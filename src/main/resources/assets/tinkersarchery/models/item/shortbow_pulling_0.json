@@ -1,0 +1,13 @@
+{
+  "loader": "tinkersarchery:generic_bow",
+  "parent": "tinkersarchery:item/shortbow",
+  "textures": {
+    "bowstring": "tinkersarchery:item/tool/shortbow/bowstring_pulling_0"
+  },
+  "parts": [
+    { "name": "bowshaft",  "index": 0 },
+    { "name": "bowstring",    "index": 1 },
+    { "name": "guide",    "index": 2 }
+  ],
+  "modifier_roots": [ "tconstruct:item/tool/hand_axe/modifiers/" ]
+}

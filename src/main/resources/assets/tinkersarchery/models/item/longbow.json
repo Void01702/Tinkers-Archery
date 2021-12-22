@@ -1,0 +1,49 @@
+{
+  "loader": "tinkersarchery:generic_bow",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "bowshaft_right": "tinkersarchery:item/tool/longbow/large_bowshaft_right",
+    "bowshaft_left": "tinkersarchery:item/tool/longbow/large_bowshaft_left",
+    "bowstring": "tinkersarchery:item/tool/longbow/large_bowstring",
+    "guide": "tinkersarchery:item/tool/longbow/large_guard",
+
+    "large_bowshaft_right": "tinkersarchery:item/tool/longbow/large/large_bowshaft_right",
+    "large_bowshaft_left": "tinkersarchery:item/tool/longbow/large/large_bowshaft_left",
+    "large_bowstring": "tinkersarchery:item/tool/longbow/large/large_bowstring",
+    "large_guide": "tinkersarchery:item/tool/longbow/large/large_guide"
+  },
+  "modifier_roots": {
+    "small": [ "tconstruct:item/tool/cleaver/modifiers/" ],
+    "large": [ "tconstruct:item/tool/cleaver/large/modifiers/" ]
+  },
+  "large": true,
+  "large_offset": [0, 0],
+  "parts": [
+    { "name": "bowshaft_right", "index": 0 },
+    { "name": "bowshaft_left", "index": 1 },
+    { "name": "bowstring", "index": 2 },
+    { "name": "guide", "index": 3 }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -80, 260, -40 ],
+      "translation": [ -1, -4, 6.5 ],
+      "scale": [ 0.9, 0.9, 0.9 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -80, -280, 40 ],
+      "translation": [ 0, -8, 8.5 ],
+      "scale": [ 0.9, 0.9, 0.9 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, -90, 25 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 90, -25 ],
+      "translation": [ 1.13, 3.2, 1.13],
+      "scale": [ 0.68, 0.68, 0.68 ]
+    }
+  }
+}

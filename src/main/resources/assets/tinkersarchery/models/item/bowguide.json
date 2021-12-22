@@ -1,0 +1,8 @@
+{
+  "loader": "tconstruct:material",
+  "parent": "forge:item/default",
+  "textures": {
+    "texture": "tinkersarchery:item/tool/shortbow/guide"
+  },
+  "offset": [2, 2]
+}
