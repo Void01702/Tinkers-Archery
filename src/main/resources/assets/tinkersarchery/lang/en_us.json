@@ -1,0 +1,12 @@
+{
+  "_comment": "Tools",
+
+  "item.tinkersarchery.shortbow": "Shortbow",
+
+  "_comment": "Tool Parts",
+
+  "item.tinkersarchery.bowstring": "Bowstring",
+  "item.tinkersarchery.bowshaft": "Bowshaft",
+  "item.tinkersarchery.bowguide": "Guide",
+  "item.tinkersarchery.large_bowshaft": "Large Bowshaft"
+}

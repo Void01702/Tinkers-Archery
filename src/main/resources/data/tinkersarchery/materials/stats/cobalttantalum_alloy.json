@@ -1,0 +1,27 @@
+{
+  "stats": {
+    "tconstruct:extra": {},
+    "tconstruct:handle": {
+      "durability": 1.0,
+      "miningSpeed": 0.9,
+      "attackSpeed": 1.1,
+      "attackDamage": 1.2
+    },
+    "tconstruct:head": {
+      "durability": 900,
+      "miningSpeed": 5.5,
+      "harvestLevel": 3,
+      "attack": 2.5
+    },
+    "tinkersarchery:bow": {
+      "durability": 1200,
+      "elasticity": 1.25,
+      "drawSpeed": 1.35,
+      "accuracy": 1.2
+    },
+    "tinkersarchery:bowguide": {
+      "elasticity": 1.0,
+      "accuracy": 1.5
+    }
+  }
+}

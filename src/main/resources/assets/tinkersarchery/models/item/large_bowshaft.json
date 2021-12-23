@@ -1,0 +1,8 @@
+{
+  "loader": "tconstruct:material",
+  "parent": "forge:item/default",
+  "textures": {
+    "texture": "tinkersarchery:item/tool/longbow/large_bowshaft_right"
+  },
+  "offset": [-2, 5]
+}

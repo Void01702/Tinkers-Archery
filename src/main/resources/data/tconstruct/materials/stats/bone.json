@@ -1,0 +1,14 @@
+{
+  "stats": {
+    "tinkersarchery:bow": {
+      "durability": 100,
+      "elasticity": 0.9,
+      "drawSpeed": 1.1,
+      "accuracy": 1.1
+    },
+    "tinkersarchery:bowguide": {
+      "elasticity": 0.9,
+      "accuracy": 1.2
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:modifier",
+  "inputs": [
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "result": {
+    "name": "tinkersarchery:burst",
+    "level": 1
+  }
+}
