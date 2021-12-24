@@ -16,7 +16,7 @@ public class BouncingTrajectory extends ProjectileTrajectory {
         if (time < data.bounceLength * BOUNCE_COUNT) {
             return originalDirection.add(0, data.startVelocity - data.gravity * (time % data.bounceLength), 0);
         } else {
-            return originalDirection.add(0, -data.startVelocity - data.gravity * (time - data.bounceLength * 10), 0);
+            return originalDirection.add(0, -data.startVelocity - data.gravity * (time - data.bounceLength * BOUNCE_COUNT), 0);
         }
     }
 

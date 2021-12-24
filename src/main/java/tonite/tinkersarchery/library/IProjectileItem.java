@@ -6,6 +6,10 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
+import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
+import tonite.tinkersarchery.library.util.ProjectileAttackUtil;
 
 public interface IProjectileItem {
 
@@ -16,5 +20,9 @@ public interface IProjectileItem {
     ProjectileEntity createProjectile(ItemStack ammo, World world, LivingEntity shooter, ItemStack bow);
 
     void supplyInfoToProjectile(ProjectileEntity projectile, ItemStack ammo, World world, LivingEntity shooter, ItemStack bow);
+
+    default boolean dealDamageProjectile(ProjectileEntity projectile, IModifierToolStack stack, ToolAttackContext context, float damage) {
+        return ProjectileAttackUtil.dealDefaultDamage(projectile, context.getAttacker(), context.getTarget(), damage);
+    }
 
 }

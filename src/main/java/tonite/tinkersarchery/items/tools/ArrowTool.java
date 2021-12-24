@@ -56,6 +56,7 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
     public void supplyInfoToProjectile(ProjectileEntity projectile, ItemStack ammo, World world, LivingEntity shooter, ItemStack bow) {
         TinkersArrowEntity newProjectile = ((TinkersArrowEntity)projectile);
         newProjectile.setTool(ammo);
+        newProjectile.setBow(bow);
 
         ToolStack toolStack = ToolStack.from(ammo);
 

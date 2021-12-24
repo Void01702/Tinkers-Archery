@@ -3,10 +3,11 @@ package tonite.tinkersarchery.modifiers.traits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.library.IBowModifier;
 
-public class Clean extends Modifier implements IBowModifier {
+public class Clean extends SingleUseModifier implements IBowModifier {
 
     public Clean() {
         super(0xFFD9D9D9);

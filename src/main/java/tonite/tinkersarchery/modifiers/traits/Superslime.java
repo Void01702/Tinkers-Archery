@@ -3,6 +3,7 @@ package tonite.tinkersarchery.modifiers.traits;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.context.ToolRebuildContext;
 import slimeknights.tconstruct.library.tools.nbt.IModDataReadOnly;
@@ -14,7 +15,7 @@ import slimeknights.tconstruct.tools.modifiers.slotless.OverslimeModifier;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.library.IBowModifier;
 
-public class Superslime extends Modifier implements IBowModifier {
+public class Superslime extends SingleUseModifier implements IBowModifier {
 
     public static final float DRAW_SPEED_BOOST = 0.5f;
     public static final float POWER_BOOST = 0.5f;
@@ -35,7 +36,7 @@ public class Superslime extends Modifier implements IBowModifier {
         int current = overslime.getOverslime(tool);
         int cap = overslime.getCapacity(tool);
 
-        return (((float)current)/ cap) * baseDrawSpeed + drawSpeed;
+        return (((float)current)/ cap) * level * baseDrawSpeed + drawSpeed;
 
     }
 

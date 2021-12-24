@@ -6,12 +6,13 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.IBowModifier;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 
-public class Uplifting extends Modifier implements IBowModifier {
+public class Uplifting extends SingleUseModifier implements IBowModifier {
     public Uplifting() {
         super(0xFF119B85);
     }

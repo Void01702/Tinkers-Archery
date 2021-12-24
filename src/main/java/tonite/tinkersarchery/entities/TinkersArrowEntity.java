@@ -62,6 +62,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     private int numTicks = 0;
     // As much as I didn't want to, I had to store the item itself. Stupid TConstruct and their stupid lack of IModDataReadOnly.toNBT.
     private ItemStack arrowStack;
+    private ItemStack bowStack;
 
     private int pierceLevel = 0;
 
@@ -71,6 +72,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     private ToolStack toolStack;
     private StatsNBT stats;
     private List<ModifierEntry> projectileModifierList;
+    private ToolStack bowToolStack;
 
     protected boolean inGround;
     protected int inGroundTime;
@@ -323,11 +325,11 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         }
 
         Entity entity1 = this.getOwner();
-        DamageSource damagesource;
+        //DamageSource damagesource;
         if (entity1 == null) {
-            damagesource = DamageSource.thrown(this, this);
+            //damagesource = DamageSource.thrown(this, this);
         } else {
-            damagesource = DamageSource.thrown(this, entity1);
+            //damagesource = DamageSource.thrown(this, entity1);
             if (entity1 instanceof LivingEntity) {
                 ((LivingEntity)entity1).setLastHurtMob(entity);
             }
@@ -350,7 +352,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
 
         //if (entity.hurt(damagesource, (float)damage)) {
-        if (this.level.isClientSide || ProjectileAttackUtil.attackEntity(damagesource, arrowStack.getItem(), this, toolStack, livingOwner, entity, false)) {
+        if (this.level.isClientSide || ProjectileAttackUtil.attackEntity( arrowStack.getItem(), this, toolStack, livingOwner, entity, false, bowToolStack)) {
             if (flag) {
                 return;
             }
@@ -545,6 +547,21 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
             toolStack = null;
 
             stats = StatsNBT.EMPTY;
+        }
+
+
+    }
+
+    public void setBow(ItemStack bow){
+
+        if (bow != null) {
+            bowStack = bow.copy();
+
+            toolStack = ToolStack.from(bow);
+        } else {
+            bowStack = null;
+
+            toolStack = null;
         }
 
 

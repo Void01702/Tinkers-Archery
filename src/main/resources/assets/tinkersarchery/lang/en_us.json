@@ -18,11 +18,32 @@
   "material.tinkersarchery.weeping_vine": "Weeping Vine",
 
   "material.tinkersarchery.feather": "Feather",
-  "material.tinkersarchery.phantom_membrane": "Phantom Membrane",
   "material.tinkersarchery.leaf": "Leaf",
+  "material.tinkersarchery.slime_leaf": "Slime Leaf",
   "material.tinkersarchery.silky_cloth": "Silky Cloth",
 
   "material.tinkersarchery.tantalum": "Tantalum",
-  "material.tinkersarchery.cobalttantalum_alloy": "CobaltTantalum",
-  "material.tinkersarchery.galaxy_alloy": "Galaxy Alloy"
+  "material.tinkersarchery.cobalt_tantalum_alloy": "Cobalt Tantalum",
+  "material.tinkersarchery.galaxy_alloy": "Galaxy Alloy",
+
+  "_comment": "Modifiers",
+
+  "modifier.tinkersarchery.groovy": "Groovy",
+  "modifier.tinkersarchery.groovy.flavor": "In the Groove",
+  "modifier.tinkersarchery.groovy.description": "The more you shoot, the faster you draw.",
+
+  "modifier.tinkersarchery.accurate": "Accurate",
+  "modifier.tinkersarchery.accurate.flavor": "What Good Is a Bow That Doesn't Shoot Where You Point?",
+  "modifier.tinkersarchery.accurate.description": "The bow is more accurate.",
+
+  "modifier.tinkersarchery.clean": "Clean",
+  "modifier.tinkersarchery.superslime": "Superslime",
+  "modifier.tinkersarchery.uplifting": "Uplifting",
+  "modifier.tinkersarchery.savage": "Savage",
+
+  "modifier.tinkersarchery.gravity_trajectory": "Gravity Trajectory",
+  "modifier.tinkersarchery.flying_trajectory": "Flying Trajectory",
+  "modifier.tinkersarchery.antigravity_trajectory": "Antigravity Trajectory",
+  "modifier.tinkersarchery.twirling_trajectory": "Twirling Trajectory",
+  "modifier.tinkersarchery.bouncing_trajectory": "Bouncing Trajectory"
 }

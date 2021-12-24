@@ -16,7 +16,9 @@ import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.item.IModifiableWeapon;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
+import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import tonite.tinkersarchery.TinkersArchery;
+import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IDamageProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IKnockbackProjectile;
@@ -26,8 +28,12 @@ import java.util.Optional;
 
 public class ProjectileAttackUtil {
 
-    public static boolean attackEntity(DamageSource source, Item weapon, ProjectileEntity projectile, IModifierToolStack tool, LivingEntity attackerLiving,
-                                       Entity targetEntity, boolean isExtraAttack) {
+    public static boolean dealDefaultDamage(ProjectileEntity projectile, LivingEntity attacker, Entity target, float damage) {
+        return target.hurt(DamageSource.thrown(projectile, attacker), damage);
+    }
+
+    public static boolean attackEntity(Item weapon, ProjectileEntity projectile, IModifierToolStack tool, LivingEntity attackerLiving,
+                                       Entity targetEntity, boolean isExtraAttack, IModifierToolStack bowStack) {
 
         boolean wasCritical = false;
 
@@ -50,7 +56,6 @@ public class ProjectileAttackUtil {
 
         if (projectile instanceof IDamageProjectile) {
             damage = ((IDamageProjectile)projectile).getDamage();
-            TinkersArchery.LOGGER.info("asked for damage from projectile, and I got " + damage);
         } else {
             damage = tool.getDamage();
         }
@@ -61,10 +66,18 @@ public class ProjectileAttackUtil {
             damage = e.getModifier().getEntityDamage(tool, e.getLevel(), context, baseDamage, damage);
         }
 
+        if (bowStack != null) {
+            baseDamage = damage;
+
+            for (ModifierEntry e: bowStack.getModifierList()) {
+                damage = e.getModifier().getEntityDamage(tool, e.getLevel(), context, baseDamage, damage);
+            }
+        }
+
         if (projectile instanceof IKnockbackProjectile) {
             knockback = ((IKnockbackProjectile)projectile).getKnockback();
         } else {
-            knockback = 1;
+            knockback = 0.4f;
         }
 
         float baseKnockback = knockback;
@@ -73,16 +86,24 @@ public class ProjectileAttackUtil {
             knockback = e.getModifier().beforeEntityHit(tool, e.getLevel(), context, damage, baseKnockback, knockback);
         }
 
+        if (bowStack != null) {
+            baseKnockback = knockback;
+
+            for (ModifierEntry e: bowStack.getModifierList()) {
+                knockback = e.getModifier().beforeEntityHit(tool, e.getLevel(), context, damage, baseKnockback, knockback);
+            }
+        }
+
         float oldHealth = 0.0F;
         if (context.getLivingTarget() != null) {
             oldHealth = context.getLivingTarget().getHealth();
         }
 
         boolean didHit;
-        if (isExtraAttack || !(weapon instanceof IModifiableWeapon)) {
-            didHit = ToolAttackUtil.dealDefaultDamage(attackerLiving, targetEntity, damage);
+        if (isExtraAttack || !(weapon instanceof IProjectileItem)) {
+            didHit = dealDefaultDamage(projectile, attackerLiving, targetEntity, damage);
         } else {
-            didHit = ((IModifiableWeapon)weapon).dealDamage(tool, context, damage);
+            didHit = ((IProjectileItem)weapon).dealDamageProjectile(projectile, tool, context, damage);
         }
 
         if (didHit) {
@@ -103,12 +124,24 @@ public class ProjectileAttackUtil {
                 e.getModifier().afterEntityHit(tool, e.getLevel(), context, damageDealt);
             }
 
+            if (bowStack != null) {
+                for (ModifierEntry e: bowStack.getModifierList()) {
+                    e.getModifier().afterEntityHit(tool, e.getLevel(), context, damageDealt);
+                }
+            }
+
             return true;
 
         } else {
 
             for (ModifierEntry e: tool.getModifierList()) {
                 e.getModifier().failedEntityHit(tool, e.getLevel(), context);
+            }
+
+            if (bowStack != null) {
+                for (ModifierEntry e: bowStack.getModifierList()) {
+                    e.getModifier().failedEntityHit(tool, e.getLevel(), context);
+                }
             }
 
             return !isExtraAttack;

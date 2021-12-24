@@ -6,6 +6,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.IProjectileModifier;
@@ -13,7 +14,7 @@ import tonite.tinkersarchery.library.ProjectileTrajectory;
 
 import java.util.function.Supplier;
 
-public class TrajectoryApplier extends Modifier implements IProjectileModifier {
+public class TrajectoryApplier extends SingleUseModifier implements IProjectileModifier {
 
     Supplier<ProjectileTrajectory> trajectory;
 
