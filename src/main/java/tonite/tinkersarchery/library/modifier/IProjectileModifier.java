@@ -1,4 +1,4 @@
-package tonite.tinkersarchery.library;
+package tonite.tinkersarchery.library.modifier;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

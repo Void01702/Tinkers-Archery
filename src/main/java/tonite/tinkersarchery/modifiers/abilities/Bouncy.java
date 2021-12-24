@@ -1,7 +1,7 @@
 package tonite.tinkersarchery.modifiers.abilities;
 
 import slimeknights.tconstruct.library.modifiers.Modifier;
-import tonite.tinkersarchery.library.IBowModifier;
+import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 public class Bouncy extends Modifier implements IBowModifier {
     public Bouncy() {

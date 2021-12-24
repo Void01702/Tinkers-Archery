@@ -13,7 +13,7 @@ import net.minecraftforge.common.ToolType;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import tonite.tinkersarchery.library.IBowModifier;
+import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.ShootableTool;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;

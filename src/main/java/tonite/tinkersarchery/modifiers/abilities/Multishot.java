@@ -6,7 +6,7 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.library.IBowModifier;
+import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 import java.util.List;
 

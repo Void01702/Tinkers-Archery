@@ -8,7 +8,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.IncrementalModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.library.IBowModifier;
+import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 public class Power extends IncrementalModifier implements IBowModifier {
     public Power() {

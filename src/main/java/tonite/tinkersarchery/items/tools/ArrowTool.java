@@ -1,7 +1,6 @@
 package tonite.tinkersarchery.items.tools;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,10 +12,7 @@ import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.IProjectileItem;
-import tonite.tinkersarchery.library.IProjectileModifier;
-
-import java.util.ArrayList;
-import java.util.List;
+import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 
 public class ArrowTool extends ModifiableItem implements IProjectileItem {
 

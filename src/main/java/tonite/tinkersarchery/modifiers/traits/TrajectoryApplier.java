@@ -1,15 +1,10 @@
 package tonite.tinkersarchery.modifiers.traits;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
-import tonite.tinkersarchery.library.IProjectileModifier;
+import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 
 import java.util.function.Supplier;
