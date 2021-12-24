@@ -42,6 +42,10 @@ import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.library.IProjectileModifier;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.library.TinkersArcheryRegistries;
+import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
+import tonite.tinkersarchery.library.projectileinterfaces.IDamageProjectile;
+import tonite.tinkersarchery.library.projectileinterfaces.IKnockbackProjectile;
+import tonite.tinkersarchery.library.util.ProjectileAttackUtil;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 import javax.annotation.Nonnull;
@@ -50,7 +54,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TinkersArrowEntity extends ProjectileEntity implements IEntityAdditionalSpawnData {
+public class TinkersArrowEntity extends ProjectileEntity implements IEntityAdditionalSpawnData, ICriticalProjectile, IDamageProjectile {
 
     private ProjectileTrajectory trajectory;
     private Object trajectoryData;
@@ -59,8 +63,9 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     // As much as I didn't want to, I had to store the item itself. Stupid TConstruct and their stupid lack of IModDataReadOnly.toNBT.
     private ItemStack arrowStack;
 
-    private int pierceLevel = 3;
-    private int knockback = 0;
+    private int pierceLevel = 0;
+
+    private float bonusDamage = 0;
     private boolean critical = false;
 
     private ToolStack toolStack;
@@ -102,10 +107,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     public void shoot(double xDirection, double yDirection, double zDirection, float power, float inaccuracy){
 
         super.shoot(xDirection, yDirection, zDirection, power, inaccuracy);
-
-        /*for(ModifierEntry m: projectileModifierList) {
-            ((IProjectileModifier)m.getModifier()).onArrowShot(toolStack, m.getLevel(), this, originalDirection, getOwner());
-        }*/
 
         originalDirection = getDeltaMovement();
         numTicks = 0;
@@ -288,6 +289,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         Vector3d vector3d = this.getDeltaMovement();
         this.setDeltaMovement(vector3d.multiply((double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
         this.inGroundTime = 0;
+        this.tickCount = 0;
     }
 
     @Nullable
@@ -299,8 +301,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     protected void onHitEntity(EntityRayTraceResult entityHit) {
         super.onHitEntity(entityHit);
         Entity entity = entityHit.getEntity();
-        float speed = (float)this.getDeltaMovement().length();
-        int damage = MathHelper.ceil(MathHelper.clamp((double)speed * stats.getFloat(ToolStats.ATTACK_DAMAGE), 0.0D, 2.147483647E9D));
         if (this.getPierceLevel() > 0) {
             if (this.piercingIgnoreEntityIds == null) {
                 this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
@@ -317,11 +317,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
             this.piercingIgnoreEntityIds.add(entity.getId());
         }
-
-        /*if (this.isCritArrow()) {
-            long j = (long)this.random.nextInt(damage / 2 + 2);
-            damage = (int)Math.min(j + (long)damage, 2147483647L);
-        }*/
 
         Entity entity1 = this.getOwner();
         DamageSource damagesource;
@@ -343,7 +338,15 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         //if (entity instanceof LivingEntity && getOwner() instanceof LivingEntity)
         //    toolStack.getItem().hurtEnemy(arrowStack, (LivingEntity)entity, (LivingEntity)getOwner());
 
-        if (entity.hurt(damagesource, (float)damage)) {
+        // TinkersArchery.LOGGER.info(getOwner());
+
+        // Entity owner = getOwner();
+
+        LivingEntity livingOwner = getOwner() instanceof LivingEntity ? (LivingEntity) getOwner() : null;
+
+
+        //if (entity.hurt(damagesource, (float)damage)) {
+        if (this.level.isClientSide || ProjectileAttackUtil.attackEntity(damagesource, arrowStack.getItem(), this, toolStack, livingOwner, entity, false)) {
             if (flag) {
                 return;
             }
@@ -416,9 +419,10 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         //this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.inGround = true;
         this.shakeTime = 7;
-        /*this.setCritArrow(false);
-        this.setPierceLevel((byte)0);
-        this.setSoundEvent(SoundEvents.ARROW_HIT);
+        this.setCritical(false);
+        this.setPierceLevel(0);
+        setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
+        /*this.setSoundEvent(SoundEvents.ARROW_HIT);
         this.setShotFromCrossbow(false);
         this.resetPiercedEntities();*/
     }
@@ -545,11 +549,46 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         this.pierceLevel = pierceLevel;
     }
 
+    public Vector3d getOriginalDirection() {
+        return originalDirection;
+    }
+
     public int getPierceLevel(){
         return pierceLevel;
     }
 
     protected SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundEvents.ARROW_HIT;
+    }
+
+    @Override
+    public void setCritical(boolean critical) {
+        this.critical = critical;
+    }
+
+    @Override
+    public boolean getCritical() {
+        return critical;
+    }
+
+    @Override
+    public void setDamage(float damage) {
+        bonusDamage = damage;
+    }
+
+    @Override
+    public float getDamage() {
+
+        float result = stats.getFloat(ToolStats.ATTACK_DAMAGE) + bonusDamage;
+
+        float speed = (float)this.getDeltaMovement().length();
+        result = (float)MathHelper.clamp((double)speed * result, 0.0D, 2.147483647E9D);
+
+        if (critical) {
+            float j = this.random.nextFloat() * (result / 2 + 2);
+            result += j;
+        }
+
+        return result;
     }
 }

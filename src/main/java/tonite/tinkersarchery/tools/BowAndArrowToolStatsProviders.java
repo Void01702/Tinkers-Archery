@@ -52,7 +52,7 @@ public class BowAndArrowToolStatsProviders {
     public static final IToolStatProvider ARROW = new IToolStatProvider() {
         @Override
         public StatsNBT buildStats(ToolDefinition definition, List<IMaterial> materials) {
-            return BowToolStatsBuilder.from(definition, materials).buildStats();
+            return ArrowToolStatsBuilder.from(definition, materials).buildStats();
         }
 
         @Override

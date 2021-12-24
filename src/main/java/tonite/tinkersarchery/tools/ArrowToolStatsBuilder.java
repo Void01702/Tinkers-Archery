@@ -65,16 +65,16 @@ public class ArrowToolStatsBuilder extends ToolStatsBuilder {
 
     /** Builds durability for the tool */
     public float buildDurability() {
-        double averageHeadDurability = getAverageValue(arrowheads, HeadMaterialStats::getDurability) + toolData.getBonus(ToolStats.DURABILITY);
-        double averageHandleModifier = getAverageValue(arrowshafts, HandleMaterialStats::getDurability, 1);
+        double averageHeadDurability = getAverageValue(arrowheads, ArrowHeadMaterialStats::getDurability) + toolData.getBonus(ToolStats.DURABILITY);
+        double averageHandleModifier = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getDurability, 1);
         // durability should never be below 1
         return Math.max(1, (int)(averageHeadDurability * averageHandleModifier));
     }
 
     /** Builds mining speed for the tool */
     public float buildMiningSpeed() {
-        double averageHeadSpeed = getAverageValue(arrowheads, HeadMaterialStats::getMiningSpeed) + toolData.getBonus(ToolStats.MINING_SPEED);
-        double averageHandleModifier = getAverageValue(arrowshafts, HandleMaterialStats::getMiningSpeed, 1);
+        double averageHeadSpeed = getAverageValue(arrowheads, ArrowHeadMaterialStats::getMiningSpeed) + toolData.getBonus(ToolStats.MINING_SPEED);
+        double averageHandleModifier = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getMiningSpeed, 1);
 
         return (float)Math.max(0.1d, averageHeadSpeed * averageHandleModifier);
     }
@@ -82,22 +82,22 @@ public class ArrowToolStatsBuilder extends ToolStatsBuilder {
     /** Builds attack speed for the tool */
     public float buildAttackSpeed() {
         float baseSpeed = ToolStats.ATTACK_SPEED.getDefaultValue() + toolData.getBonus(ToolStats.ATTACK_SPEED);
-        double averageHandleModifier = getAverageValue(arrowshafts, HandleMaterialStats::getAttackSpeed, 1);
+        double averageHandleModifier = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getAttackSpeed, 1);
         return (float)Math.max(0, baseSpeed * averageHandleModifier);
     }
 
     /** Builds the harvest level for the tool */
     public int buildHarvestLevel() {
         return arrowheads.stream()
-                .mapToInt(HeadMaterialStats::getHarvestLevel)
+                .mapToInt(ArrowHeadMaterialStats::getHarvestLevel)
                 .max()
                 .orElse(0);
     }
 
     /** Builds attack damage for the tool */
     public float buildAttackDamage() {
-        double averageHeadAttack = getAverageValue(arrowheads, HeadMaterialStats::getAttack) + toolData.getBonus(ToolStats.ATTACK_DAMAGE);
-        double averageHandle = getAverageValue(arrowshafts, HandleMaterialStats::getAttackDamage, 1.0f);
+        double averageHeadAttack = getAverageValue(arrowheads, ArrowHeadMaterialStats::getAttack) + toolData.getBonus(ToolStats.ATTACK_DAMAGE);
+        double averageHandle = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getAttackDamage, 1.0f);
         return (float)Math.max(0.0d, averageHeadAttack * averageHandle);
     }
 

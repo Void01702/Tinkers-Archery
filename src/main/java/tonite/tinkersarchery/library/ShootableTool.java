@@ -13,6 +13,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 import java.util.ArrayList;
@@ -144,6 +145,10 @@ public abstract class ShootableTool extends ModifiableItem {
     }
 
     public void supplyInfoToArrow(ProjectileEntity projectile, ItemStack bow, World world, Vector3f direction, float drawPortion, LivingEntity shooter, ItemStack arrowItem) {
+
+        if (projectile instanceof ICriticalProjectile && drawPortion == 1.0F) {
+            ((ICriticalProjectile)projectile).setCritical(true);
+        }
 
         if (arrowItem.getItem() instanceof IProjectileItem) {
             ((IProjectileItem)arrowItem.getItem()).supplyInfoToProjectile(projectile, arrowItem, world, shooter, bow);

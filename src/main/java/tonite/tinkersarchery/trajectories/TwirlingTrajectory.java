@@ -7,7 +7,7 @@ import tonite.tinkersarchery.library.ProjectileTrajectory;
 public class TwirlingTrajectory extends ProjectileTrajectory {
 
     public static final float ANGLE = (float)(Math.PI / 4);
-    public static final float TWIRL_SPEED = 0.3f;
+    public static final float TWIRL_SPEED = 0.4f;
     public static final int FALLOFF_START = 30;
     public static final int FALLOFF_TIME = 20;
 

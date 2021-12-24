@@ -7,10 +7,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.IProjectileItem;
+import tonite.tinkersarchery.library.IProjectileModifier;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArrowTool extends ModifiableItem implements IProjectileItem {
 
@@ -48,6 +54,15 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
 
     @Override
     public void supplyInfoToProjectile(ProjectileEntity projectile, ItemStack ammo, World world, LivingEntity shooter, ItemStack bow) {
-        ((TinkersArrowEntity)projectile).setTool(ammo);
+        TinkersArrowEntity newProjectile = ((TinkersArrowEntity)projectile);
+        newProjectile.setTool(ammo);
+
+        ToolStack toolStack = ToolStack.from(ammo);
+
+        for(ModifierEntry m: toolStack.getModifierList()) {
+            if (m.getModifier() instanceof IProjectileModifier) {
+                ((IProjectileModifier) m.getModifier()).onArrowShot(toolStack, m.getLevel(), projectile, newProjectile.getOriginalDirection(), projectile.getOwner());
+            }
+        }
     }
 }
