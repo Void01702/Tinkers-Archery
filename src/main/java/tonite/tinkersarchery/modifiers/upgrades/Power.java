@@ -1,4 +1,4 @@
-package tonite.tinkersarchery.modifiers.abilities;
+package tonite.tinkersarchery.modifiers.upgrades;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;

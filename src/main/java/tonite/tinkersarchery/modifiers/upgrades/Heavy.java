@@ -1,0 +1,35 @@
+package tonite.tinkersarchery.modifiers.upgrades;
+
+import net.minecraft.item.Item;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import slimeknights.tconstruct.library.modifiers.IncrementalModifier;
+import slimeknights.tconstruct.library.tools.ToolDefinition;
+import slimeknights.tconstruct.library.tools.nbt.IModDataReadOnly;
+import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
+import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
+import tonite.tinkersarchery.stats.BowAndArrowToolStats;
+
+public class Heavy extends IncrementalModifier {
+    public Heavy() {
+        super(0xFF474747);
+    }
+
+    @Override
+    public ITextComponent getDisplayName(int level) {
+        // displays special names for levels of haste
+        if (level <= 5) {
+            return applyStyle(new TranslationTextComponent(getTranslationKey() + "." + level));
+        }
+        return super.getDisplayName(level);
+    }
+
+    @Override
+    public void addToolStats(Item item, ToolDefinition toolDefinition, StatsNBT baseStats, IModDataReadOnly persistentData, IModDataReadOnly volatileData, int level, ModifierStatsBuilder builder) {
+        float scaledLevel = getScaledLevel(persistentData, level);
+        // currently gives +5 speed per level
+        // for comparison, vanilla gives +2, 5, 10, 17, 26 for efficiency I to V
+        // 5 per level gives us          +5, 10, 15, 20, 25 for 5 levels
+        BowAndArrowToolStats.WEIGHT.multiply(builder, 1 + scaledLevel * 0.2f);
+    }
+}

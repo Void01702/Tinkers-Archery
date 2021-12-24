@@ -8,5 +8,21 @@
   "item.tinkersarchery.bowstring": "Bowstring",
   "item.tinkersarchery.bowshaft": "Bowshaft",
   "item.tinkersarchery.bowguide": "Guide",
-  "item.tinkersarchery.large_bowshaft": "Large Bowshaft"
+  "item.tinkersarchery.large_bowshaft": "Large Bowshaft",
+
+  "_comment": "Materials",
+
+  "material.tinkersarchery.slime": "Slime",
+  "material.tinkersarchery.vine": "Vine",
+  "material.tinkersarchery.twisting_vine": "Twisting Vine",
+  "material.tinkersarchery.weeping_vine": "Weeping Vine",
+
+  "material.tinkersarchery.feather": "Feather",
+  "material.tinkersarchery.phantom_membrane": "Phantom Membrane",
+  "material.tinkersarchery.leaf": "Leaf",
+  "material.tinkersarchery.silky_cloth": "Silky Cloth",
+
+  "material.tinkersarchery.tantalum": "Tantalum",
+  "material.tinkersarchery.cobalttantalum_alloy": "CobaltTantalum",
+  "material.tinkersarchery.galaxy_alloy": "Galaxy Alloy"
 }

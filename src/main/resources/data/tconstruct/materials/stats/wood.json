@@ -3,8 +3,7 @@
     "tinkersarchery:bow": {
       "durability": 60,
       "elasticity": 1,
-      "drawSpeed": 1,
-      "accuracy": 1
+      "drawSpeed": 1
     },
     "tinkersarchery:bowguide": {
       "elasticity": 1,

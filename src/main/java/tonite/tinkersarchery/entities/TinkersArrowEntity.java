@@ -220,7 +220,11 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
             numTicks++;
 
             if (trajectory != null && originalDirection != null) {
-                setDeltaMovement(trajectory.getMotionDirection(numTicks, originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData));
+                try {
+                    setDeltaMovement(trajectory.getMotionDirection(numTicks, originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData));
+                } catch (Exception e) {
+                    trajectoryData = trajectory.onCreated(originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT));
+                }
             }
 
             Vector3d motion = this.getDeltaMovement();
@@ -422,6 +426,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         this.setCritical(false);
         this.setPierceLevel(0);
         setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
+        trajectoryData = trajectory.onCreated(originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT));
         /*this.setSoundEvent(SoundEvents.ARROW_HIT);
         this.setShotFromCrossbow(false);
         this.resetPiercedEntities();*/
