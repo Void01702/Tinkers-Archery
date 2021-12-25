@@ -35,6 +35,8 @@ import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.library.TinkersArcheryRegistries;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IDamageProjectile;
+import tonite.tinkersarchery.library.projectileinterfaces.IPiercingProjectile;
+import tonite.tinkersarchery.library.projectileinterfaces.IWaterInertiaProjectile;
 import tonite.tinkersarchery.library.util.ProjectileAttackUtil;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
@@ -43,7 +45,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TinkersArrowEntity extends ProjectileEntity implements IEntityAdditionalSpawnData, ICriticalProjectile, IDamageProjectile {
+public class TinkersArrowEntity extends ProjectileEntity implements IEntityAdditionalSpawnData, ICriticalProjectile, IDamageProjectile, IPiercingProjectile, IWaterInertiaProjectile {
 
     private ProjectileTrajectory trajectory;
     private Object trajectoryData;
@@ -56,6 +58,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     private int pierceLevel = 0;
     private float bonusDamage = 0;
     private boolean critical = false;
+    private float waterInertia = 0.6f;
 
     private ToolStack toolStack;
     private StatsNBT stats;
@@ -133,6 +136,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         nbt.putInt("PierceLevel", pierceLevel);
         nbt.putFloat("BonusDamage", bonusDamage);
         nbt.putBoolean("Critical", critical);
+        nbt.putFloat("WaterInertia", waterInertia);
 
     }
 
@@ -166,6 +170,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         pierceLevel = nbt.getInt("PierceLevel");
         bonusDamage = nbt.getFloat("BonusDamage");
         critical = nbt.getBoolean("Critical");
+        waterInertia = nbt.getFloat("WaterInertia");
     }
 
     @Override
@@ -182,8 +187,13 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         super.lerpMotion(p_70016_1_, p_70016_3_, p_70016_5_);
     }
 
+    @Override
+    public void setWaterInertia(float waterInertia) {
+        this.waterInertia = waterInertia;
+    }
+
     public float getWaterInertia() {
-        return 0.6f;
+        return waterInertia;
     }
 
     private Vector3d getArrowMotion() {
@@ -239,8 +249,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
             numTicks++;
 
-            float inertia = 1.0f;
-
             if (trajectory != null && originalDirection != null) {
                 Vector3d arrowMotion = getArrowMotion();
 
@@ -250,7 +258,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
                         this.level.addParticle(ParticleTypes.BUBBLE, getX() - arrowMotion.x * 0.25D, getY() - arrowMotion.y * 0.25D, getZ() - arrowMotion.z * 0.25D, arrowMotion.x, arrowMotion.y, arrowMotion.z);
                     }
 
-                    arrowMotion = arrowMotion.scale(this.getWaterInertia());
+                    arrowMotion = arrowMotion.scale(waterInertia);
                 }
 
                 setDeltaMovement(arrowMotion);
@@ -515,6 +523,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         buffer.writeInt(pierceLevel);
         buffer.writeFloat(bonusDamage);
         buffer.writeBoolean(critical);
+        buffer.writeFloat(waterInertia);
 
     }
 
@@ -546,6 +555,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         pierceLevel = additionalData.readInt();
         bonusDamage = additionalData.readFloat();
         critical = additionalData.readBoolean();
+        waterInertia = additionalData.readFloat();
 
     }
 
@@ -620,20 +630,22 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     }
 
-    public void setPierceLevel(int pierceLevel) {
-        this.pierceLevel = pierceLevel;
-    }
-
     public Vector3d getOriginalDirection() {
         return originalDirection;
     }
 
-    public int getPierceLevel(){
-        return pierceLevel;
-    }
-
     protected SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundEvents.ARROW_HIT;
+    }
+
+    @Override
+    public void setPierceLevel(int pierceLevel) {
+        this.pierceLevel = pierceLevel;
+    }
+
+    @Override
+    public int getPierceLevel(){
+        return pierceLevel;
     }
 
     @Override

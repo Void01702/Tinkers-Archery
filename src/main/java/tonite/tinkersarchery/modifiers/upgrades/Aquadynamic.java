@@ -1,4 +1,4 @@
-package tonite.tinkersarchery.modifiers.abilities;
+package tonite.tinkersarchery.modifiers.upgrades;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -6,21 +6,24 @@ import net.minecraft.util.math.vector.Vector3d;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
-import tonite.tinkersarchery.library.projectileinterfaces.IPiercingProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IWaterInertiaProjectile;
 
-public class Piercing extends Modifier implements IProjectileModifier {
-    public Piercing() {
-        super(0xFFE68600);
+import java.util.function.Supplier;
+
+public class Aquadynamic extends Modifier implements IProjectileModifier {
+
+    public Aquadynamic() {
+        super(0xFF1896C4);
     }
 
     @Override
     public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, Vector3d direction, Entity shooter) {
-        if (arrow instanceof IPiercingProjectile) {
-            IPiercingProjectile projectile = (IPiercingProjectile) arrow;
+        if(arrow instanceof IWaterInertiaProjectile) {
+            IWaterInertiaProjectile projectile = (IWaterInertiaProjectile) arrow;
 
-            projectile.setPierceLevel(projectile.getPierceLevel() + level);
+            projectile.setWaterInertia(projectile.getWaterInertia() + 0.2f * level);
         }
     }
 }
