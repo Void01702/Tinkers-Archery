@@ -3,7 +3,7 @@
     "tinkersarchery:bowstring": {
       "durability": 0.7,
       "elasticity": 1.2,
-      "drawSpeed": 1,
+      "drawSpeed": 1.1,
       "accuracy": 1.1
     }
   }

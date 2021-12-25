@@ -14,6 +14,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -53,7 +54,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     private ItemStack bowStack;
 
     private int pierceLevel = 0;
-
     private float bonusDamage = 0;
     private boolean critical = false;
 
@@ -116,6 +116,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         nbt.put("OriginalDirection", this.newDoubleList(originalDirection.x, originalDirection.y, originalDirection.z));
 
         nbt.put("Tool", arrowStack.serializeNBT());
+        nbt.put("Bow", bowStack.serializeNBT());
 
         if (trajectory != null && TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsValue(trajectory)) {
             nbt.putString("Trajectory", TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getKey(trajectory).toString());
@@ -128,6 +129,11 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         nbt.put("TrajectoryData", trajectoryDataNBT);
 
         nbt.putInt("TickCount", numTicks);
+
+        nbt.putInt("PierceLevel", pierceLevel);
+        nbt.putFloat("BonusDamage", bonusDamage);
+        nbt.putBoolean("Critical", critical);
+
     }
 
     public void readAdditionalSaveData(CompoundNBT nbt) {
@@ -137,6 +143,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         originalDirection = new Vector3d(directionList.getDouble(0), directionList.getDouble(1), directionList.getDouble(2));
 
         setTool(ItemStack.of(nbt.getCompound("Tool")));
+        setBow(ItemStack.of(nbt.getCompound("Bow")));
 
         String trajectoryString = nbt.getString("Trajectory");
 
@@ -155,6 +162,10 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         trajectory.load(originalDirection, toolStack.getStats().getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData, nbt.getCompound("TrajectoryData"));
 
         numTicks = nbt.getInt("TickCount");
+
+        pierceLevel = nbt.getInt("PierceLevel");
+        bonusDamage = nbt.getFloat("BonusDamage");
+        critical = nbt.getBoolean("Critical");
     }
 
     @Override
@@ -171,12 +182,31 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         super.lerpMotion(p_70016_1_, p_70016_3_, p_70016_5_);
     }
 
+    public float getWaterInertia() {
+        return 0.6f;
+    }
+
+    private Vector3d getArrowMotion() {
+        float weight = stats.getFloat(BowAndArrowToolStats.WEIGHT);
+
+        try {
+            return trajectory.getMotionDirection(numTicks, originalDirection, weight, trajectoryData);
+        } catch (Exception e) {
+            trajectoryData = trajectory.onCreated(originalDirection, weight);
+            return trajectory.getMotionDirection(numTicks, originalDirection, weight, trajectoryData);
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
 
         if (this.shakeTime > 0) {
             --this.shakeTime;
+        }
+
+        if (this.isInWaterOrRain()) {
+            this.clearFire();
         }
 
         BlockPos blockpos = this.blockPosition();
@@ -209,12 +239,21 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
             numTicks++;
 
+            float inertia = 1.0f;
+
             if (trajectory != null && originalDirection != null) {
-                try {
-                    setDeltaMovement(trajectory.getMotionDirection(numTicks, originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData));
-                } catch (Exception e) {
-                    trajectoryData = trajectory.onCreated(originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT));
+                Vector3d arrowMotion = getArrowMotion();
+
+                if (this.isInWater()) {
+                    for(int j = 0; j < 4; ++j) {
+                        float f4 = 0.25F;
+                        this.level.addParticle(ParticleTypes.BUBBLE, getX() - arrowMotion.x * 0.25D, getY() - arrowMotion.y * 0.25D, getZ() - arrowMotion.z * 0.25D, arrowMotion.x, arrowMotion.y, arrowMotion.z);
+                    }
+
+                    arrowMotion = arrowMotion.scale(this.getWaterInertia());
                 }
+
+                setDeltaMovement(arrowMotion);
             }
 
             Vector3d motion = this.getDeltaMovement();
@@ -255,6 +294,12 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
                 }
 
                 raytraceresult = null;
+            }
+
+            if (critical) {
+                for(int i = 0; i < 4; ++i) {
+                    this.level.addParticle(ParticleTypes.CRIT, this.getX() + motion.x * (double)i / 4.0D, this.getY() + motion.y * (double)i / 4.0D, this.getZ() + motion.z * (double)i / 4.0D, -motion.x, -motion.y + 0.2D, -motion.z);
+                }
             }
 
             float f1 = MathHelper.sqrt(getHorizontalDistanceSqr(motion));
@@ -418,8 +463,19 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
         trajectoryData = trajectory.onCreated(originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT));
         /*this.setSoundEvent(SoundEvents.ARROW_HIT);
-        this.setShotFromCrossbow(false);
-        this.resetPiercedEntities();*/
+        this.setShotFromCrossbow(false);*/
+        this.resetPiercedEntities();
+    }
+
+    private void resetPiercedEntities() {
+        if (this.piercedAndKilledEntities != null) {
+            this.piercedAndKilledEntities.clear();
+        }
+
+        if (this.piercingIgnoreEntityIds != null) {
+            this.piercingIgnoreEntityIds.clear();
+        }
+
     }
 
     protected void tickDespawn() {
@@ -442,6 +498,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         buffer.writeDouble(originalDirection.z);
 
         buffer.writeItem(arrowStack);
+        buffer.writeItem(bowStack);
 
         if (trajectory != null && TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsValue(trajectory)) {
             buffer.writeUtf(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getKey(trajectory).toString());
@@ -455,6 +512,10 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         trajectory.save(trajectoryNBT, originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData);
         buffer.writeNbt(trajectoryNBT);
 
+        buffer.writeInt(pierceLevel);
+        buffer.writeFloat(bonusDamage);
+        buffer.writeBoolean(critical);
+
     }
 
     @Override
@@ -463,6 +524,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         originalDirection = new Vector3d(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
 
         setTool(additionalData.readItem());
+        setBow(additionalData.readItem());
 
         String trajectoryString = additionalData.readUtf();
 
@@ -481,6 +543,9 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
         trajectory.load(originalDirection, stats.getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData, additionalData.readNbt());
 
+        pierceLevel = additionalData.readInt();
+        bonusDamage = additionalData.readFloat();
+        critical = additionalData.readBoolean();
 
     }
 
