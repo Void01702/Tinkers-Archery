@@ -1,0 +1,25 @@
+{
+  "parts": [
+    {
+      "item": "tinkersarchery:bowshaft"
+    },
+    {
+      "item": "tinkersarchery:bowstring"
+    },
+    {
+      "item": "tinkersarchery:crossbow_arm"
+    }
+  ],
+  "stats": {
+    "multipliers": {
+      "tconstruct:durability": 7,
+      "tinkersarchery:elasticity": 1.2,
+      "tinkersarchery:draw_speed": 0.8
+    }
+  },
+  "slots": {
+    "upgrades": 2,
+    "abilities": 1
+  },
+  "traits": []
+}

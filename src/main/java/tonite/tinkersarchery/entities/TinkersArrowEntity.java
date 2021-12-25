@@ -245,6 +245,10 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
             ++this.inGroundTime;
 
+            for (ModifierEntry m: projectileModifierList) {
+                ((IProjectileModifier)m.getModifier()).onProjectileGroundTick(toolStack, m.getLevel(), this);
+            }
+
         } else {
 
             numTicks++;
@@ -323,6 +327,14 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
             setPos(getX() + motion.x, getY() + motion.y, getZ() + motion.z);
 
+            for (ModifierEntry m: projectileModifierList) {
+                ((IProjectileModifier)m.getModifier()).onProjectileFlyTick(toolStack, m.getLevel(), this);
+            }
+
+        }
+
+        for (ModifierEntry m: projectileModifierList) {
+            ((IProjectileModifier)m.getModifier()).onProjectileTick(toolStack, m.getLevel(), this);
         }
 
     }
@@ -459,6 +471,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     protected void onHitBlock(BlockRayTraceResult BlockRayTraceResult) {
         this.lastState = this.level.getBlockState(BlockRayTraceResult.getBlockPos());
         super.onHitBlock(BlockRayTraceResult);
+        Vector3d direction = getDeltaMovement();
         Vector3d positionDifference = BlockRayTraceResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(positionDifference);
         Vector3d vector3d1 = positionDifference.normalize().scale((double)0.05F);
@@ -473,6 +486,9 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         /*this.setSoundEvent(SoundEvents.ARROW_HIT);
         this.setShotFromCrossbow(false);*/
         this.resetPiercedEntities();
+        for (ModifierEntry m: projectileModifierList) {
+            ((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, this.lastState, direction);
+        }
     }
 
     private void resetPiercedEntities() {

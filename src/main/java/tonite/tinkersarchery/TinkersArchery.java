@@ -32,6 +32,7 @@ import slimeknights.tconstruct.tools.TinkerTools;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.items.tools.ArrowTool;
 import tonite.tinkersarchery.items.tools.BowTool;
+import tonite.tinkersarchery.items.tools.CrossbowTool;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.modifiers.*;
 import tonite.tinkersarchery.modifiers.abilities.*;
@@ -80,13 +81,14 @@ public class TinkersArchery
     public static final RegistryObject<ToolPartItem> bowstring = ITEMS.register("bowstring", () -> new ToolPartItem(PARTS_PROPS, BowStringMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> bowguide = ITEMS.register("bowguide", () -> new ToolPartItem(PARTS_PROPS, BowGuideMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> large_bowshaft = ITEMS.register("large_bowshaft", () -> new ToolPartItem(PARTS_PROPS, BowMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> crossbow_arm = ITEMS.register("crossbow_arm", () -> new ToolPartItem(PARTS_PROPS, BowGuideMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> arrowhead = ITEMS.register("arrowhead", () -> new ToolPartItem(PARTS_PROPS, ArrowHeadMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> arrow_shaft = ITEMS.register("arrow_shaft", () -> new ToolPartItem(PARTS_PROPS, ArrowShaftMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> arrow_fletching = ITEMS.register("arrow_fletching", () -> new ToolPartItem(PARTS_PROPS, ArrowFletchingMaterialStats.ID));
 
     public static final RegistryObject<BowTool> shortbow = ITEMS.register("shortbow", () -> new BowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.SHORTBOW));
     public static final RegistryObject<BowTool> longbow = ITEMS.register("longbow", () -> new BowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.LONGBOW));
-
+    public static final RegistryObject<CrossbowTool> crossbow = ITEMS.register("crossbow", () -> new CrossbowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.CROSSBOW));
     public static final RegistryObject<ArrowTool> arrow = ITEMS.register("arrow", () -> new ArrowTool(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.ARROW));
 
     public static final RegistryObject<Item> tantalum_ingot = ITEMS.register("tantalum_ingot", () -> new Item(new Item.Properties().tab(TAB_TINKERS_ARCHERY)));

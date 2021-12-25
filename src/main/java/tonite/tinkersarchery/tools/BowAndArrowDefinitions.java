@@ -16,6 +16,11 @@ public class BowAndArrowDefinitions {
             .setStatsProvider(BowAndArrowToolStatsProviders.BOW)
             .build();
 
+    public static final ToolDefinition CROSSBOW = ToolDefinition
+            .builder(crossbow)
+            .setStatsProvider(BowAndArrowToolStatsProviders.BOW)
+            .build();
+
     public static final ToolDefinition ARROW = ToolDefinition
             .builder(arrow)
             .setStatsProvider(BowAndArrowToolStatsProviders.ARROW)

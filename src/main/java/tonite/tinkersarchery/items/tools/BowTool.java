@@ -101,8 +101,8 @@ public class BowTool extends ShootableTool {
     public static float getDrawSpeed(ItemStack bow) {
         float drawspeedModifier;
 
-        if(bow.hasTag() && bow.getTag().contains("drawspeed")) {
-            drawspeedModifier = bow.getTag().getFloat("drawspeed");
+        if(bow.hasTag() && bow.getTag().contains("Drawspeed")) {
+            drawspeedModifier = bow.getTag().getFloat("Drawspeed");
         } else {
             drawspeedModifier = 1f;
         }
@@ -116,7 +116,7 @@ public class BowTool extends ShootableTool {
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        boolean flag = !player.getProjectile(itemstack).isEmpty();
+        boolean flag = !getProjectile(player, itemstack).isEmpty();
 
         float drawspeedModifier;
 
@@ -135,16 +135,16 @@ public class BowTool extends ShootableTool {
             }
         }
 
-        itemstack.addTagElement("drawspeed", FloatNBT.valueOf(drawspeedModifier));
+        itemstack.addTagElement("Drawspeed", FloatNBT.valueOf(drawspeedModifier));
 
         ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, flag);
         if (ret != null) return ret;
 
-        if (!player.abilities.instabuild && !flag) {
-            return ActionResult.fail(itemstack);
-        } else {
+        if (player.abilities.instabuild || flag) {
             player.startUsingItem(hand);
             return ActionResult.consume(itemstack);
+        } else {
+            return ActionResult.fail(itemstack);
         }
     }
 
