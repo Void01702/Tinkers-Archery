@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "tinkersarchery:shortbow",
+    "tinkersarchery:crossbow",
     "tinkersarchery:longbow"
   ]
 }

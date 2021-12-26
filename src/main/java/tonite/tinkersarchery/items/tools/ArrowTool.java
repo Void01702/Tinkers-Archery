@@ -22,23 +22,36 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
         super(properties, toolDefinition);
     }
 
+    public boolean hasInfinity (ItemStack itemStack) {
+        CompoundNBT tag = itemStack.getTag();
+
+        return tag.contains("infinity") && tag.getBoolean("infinity");
+    }
+
     @Override
-    public int consumeAmmo(ItemStack ammo, int amount, LivingEntity player) {
+    public int consumeAmmo(ItemStack ammo, int desiredAmount, LivingEntity player) {
         CompoundNBT tag = ammo.getTag();
 
-        if (tag.contains("infinity") && tag.getBoolean("infinity")) {
-            return amount;
+        if (hasInfinity(ammo)) {
+            return desiredAmount;
         }
         if (ammo.getTag().contains("count")) {
-            return Math.min(ammo.getTag().getInt("count"), amount);
+            return Math.min(ammo.getTag().getInt("count"), desiredAmount);
         } else {
             return 0;
         }
     }
 
     @Override
-    public int getAmmo(ItemStack ammo, LivingEntity player) {
-        return 0;
+    public int getAmmo(ItemStack ammo, int desiredAmount) {
+        if (hasInfinity(ammo)) {
+            return desiredAmount;
+        }
+        if (ammo.getTag().contains("count")) {
+            return Math.min(ammo.getTag().getInt("count"), desiredAmount);
+        } else {
+            return desiredAmount;//0;
+        }
     }
 
     @Override

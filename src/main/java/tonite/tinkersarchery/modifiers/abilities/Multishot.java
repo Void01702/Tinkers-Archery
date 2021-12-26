@@ -16,11 +16,15 @@ public class Multishot extends Modifier implements IBowModifier {
         super(0xFFB212D9);
     }
 
-    public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, World world, LivingEntity shooter) {
+    @Override
+    public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int count, World world, LivingEntity shooter) {
         for (int i = 1; i <= level; i++) {
             arrows.add(new ArrowData(new Quaternion(new Vector3f(shooter.getUpVector(1.0f)), 10 * i, true), power, accuracy));
             arrows.add(new ArrowData(new Quaternion(new Vector3f(shooter.getUpVector(1.0f)), -10 * i, true), power, accuracy));
         }
     }
+
+    @Override
+    public int getArrowCount(IModifierToolStack tool, int level, float drawPortion, World world, LivingEntity shooter) { return 2; }
 
 }

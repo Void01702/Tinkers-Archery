@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
@@ -25,36 +26,137 @@ public abstract class ShootableTool extends ModifiableItem {
         super(properties, toolDefinition);
     }
 
-    public Predicate<ItemStack> getSupportedHeldProjectiles() {
-        return this.getAllSupportedProjectiles();
-    }
+    public int getItemAmount(ItemStack itemStack, int desiredAmount, boolean isHand) {
+        if (itemStack.getItem() instanceof IProjectileItem) {
+            return ((IProjectileItem)itemStack.getItem()).getAmmo(itemStack, desiredAmount);
+        }
 
-    public abstract Predicate<ItemStack> getAllSupportedProjectiles();
-
-    public static ItemStack getProjectile(PlayerEntity player, ItemStack bowItemStack) {
-        if (!(bowItemStack.getItem() instanceof ShootableTool)) {
-            return ItemStack.EMPTY;
+        if (itemStack.getItem() instanceof ArrowItem) {
+            return Math.min(itemStack.getCount(), desiredAmount);
         } else {
-            Predicate<ItemStack> predicate = ((ShootableTool) bowItemStack.getItem()).getSupportedHeldProjectiles();
-            ItemStack itemstack = ShootableItem.getHeldProjectile(player, predicate);
-            if (!itemstack.isEmpty()) {
-                return itemstack;
-            } else {
-                predicate = ((ShootableTool) bowItemStack.getItem()).getAllSupportedProjectiles();
-
-                for (int i = 0; i < player.inventory.getContainerSize(); ++i) {
-                    ItemStack itemstack1 = player.inventory.getItem(i);
-                    if (predicate.test(itemstack1)) {
-                        return itemstack1;
-                    }
-                }
-
-                return player.abilities.instabuild ? new ItemStack(Items.ARROW) : ItemStack.EMPTY;
-            }
+            return 0;
         }
     }
 
-    public void shootBow(ItemStack bow, World world, LivingEntity shooter, float drawPortion, ItemStack arrowItem){
+    private static int addItemToList(ShootableTool shootableTool, List<AmmoListEntry> list, ItemStack itemStack, int currentlyDesired, boolean isHand) {
+        int heldItemCount = shootableTool.getItemAmount(itemStack, currentlyDesired, isHand);
+        if (heldItemCount > 0) {
+            list.add(new AmmoListEntry(itemStack, heldItemCount));
+            return heldItemCount;
+        }
+        return 0;
+    }
+
+    public static ItemStack getFirstProjectile(PlayerEntity player, ItemStack bowItemStack) {
+        if (!(bowItemStack.getItem() instanceof ShootableTool)) {
+            return ItemStack.EMPTY;
+        } else {
+            ShootableTool shootableTool = ((ShootableTool) bowItemStack.getItem());
+
+            ItemStack itemstack = player.getItemInHand(Hand.MAIN_HAND);
+            if (itemstack != bowItemStack) {
+                if (shootableTool.getItemAmount(itemstack, 1, true) > 0) {
+                    return itemstack;
+                }
+            }
+            itemstack = player.getItemInHand(Hand.OFF_HAND);
+            if (itemstack != bowItemStack) {
+                if (shootableTool.getItemAmount(itemstack, 1, true) > 0) {
+                    return itemstack;
+                }
+            }
+
+            for (int i = 0; i < player.inventory.getContainerSize(); ++i) {
+                itemstack= player.inventory.getItem(i);
+                if (itemstack != bowItemStack) {
+                    if (shootableTool.getItemAmount(itemstack, 1, false) > 0) {
+                        return itemstack;
+                    }
+                }
+            }
+
+            if (player.abilities.instabuild) {
+                return new ItemStack(Items.ARROW);
+            }
+
+            return ItemStack.EMPTY;
+        }
+    }
+
+    public static List<AmmoListEntry> getProjectile(PlayerEntity player, ItemStack bowItemStack, int desiredAmount) {
+        if (!(bowItemStack.getItem() instanceof ShootableTool)) {
+            return new ArrayList<>();
+        } else {
+            ShootableTool shootableTool = ((ShootableTool) bowItemStack.getItem());
+            int currentlyDesired = desiredAmount;
+
+            ArrayList<AmmoListEntry> result = new ArrayList<>();
+
+            ItemStack itemstack = player.getItemInHand(Hand.MAIN_HAND);
+            if (itemstack != bowItemStack) {
+                currentlyDesired -= addItemToList(shootableTool, result, itemstack, currentlyDesired, true);
+            }
+            itemstack = player.getItemInHand(Hand.OFF_HAND);
+            if (itemstack != bowItemStack) {
+                currentlyDesired -= addItemToList(shootableTool, result, itemstack, currentlyDesired, true);
+            }
+
+            for (int i = 0; i < player.inventory.getContainerSize(); ++i) {
+                itemstack= player.inventory.getItem(i);
+                if (itemstack != bowItemStack) {
+                    currentlyDesired -= addItemToList(shootableTool, result, itemstack, currentlyDesired, false);
+                }
+            }
+
+            if (currentlyDesired > 0 && player.abilities.instabuild) {
+                result.add(new AmmoListEntry(new ItemStack(Items.ARROW), currentlyDesired));
+            }
+
+            return result;
+        }
+    }
+
+    public int[] getArrowCounts(ItemStack bow, World world, LivingEntity shooter, float drawPortion) {
+        List<ModifierEntry> modifierList = new ArrayList<>();
+
+        ToolStack tool = null;
+
+        if(!bow.hasTag()) {
+            return new int[0];
+        }
+
+        tool = ToolStack.from(bow);
+
+        for (ModifierEntry m : tool.getModifierList()) {
+            if (m.getModifier() instanceof IBowModifier){
+                modifierList.add(m);
+            }
+        }
+
+        int[] result = new int[modifierList.size()];
+
+        for(int i = 0; i < result.length; i++) {
+            ModifierEntry entry = modifierList.get(i);
+
+            result[i] = ((IBowModifier)entry.getModifier()).getArrowCount(tool, entry.getLevel(), drawPortion, world, shooter);
+        }
+
+        return result;
+    }
+
+    public static int compileArrowCounts(int[] arrowCounts) {
+
+        int result = 1;
+
+        for (int arrowCount : arrowCounts) {
+            result += arrowCount;
+        }
+
+        return result;
+
+    }
+
+    public void shootBow(ItemStack bow, World world, LivingEntity shooter, float drawPortion, List<AmmoListEntry> arrowItems, int[] arrowCounts){
 
         float powerModifier = 1f;
         float accuracyModifier = 1f;
@@ -63,15 +165,17 @@ public abstract class ShootableTool extends ModifiableItem {
 
         List<ModifierEntry> modifierList = new ArrayList<>();
 
-        if(bow.hasTag()) {
-            tool = ToolStack.from(bow);
-            powerModifier = tool.getStats().getFloat(BowAndArrowToolStats.ELASTICITY);
-            accuracyModifier = tool.getStats().getFloat(BowAndArrowToolStats.ACCURACY);
+        if(!bow.hasTag()) {
+            return;
+        }
 
-            for (ModifierEntry m : tool.getModifierList()) {
-                if (m.getModifier() instanceof IBowModifier){
-                    modifierList.add(m);
-                }
+        tool = ToolStack.from(bow);
+        powerModifier = tool.getStats().getFloat(BowAndArrowToolStats.ELASTICITY);
+        accuracyModifier = tool.getStats().getFloat(BowAndArrowToolStats.ACCURACY);
+
+        for (ModifierEntry m : tool.getModifierList()) {
+            if (m.getModifier() instanceof IBowModifier){
+                modifierList.add(m);
             }
         }
 
@@ -87,8 +191,9 @@ public abstract class ShootableTool extends ModifiableItem {
 
         arrows.add(new IBowModifier.ArrowData(Quaternion.ONE, power, accuracy));
 
-        for (ModifierEntry entry : modifierList) {
-            ((IBowModifier) entry.getModifier()).onReleaseBow(tool, entry.getLevel(), drawPortion, power, accuracy, arrows, world, shooter);
+        for(int i = 0; i < modifierList.size(); i++) {
+            ModifierEntry entry = modifierList.get(i);
+            ((IBowModifier) entry.getModifier()).onReleaseBow(tool, entry.getLevel(), drawPortion, power, accuracy, arrows, arrowCounts[i], world, shooter);
         }
 
         Vector3f motion = new Vector3f( shooter.getDeltaMovement() );
@@ -96,7 +201,13 @@ public abstract class ShootableTool extends ModifiableItem {
 
         Vector3f lookingDirection = new Vector3f( shooter.getViewVector(1.0F) );
 
-        ArrowItem arrowitem = (ArrowItem) (arrowItem.getItem() instanceof ArrowItem ? arrowItem.getItem() : Items.ARROW);
+        int ammoListIndex = 0;
+
+        AmmoListEntry ammoListEntry = arrowItems.get(ammoListIndex);
+
+        ItemStack arrowItem = ammoListEntry.itemStack;
+        int arrowItemCount = ammoListEntry.amount;
+
         for (IBowModifier.ArrowData data: arrows) {
 
             Vector3f arrowDirection = lookingDirection.copy();
@@ -114,6 +225,21 @@ public abstract class ShootableTool extends ModifiableItem {
             }
 
             world.addFreshEntity(projectile);
+
+            arrowItemCount--;
+
+            if (arrowItemCount <= 0) {
+                ammoListIndex++;
+
+                if (ammoListIndex < arrowItems.size()) {
+                    ammoListEntry = arrowItems.get(ammoListIndex);
+
+                    arrowItem = ammoListEntry.itemStack;
+                    arrowItemCount = ammoListEntry.amount;
+                } else {
+                    break;
+                }
+            }
         }
     }
 
@@ -164,6 +290,16 @@ public abstract class ShootableTool extends ModifiableItem {
             if (shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.instabuild) {
                 arrow.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
             }
+        }
+    }
+
+    public static class AmmoListEntry {
+        public ItemStack itemStack;
+        public int amount;
+
+        public AmmoListEntry (ItemStack itemStack, int amount) {
+            this.itemStack = itemStack;
+            this.amount = amount;
         }
     }
 }

@@ -1,12 +1,9 @@
 package tonite.tinkersarchery.library.modifier;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.world.World;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 
 import java.util.List;
@@ -51,17 +48,30 @@ public interface IBowModifier {
     default float getDrawSpeed(IModifierToolStack tool, int level, float baseDrawSpeed, float drawSpeed, World world, LivingEntity shooter) { return drawSpeed; }
 
     /**
-     * Called immediately before the arrow is shot out of the bow to determine additional arrows
+     * Called some point during drawing the bow to determine the number of additional arrows
+     * @param tool           Current tool instance
+     * @param level          Modifier level
+     * @param drawPortion    The portion the bow was drawn
+     * @param world          World containing tool
+     * @param shooter        Entity who shot tool
+     * @return               How many arrows to add
+     */
+    default int getArrowCount(IModifierToolStack tool, int level, float drawPortion, World world, LivingEntity shooter) { return 0; }
+
+
+    /**
+     * Called immediately before the arrow is shot out of the bow to determine the directions of additional arrows.
      * @param tool           Current tool instance
      * @param level          Modifier level
      * @param drawPortion    The portion the bow was drawn
      * @param power          The power the bow had when released
      * @param accuracy       The accuracy the bow had when released
-     * @param arrows         The current set of arrows being shot from the bow. You can add items to this list to have the bow shoot more arrows
+     * @param arrows         The current set of arrows being shot from the bow. You can add items to this list to have the bow shoot more arrows. The number of items in this array must equal that from getNum.
+     * @param numArrows      The number of arrows this modifier should add.
      * @param world          World containing tool
      * @param shooter        Entity who shot tool
      */
-    default void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, World world, LivingEntity shooter) {}
+    default void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int numArrows, World world, LivingEntity shooter) {}
 
     /**
      * Called for every arrow shot out of the bow. This is different from onBowReleased in that onBowReleased is only called once, but this can be called more than once.

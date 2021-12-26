@@ -2,12 +2,16 @@
   "_comment": "Tools",
 
   "item.tinkersarchery.shortbow": "Shortbow",
+  "item.tinkersarchery.crossbow": "Crossbow",
+  "item.tinkersarchery.longbow": "Longbow",
+  "item.tinkersarchery.arrow": "Arrows",
 
   "_comment": "Tool Parts",
 
   "item.tinkersarchery.bowstring": "Bowstring",
   "item.tinkersarchery.bowshaft": "Bowshaft",
   "item.tinkersarchery.bowguide": "Guide",
+  "item.tinkersarchery.crossbow_arm": "Crossbow Arm",
   "item.tinkersarchery.large_bowshaft": "Large Bowshaft",
   "item.tinkersarchery.arrowhead": "Arrowhead",
   "item.tinkersarchery.arrow_shaft": "Arrow Shaft",
@@ -31,13 +35,17 @@
 
   "_comment": "Modifiers",
 
-  "modifier.tinkersarchery.groovy": "Groovy",
-  "modifier.tinkersarchery.groovy.flavor": "In the Groove",
-  "modifier.tinkersarchery.groovy.description": "The more you shoot, the faster you draw.",
-
   "modifier.tinkersarchery.accurate": "Accurate",
   "modifier.tinkersarchery.accurate.flavor": "What Good Is a Bow That Doesn't Shoot Where You Point?",
   "modifier.tinkersarchery.accurate.description": "The bow is more accurate.",
+
+  "modifier.tinkersarchery.weighty": "Weighty",
+  "modifier.tinkersarchery.weighty.flavor": "Magic?",
+  "modifier.tinkersarchery.weighty.description": "Makes arrows heavier, making them follow more favorable trajectories.",
+
+  "modifier.tinkersarchery.groovy": "Groovy",
+  "modifier.tinkersarchery.groovy.flavor": "In the Groove",
+  "modifier.tinkersarchery.groovy.description": "The more you shoot, the faster you draw.",
 
   "modifier.tinkersarchery.clean": "Clean",
   "modifier.tinkersarchery.superslime": "Superslime",
@@ -48,5 +56,22 @@
   "modifier.tinkersarchery.flying_trajectory": "Flying Trajectory",
   "modifier.tinkersarchery.antigravity_trajectory": "Antigravity Trajectory",
   "modifier.tinkersarchery.twirling_trajectory": "Twirling Trajectory",
-  "modifier.tinkersarchery.bouncing_trajectory": "Bouncing Trajectory"
+  "modifier.tinkersarchery.bouncing_trajectory": "Bouncing Trajectory",
+
+  "_comment": "Stats",
+
+  "stat.tinkersarchery.bow": "Bow Shaft",
+  "stat.tinkersarchery.bowstring": "Bowstring",
+  "stat.tinkersarchery.bowguide": "Guide",
+  "stat.tinkersarchery.arrowhead": "Arrowhead",
+  "stat.tinkersarchery.arrow_shaft": "Arrow Shaft",
+  "stat.tinkersarchery.arrow_fletching": "Fletching",
+
+  "_comment": "Tool Stats",
+
+  "tool_stat.tinkersarchery.elasticity": "Elasticity: ",
+  "tool_stat.tinkersarchery.draw_speed": "Draw Speed: ",
+  "tool_stat.tinkersarchery.accuracy": "Accuracy: ",
+  "tool_stat.tinkersarchery.speed": "Speed: ",
+  "tool_stat.tinkersarchery.weight": "Weight: "
 }

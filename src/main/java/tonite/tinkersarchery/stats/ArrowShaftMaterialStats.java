@@ -16,7 +16,7 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("arrow_shaft"));
     public static final ArrowShaftMaterialStats DEFAULT = new ArrowShaftMaterialStats();
 
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.ATTACK_SPEED.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription());
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.ATTACK_SPEED.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
 
     private float speed;
     private float weight;
@@ -44,6 +44,7 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
 
         info.add(BowAndArrowToolStats.ELASTICITY.formatValue(this.speed));
         info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));
+        info.add(BowAndArrowToolStats.WEIGHT.formatValue(this.accuracy));
 
         return info;
     }

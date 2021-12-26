@@ -13,9 +13,9 @@ import tonite.tinkersarchery.library.util.ProjectileAttackUtil;
 
 public interface IProjectileItem {
 
-    int consumeAmmo(ItemStack ammo, int amount, LivingEntity player);
+    int consumeAmmo(ItemStack ammo, int desiredAmount, LivingEntity player);
 
-    int getAmmo(ItemStack ammo, LivingEntity player);
+    int getAmmo(ItemStack ammo, int desiredAmount);
 
     ProjectileEntity createProjectile(ItemStack ammo, World world, LivingEntity shooter, ItemStack bow);
 

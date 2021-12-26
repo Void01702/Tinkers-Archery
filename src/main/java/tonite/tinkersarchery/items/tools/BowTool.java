@@ -18,14 +18,11 @@ import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.ShootableTool;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 public class BowTool extends ShootableTool {
     public static final ToolType TOOL_TYPE = ToolType.get("shortbow");
-
-    public static final Predicate<ItemStack> TINKERS_ARROW_ONLY = (itemStack) -> {
-        return itemStack.getItem() instanceof IProjectileItem;
-    };
 
     public BowTool(Properties properties, ToolDefinition toolDefinition) {
         super(properties, toolDefinition);
@@ -34,36 +31,35 @@ public class BowTool extends ShootableTool {
     public void releaseUsing(ItemStack bow, World world, LivingEntity shooter, int held_ticks) {
         if (shooter instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity)shooter;
-            boolean flag = playerentity.abilities.instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, bow) > 0;
-            ItemStack itemstack = ShootableTool.getProjectile(playerentity, bow);
 
             int time = this.getUseDuration(bow) - held_ticks;
-            time = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(bow, world, playerentity, time, !itemstack.isEmpty() || flag);
+            time = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(bow, world, playerentity, time, !getFirstProjectile(playerentity, bow).isEmpty());
             if (time < 0) return;
 
-            if (!itemstack.isEmpty() || flag) {
-                if (itemstack.isEmpty()) {
-                    itemstack = new ItemStack(Items.ARROW);
-                }
+            float drawPortion = getPowerForTime(time, getDrawSpeed(bow));
 
-                float drawPortion = getPowerForTime(time, getDrawSpeed(bow));
+            int[] arrowCounts = getArrowCounts(bow, world, shooter, drawPortion);
+
+            List<AmmoListEntry> ammoList = ShootableTool.getProjectile(playerentity, bow, compileArrowCounts(arrowCounts));
+
+            if (!ammoList.isEmpty()) {
+
                 if (!((double)drawPortion < 0.1D)) {
-                    boolean flag1 = playerentity.abilities.instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, bow, playerentity));
                     if (!world.isClientSide) {
 
-                        shootBow(bow, world, shooter, drawPortion, itemstack);
+                        shootBow(bow, world, shooter, drawPortion, ammoList, arrowCounts);
 
                         damageItem(bow, 1, playerentity, (damager) -> {
                         });
                     }
 
                     world.playSound((PlayerEntity)null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + drawPortion * 0.5F);
-                    if (!flag1 && !playerentity.abilities.instabuild) {
+                    /*if (!flag1 && !playerentity.abilities.instabuild) {
                         //itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
                             playerentity.inventory.removeItem(itemstack);
                         }
-                    }
+                    }*/
 
                     playerentity.awardStat(Stats.ITEM_USED.get(this));
                 }
@@ -116,7 +112,7 @@ public class BowTool extends ShootableTool {
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        boolean flag = !getProjectile(player, itemstack).isEmpty();
+        boolean flag = !getFirstProjectile(player, itemstack).isEmpty();
 
         float drawspeedModifier;
 
@@ -147,10 +143,5 @@ public class BowTool extends ShootableTool {
             return ActionResult.fail(itemstack);
         }
     }
-
-    public Predicate<ItemStack> getAllSupportedProjectiles() {
-        return TINKERS_ARROW_ONLY.or(ShootableItem.ARROW_ONLY);
-    }
-
 
 }

@@ -95,6 +95,7 @@ public class TinkersArchery
     public static final RegistryObject<Item> galaxy_alloy_ingot = ITEMS.register("galaxy_alloy_ingot", () -> new Item(new Item.Properties().tab(TAB_TINKERS_ARCHERY)));
 
     public static final RegistryObject<Modifier> ACCURATE_MODIFIER = MODIFIERS.register("accurate", Accurate::new);
+    public static final RegistryObject<Modifier> WEIGHTY_MODIFIER = MODIFIERS.register("weighty", Weighty::new);
     public static final RegistryObject<Modifier> GROOVY_MODIFIER = MODIFIERS.register("groovy", Groovy::new);
     public static final RegistryObject<Modifier> CLEAN_MODIFIER = MODIFIERS.register("clean", Clean::new);
     public static final RegistryObject<Modifier> SUPERSLIME_MODIFIER = MODIFIERS.register("superslime", Superslime::new);

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "tinkersarchery:shortbow",
-    "tinkersarchery:longbow"
+    "tinkersarchery:crossbow",
+    "tinkersarchery:longbow",
+    "tinkersarchery:arrow"
   ]
 }
