@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -78,6 +79,7 @@ public class CrossbowTool extends ShootableTool {
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
+        ToolStack toolStack = ToolStack.from(itemstack);
         boolean flag = !getFirstProjectile(player, itemstack).isEmpty();
         if (isCharged(itemstack)) {
 
@@ -98,13 +100,16 @@ public class CrossbowTool extends ShootableTool {
                     if (!world.isClientSide) {
                         world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CROSSBOW_SHOOT, SoundCategory.PLAYERS, 0.5F, 1.0F);
                     }
+                    damageItem(itemstack, 1, player, (damager) -> {
+                    });
+                    player.awardStat(Stats.ITEM_USED.get(this));
                 }
             }
 
             uncharge(itemstack);
 
         }
-        if (flag) {
+        if (flag && !toolStack.isBroken()) {
 
             float drawspeedModifier;
 
@@ -137,7 +142,6 @@ public class CrossbowTool extends ShootableTool {
     public void releaseUsing(ItemStack bow, World world, LivingEntity shooter, int held_ticks) {
         if (shooter instanceof PlayerEntity) {
             int time = getUseDuration(bow) - held_ticks;
-            TinkersArchery.LOGGER.info("time held: " + time);
             if (time > 25 / getDrawSpeed(bow)) {
 
                 int[] arrowCounts = getArrowCounts(bow, world, shooter, 1.0f);
@@ -146,6 +150,7 @@ public class CrossbowTool extends ShootableTool {
 
                 if (!ammo.isEmpty()) {
                     charge(ammo, arrowCounts, bow);
+                    consumeAmmo(ammo, (PlayerEntity) shooter);
                     if (!world.isClientSide) {
                         world.playSound(null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.CROSSBOW_LOADING_END, SoundCategory.PLAYERS, 0.5F, 1.0F);
                     }

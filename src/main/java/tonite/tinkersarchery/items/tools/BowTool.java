@@ -54,12 +54,8 @@ public class BowTool extends ShootableTool {
                     }
 
                     world.playSound((PlayerEntity)null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + drawPortion * 0.5F);
-                    /*if (!flag1 && !playerentity.abilities.instabuild) {
-                        //itemstack.shrink(1);
-                        if (itemstack.isEmpty()) {
-                            playerentity.inventory.removeItem(itemstack);
-                        }
-                    }*/
+
+                    consumeAmmo(ammoList, playerentity);
 
                     playerentity.awardStat(Stats.ITEM_USED.get(this));
                 }
@@ -112,36 +108,41 @@ public class BowTool extends ShootableTool {
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        boolean flag = !getFirstProjectile(player, itemstack).isEmpty();
+        ToolStack tool = ToolStack.from(itemstack);
 
-        float drawspeedModifier;
+        if (!tool.isBroken()) {
+            boolean flag = !getFirstProjectile(player, itemstack).isEmpty();
 
-        if(!itemstack.hasTag()) {
-            drawspeedModifier = 1f;
-        } else {
-            ToolStack tool = ToolStack.from(itemstack);
-            drawspeedModifier = tool.getStats().getFloat(BowAndArrowToolStats.DRAW_SPEED);
+            float drawspeedModifier;
 
-            float drawspeedBase = drawspeedModifier;
+            if (!itemstack.hasTag()) {
+                drawspeedModifier = 1f;
+            } else {
 
-            for (ModifierEntry m : tool.getModifierList()) {
-                if (m.getModifier() instanceof IBowModifier){
-                    drawspeedModifier = ((IBowModifier)m.getModifier()).getDrawSpeed(tool, m.getLevel(), drawspeedBase, drawspeedModifier, world, player);
+                drawspeedModifier = tool.getStats().getFloat(BowAndArrowToolStats.DRAW_SPEED);
+
+                float drawspeedBase = drawspeedModifier;
+
+                for (ModifierEntry m : tool.getModifierList()) {
+                    if (m.getModifier() instanceof IBowModifier) {
+                        drawspeedModifier = ((IBowModifier) m.getModifier()).getDrawSpeed(tool, m.getLevel(), drawspeedBase, drawspeedModifier, world, player);
+                    }
                 }
             }
+
+            itemstack.addTagElement("Drawspeed", FloatNBT.valueOf(drawspeedModifier));
+
+            ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, flag);
+            if (ret != null) return ret;
+
+            if (player.abilities.instabuild || flag) {
+                player.startUsingItem(hand);
+                return ActionResult.consume(itemstack);
+            } else {
+                return ActionResult.fail(itemstack);
+            }
         }
-
-        itemstack.addTagElement("Drawspeed", FloatNBT.valueOf(drawspeedModifier));
-
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, flag);
-        if (ret != null) return ret;
-
-        if (player.abilities.instabuild || flag) {
-            player.startUsingItem(hand);
-            return ActionResult.consume(itemstack);
-        } else {
-            return ActionResult.fail(itemstack);
-        }
+        return ActionResult.fail(itemstack);
     }
 
 }

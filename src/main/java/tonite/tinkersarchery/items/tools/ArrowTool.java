@@ -30,13 +30,11 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
 
     @Override
     public int consumeAmmo(ItemStack ammo, int desiredAmount, LivingEntity player) {
-        CompoundNBT tag = ammo.getTag();
-
         if (hasInfinity(ammo)) {
             return desiredAmount;
         }
-        if (ammo.getTag().contains("count")) {
-            return Math.min(ammo.getTag().getInt("count"), desiredAmount);
+        if (getDamage(ammo) < getMaxDamage(ammo) - 1) {
+            return damageItem(ammo, desiredAmount, player, a -> {});
         } else {
             return 0;
         }
@@ -44,14 +42,11 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
 
     @Override
     public int getAmmo(ItemStack ammo, int desiredAmount) {
+        ToolStack toolStack = ToolStack.from(ammo);
         if (hasInfinity(ammo)) {
             return desiredAmount;
         }
-        if (ammo.getTag().contains("count")) {
-            return Math.min(ammo.getTag().getInt("count"), desiredAmount);
-        } else {
-            return desiredAmount;//0;
-        }
+        return Math.min(toolStack.getCurrentDurability(), desiredAmount);
     }
 
     @Override

@@ -293,6 +293,23 @@ public abstract class ShootableTool extends ModifiableItem {
         }
     }
 
+    public final void consumeAmmo(List<AmmoListEntry> ammo, PlayerEntity player) {
+        if (!player.abilities.instabuild) {
+            for (AmmoListEntry entry : ammo) {
+                consumeAmmo(entry, player);
+            }
+        }
+    }
+
+    public void consumeAmmo(AmmoListEntry ammo, PlayerEntity player) {
+        if (ammo.itemStack.getItem() instanceof IProjectileItem) {
+            ((IProjectileItem)ammo.itemStack.getItem()).consumeAmmo(ammo.itemStack, ammo.amount, player);
+            return;
+        }
+
+        ammo.itemStack.shrink(ammo.amount);
+    }
+
     public static class AmmoListEntry {
         public ItemStack itemStack;
         public int amount;

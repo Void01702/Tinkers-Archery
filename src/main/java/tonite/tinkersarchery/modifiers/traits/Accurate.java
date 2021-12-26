@@ -3,6 +3,7 @@ package tonite.tinkersarchery.modifiers.traits;
 import net.minecraft.item.Item;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
+import slimeknights.tconstruct.library.tools.context.ToolRebuildContext;
 import slimeknights.tconstruct.library.tools.nbt.IModDataReadOnly;
 import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
@@ -15,7 +16,7 @@ public class Accurate extends Modifier {
     }
 
     @Override
-    public void addToolStats(Item item, ToolDefinition toolDefinition, StatsNBT baseStats, IModDataReadOnly persistentData, IModDataReadOnly volatileData, int level, ModifierStatsBuilder builder) {
+    public void addToolStats(ToolRebuildContext context, int level, ModifierStatsBuilder builder) {
         BowAndArrowToolStats.ACCURACY.multiply(builder, 1 + level * 0.4f);
     }
 }

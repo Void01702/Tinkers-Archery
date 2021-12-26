@@ -70,8 +70,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     private IntOpenHashSet piercingIgnoreEntityIds = null;
     private List<Entity> piercedAndKilledEntities = null;
 
-    private SoundEvent soundEvent = this.getDefaultHitGroundSoundEvent();
-
     @Nullable
     private BlockState lastState;
 
@@ -445,7 +443,11 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
                 }*/
             }
 
-            this.playSound(this.soundEvent, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+            if (entity instanceof PlayerEntity) {
+                this.playSound(SoundEvents.ARROW_HIT_PLAYER, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+            } else {
+                this.playSound(SoundEvents.ARROW_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+            }
             if (this.getPierceLevel() <= 0) {
                 this.remove();
             }
@@ -474,15 +476,13 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         this.setDeltaMovement(positionDifference);
         Vector3d vector3d1 = positionDifference.normalize().scale((double)0.05F);
         this.setPosRaw(this.getX() - vector3d1.x, this.getY() - vector3d1.y, this.getZ() - vector3d1.z);
-        //this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+        this.playSound(SoundEvents.ARROW_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.inGround = true;
         this.shakeTime = 7;
         this.setCritical(false);
         this.setPierceLevel(0);
         setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
         trajectoryData = trajectory.onCreated(originalDirection, getWeight());
-        /*this.setSoundEvent(SoundEvents.ARROW_HIT);
-        this.setShotFromCrossbow(false);*/
         this.resetPiercedEntities();
         for (ModifierEntry m: projectileModifierList) {
             ((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, this.lastState, direction);
@@ -646,10 +646,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     public Vector3d getOriginalDirection() {
         return originalDirection;
-    }
-
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
-        return SoundEvents.ARROW_HIT;
     }
 
     @Override
