@@ -6,7 +6,9 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
+import slimeknights.tconstruct.library.tools.stat.IToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import tonite.tinkersarchery.TinkersArchery;
 
 import java.util.List;
@@ -14,6 +16,10 @@ import java.util.List;
 public class BowStringMaterialStats extends BaseMaterialStats {
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("bowstring"));
     public static final BowStringMaterialStats DEFAULT = new BowStringMaterialStats(1f, 1f, 1f, 1f);
+
+    // tooltip prefixes
+    private static final String ELASTICITY_PREFIX = makeTooltipKey(TinkersArchery.getResource("elasticity"));
+    private static final String DRAW_SPEED_PREFIX = makeTooltipKey(TinkersArchery.getResource("draw_speed"));
 
     private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.DRAW_SPEED.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription());
 
@@ -42,12 +48,16 @@ public class BowStringMaterialStats extends BaseMaterialStats {
     public List<ITextComponent> getLocalizedInfo() {
         List<ITextComponent> info = Lists.newArrayList();
 
-        info.add(ToolStats.DURABILITY.formatValue(this.durability));
-        info.add(BowAndArrowToolStats.ELASTICITY.formatValue(this.elasticity));
-        info.add(BowAndArrowToolStats.DRAW_SPEED.formatValue(this.drawSpeed));
+        info.add(HandleMaterialStats.formatDurability(this.durability));
+        info.add(format(ELASTICITY_PREFIX, this.elasticity));
+        info.add(format(DRAW_SPEED_PREFIX, this.drawSpeed));
         info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));
 
         return info;
+    }
+
+    public static ITextComponent format(String prefix, float quality) {
+        return IToolStat.formatColoredMultiplier(prefix, quality);
     }
 
     @Override

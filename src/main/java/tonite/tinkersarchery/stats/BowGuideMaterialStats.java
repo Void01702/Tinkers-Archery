@@ -6,6 +6,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
+import slimeknights.tconstruct.library.tools.stat.IToolStat;
 import tonite.tinkersarchery.TinkersArchery;
 
 import java.util.List;
@@ -13,6 +14,10 @@ import java.util.List;
 public class BowGuideMaterialStats  extends BaseMaterialStats {
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("bowguide"));
     public static final BowGuideMaterialStats DEFAULT = new BowGuideMaterialStats(1f, 1f);
+
+    // tooltip prefixes
+    private static final String ELASTICITY_PREFIX = makeTooltipKey(TinkersArchery.getResource("elasticity"));
+    private static final String ACCURACY_PREFIX = makeTooltipKey(TinkersArchery.getResource("accuracy"));
 
     private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription());
 
@@ -37,10 +42,14 @@ public class BowGuideMaterialStats  extends BaseMaterialStats {
     public List<ITextComponent> getLocalizedInfo() {
         List<ITextComponent> info = Lists.newArrayList();
 
-        info.add(BowAndArrowToolStats.ELASTICITY.formatValue(this.elasticity));
-        info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));
+        info.add(format(ELASTICITY_PREFIX, this.elasticity));
+        info.add(format(ACCURACY_PREFIX, this.accuracy));
 
         return info;
+    }
+
+    public static ITextComponent format(String prefix, float quality) {
+        return IToolStat.formatColoredMultiplier(prefix, quality);
     }
 
     @Override

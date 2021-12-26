@@ -44,7 +44,7 @@ public class AntigravityTrajectory extends ProjectileTrajectory {
 
         public AntigravityData(float weight) {
             cutoffTicks = (int)(weight * CUTOFF);
-            speedLoss = SPEED_LOSS / weight;
+            speedLoss = Math.min(0.49f, SPEED_LOSS / weight);
         }
     }
 }

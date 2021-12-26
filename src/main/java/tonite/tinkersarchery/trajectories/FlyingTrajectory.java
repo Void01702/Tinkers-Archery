@@ -10,18 +10,19 @@ public class FlyingTrajectory extends ProjectileTrajectory {
     }
 
     public static final int CUTOFF = 20;
+    public static final double GRAVITY = 0.05f;
 
     @Override
     public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, Object data) {
 
 
-        if (time <= CUTOFF) {
+        if (time <= ((FlyingData)data).cutoffTicks) {
 
-            return originalDirection.add(0, 0.05 * ( time ), 0);
+            return originalDirection.add(0, ((FlyingData)data).antigravity * ( time ), 0);
 
         } else {
 
-            return originalDirection.add(0, -0.05 * ( time - CUTOFF ) + 0.05 * CUTOFF, 0);
+            return originalDirection.add(0, -((FlyingData)data).gravity * ( time - ((FlyingData)data).cutoffTicks ) + ((FlyingData)data).antigravity * ((FlyingData)data).cutoffTicks, 0);
 
         }
     }
@@ -32,11 +33,23 @@ public class FlyingTrajectory extends ProjectileTrajectory {
 
     @Override
     public Object onCreated(Vector3d originalDirection, float weight) {
-        return null;
+        return new FlyingData(weight);
     }
 
     @Override
     public void save(CompoundNBT data, Vector3d originalDirection, float weight, Object o) {
 
+    }
+
+    private static class FlyingData {
+        public int cutoffTicks;
+        public double gravity;
+        public double antigravity;
+
+        public FlyingData(float weight) {
+            cutoffTicks = (int)(weight * CUTOFF);
+            gravity = GRAVITY / weight;
+            antigravity = GRAVITY * weight;
+        }
     }
 }

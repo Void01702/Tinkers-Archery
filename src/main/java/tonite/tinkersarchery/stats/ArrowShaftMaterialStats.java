@@ -3,7 +3,9 @@ package tonite.tinkersarchery.stats;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
+import slimeknights.tconstruct.library.tools.stat.IToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -15,6 +17,12 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
 
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("arrow_shaft"));
     public static final ArrowShaftMaterialStats DEFAULT = new ArrowShaftMaterialStats();
+
+    // tooltip prefixes
+    private static final String SPEED_PREFIX = makeTooltipKey(TinkersArchery.getResource("speed"));
+    private static final String ACCURACY_PREFIX = makeTooltipKey(TinkersArchery.getResource("accuracy"));
+    private static final String WEIGHT_PREFIX = makeTooltipKey(TinkersArchery.getResource("weight"));
+
 
     private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.ATTACK_SPEED.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
 
@@ -42,11 +50,15 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
     public List<ITextComponent> getLocalizedInfo() {
         List<ITextComponent> info = super.getLocalizedInfo();
 
-        info.add(BowAndArrowToolStats.ELASTICITY.formatValue(this.speed));
-        info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));
-        info.add(BowAndArrowToolStats.WEIGHT.formatValue(this.accuracy));
+        info.add(format(SPEED_PREFIX, this.speed));
+        info.add(format(ACCURACY_PREFIX, this.accuracy));
+        info.add(format(WEIGHT_PREFIX, this.weight));
 
         return info;
+    }
+
+    public static ITextComponent format(String prefix, float quality) {
+        return IToolStat.formatColoredMultiplier(prefix, quality);
     }
 
     @Override
