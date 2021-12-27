@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "tinkersarchery:bowshaft_sand_cast",
+    "tinkersarchery:bowguide_sand_cast",
+    "tinkersarchery:crossbow_arm_sand_cast",
+    "tinkersarchery:large_bowshaft_sand_cast",
+    "tinkersarchery:arrowhead_sand_cast",
+    "tinkersarchery:arrow_shaft_sand_cast"
+  ]
+}

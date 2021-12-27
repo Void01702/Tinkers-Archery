@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:part_builder",
+  "pattern": "tinkersarchery:bowshaft",
+  "cost": 2,
+  "result": {
+    "item": "tinkersarchery:bowshaft"
+  }
+}

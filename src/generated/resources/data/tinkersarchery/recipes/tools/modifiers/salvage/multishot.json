@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "modifier": "tinkersarchery:multishot",
+  "min_level": 1,
+  "salvage": [
+    {
+      "item": "minecraft:emerald",
+      "chance": 0.7
+    },
+    {
+      "item": "minecraft:spectral_arrow",
+      "chance": 0.5
+    },
+    {
+      "item": "tinkersarchery:galaxy_alloy_ingot",
+      "chance": 0.3
+    }
+  ]
+}

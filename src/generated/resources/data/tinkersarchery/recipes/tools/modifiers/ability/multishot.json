@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:modifier",
+  "inputs": [
+    {
+      "item": "minecraft:spectral_arrow"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "tag": "forge:ingots/galaxy_alloy"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "item": "minecraft:spectral_arrow"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "result": {
+    "name": "tinkersarchery:multishot",
+    "level": 1
+  }
+}

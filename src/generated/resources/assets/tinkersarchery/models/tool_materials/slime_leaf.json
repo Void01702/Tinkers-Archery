@@ -1,0 +1,49 @@
+{
+  "fallbacks": [
+    "leaf"
+  ],
+  "color": "FF36FFFC",
+  "luminosity": 0,
+  "generator": {
+    "transformer": {
+      "type": "tconstruct:recolor_sprite",
+      "color_mapping": {
+        "type": "tconstruct:grey_to_color",
+        "palette": [
+          {
+            "grey": 0,
+            "color": "FF000000"
+          },
+          {
+            "grey": 63,
+            "color": "FF30E6E4"
+          },
+          {
+            "grey": 102,
+            "color": "FF36FFFC"
+          },
+          {
+            "grey": 140,
+            "color": "FF36FFFC"
+          },
+          {
+            "grey": 178,
+            "color": "FF36FFFC"
+          },
+          {
+            "grey": 216,
+            "color": "FF36FFFC"
+          },
+          {
+            "grey": 255,
+            "color": "FF36FFFC"
+          }
+        ]
+      }
+    },
+    "supportedStats": [
+      "tinkersarchery:arrow_fletching"
+    ],
+    "ignoreMaterialStats": false
+  }
+}

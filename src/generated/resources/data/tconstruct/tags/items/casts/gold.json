@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "tinkersarchery:bowshaft_cast",
+    "tinkersarchery:bowguide_cast",
+    "tinkersarchery:crossbow_arm_cast",
+    "tinkersarchery:large_bowshaft_cast",
+    "tinkersarchery:arrowhead_cast",
+    "tinkersarchery:arrow_shaft_cast"
+  ]
+}

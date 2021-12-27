@@ -2,7 +2,7 @@
   "loader": "tconstruct:material",
   "parent": "forge:item/default",
   "textures": {
-    "texture": "tinkersarchery:item/tool/arrow/arrow_fletching"
+    "texture": "tinkersarchery:item/tool/parts/arrow_fletching"
   },
   "offset": [0, 0]
 }

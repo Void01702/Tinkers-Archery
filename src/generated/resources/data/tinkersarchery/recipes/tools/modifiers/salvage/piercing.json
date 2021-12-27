@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "modifier": "tinkersarchery:piercing",
+  "min_level": 1,
+  "salvage": [
+    {
+      "item": "minecraft:flint",
+      "chance": 0.7
+    },
+    {
+      "item": "minecraft:quartz",
+      "chance": 0.5
+    },
+    {
+      "item": "tconstruct:blazing_bone",
+      "chance": 0.3
+    }
+  ]
+}

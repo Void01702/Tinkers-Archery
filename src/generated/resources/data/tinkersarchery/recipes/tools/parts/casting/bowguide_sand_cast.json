@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "tinkersarchery:casts/single_use/bowguide"
+  },
+  "cast_consumed": true,
+  "item_cost": 1,
+  "result": "tinkersarchery:bowguide"
+}

@@ -1,0 +1,23 @@
+{
+  "parts": [
+    {
+      "item": "tinkersarchery:bowshaft"
+    },
+    {
+      "item": "tinkersarchery:bowstring"
+    },
+    {
+      "item": "tinkersarchery:bowguide"
+    }
+  ],
+  "stats": {
+    "base": {},
+    "multipliers": {
+      "tconstruct:durability": 6.5
+    }
+  },
+  "slots": {
+    "upgrades": 3,
+    "abilities": 1
+  }
+}

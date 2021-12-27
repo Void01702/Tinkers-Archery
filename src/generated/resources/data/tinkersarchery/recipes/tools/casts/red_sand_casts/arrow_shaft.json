@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:molding_table",
+  "material": {
+    "item": "tconstruct:blank_red_sand_cast"
+  },
+  "pattern": {
+    "item": "tinkersarchery:arrow_shaft",
+    "type": "tconstruct:material"
+  },
+  "result": "tinkersarchery:arrow_shaft_red_sand_cast"
+}

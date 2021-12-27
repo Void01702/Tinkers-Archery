@@ -1,0 +1,53 @@
+{
+  "replace": false,
+  "parts": [
+    {
+      "path": "tinkersarchery:parts/bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:shortbow/broken_bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowshaft_pulling_2",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowshaft_pulling_1",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowstring_pulling_0",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowstring_pulling_1",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowshaft",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:shortbow/bowstring_pulling_2",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:shortbow/guide",
+      "statType": "tconstruct:handle"
+    },
+    {
+      "path": "tinkersarchery:arrow/arrowhead",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:arrow/arrow_shaft",
+      "statType": "tconstruct:handle"
+    }
+  ]
+}

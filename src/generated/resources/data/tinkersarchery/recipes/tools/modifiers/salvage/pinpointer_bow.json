@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:incremental_modifier_salvage",
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "modifier": "tinkersarchery:pinpointer",
+  "min_level": 1,
+  "salvage": {
+    "item": "minecraft:tripwire_hook",
+    "full": false
+  }
+}

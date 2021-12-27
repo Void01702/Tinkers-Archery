@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:part_builder",
+  "pattern": "tinkersarchery:arrow_fletching",
+  "cost": 1,
+  "result": {
+    "item": "tinkersarchery:arrow_fletching"
+  }
+}

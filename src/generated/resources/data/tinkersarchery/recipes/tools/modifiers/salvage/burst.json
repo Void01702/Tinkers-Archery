@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "modifier": "tinkersarchery:burst",
+  "min_level": 1,
+  "salvage": [
+    {
+      "item": "minecraft:ghast_tear",
+      "chance": 0.5
+    }
+  ]
+}

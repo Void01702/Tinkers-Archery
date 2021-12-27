@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:part_builder",
+  "pattern": "tinkersarchery:large_bowshaft",
+  "cost": 1,
+  "result": {
+    "item": "tinkersarchery:large_bowshaft"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#tinkersarchery:casts/multi_use/bowshaft",
+    "#tinkersarchery:casts/multi_use/bowguide",
+    "#tinkersarchery:casts/multi_use/crossbow_arm",
+    "#tinkersarchery:casts/multi_use/large_bowshaft",
+    "#tinkersarchery:casts/multi_use/arrowhead",
+    "#tinkersarchery:casts/multi_use/arrow_shaft"
+  ]
+}

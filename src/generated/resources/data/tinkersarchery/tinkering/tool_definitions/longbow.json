@@ -1,0 +1,35 @@
+{
+  "parts": [
+    {
+      "item": "tinkersarchery:large_bowshaft"
+    },
+    {
+      "item": "tinkersarchery:large_bowshaft"
+    },
+    {
+      "item": "tinkersarchery:bowstring"
+    },
+    {
+      "item": "tinkersarchery:bowguide"
+    }
+  ],
+  "stats": {
+    "base": {},
+    "multipliers": {
+      "tconstruct:durability": 8.0,
+      "tinkersarchery:elasticity": 1.35,
+      "tinkersarchery:draw_speed": 0.65,
+      "tinkersarchery:accuracy": 1.25
+    }
+  },
+  "slots": {
+    "upgrades": 2,
+    "abilities": 1
+  },
+  "traits": [
+    {
+      "name": "tconstruct:two_handed",
+      "level": 1
+    }
+  ]
+}

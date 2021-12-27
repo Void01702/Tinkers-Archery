@@ -30,7 +30,7 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
     private float weight;
     private float accuracy;
 
-    public ArrowShaftMaterialStats(int durability, float miningSpeed, float attackSpeed, float attack, float speed, float weight, float accuracy){
+    public ArrowShaftMaterialStats(float durability, float miningSpeed, float attackSpeed, float attack, float speed, float weight, float accuracy){
         super(durability, miningSpeed, attackSpeed, attack);
         this.speed = speed;
         this.weight = weight;
@@ -38,7 +38,7 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
     }
 
     public ArrowShaftMaterialStats(){
-        this (1, 1f, 0, 1f, 1f, 1f, 1f);
+        this (1f, 1f, 0, 1f, 1f, 1f, 1f);
     }
 
     @Override

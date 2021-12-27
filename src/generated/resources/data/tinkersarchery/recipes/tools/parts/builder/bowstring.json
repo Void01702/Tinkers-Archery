@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:part_builder",
+  "pattern": "tinkersarchery:bowstring",
+  "cost": 1,
+  "result": {
+    "item": "tinkersarchery:bowstring"
+  }
+}

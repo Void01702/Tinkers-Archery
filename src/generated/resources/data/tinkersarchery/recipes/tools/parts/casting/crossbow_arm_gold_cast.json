@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "tinkersarchery:casts/multi_use/crossbow_arm"
+  },
+  "item_cost": 2,
+  "result": "tinkersarchery:crossbow_arm"
+}

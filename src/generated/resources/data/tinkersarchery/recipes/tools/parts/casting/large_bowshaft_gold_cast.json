@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "tinkersarchery:casts/multi_use/large_bowshaft"
+  },
+  "item_cost": 1,
+  "result": "tinkersarchery:large_bowshaft"
+}

@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:modifier",
+  "inputs": [
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "tag": "forge:gems/quartz"
+    },
+    {
+      "item": "tconstruct:blazing_bone"
+    },
+    {
+      "tag": "forge:gems/quartz"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "result": {
+    "name": "tinkersarchery:piercing",
+    "level": 1
+  }
+}

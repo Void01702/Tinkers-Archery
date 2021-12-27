@@ -19,11 +19,11 @@ public class Airborne extends SingleUseModifier implements IBowModifier {
         Vector3d direction = shooter.getDeltaMovement().scale(-1);
 
         if (shooter.isOnGround()) {
-            direction = new Vector3d(direction.x, 0, direction.y);
+            direction = new Vector3d(direction.x, 0, direction.z);
         }
 
         if (arrow instanceof TinkersArrowEntity) {
-            ((TinkersArrowEntity)arrow).changeDirection(arrow.getDeltaMovement().add(direction));
+            ((TinkersArrowEntity)arrow).changeDirection(((TinkersArrowEntity)arrow).getOriginalDirection().add(direction));
         } else {
             arrow.setDeltaMovement(arrow.getDeltaMovement().add(direction));
         }

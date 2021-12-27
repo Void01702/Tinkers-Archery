@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:incremental_modifier",
+  "input": {
+    "tag": "forge:storage_blocks/quartz"
+  },
+  "amount_per_item": 4,
+  "needed_per_level": 36,
+  "leftover": "minecraft:quartz",
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "result": {
+    "name": "tinkersarchery:power",
+    "level": 1
+  },
+  "max_level": 5
+}

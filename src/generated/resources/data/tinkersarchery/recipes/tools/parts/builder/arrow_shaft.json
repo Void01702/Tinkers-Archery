@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:part_builder",
+  "pattern": "tinkersarchery:arrow_shaft",
+  "cost": 1,
+  "result": {
+    "item": "tinkersarchery:arrow_shaft"
+  }
+}

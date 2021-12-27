@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "tinkersarchery:casts/multi_use/arrow_shaft"
+  },
+  "item_cost": 1,
+  "result": "tinkersarchery:arrow_shaft"
+}
