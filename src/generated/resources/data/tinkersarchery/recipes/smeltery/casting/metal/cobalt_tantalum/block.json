@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "fluid": {
+    "tag": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 1296
+  },
+  "result": "tinkersarchery:cobalt_tantalum_block",
+  "cooling_time": 190
+}

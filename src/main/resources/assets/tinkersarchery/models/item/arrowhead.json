@@ -4,5 +4,5 @@
   "textures": {
     "texture": "tinkersarchery:item/tool/arrow/arrowhead"
   },
-  "offset": [0, 0]
+  "offset": [-5, 5]
 }

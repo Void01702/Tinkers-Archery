@@ -1,8 +1,11 @@
 package tonite.tinkersarchery.data.client;
 
+import net.minecraft.util.ResourceLocation;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialSpriteProvider;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToColorMapping;
-import slimeknights.tconstruct.tools.data.material.MaterialIds;
+import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToSpriteTransformer;
+import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
 import tonite.tinkersarchery.stats.BowStringMaterialStats;
@@ -21,32 +24,60 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
         buildMaterial(TinkersArcheryMaterialIds.tantalum)
                 .meleeHarvest()
                 .fallbacks("metal")
-                .colorMapper(fromColor(0xFF9EB9D4));
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(63, 0xFF323232)
+                        .addARGB(102, 0xFF535353)
+                        .addARGB(140, 0xFF676D6D)
+                        .addARGB(178, 0xFF7F8E8E)
+                        .addARGB(216, 0xFF95ABAB)
+                        .addARGB(255, 0xFFC7E0E0)
+                        .build());
         buildMaterial(TinkersArcheryMaterialIds.cobalt_tantalum)
                 .meleeHarvest()
                 .fallbacks("metal")
-                .colorMapper(fromColor(0xFF5079FF));
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(63, 0xFF575757)
+                        .addARGB(102, 0xFF727272)
+                        .addARGB(140, 0xFF7B808B)
+                        .addARGB(178, 0xFF8491AB)
+                        .addARGB(216, 0xFF8CA0C7)
+                        .addARGB(255, 0xFF90B1F3)
+                        .build());
+        ResourceLocation galaxyALloyTexture = TinkersArchery.getResource("item/generator/galaxy_alloy");
         buildMaterial(TinkersArcheryMaterialIds.galaxy_alloy)
                 .meleeHarvest()
-                .fallbacks("metal")
-                .colorMapper(fromColor(0xFF21007F));
+                .fallbacks("galaxy", "metal")
+                .transformer(GreyToSpriteTransformer.builderFromBlack()
+                        .addARGB(63, 0xFF03001B)
+                        .addARGB(102, 0xFF090035)
+                        .addTexture(140, galaxyALloyTexture)
+                        .addTexture(178, galaxyALloyTexture)
+                        .addTexture(216, galaxyALloyTexture)
+                        .addARGB(255, 0xFF290097)
+                        .build());
 
         // Bowstring
-        buildMaterial(TinkersArcheryMaterialIds.vine)
+        buildMaterial(TinkersArcheryMaterialIds.silky_cloth)
                 .statType(BowStringMaterialStats.ID)
-                .fallbacks("vine")
-                .colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF143306).addARGB(102, 0xFF183D08).addARGB(140, 0xFF1F4E0A).addARGB(178, 0xFF265F0D).addARGB(216, 0xFF2E730F).addARGB(255, 0xFF3A9313).build());
-        buildMaterial(TinkersArcheryMaterialIds.twisting_vine)
-                .statType(BowStringMaterialStats.ID)
-                .fallbacks("vine")
-                .colorMapper(fromColor(0xFF119B85));
-        buildMaterial(TinkersArcheryMaterialIds.weeping_vine)
-                .statType(BowStringMaterialStats.ID)
-                .fallbacks("vine")
-                .colorMapper(fromColor(0xFF7B0000));
+                .statType(ArrowFletchingMaterialStats.ID)
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(63, 0xFFAD685B)
+                        .addARGB(102, 0xFFBF8070)
+                        .addARGB(140, 0xFFBF8070)
+                        .addARGB(178, 0xFFE8B3A0)
+                        .addARGB(216, 0xFFF7CDBB)
+                        .addARGB(255, 0xFFFFE7DB)
+                        .build());
         buildMaterial(TinkersArcheryMaterialIds.slime)
                 .statType(BowStringMaterialStats.ID)
                 .colorMapper(fromColor(0xFF5BD141));
+        buildMaterial(TinkersArcheryMaterialIds.blazing_string)
+                .statType(BowStringMaterialStats.ID)
+                .colorMapper(fromColor(0xFFFFC42E));
+
+        buildMaterial(TinkersArcheryMaterialIds.steel_wire)
+                .statType(BowStringMaterialStats.ID)
+                .colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF222626).addARGB(102, 0xFF393D3D).addARGB(140, 0xFF515454).addARGB(178, 0xFF6A6D6D).addARGB(216, 0xFF898C8C).addARGB(255, 0xFFADAFAF).build());
 
         // Fletching
         buildMaterial(TinkersArcheryMaterialIds.feather)
@@ -60,9 +91,6 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                 .statType(ArrowFletchingMaterialStats.ID)
                 .fallbacks("leaf")
                 .colorMapper(fromColor(0xFF36FFFC));
-        buildMaterial(TinkersArcheryMaterialIds.silky_cloth)
-                .statType(ArrowFletchingMaterialStats.ID)
-                .colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFFAD685B).addARGB(102, 0xFFBF8070).addARGB(140, 0xFFBF8070).addARGB(178, 0xFFE8B3A0).addARGB(216, 0xFFF7CDBB).addARGB(255, 0xFFFFE7DB).build());
     }
 
     private GreyToColorMapping fromColor(int color) {

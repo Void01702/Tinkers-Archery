@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/cobalt_tantalum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 144
+  },
+  "temperature": 900,
+  "time": 63
+}

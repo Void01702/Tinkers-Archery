@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "tag": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 144
+  },
+  "temperature": 900,
+  "output": "tinkersarchery:cobalt_tantalum"
+}

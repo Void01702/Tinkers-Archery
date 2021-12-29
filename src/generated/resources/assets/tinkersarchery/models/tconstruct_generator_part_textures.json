@@ -6,6 +6,10 @@
       "statType": "tinkersarchery:bowstring"
     },
     {
+      "path": "tinkersarchery:parts/arrow_fletching",
+      "statType": "tinkersarchery:arrow_fletching"
+    },
+    {
       "path": "tinkersarchery:shortbow/bowstring",
       "statType": "tinkersarchery:bowstring"
     },
@@ -40,6 +44,78 @@
     {
       "path": "tinkersarchery:shortbow/guide",
       "statType": "tconstruct:handle"
+    },
+    {
+      "path": "tinkersarchery:crossbow/bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:crossbow/broken_bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:crossbow/bowstring_pulling_0",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:crossbow/crossbow_arm",
+      "statType": "tconstruct:handle"
+    },
+    {
+      "path": "tinkersarchery:crossbow/bowstring_pulling_1",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:crossbow/bowshaft",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:crossbow/bowstring_pulling_2",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_left",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_right",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/broken_bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/guide",
+      "statType": "tconstruct:handle"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_left",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_right",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/broken_bowstring",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/guide",
+      "statType": "tconstruct:handle"
+    },
+    {
+      "path": "tinkersarchery:arrow/arrow_fletching",
+      "statType": "tinkersarchery:arrow_fletching"
     },
     {
       "path": "tinkersarchery:arrow/arrowhead",

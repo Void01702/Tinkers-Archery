@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 16
+  },
+  "result": "tinkersarchery:cobalt_tantalum_nugget",
+  "cooling_time": 21
+}

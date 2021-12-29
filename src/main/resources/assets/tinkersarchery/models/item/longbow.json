@@ -2,15 +2,17 @@
   "loader": "tinkersarchery:generic_bow",
   "parent": "forge:item/default-tool",
   "textures": {
-    "bowshaft_right": "tinkersarchery:item/tool/longbow/large_bowshaft_right",
-    "bowshaft_left": "tinkersarchery:item/tool/longbow/large_bowshaft_left",
-    "bowstring": "tinkersarchery:item/tool/longbow/large_bowstring",
-    "guide": "tinkersarchery:item/tool/longbow/large_guard",
+    "bowshaft_right": "tinkersarchery:item/tool/longbow/bowshaft_right",
+    "bowshaft_left": "tinkersarchery:item/tool/longbow/bowshaft_left",
+    "bowstring": "tinkersarchery:item/tool/longbow/bowstring",
+    "broken_bowstring": "tinkersarchery:item/tool/longbow/broken_bowstring",
+    "guide": "tinkersarchery:item/tool/longbow/guide",
 
-    "large_bowshaft_right": "tinkersarchery:item/tool/longbow/large/large_bowshaft_right",
-    "large_bowshaft_left": "tinkersarchery:item/tool/longbow/large/large_bowshaft_left",
-    "large_bowstring": "tinkersarchery:item/tool/longbow/large/large_bowstring",
-    "large_guide": "tinkersarchery:item/tool/longbow/large/large_guide"
+    "large_bowshaft_right": "tinkersarchery:item/tool/longbow/large/bowshaft_right",
+    "large_bowshaft_left": "tinkersarchery:item/tool/longbow/large/bowshaft_left",
+    "large_bowstring": "tinkersarchery:item/tool/longbow/large/bowstring",
+    "large_broken_bowstring": "tinkersarchery:item/tool/longbow/large/broken_bowstring",
+    "large_guide": "tinkersarchery:item/tool/longbow/large/guide"
   },
   "modifier_roots": {
     "small": [ "tconstruct:item/tool/cleaver/modifiers/" ],
@@ -21,7 +23,7 @@
   "parts": [
     { "name": "bowshaft_right", "index": 0 },
     { "name": "bowshaft_left", "index": 1 },
-    { "name": "bowstring", "index": 2 },
+    { "name": "bowstring", "index": 2, "broken": "broken_bowstring" },
     { "name": "guide", "index": 3 }
   ],
   "display": {

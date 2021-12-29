@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "tinkersarchery:cobalt_tantalum",
+  "temperature": 900,
+  "result": {
+    "fluid": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 144
+  }
+}

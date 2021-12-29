@@ -1,0 +1,43 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "type": "forge:true"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "tinkersarchery:galaxy_alloy_ingot"
+          ]
+        },
+        "criteria": {
+          "has_nugget": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "tinkersarchery:galaxy_alloy_nugget"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "tinkersarchery:galaxy_alloy_ingot"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_nugget",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "tinkersarchery:galaxy_alloy",
+  "temperature": 1400,
+  "result": {
+    "fluid": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 144
+  }
+}

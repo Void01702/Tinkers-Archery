@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:nuggets/galaxy_alloy"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 16
+  },
+  "temperature": 1400,
+  "time": 26
+}

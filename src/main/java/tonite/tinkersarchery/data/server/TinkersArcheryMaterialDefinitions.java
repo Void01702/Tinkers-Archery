@@ -21,19 +21,19 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
 
     @Override
     protected void addMaterials() {
-        addMaterial(TinkersArcheryMaterialIds.tantalum, 2, ORDER_BOW, true,  0xFF9EB9D4);
-        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 3, ORDER_BOW, true,  0xFF5079FF);
-        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, 4, ORDER_BOW, true,  0xFF21007F);
+        addMaterial(TinkersArcheryMaterialIds.tantalum, 2, ORDER_BOW, false,  0xFF9EB9D4);
+        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 3, ORDER_BOW, false,  0xFF5079FF);
+        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, 4, ORDER_BOW, false,  0xFF21007F);
 
-        addMaterial(TinkersArcheryMaterialIds.vine, 1, ORDER_BOW, true,  0xFF48B518);
-        addMaterial(TinkersArcheryMaterialIds.twisting_vine, 1, ORDER_BOW, true,  0xFF119B85);
-        addMaterial(TinkersArcheryMaterialIds.weeping_vine, 1, ORDER_BOW, true,  0xFF7B0000);
-        addMaterial(TinkersArcheryMaterialIds.slime, 1, ORDER_BOW, true,  0xFF5BD141);
+        addMaterial(TinkersArcheryMaterialIds.silky_cloth, 1, ORDER_BOW + ORDER_BINDING, true,  0xFFF7CDBB);
+        addMaterial(TinkersArcheryMaterialIds.slime, 1, ORDER_BOW + ORDER_BINDING, true,  0xFF5BD141);
+        addMaterial(TinkersArcheryMaterialIds.blazing_string, 1, ORDER_BOW + ORDER_BINDING, false,  0xFFFFC42E);
+
+        addMaterial(TinkersArcheryMaterialIds.steel_wire, 1, ORDER_BOW + ORDER_COMPAT + ORDER_BINDING, true,  0xFF7B0000);
 
         addMaterial(TinkersArcheryMaterialIds.feather, 1, ORDER_BOW, true,  0xFFFFFFFF);
         addMaterial(TinkersArcheryMaterialIds.leaf, 1, ORDER_BOW, true,  0xFF4AD718);
         addMaterial(TinkersArcheryMaterialIds.slime_leaf, 1, ORDER_BOW, true,  0xFF36FFFC);
-        addMaterial(TinkersArcheryMaterialIds.silky_cloth, 1, ORDER_BOW, true,  0xFFF7CDBB);
     }
 
     @Override
@@ -53,15 +53,16 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addDefaultTraits(TinkersArcheryMaterialIds.cobalt_tantalum, TinkersArchery.WEIGHTY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.galaxy_alloy, TinkersArchery.GROOVY_MODIFIER.get());
 
-            addDefaultTraits(TinkersArcheryMaterialIds.vine, TinkerModifiers.solarPowered.get());
-            addDefaultTraits(TinkersArcheryMaterialIds.twisting_vine, TinkersArchery.UPLIFTING_MODIFIER.get());
-            addDefaultTraits(TinkersArcheryMaterialIds.weeping_vine, TinkersArchery.SAVAGE_MODIFIER.get());
+            addDefaultTraits(TinkersArcheryMaterialIds.silky_cloth, TinkersArchery.UPLIFTING_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.slime, TinkersArchery.SUPERSLIME_MODIFIER.get(), TinkerModifiers.overslime.get());
+            addDefaultTraits(TinkersArcheryMaterialIds.blazing_string, TinkersArchery.BLAZING_MODIFIER.get());
+
+            addDefaultTraits(TinkersArcheryMaterialIds.steel_wire, TinkersArchery.SLICING_MODIFIER.get());
 
             addDefaultTraits(TinkersArcheryMaterialIds.feather, TinkersArchery.GRAVITY_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.leaf, TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.slime_leaf, TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER.get());
-            addDefaultTraits(TinkersArcheryMaterialIds.silky_cloth, TinkersArchery.FLYING_TRAJECTORY_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.ID, TinkersArchery.FLYING_TRAJECTORY_MODIFIER.get());
         }
 
         @Override
@@ -105,10 +106,11 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new ArrowShaftMaterialStats(1.1f, 0.9f, 1.1f, 1.1f, 1.2f, 1.2f, 1.2f));
 
             // Bowstring
-            addMaterialStats(TinkersArcheryMaterialIds.vine, new BowStringMaterialStats(1.3f, 0.8f, 1.2f, 0.8f));
-            addMaterialStats(TinkersArcheryMaterialIds.twisting_vine, new BowStringMaterialStats(0.7f, 1.2f, 1.1f, 1.1f));
-            addMaterialStats(TinkersArcheryMaterialIds.weeping_vine, new BowStringMaterialStats(1.1f, 1.2f, 0.7f, 1.0f));
+            addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.7f, 1.2f, 0.8f, 1.3f));
             addMaterialStats(TinkersArcheryMaterialIds.slime, new BowStringMaterialStats(1.2f, 1.0f, 1.3f, 0.5f));
+            addMaterialStats(TinkersArcheryMaterialIds.blazing_string, new BowStringMaterialStats(0.8f, 1.1f, 1.3f, 0.9f));
+
+            addMaterialStats(TinkersArcheryMaterialIds.steel_wire, new BowStringMaterialStats(1.2f, 1.2f, 0.7f, 1.0f));
 
             // fletching
             addMaterialStats(TinkersArcheryMaterialIds.feather, ArrowFletchingMaterialStats.DEFAULT);

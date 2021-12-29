@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "input": "tconstruct:string",
+  "fluid": {
+    "tag": "tconstruct:blazing_blood",
+    "amount": 100
+  },
+  "temperature": 1500,
+  "output": "tinkersarchery:blazing_string"
+}

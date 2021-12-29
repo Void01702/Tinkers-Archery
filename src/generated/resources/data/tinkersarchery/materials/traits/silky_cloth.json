@@ -1,8 +1,16 @@
 {
   "default": [
     {
-      "name": "tinkersarchery:flying_trajectory",
+      "name": "tinkersarchery:uplifting",
       "level": 1
     }
-  ]
+  ],
+  "perStat": {
+    "tinkersarchery:arrow_fletching": [
+      {
+        "name": "tinkersarchery:flying_trajectory",
+        "level": 1
+      }
+    ]
+  }
 }

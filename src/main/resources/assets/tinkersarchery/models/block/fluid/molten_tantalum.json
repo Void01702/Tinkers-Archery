@@ -1,0 +1,8 @@
+{
+  "loader": "mantle:fluid_texture",
+  "textures": {
+    "still": "tinkersarchery:block/fluid/molten_tantalum_still",
+    "flowing": "tinkersarchery:block/fluid/molten_tantalum_flow"
+  },
+  "color": "FFFFFF"
+}

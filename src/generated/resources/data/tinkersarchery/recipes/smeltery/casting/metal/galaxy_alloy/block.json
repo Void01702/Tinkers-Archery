@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "fluid": {
+    "tag": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 1296
+  },
+  "result": "tinkersarchery:galaxy_alloy_block",
+  "cooling_time": 233
+}

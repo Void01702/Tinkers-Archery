@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/tantalum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_tantalum",
+    "amount": 1296
+  },
+  "temperature": 600,
+  "time": 160
+}

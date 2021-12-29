@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "name": "tinkersarchery:molten_tantalum",
+      "amount": 144
+    },
+    {
+      "name": "tconstruct:molten_cobalt",
+      "amount": 144
+    }
+  ],
+  "result": {
+    "fluid": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 288
+  },
+  "temperature": 900
+}

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/nugget"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 16
+  },
+  "result": "tinkersarchery:galaxy_alloy_nugget",
+  "cooling_time": 26
+}

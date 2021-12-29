@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:ingots/galaxy_alloy"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 144
+  },
+  "temperature": 1400,
+  "time": 78
+}

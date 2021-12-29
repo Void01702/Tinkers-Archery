@@ -1,0 +1,8 @@
+{
+  "loader": "mantle:fluid_texture",
+  "textures": {
+    "still": "tinkersarchery:block/fluid/molten_galaxy_alloy_still",
+    "flowing": "tinkersarchery:block/fluid/molten_galaxy_alloy_flow"
+  },
+  "color": "FFFFFF"
+}

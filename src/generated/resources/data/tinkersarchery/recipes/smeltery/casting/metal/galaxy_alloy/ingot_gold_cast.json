@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 144
+  },
+  "result": "tinkersarchery:galaxy_alloy_ingot",
+  "cooling_time": 78
+}

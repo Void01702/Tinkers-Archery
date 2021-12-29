@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:coins/galaxy_alloy",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/single_use/coin"
+  },
+  "cast_consumed": true,
+  "fluid": {
+    "tag": "tinkersarchery:molten_galaxy_alloy",
+    "amount": 48
+  },
+  "result": {
+    "tag": "forge:coins/galaxy_alloy"
+  },
+  "cooling_time": 45
+}

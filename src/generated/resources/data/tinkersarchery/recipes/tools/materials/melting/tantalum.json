@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "tinkersarchery:tantalum",
+  "temperature": 600,
+  "result": {
+    "fluid": "tinkersarchery:molten_tantalum",
+    "amount": 144
+  }
+}

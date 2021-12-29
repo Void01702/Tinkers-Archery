@@ -9,6 +9,12 @@
       "harvestLevel": 2,
       "attack": 1.0
     },
+    "tinkersarchery:bowstring": {
+      "durability": 1.3,
+      "elasticity": 1.1,
+      "drawSpeed": 0.9,
+      "accuracy": 0.8
+    },
     "tinkersarchery:bow": {
       "durability": 375,
       "elasticity": 1.3,

@@ -18,6 +18,12 @@ public class TinkerExtendedMaterialSpriteProvider extends TinkerMaterialSpritePr
         buildMaterial(MaterialIds.string)
                 .statType(BowStringMaterialStats.ID);
 
+        buildMaterial(MaterialIds.vine)
+                .statType(BowStringMaterialStats.ID);
+
+        buildMaterial(MaterialIds.slimewood)
+                .statType(BowStringMaterialStats.ID);
+
         buildMaterial(MaterialIds.skyslimeVine)
                 .statType(BowStringMaterialStats.ID);
 

@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:sheetmetals/cobalt_tantalum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:sheetmetals/cobalt_tantalum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 144
+  },
+  "temperature": 900,
+  "time": 63
+}

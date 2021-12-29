@@ -57,6 +57,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
 
         // Bowstrings
         add(MaterialIds.string);
+        add(MaterialIds.vine);
         add(MaterialIds.skyslimeVine);
         add(MaterialIds.enderslimeVine);
 
@@ -288,10 +289,12 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
 
             // Bowstrings
 
-            addMaterialStats(MaterialIds.wood, new BowStringMaterialStats(1.3f, 0.8f, 0.8f, 1.2f));
+            addMaterialStats(MaterialIds.wood, new BowStringMaterialStats(1.2f, 0.8f, 0.8f, 1.2f));
             addMaterialStats(MaterialIds.string, new BowStringMaterialStats(1.0f, 1.0f, 1.0f, 1.0f));
+            addMaterialStats(MaterialIds.vine, new BowStringMaterialStats(1.3f, 0.8f, 1.2f, 0.8f));
+            addMaterialStats(MaterialIds.slimewood, new BowStringMaterialStats(1.3f, 1.1f, 0.9f, 0.8f));
             addMaterialStats(MaterialIds.skyslimeVine, new BowStringMaterialStats(1.1f, 1.0f, 0.9f, 1.2f));
-            addMaterialStats(MaterialIds.enderslimeVine, new BowStringMaterialStats(1.1f, 1.2f, 1.1f, 0.7f));
+            addMaterialStats(MaterialIds.enderslimeVine, new BowStringMaterialStats(0.7f, 1.2f, 1.1f, 1.2f));
 
             // Fletchings
 

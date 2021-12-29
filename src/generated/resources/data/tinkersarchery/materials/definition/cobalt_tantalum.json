@@ -1,5 +1,5 @@
 {
-  "craftable": true,
+  "craftable": false,
   "tier": 3,
   "sortOrder": 4,
   "textColor": "#FF5079FF",

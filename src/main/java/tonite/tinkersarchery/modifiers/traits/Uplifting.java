@@ -11,7 +11,7 @@ import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 public class Uplifting extends SingleUseModifier implements IBowModifier {
     public Uplifting() {
-        super(0xFF119B85);
+        super(0xFFF7CDBB);
     }
 
     @Override

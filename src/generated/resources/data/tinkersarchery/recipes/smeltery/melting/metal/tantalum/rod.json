@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:rods/tantalum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:rods/tantalum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_tantalum",
+    "amount": 72
+  },
+  "temperature": 600,
+  "time": 11
+}

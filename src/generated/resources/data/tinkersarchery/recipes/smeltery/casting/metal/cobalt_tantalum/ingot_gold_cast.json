@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_cobalt_tantalum",
+    "amount": 144
+  },
+  "result": "tinkersarchery:cobalt_tantalum_ingot",
+  "cooling_time": 63
+}

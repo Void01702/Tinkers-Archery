@@ -1,45 +1,43 @@
 {
   "fallbacks": [
+    "galaxy",
     "metal"
   ],
   "color": "FF21007F",
   "luminosity": 0,
   "generator": {
     "transformer": {
-      "type": "tconstruct:recolor_sprite",
-      "color_mapping": {
-        "type": "tconstruct:grey_to_color",
-        "palette": [
-          {
-            "grey": 0,
-            "color": "FF000000"
-          },
-          {
-            "grey": 63,
-            "color": "FF1D0072"
-          },
-          {
-            "grey": 102,
-            "color": "FF21007F"
-          },
-          {
-            "grey": 140,
-            "color": "FF21007F"
-          },
-          {
-            "grey": 178,
-            "color": "FF21007F"
-          },
-          {
-            "grey": 216,
-            "color": "FF21007F"
-          },
-          {
-            "grey": 255,
-            "color": "FF21007F"
-          }
-        ]
-      }
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "grey": 0,
+          "color": "FF000000"
+        },
+        {
+          "grey": 63,
+          "color": "FF03001B"
+        },
+        {
+          "grey": 102,
+          "color": "FF090035"
+        },
+        {
+          "grey": 140,
+          "path": "tinkersarchery:item/generator/galaxy_alloy"
+        },
+        {
+          "grey": 178,
+          "path": "tinkersarchery:item/generator/galaxy_alloy"
+        },
+        {
+          "grey": 216,
+          "path": "tinkersarchery:item/generator/galaxy_alloy"
+        },
+        {
+          "grey": 255,
+          "color": "FF290097"
+        }
+      ]
     },
     "supportedStats": [
       "tconstruct:head",

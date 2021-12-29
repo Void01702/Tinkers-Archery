@@ -2,12 +2,16 @@ package tonite.tinkersarchery.data.server;
 
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.FluidTagsProvider;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import tonite.tinkersarchery.TinkersArchery;
 
@@ -48,10 +52,20 @@ public class TinkersArcheryTags {
         public static final INamedTag<Item> ARROW_SHAFT_CAST = ItemTags.bind(TinkersArchery.MOD_ID + ":casts/multi_use/arrow_shaft");
         public static final INamedTag<Item> ARROW_SHAFT_CAST_SINGLE = ItemTags.bind(TinkersArchery.MOD_ID + ":casts/single_use/arrow_shaft");
 
+        // Materials
+        public static final INamedTag<Item> TANTALUM_BLOCK = ItemTags.bind("forge:storage_blocks/tantalum");
         public static final INamedTag<Item> TANTALUM_INGOT = ItemTags.bind("forge:ingots/tantalum");
-        public static final INamedTag<Item> COBALT_TANTALUM_INGOT = ItemTags.bind("forge:ingots/cobalt_tantalum");
-        public static final INamedTag<Item> GALAXY_ALLOY_INGOT = ItemTags.bind("forge:ingots/galaxy_alloy");
+        public static final INamedTag<Item> TANTALUM_NUGGET = ItemTags.bind("forge:nuggets/tantalum");
 
+        public static final INamedTag<Item> COBALT_TANTALUM_BLOCK = ItemTags.bind("forge:storage_blocks/cobalt_tantalum");
+        public static final INamedTag<Item> COBALT_TANTALUM_INGOT = ItemTags.bind("forge:ingots/cobalt_tantalum");
+        public static final INamedTag<Item> COBALT_TANTALUM_NUGGET = ItemTags.bind("forge:nuggets/cobalt_tantalum");
+
+        public static final INamedTag<Item> GALAXY_ALLOY_BLOCK = ItemTags.bind("forge:storage_blocks/galaxy_alloy");
+        public static final INamedTag<Item> GALAXY_ALLOY_INGOT = ItemTags.bind("forge:ingots/galaxy_alloy");
+        public static final INamedTag<Item> GALAXY_ALLOY_NUGGET = ItemTags.bind("forge:nuggets/galaxy_alloy");
+
+        // Tools
         public static final INamedTag<Item> MODIFIABLE_SHOOTABLE = ItemTags.bind(TinkersArchery.MOD_ID + ":modifiable/shootable");
         public static final INamedTag<Item> MODIFIABLE_PROJECTILE = ItemTags.bind(TinkersArchery.MOD_ID + ":modifiable/projectile");
 
@@ -73,9 +87,17 @@ public class TinkersArcheryTags {
         protected void addTags() {
 
             // Materials
+            tag(TANTALUM_BLOCK).add(TinkersArchery.tantalum_block_item.get());
             tag(TANTALUM_INGOT).add(TinkersArchery.tantalum_ingot.get());
+            tag(TANTALUM_NUGGET).add(TinkersArchery.tantalum_nugget.get());
+
+            tag(COBALT_TANTALUM_BLOCK).add(TinkersArchery.cobalt_tantalum_block_item.get());
             tag(COBALT_TANTALUM_INGOT).add(TinkersArchery.cobalt_tantalum_ingot.get());
+            tag(COBALT_TANTALUM_NUGGET).add(TinkersArchery.cobalt_tantalum_nugget.get());
+
+            tag(GALAXY_ALLOY_BLOCK).add(TinkersArchery.galaxy_alloy_block_item.get());
             tag(GALAXY_ALLOY_INGOT).add(TinkersArchery.galaxy_alloy_ingot.get());
+            tag(GALAXY_ALLOY_NUGGET).add(TinkersArchery.galaxy_alloy_nugget.get());
 
             // Casts
             addCast(TinkersArchery.bowshaft_cast, BOWSHAFT_CAST, BOWSHAFT_CAST_SINGLE);
@@ -93,6 +115,31 @@ public class TinkersArcheryTags {
             tag(MELEE_PRIMARY).add(TinkersArchery.arrow.get());
             tag(MODIFIABLE_SHOOTABLE).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get());
             tag(MODIFIABLE_PROJECTILE).add(TinkersArchery.arrow.get());
+        }
+    }
+
+    public static class TinkersArcheryFluidTags extends FluidTagsProvider {
+
+        public static final INamedTag<Fluid> MOLTEN_TANTALUM = FluidTags.bind(TinkersArchery.MOD_ID + ":molten_tantalum");
+        public static final INamedTag<Fluid> MOLTEN_COBALT_TANTALUM = FluidTags.bind(TinkersArchery.MOD_ID + ":molten_cobalt_tantalum");
+        public static final INamedTag<Fluid> MOLTEN_GALAXY_ALLOY = FluidTags.bind(TinkersArchery.MOD_ID + ":molten_galaxy_alloy");
+
+        public TinkersArcheryFluidTags(DataGenerator p_i49156_1_, @Nullable ExistingFileHelper existingFileHelper) {
+            super(p_i49156_1_, TinkersArchery.MOD_ID, existingFileHelper);
+        }
+
+        @Override
+        protected void addTags() {
+
+            // Materials
+            addFluid(TinkersArchery.molten_tantalum, MOLTEN_TANTALUM);
+            addFluid(TinkersArchery.molten_cobalt_tantalum, MOLTEN_COBALT_TANTALUM);
+            addFluid(TinkersArchery.molten_galaxy_alloy, MOLTEN_GALAXY_ALLOY);
+
+        }
+
+        private void addFluid(FluidObject fluid, INamedTag<Fluid> tag) {
+            tag(tag).add(fluid.get()).add(fluid.getFlowing());
         }
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_tantalum",
+    "amount": 144
+  },
+  "result": "tinkersarchery:tantalum_ingot",
+  "cooling_time": 53
+}

@@ -1,6 +1,10 @@
 package tonite.tinkersarchery;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.EntityClassification;
@@ -9,6 +13,7 @@ import net.minecraft.item.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +21,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +34,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import slimeknights.mantle.registration.ModelFluidAttributes;
+import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
+import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.TinkerEffect;
 import slimeknights.tconstruct.common.registration.CastItemObject;
@@ -42,10 +51,7 @@ import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 import slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider;
-import tonite.tinkersarchery.data.client.TinkerExtendedMaterialSpriteProvider;
-import tonite.tinkersarchery.data.client.TinkersArcheryMaterialRenderInfoProvider;
-import tonite.tinkersarchery.data.client.TinkersArcheryMaterialSpriteProvider;
-import tonite.tinkersarchery.data.client.TinkersArcheryPartSpriteProvider;
+import tonite.tinkersarchery.data.client.*;
 import tonite.tinkersarchery.data.server.*;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.items.tools.ArrowTool;
@@ -76,8 +82,10 @@ public class TinkersArchery
 
     private static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, MOD_ID);
     private static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
+    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
     private static final ItemDeferredRegisterExtension ITEMS_EXTENDED = new ItemDeferredRegisterExtension(MOD_ID);
+    private static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(MOD_ID);
     private static final DeferredRegister<Modifier> MODIFIERS = DeferredRegister.create(Modifier.class, MOD_ID);
     private static final DeferredRegister<ProjectileTrajectory> PROJECTILE_TRAJECTORIES = DeferredRegister.create(ProjectileTrajectory.class, MOD_ID);
 
@@ -113,9 +121,25 @@ public class TinkersArchery
     public static final RegistryObject<CrossbowTool> crossbow = ITEMS.register("crossbow", () -> new CrossbowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.CROSSBOW));
     public static final RegistryObject<ArrowTool> arrow = ITEMS.register("arrow", () -> new ArrowTool(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.ARROW));
 
+    public static final RegistryObject<Block> tantalum_block = BLOCKS.register("tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).harvestLevel(2).strength(5.0F, 6.0F).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> cobalt_tantalum_block = BLOCKS.register("cobalt_tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).harvestLevel(3).strength(6.0F, 8.0F).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> galaxy_alloy_block = BLOCKS.register("galaxy_alloy_block", () -> new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.ICE).harvestLevel(4).strength(8.0F, 10.0F).sound(SoundType.NETHERITE_BLOCK)));
+
+    public static final RegistryObject<Item> tantalum_block_item = ITEMS.register("tantalum_block", () -> new BlockItem(tantalum_block.get(), TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> cobalt_tantalum_block_item = ITEMS.register("cobalt_tantalum_block", () -> new BlockItem(cobalt_tantalum_block.get(), TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> galaxy_alloy_block_item = ITEMS.register("galaxy_alloy_block", () -> new BlockItem(galaxy_alloy_block.get(), TINKERS_ARCHERY_PROPS));
+
     public static final RegistryObject<Item> tantalum_ingot = ITEMS.register("tantalum_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> cobalt_tantalum_ingot = ITEMS.register("cobalt_tantalum_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> galaxy_alloy_ingot = ITEMS.register("galaxy_alloy_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
+
+    public static final RegistryObject<Item> tantalum_nugget = ITEMS.register("tantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> cobalt_tantalum_nugget = ITEMS.register("cobalt_tantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> galaxy_alloy_nugget = ITEMS.register("galaxy_alloy_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
+
+    public static final FluidObject molten_tantalum = FLUIDS.register("molten_tantalum", hotBuilder().temperature(900), Material.LAVA, 12);
+    public static final FluidObject molten_cobalt_tantalum = FLUIDS.register("molten_cobalt_tantalum", hotBuilder().temperature(1200), Material.LAVA, 12);
+    public static final FluidObject molten_galaxy_alloy = FLUIDS.register("molten_galaxy_alloy", hotBuilder().temperature(1700), Material.LAVA, 15);
 
     public static final CastItemObject bowshaft_cast = ITEMS_EXTENDED.registerCast("bowshaft", TINKERS_ARCHERY_PROPS);
     public static final CastItemObject bowguide_cast = ITEMS_EXTENDED.registerCast("bowguide", TINKERS_ARCHERY_PROPS);
@@ -131,7 +155,8 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> SUPERSLIME_MODIFIER = MODIFIERS.register("superslime", Superslime::new);
     public static final RegistryObject<Modifier> FINISHING_MODIFIER = MODIFIERS.register("finishing", Finishing::new);
     public static final RegistryObject<Modifier> UPLIFTING_MODIFIER = MODIFIERS.register("uplifting", Uplifting::new);
-    public static final RegistryObject<Modifier> SAVAGE_MODIFIER = MODIFIERS.register("savage", Savage::new);
+    public static final RegistryObject<Modifier> BLAZING_MODIFIER = MODIFIERS.register("blazing", Blazing::new);
+    public static final RegistryObject<Modifier> SLICING_MODIFIER = MODIFIERS.register("slicing", Slicing::new);
     public static final RegistryObject<Modifier> AIRBORNE_MODIFIER = MODIFIERS.register("airborne", Airborne::new);
 
     public static final RegistryObject<Modifier> MULTISHOT_MODIFIER = MODIFIERS.register("multishot", Multishot::new);
@@ -184,8 +209,10 @@ public class TinkersArchery
 
         ENTITY_TYPES.register(bus);
         EFFECTS.register(bus);
+        BLOCKS.register(bus);
         ITEMS.register(bus);
         ITEMS_EXTENDED.register(bus);
+        FLUIDS.register(bus);
         PROJECTILE_TRAJECTORIES.register(bus);
         MODIFIERS.register(bus);
 
@@ -255,8 +282,12 @@ public class TinkersArchery
             BlockTagsProvider blockTags = new TinkersArcheryTags.TinkersArcheryBlockTags(generator, existingFileHelper);
             generator.addProvider(blockTags);
             generator.addProvider(new TinkersArcheryTags.TinkersArcheryItemTags(generator, blockTags, existingFileHelper));
+            generator.addProvider(new TinkersArcheryTags.TinkersArcheryFluidTags(generator, existingFileHelper));
         }
         if (event.includeClient()) {
+            generator.addProvider(new TinkersArcheryLang(generator));
+            generator.addProvider(new TinkersArcheryItemModels(generator, existingFileHelper));
+            generator.addProvider(new TinkersArcheryBlockStates(generator, existingFileHelper));
             TinkerMaterialSpriteProvider tinkerMaterialSprites = new TinkerExtendedMaterialSpriteProvider();
             TinkersArcheryMaterialSpriteProvider tinkersArcheryMaterialSprites = new TinkersArcheryMaterialSpriteProvider();
             TinkerPartSpriteProvider tinkerPartSprites = new TinkerPartSpriteProvider();
@@ -270,5 +301,9 @@ public class TinkersArchery
 
     public static ResourceLocation getResource(String name){
         return new ResourceLocation(MOD_ID, name);
+    }
+
+    private static FluidAttributes.Builder hotBuilder() {
+        return ModelFluidAttributes.builder().density(2000).viscosity(10000).temperature(1000).sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA);
     }
 }

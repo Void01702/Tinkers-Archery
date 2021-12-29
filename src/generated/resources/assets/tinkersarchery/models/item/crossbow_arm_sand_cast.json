@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tinkersarchery:item/cast/sand/crossbow_arm"
+  }
+}

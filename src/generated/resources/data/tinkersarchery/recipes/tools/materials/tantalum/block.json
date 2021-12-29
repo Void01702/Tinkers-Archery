@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/tantalum"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkersarchery:tantalum",
+  "leftover": {
+    "tag": "forge:ingots/tantalum"
+  }
+}

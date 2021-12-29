@@ -39,6 +39,7 @@
       }
     },
     "supportedStats": [
+      "tinkersarchery:bowstring",
       "tinkersarchery:arrow_fletching"
     ],
     "ignoreMaterialStats": false

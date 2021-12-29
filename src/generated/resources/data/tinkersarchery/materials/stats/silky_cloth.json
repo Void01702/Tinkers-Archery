@@ -1,5 +1,11 @@
 {
   "stats": {
-    "tinkersarchery:arrow_fletching": {}
+    "tinkersarchery:arrow_fletching": {},
+    "tinkersarchery:bowstring": {
+      "durability": 0.7,
+      "elasticity": 1.2,
+      "drawSpeed": 0.8,
+      "accuracy": 1.3
+    }
   }
 }

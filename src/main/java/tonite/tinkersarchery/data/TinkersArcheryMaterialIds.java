@@ -11,16 +11,16 @@ public class TinkersArcheryMaterialIds {
     public static final MaterialId galaxy_alloy = id("galaxy_alloy");
 
     // Bowstring
-    public static final MaterialId vine = id("vine");
-    public static final MaterialId twisting_vine = id("twisting_vine");
-    public static final MaterialId weeping_vine = id("weeping_vine");
+    public static final MaterialId silky_cloth = id("silky_cloth");
     public static final MaterialId slime = id("slime");
+    public static final MaterialId blazing_string = id("blazing_string");
+
+    public static final MaterialId steel_wire = id("steel_wire");
 
     // Fletchings
     public static final MaterialId feather = id("feather");
     public static final MaterialId leaf = id("leaf");
     public static final MaterialId slime_leaf = id("slime_leaf");
-    public static final MaterialId silky_cloth = id("silky_cloth");
 
     private static MaterialId id(String name) {
         return new MaterialId(TinkersArchery.MOD_ID, name);
