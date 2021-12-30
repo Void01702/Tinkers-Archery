@@ -1,5 +1,5 @@
 {
-  "type": "tconstruct:modifier_salvage",
+  "type": "tconstruct:incremental_modifier_salvage",
   "tools": {
     "tag": "tinkersarchery:modifiable/shootable"
   },
@@ -8,10 +8,8 @@
   },
   "modifier": "tinkersarchery:highlander",
   "min_level": 1,
-  "salvage": [
-    {
-      "item": "minecraft:feather",
-      "chance": 0.5
-    }
-  ]
+  "salvage": {
+    "item": "minecraft:feather",
+    "full": false
+  }
 }

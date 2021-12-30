@@ -137,11 +137,11 @@ public class TinkersArchery
     public static final RegistryObject<CrossbowTool> crossbow = ITEMS.register("crossbow", () -> new CrossbowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.CROSSBOW));
     public static final RegistryObject<ArrowTool> arrow = ITEMS.register("arrow", () -> new ArrowTool(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.ARROW));
 
-    public static final RegistryObject<Block> tantalum_ore = BLOCKS.register("tantalum_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F).harvestLevel(2)));
+    public static final RegistryObject<Block> tantalum_ore = BLOCKS.register("tantalum_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F).harvestLevel(1)));
 
-    public static final RegistryObject<Block> tantalum_block = BLOCKS.register("tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).harvestLevel(2).strength(5.0F, 6.0F).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> cobalt_tantalum_block = BLOCKS.register("cobalt_tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).harvestLevel(3).strength(6.0F, 8.0F).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> galaxy_alloy_block = BLOCKS.register("galaxy_alloy_block", () -> new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.ICE).harvestLevel(4).strength(8.0F, 10.0F).sound(SoundType.NETHERITE_BLOCK)));
+    public static final RegistryObject<Block> tantalum_block = BLOCKS.register("tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(5.0F, 6.0F).harvestLevel(1).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> cobalt_tantalum_block = BLOCKS.register("cobalt_tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(6.0F, 8.0F).harvestLevel(2).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> galaxy_alloy_block = BLOCKS.register("galaxy_alloy_block", () -> new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(8.0F, 10.0F).harvestLevel(3).sound(SoundType.NETHERITE_BLOCK)));
 
     public static final RegistryObject<Item> tantalum_ore_item = ITEMS.register("tantalum_ore", () -> new BlockItem(tantalum_ore.get(), TINKERS_ARCHERY_PROPS));
 

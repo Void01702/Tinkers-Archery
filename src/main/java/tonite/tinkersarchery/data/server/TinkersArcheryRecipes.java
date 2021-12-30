@@ -269,13 +269,62 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.BURST_MODIFIER, salvageFolder))
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.BURST_MODIFIER, upgradeFolder));
 
-        ModifierRecipeBuilder.modifier(TinkersArchery.HIGHLANDER_MODIFIER.get())
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HIGHLANDER_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
-                .addInput(Items.FEATHER)
-                .addSalvage(Items.FEATHER, 0.5f)
+                .setInput(Items.FEATHER, 1, 12)
+                .setSalvage(Items.FEATHER, false)
+                .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.HIGHLANDER_MODIFIER, salvageFolder))
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.HIGHLANDER_MODIFIER, upgradeFolder));
+
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.VELOCITY_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Items.FEATHER, 1, 12)
+                .setSalvage(Items.FEATHER, false)
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.VELOCITY_MODIFIER, salvageFolder))
+                .build(finishedRecipeConsumer, prefix(TinkersArchery.VELOCITY_MODIFIER, upgradeFolder));
+
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HEAVY_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Items.CLAY_BALL, 1, 36)
+                .setSalvage(Items.CLAY_BALL, false)
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.HEAVY_MODIFIER, salvageFolder))
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.HEAVY_MODIFIER, upgradeFolder, "_from_ball"));
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HEAVY_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Items.CLAY, 4, 36)
+                .setLeftover(new ItemStack(Items.CLAY_BALL))
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.HEAVY_MODIFIER, upgradeFolder, "_from_block"));
+
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Tags.Items.GEMS_PRISMARINE, 1, 36)
+                .setSalvage(Items.PRISMARINE_SHARD, false)
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.AQUADYNAMIC_MODIFIER, salvageFolder))
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_shard"));
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Items.PRISMARINE, 4, 36)
+                .setLeftover(new ItemStack(Items.PRISMARINE_SHARD))
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_block"));
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Items.PRISMARINE_BRICKS, 9, 36)
+                .setLeftover(new ItemStack(Items.PRISMARINE_SHARD))
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_bricks"));
     }
 
     private void compressionRecipes(Consumer<IFinishedRecipe> consumer, Item block, Item ingot, Item nugget, String name) {

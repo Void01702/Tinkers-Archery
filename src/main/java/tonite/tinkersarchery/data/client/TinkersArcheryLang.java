@@ -79,6 +79,9 @@ public class TinkersArcheryLang extends LanguageProvider {
         addFluid(TinkersArchery.molten_cobalt_tantalum, "Molten Cobalt Tantalum");
         addFluid(TinkersArchery.molten_galaxy_alloy, "Molten Galaxy Alloy");
 
+        // Entities
+        addEntityType(TinkersArchery.TINKERS_ARROW, "Tinkers' Arrow");
+
         // Materials
         addMaterial(TinkersArcheryMaterialIds.tantalum, "Tantalum", "Tantalizingly Accurate", "Bows are 40% per level more accurate");
         addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, "Cobalt Tantalum", "Yes, this is its formal name", "Arrows shot from this have 0.2 per level added to thier weight");
@@ -119,12 +122,12 @@ public class TinkersArcheryLang extends LanguageProvider {
         addIncrementalModifier(TinkersArchery.HASTE_MODIFIER, "Haste", new String[]{"Haste", "Hastier", "Hastiest", "Hastiester", "Hastiestest"}, "Science!", "Magic red dust makes bow draw faster!");
         addIncrementalModifier(TinkersArchery.POWER_MODIFIER, "Power", new String[]{"Power", "Powerer", "Powerest", "Powerester", "Powerestest"}, "But how does it work?", "Arrows deal more damage");
         addIncrementalModifier(TinkersArchery.LAUNCHING_MODIFIER, "Launching", new String[]{"Launching", "More Lanching", "Most Launching", "More Most Launching", "Most Most Launching"}, "Arrows go fastified", "Arrows are launched at a greater speed");
-        addIncrementalModifier(TinkersArchery.PINPOINTER_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharpester Pinpointer", "Sharpestest Pinpointer"}, "Legolas got nothing on this", "The bow is more accurate");
+        addIncrementalModifier(TinkersArchery.PINPOINTER_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharp Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharper Than The Sharpest Pinpointer"}, "Legolas got nothing on this", "The bow is more accurate");
         addModifier(TinkersArchery.BURST_MODIFIER, "Burst", "With every deaath comes honor", "The next time you consecutvely draw your bow, it will draw much faster");
-        addModifier(TinkersArchery.HIGHLANDER_MODIFIER, "Highlander", "Then I took an arrow to the knee", "Arrows are shot further at higher altitudes");
-        addModifier(TinkersArchery.VELOCITY_MODIFIER, "Velocity", "Ludicrous Speed. Ludicrous Speed! GO!", "Arrows travel faster");
-        addModifier(TinkersArchery.HEAVY_MODIFIER, "Heavy", "F = ma", "Arrows are heavier, making them follow a much more favorable trajectory");
-        addModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", "Enguarde", "Arrows travel better in water");
+        addIncrementalModifier(TinkersArchery.HIGHLANDER_MODIFIER, "Highlander", new String[]{"Highlander", "Higherlander", "Highestlander", "Highesterlander", "Highestestlander"}, "Then I took an arrow to the knee", "Arrows are shot further at higher altitudes");
+        addIncrementalModifier(TinkersArchery.VELOCITY_MODIFIER, "Velocity", new String[]{"Velocity", "High Velocity", "Higher Velocity", "Highest Velocity", "Ludicrous Speed"}, "Ludicrous Speed. Ludicrous Speed! GO!", "Arrows travel faster");
+        addIncrementalModifier(TinkersArchery.HEAVY_MODIFIER, "Heavy", new String[]{"Heavy", "Heavier", "Heaviest", "Heaviester", "Heaviestest"}, "F = ma", "Arrows are heavier, making them follow a much more favorable trajectory");
+        addIncrementalModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", new String[]{"Aquadynamic", "Super Aquadynamic", "Ultra Aquadynamic", "Mega Super Aquadynamic", "Mega Ultra Aquadynamic"}, "Enguarde", "Arrows travel better in water");
 
         // Stats
         addStat(BowMaterialStats.ID, "Bow");

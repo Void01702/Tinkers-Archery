@@ -2,11 +2,12 @@ package tonite.tinkersarchery.modifiers.upgrades;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.library.modifiers.IncrementalModifier;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 
-public class Highlander extends Modifier implements IBowModifier {
+public class Highlander extends IncrementalModifier implements IBowModifier {
     public Highlander() {
         super(0xFFFAFF99);
     }
@@ -28,6 +29,6 @@ public class Highlander extends Modifier implements IBowModifier {
             }
         }
 
-        return power * (1 + level * multiplier);
+        return power * (1 + getScaledLevel(tool, level) * multiplier);
     }
 }
