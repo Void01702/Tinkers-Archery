@@ -9,7 +9,7 @@
     {
       "icon": "tinkersarchery:bowshaft",
       "translation_key": "item.tinkersarchery.bowshaft",
-      "x": 12,
+      "x": 17,
       "y": 26,
       "filter": {
         "item": "tinkersarchery:bowshaft"
@@ -18,7 +18,7 @@
     {
       "icon": "tinkersarchery:bowstring",
       "translation_key": "item.tinkersarchery.bowstring",
-      "x": 30,
+      "x": 35,
       "y": 44,
       "filter": {
         "item": "tinkersarchery:bowstring"
@@ -27,7 +27,7 @@
     {
       "icon": "tinkersarchery:crossbow_arm",
       "translation_key": "item.tinkersarchery.crossbow_arm",
-      "x": 48,
+      "x": 53,
       "y": 62,
       "filter": {
         "item": "tinkersarchery:crossbow_arm"

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
@@ -19,7 +20,10 @@ public class BowGuideMaterialStats  extends BaseMaterialStats {
     private static final String ELASTICITY_PREFIX = makeTooltipKey(TinkersArchery.getResource("elasticity"));
     private static final String ACCURACY_PREFIX = makeTooltipKey(TinkersArchery.getResource("accuracy"));
 
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription());
+    // tooltip descriptions
+    private static final ITextComponent ELASTICITY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("elasticity.multiplier_description"));
+    private static final ITextComponent ACCURACY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("accuracy.multiplier_description"));
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ELASTICITY_DESCRIPTION, ACCURACY_DESCRIPTION);
 
     private float elasticity;
     private float accuracy;

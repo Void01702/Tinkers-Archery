@@ -3,8 +3,8 @@
   "input": {
     "item": "minecraft:obsidian"
   },
-  "amount_per_item": 1,
-  "needed_per_level": 4,
+  "amount_per_item": 2,
+  "needed_per_level": 8,
   "tools": {
     "tag": "tinkersarchery:modifiable/projectile"
   },

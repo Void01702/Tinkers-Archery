@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
@@ -20,8 +21,14 @@ public class BowStringMaterialStats extends BaseMaterialStats {
     // tooltip prefixes
     private static final String ELASTICITY_PREFIX = makeTooltipKey(TinkersArchery.getResource("elasticity"));
     private static final String DRAW_SPEED_PREFIX = makeTooltipKey(TinkersArchery.getResource("draw_speed"));
+    private static final String ACCURACY_PREFIX = makeTooltipKey(TinkersArchery.getResource("accuracy"));
 
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.DRAW_SPEED.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription());
+    // tooltip descriptions
+    private static final ITextComponent DURABILITY_DESCRIPTION = makeTooltip(TConstruct.getResource("handle.durability.description"));
+    private static final ITextComponent ELASTICITY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("elasticity.multiplier_description"));
+    private static final ITextComponent DRAW_SPEED_DESCRIPTION = makeTooltip(TinkersArchery.getResource("draw_speed.multiplier_description"));
+    private static final ITextComponent ACCURACY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("accuracy.multiplier_description"));
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(DURABILITY_DESCRIPTION, ELASTICITY_DESCRIPTION, DRAW_SPEED_DESCRIPTION, ACCURACY_DESCRIPTION);
 
     private float durability;
     private float elasticity;
@@ -51,7 +58,7 @@ public class BowStringMaterialStats extends BaseMaterialStats {
         info.add(HandleMaterialStats.formatDurability(this.durability));
         info.add(format(ELASTICITY_PREFIX, this.elasticity));
         info.add(format(DRAW_SPEED_PREFIX, this.drawSpeed));
-        info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));
+        info.add(format(ACCURACY_PREFIX, this.accuracy));
 
         return info;
     }

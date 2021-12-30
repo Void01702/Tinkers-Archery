@@ -15,7 +15,7 @@ public class ArrowHeadMaterialStats extends HeadMaterialStats {
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("arrowhead"));
     public static final ArrowHeadMaterialStats DEFAULT = new ArrowHeadMaterialStats();
 
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.HARVEST_LEVEL.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.HARVEST_LEVEL.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.SPEED.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
 
     private float speed;
     private float weight;

@@ -78,12 +78,48 @@
       "statType": "tconstruct:head"
     },
     {
-      "path": "tinkersarchery:longbow/bowstring",
-      "statType": "tinkersarchery:bowstring"
+      "path": "tinkersarchery:longbow/bowshaft_left_pulling_0",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_left_pulling_2",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_left_pulling_1",
+      "statType": "tconstruct:head"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_right",
       "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_right_pulling_1",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_right_pulling_0",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowstring_pulling_0",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowshaft_right_pulling_2",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowstring_pulling_1",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowstring_pulling_2",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/bowstring",
+      "statType": "tinkersarchery:bowstring"
     },
     {
       "path": "tinkersarchery:longbow/broken_bowstring",
@@ -98,12 +134,48 @@
       "statType": "tconstruct:head"
     },
     {
-      "path": "tinkersarchery:longbow/large/bowstring",
-      "statType": "tinkersarchery:bowstring"
+      "path": "tinkersarchery:longbow/large/bowshaft_left_pulling_0",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_left_pulling_2",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_left_pulling_1",
+      "statType": "tconstruct:head"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_right",
       "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_right_pulling_1",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_right_pulling_0",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowstring_pulling_0",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowshaft_right_pulling_2",
+      "statType": "tconstruct:head"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowstring_pulling_1",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowstring_pulling_2",
+      "statType": "tinkersarchery:bowstring"
+    },
+    {
+      "path": "tinkersarchery:longbow/large/bowstring",
+      "statType": "tinkersarchery:bowstring"
     },
     {
       "path": "tinkersarchery:longbow/large/broken_bowstring",

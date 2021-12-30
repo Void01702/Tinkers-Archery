@@ -44,6 +44,17 @@ public class TinkersArcheryClient {
                 return player != null && player.isUsingItem() && player.getUseItem() == itemStack ? 1.0F : 0.0F;
             });
 
+            ItemModelsProperties.register(TinkersArchery.longbow.get(), new ResourceLocation("pull"), (itemStack, world, player) -> {
+                if (player == null) {
+                    return 0.0F;
+                } else {
+                    return player.getUseItem() != itemStack ? 0.0F : BowTool.getPowerForTimeOfTool(itemStack.getUseDuration() - player.getUseItemRemainingTicks(), itemStack);
+                }
+            });
+            ItemModelsProperties.register(TinkersArchery.longbow.get(), new ResourceLocation("pulling"), (itemStack, world, player) -> {
+                return player != null && player.isUsingItem() && player.getUseItem() == itemStack ? 1.0F : 0.0F;
+            });
+
             ItemModelsProperties.register(TinkersArchery.crossbow.get(), new ResourceLocation("pull"), (itemStack, world, player) -> {
                 if (CrossbowTool.isCharged(itemStack)) {
                     return 1.0F;

@@ -133,7 +133,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         // Material Recipes
         metalCasting(finishedRecipeConsumer, TinkersArchery.molten_tantalum, TinkersArchery.tantalum_block_item.get(), TinkersArchery.tantalum_ingot.get(), TinkersArchery.tantalum_nugget.get(), castingFolder, "tantalum");
-        metalMelting(finishedRecipeConsumer, TinkersArchery.molten_tantalum.get(), "tantalum", false, meltingFolder, false);
+        metalMelting(finishedRecipeConsumer, TinkersArchery.molten_tantalum.get(), "tantalum", true, meltingFolder, false);
         metalMaterialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.tantalum, materialFolder, "tantalum", false);
         materialMeltingCasting(finishedRecipeConsumer, TinkersArcheryMaterialIds.tantalum, TinkersArchery.molten_tantalum, materialFolder);
 
@@ -254,7 +254,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .build(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_bow"));
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.PINPOINTER_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
-                .setInput(Items.OBSIDIAN, 1, 4)
+                .setInput(Items.OBSIDIAN, 2, 8)
                 .setSalvage(Items.OBSIDIAN, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)

@@ -1,0 +1,25 @@
+{
+  "loader": "tinkersarchery:generic_bow",
+  "parent": "tinkersarchery:item/longbow",
+  "textures": {
+    "bowshaft_right": "tinkersarchery:item/tool/longbow/bowshaft_right_pulling_0",
+    "bowshaft_left": "tinkersarchery:item/tool/longbow/bowshaft_left_pulling_0",
+    "bowstring": "tinkersarchery:item/tool/longbow/bowstring_pulling_0",
+
+    "large_bowshaft_right": "tinkersarchery:item/tool/longbow/large/bowshaft_right_pulling_0",
+    "large_bowshaft_left": "tinkersarchery:item/tool/longbow/large/bowshaft_left_pulling_0",
+    "large_bowstring": "tinkersarchery:item/tool/longbow/large/bowstring_pulling_0"
+  },
+  "parts": [
+    { "name": "bowshaft_right", "index": 0 },
+    { "name": "bowshaft_left", "index": 1 },
+    { "name": "bowstring", "index": 2 },
+    { "name": "guide", "index": 3 }
+  ],
+  "modifier_roots": {
+    "small": [ "tconstruct:item/tool/cleaver/modifiers/" ],
+    "large": [ "tconstruct:item/tool/cleaver/large/modifiers/" ]
+  },
+  "large": true,
+  "large_offset": [0, 0]
+}

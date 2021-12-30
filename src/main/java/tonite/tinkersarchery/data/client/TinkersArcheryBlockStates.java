@@ -19,6 +19,8 @@ public class TinkersArcheryBlockStates extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
+        blockWithItem(TinkersArchery.tantalum_ore);
+
         blockWithItem(TinkersArchery.tantalum_block);
         blockWithItem(TinkersArchery.cobalt_tantalum_block);
         blockWithItem(TinkersArchery.galaxy_alloy_block);

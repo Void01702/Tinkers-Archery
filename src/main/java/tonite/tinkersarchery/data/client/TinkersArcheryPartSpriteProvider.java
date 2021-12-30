@@ -32,9 +32,9 @@ public class TinkersArcheryPartSpriteProvider extends AbstractPartSpriteProvider
                 .addHandle("crossbow_arm");
 
         buildTool("longbow").withLarge()
-                .addHead("bowshaft_left")
-                .addHead("bowshaft_right")
-                .addBreakablePart("bowstring", BowStringMaterialStats.ID)//.addPart("bowstring_pulling_0", BowStringMaterialStats.ID).addPart("bowstring_pulling_1", BowStringMaterialStats.ID).addPart("bowstring_pulling_2", BowStringMaterialStats.ID)
+                .addHead("bowshaft_left").addHead("bowshaft_left_pulling_0").addHead("bowshaft_left_pulling_1").addHead("bowshaft_left_pulling_2")
+                .addHead("bowshaft_right").addHead("bowshaft_right_pulling_0").addHead("bowshaft_right_pulling_1").addHead("bowshaft_right_pulling_2")
+                .addBreakablePart("bowstring", BowStringMaterialStats.ID).addPart("bowstring_pulling_0", BowStringMaterialStats.ID).addPart("bowstring_pulling_1", BowStringMaterialStats.ID).addPart("bowstring_pulling_2", BowStringMaterialStats.ID)
                 .addHandle("guide");
 
         buildTool("arrow").addHead("arrowhead").addHandle("arrow_shaft").addPart("arrow_fletching", ArrowFletchingMaterialStats.ID);

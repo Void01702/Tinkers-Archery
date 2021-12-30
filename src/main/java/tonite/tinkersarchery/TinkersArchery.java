@@ -2,6 +2,7 @@ package tonite.tinkersarchery;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.OreBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -14,11 +15,24 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.Features;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.placement.DepthAverageConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -39,6 +53,7 @@ import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.TinkerEffect;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
@@ -51,6 +66,7 @@ import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 import slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider;
+import slimeknights.tconstruct.world.TinkerWorld;
 import tonite.tinkersarchery.data.client.*;
 import tonite.tinkersarchery.data.server.*;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
@@ -95,7 +111,7 @@ public class TinkersArchery
                 TinkerRegistries.MODIFIERS.register(new TrajectoryApplier(obj).setRegistryName(obj.getRegistryName()));
             })*/);
 
-    private static final ItemGroup TAB_TINKERS_ARCHERY = new ItemGroup( MOD_ID) {
+    private static final ItemGroup TAB_TINKERS_ARCHERY = new ItemGroup(MOD_ID) {
         @OnlyIn(Dist.CLIENT)
         public ItemStack makeIcon() {
             return shortbow.get().getRenderTool();
@@ -121,9 +137,13 @@ public class TinkersArchery
     public static final RegistryObject<CrossbowTool> crossbow = ITEMS.register("crossbow", () -> new CrossbowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.CROSSBOW));
     public static final RegistryObject<ArrowTool> arrow = ITEMS.register("arrow", () -> new ArrowTool(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.ARROW));
 
+    public static final RegistryObject<Block> tantalum_ore = BLOCKS.register("tantalum_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F).harvestLevel(2)));
+
     public static final RegistryObject<Block> tantalum_block = BLOCKS.register("tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).harvestLevel(2).strength(5.0F, 6.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> cobalt_tantalum_block = BLOCKS.register("cobalt_tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).harvestLevel(3).strength(6.0F, 8.0F).sound(SoundType.METAL)));
     public static final RegistryObject<Block> galaxy_alloy_block = BLOCKS.register("galaxy_alloy_block", () -> new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.ICE).harvestLevel(4).strength(8.0F, 10.0F).sound(SoundType.NETHERITE_BLOCK)));
+
+    public static final RegistryObject<Item> tantalum_ore_item = ITEMS.register("tantalum_ore", () -> new BlockItem(tantalum_ore.get(), TINKERS_ARCHERY_PROPS));
 
     public static final RegistryObject<Item> tantalum_block_item = ITEMS.register("tantalum_block", () -> new BlockItem(tantalum_block.get(), TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> cobalt_tantalum_block_item = ITEMS.register("cobalt_tantalum_block", () -> new BlockItem(cobalt_tantalum_block.get(), TINKERS_ARCHERY_PROPS));
@@ -197,6 +217,8 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> TWIRLING_TRAJECTORY_MODIFIER = MODIFIERS.register("twirling_trajectory", () -> new TrajectoryApplier(0xFF4AD718, TWIRLING::get));
     public static final RegistryObject<Modifier> BOUNCING_TRAJECTORY_MODIFIER = MODIFIERS.register("bouncing_trajectory", () -> new TrajectoryApplier(0xFF36FFFC, BOUNCING::get));
 
+    public static ConfiguredFeature<?, ?> TANTALUM_ORE_FEATURE;
+
     public TinkersArchery() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -223,7 +245,13 @@ public class TinkersArchery
 
     private void setup(final FMLCommonSetupEvent event)
     {
-
+        event.enqueueWork(() -> {
+            TANTALUM_ORE_FEATURE = Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, getResource("tantalum_ore"),
+                    Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, TinkersArchery.tantalum_ore.get().defaultBlockState(), 9))
+                            .range(48)
+                            .squared()
+                            .count(18));
+        });
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -268,6 +296,7 @@ public class TinkersArchery
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         if (event.includeServer()) {
+            generator.addProvider(new TinkersArcheryLootTables(generator));
             generator.addProvider(new TinkersArcheryRecipes(generator));
             AbstractMaterialDataProvider materials = new TinkersArcheryMaterialDefinitions(generator);
             generator.addProvider(materials);

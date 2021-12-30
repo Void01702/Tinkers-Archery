@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.RegistryObject;
+import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
@@ -28,7 +29,12 @@ public class TinkersArcheryLang extends LanguageProvider {
     @Override
     protected void addTranslations() {
 
+        // Creative Tab
+        add("itemGroup.tinkersarchery", "Tinkers Archery");
+
         // Blocks
+        addBlock(TinkersArchery.tantalum_ore, "Tantalum Ore");
+
         addBlock(TinkersArchery.tantalum_block, "Tantalum Block");
         addBlock(TinkersArchery.cobalt_tantalum_block, "Cobalt Tantalum Block");
         addBlock(TinkersArchery.galaxy_alloy_block, "Galaxy Alloy Block");
@@ -110,15 +116,15 @@ public class TinkersArcheryLang extends LanguageProvider {
         addModifier(TinkersArchery.MULTISHOT_MODIFIER, "Multishot", "Now with 3 times the projeciles", "Bow shoots additional arrows");
         addModifier(TinkersArchery.PIERCING_MODIFIER, "Piercing", "Pierce the heavens", "Arrows pierce through targets");
 
-        addModifier(TinkersArchery.HASTE_MODIFIER, "Haste", "Gotta go fastifed", "Draw speed increased");
-        addModifier(TinkersArchery.POWER_MODIFIER, "Power", "But how does it work?", "Arrows deal more damage");
-        addModifier(TinkersArchery.LAUNCHING_MODIFIER, "Launching", "Nyoom", "Arrows are launched at a greater speed");
-        addModifier(TinkersArchery.PINPOINTER_MODIFIER, "Pinpointer", "Legolas got nothing on this", "The bow is more accurate");
+        addIncrementalModifier(TinkersArchery.HASTE_MODIFIER, "Haste", new String[]{"Haste", "Hastier", "Hastiest", "Hastiester", "Hastiestest"}, "Science!", "Magic red dust makes bow draw faster!");
+        addIncrementalModifier(TinkersArchery.POWER_MODIFIER, "Power", new String[]{"Power", "Powerer", "Powerest", "Powerester", "Powerestest"}, "But how does it work?", "Arrows deal more damage");
+        addIncrementalModifier(TinkersArchery.LAUNCHING_MODIFIER, "Launching", new String[]{"Launching", "More Lanching", "Most Launching", "More Most Launching", "Most Most Launching"}, "Arrows go fastified", "Arrows are launched at a greater speed");
+        addIncrementalModifier(TinkersArchery.PINPOINTER_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharpester Pinpointer", "Sharpestest Pinpointer"}, "Legolas got nothing on this", "The bow is more accurate");
         addModifier(TinkersArchery.BURST_MODIFIER, "Burst", "With every deaath comes honor", "The next time you consecutvely draw your bow, it will draw much faster");
         addModifier(TinkersArchery.HIGHLANDER_MODIFIER, "Highlander", "Then I took an arrow to the knee", "Arrows are shot further at higher altitudes");
         addModifier(TinkersArchery.VELOCITY_MODIFIER, "Velocity", "Ludicrous Speed. Ludicrous Speed! GO!", "Arrows travel faster");
         addModifier(TinkersArchery.HEAVY_MODIFIER, "Heavy", "F = ma", "Arrows are heavier, making them follow a much more favorable trajectory");
-        addModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", "Enguarde", "Arrows travel much better in water");
+        addModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", "Enguarde", "Arrows travel better in water");
 
         // Stats
         addStat(BowMaterialStats.ID, "Bow");
@@ -129,17 +135,19 @@ public class TinkersArcheryLang extends LanguageProvider {
         addStat(ArrowFletchingMaterialStats.ID, "Fletching");
 
         // Tool Stats
-        addToolStat(BowAndArrowToolStats.ELASTICITY, "Elasticity");
-        addToolStat(BowAndArrowToolStats.DRAW_SPEED, "Draw Speed");
-        addToolStat(BowAndArrowToolStats.ACCURACY, "Accuracy");
-        addToolStat(BowAndArrowToolStats.SPEED, "Speed");
-        addToolStat(BowAndArrowToolStats.WEIGHT, "Weight");
+        addToolStat(BowAndArrowToolStats.ELASTICITY, "Elasticity", "How fast arrows are shot out of this tool.\nThe arrow's velocity is taken into account when calculating damage.", "The total elasticity of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.DRAW_SPEED, "Draw Speed", "How fast arrows are drawn.\nThe exiting velocity of arrows is not linear to how much you draw back the bow.", "The total draw speed of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.ACCURACY, "Accuracy", "How accurate the shot is.\nThis is affected by both the bow and arrow.", "The total accuracy of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.SPEED, "Speed", "How fast the arrow is.\nThe arrow's velocity is taken into account when calculating damage.", "The total speed of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.WEIGHT, "Weight", "How heavy the arrow is.\nA heavier arrow follows a more favorable trajectory.", "The total weight of the tool will be multiplied by this.");
 
     }
 
-    public void addFluid(Supplier<? extends ForgeFlowingFluid> key, String name) {
+    public void addFluid(FluidObject key, String name) {
         ResourceLocation id = key.get().getRegistryName();
         add("fluid." + id.getNamespace() + "." + id.getPath(), name);
+        addItem(() -> key.get().getBucket(), "Bucket of " + name);
+        addBlock(() -> key.getBlock(), name);
     }
 
     public void addCast(CastItemObject cast, String name) {
@@ -183,11 +191,23 @@ public class TinkersArcheryLang extends LanguageProvider {
         add("modifier.tinkersarchery." + id + ".description", desc);
     }
 
+    public void addIncrementalModifier(RegistryObject<Modifier> modifier, String name, String[] names, String flavour, String desc) {
+        String id = modifier.getId().getPath();
+        add("modifier.tinkersarchery." + id, name);
+        for (int i = 0; i < names.length; i++){
+            add("modifier.tinkersarchery." + id + "." + (i + 1), names[i]);
+        }
+        add("modifier.tinkersarchery." + id + ".flavor", flavour);
+        add("modifier.tinkersarchery." + id + ".description", desc);
+    }
+
     public void addStat(MaterialStatsId toolStat, String name) {
         add("stat." + toolStat.getNamespace() + "." + toolStat.getPath(), name);
     }
 
-    public void addToolStat(IToolStat<?> stat, String name) {
+    public void addToolStat(IToolStat<?> stat, String name, String description, String multiplierDescription) {
         add("tool_stat." + stat.getName().getNamespace() + "." + stat.getName().getPath(), name + ": ");
+        add("tool_stat." + stat.getName().getNamespace() + "." + stat.getName().getPath() + ".description", description);
+        add("tool_stat." + stat.getName().getNamespace() + "." + stat.getName().getPath() + ".multiplier_description", multiplierDescription);
     }
 }

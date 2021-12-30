@@ -53,6 +53,8 @@ public class TinkersArcheryTags {
         public static final INamedTag<Item> ARROW_SHAFT_CAST_SINGLE = ItemTags.bind(TinkersArchery.MOD_ID + ":casts/single_use/arrow_shaft");
 
         // Materials
+        public static final INamedTag<Item> TANTALUM_ORE = ItemTags.bind("forge:ores/tantalum");
+
         public static final INamedTag<Item> TANTALUM_BLOCK = ItemTags.bind("forge:storage_blocks/tantalum");
         public static final INamedTag<Item> TANTALUM_INGOT = ItemTags.bind("forge:ingots/tantalum");
         public static final INamedTag<Item> TANTALUM_NUGGET = ItemTags.bind("forge:nuggets/tantalum");
@@ -87,6 +89,8 @@ public class TinkersArcheryTags {
         protected void addTags() {
 
             // Materials
+            tag(TANTALUM_ORE).add(TinkersArchery.tantalum_ore_item.get());
+
             tag(TANTALUM_BLOCK).add(TinkersArchery.tantalum_block_item.get());
             tag(TANTALUM_INGOT).add(TinkersArchery.tantalum_ingot.get());
             tag(TANTALUM_NUGGET).add(TinkersArchery.tantalum_nugget.get());

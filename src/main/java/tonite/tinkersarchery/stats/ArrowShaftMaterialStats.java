@@ -23,8 +23,15 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
     private static final String ACCURACY_PREFIX = makeTooltipKey(TinkersArchery.getResource("accuracy"));
     private static final String WEIGHT_PREFIX = makeTooltipKey(TinkersArchery.getResource("weight"));
 
-
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.ATTACK_SPEED.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.ELASTICITY.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
+    // tooltip descriptions
+    private static final ITextComponent DURABILITY_DESCRIPTION = makeTooltip(TConstruct.getResource("handle.durability.description"));
+    private static final ITextComponent ATTACK_DAMAGE_DESCRIPTION = makeTooltip(TConstruct.getResource("handle.attack_damage.description"));
+    private static final ITextComponent ATTACK_SPEED_DESCRIPTION = makeTooltip(TConstruct.getResource("handle.attack_speed.description"));
+    private static final ITextComponent MINING_SPEED_DESCRIPTION = makeTooltip(TConstruct.getResource("handle.mining_speed.description"));
+    private static final ITextComponent SPEED_DESCRIPTION = makeTooltip(TinkersArchery.getResource("speed.multiplier_description"));
+    private static final ITextComponent ACCURACY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("accuracy.multiplier_description"));
+    private static final ITextComponent WEIGHT_DESCRIPTION = makeTooltip(TinkersArchery.getResource("weight.multiplier_description"));
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(DURABILITY_DESCRIPTION, ATTACK_DAMAGE_DESCRIPTION, ATTACK_SPEED_DESCRIPTION, MINING_SPEED_DESCRIPTION, SPEED_DESCRIPTION, ACCURACY_DESCRIPTION, WEIGHT_DESCRIPTION);
 
     private float speed;
     private float weight;
