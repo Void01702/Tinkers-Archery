@@ -1577,6 +1577,7 @@ c9e952da958b749cf17b77d65eeaa863c3816ccc data/tconstruct/materials/stats/vine.js
 c5b08d006490af08693aa633496aaed24048a77e data/tconstruct/materials/traits/phantom.json
 2f1461c430e52baf1df3ae1c58b05fe8918cb76f data/tconstruct/materials/traits/skyslime_vine.json
 f765421a4a0fc427fefab650244f073a178f882d data/tconstruct/materials/traits/string.json
+11e84c1d42f1fdd4de5bf1a375cf11efacb82155 data/tconstruct/tags/items/anvil_metal.json
 13fdf216d5b3f868267cc4a21655cce8fa5d8f6a data/tconstruct/tags/items/casts/gold.json
 f0f8fb4ce429c927cd3c4d837043133f52f66f68 data/tconstruct/tags/items/casts/multi_use.json
 444bc39bdf73d77971bf026e5b322f4ce536a99a data/tconstruct/tags/items/casts/red_sand.json
@@ -1784,7 +1785,7 @@ df846768eee114783c1e056475669942acdf5f0f data/tinkersarchery/recipes/tools/modif
 b95d5f623024dd06430c4dc4d9e5bb540ecffb06 data/tinkersarchery/recipes/tools/modifiers/salvage/velocity.json
 d72c0c9976c3d6ffd79f346bb41f8a8ab531be21 data/tinkersarchery/recipes/tools/modifiers/upgrade/aquadynamic_from_block.json
 ab9052c4b3d8f8e2a5752363679b4cb49870cde3 data/tinkersarchery/recipes/tools/modifiers/upgrade/aquadynamic_from_bricks.json
-1c5629421e1158c4bb0c1acc49a53a2908d6ba68 data/tinkersarchery/recipes/tools/modifiers/upgrade/aquadynamic_from_shard.json
+c15abf2c5ba5b692d33733ea18c584f1ae04df32 data/tinkersarchery/recipes/tools/modifiers/upgrade/aquadynamic_from_shard.json
 e5464381233442eadb5c9aa948da462c5401999b data/tinkersarchery/recipes/tools/modifiers/upgrade/burst.json
 a7a3f166db08e37a2b395fd5d64dfa74ae024484 data/tinkersarchery/recipes/tools/modifiers/upgrade/haste_from_block.json
 935fb03170fd7289b3078ed6cbc05ea509573a21 data/tinkersarchery/recipes/tools/modifiers/upgrade/haste_from_dust.json

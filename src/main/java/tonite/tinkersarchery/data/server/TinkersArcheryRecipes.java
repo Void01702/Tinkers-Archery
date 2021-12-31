@@ -305,7 +305,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
-                .setInput(Tags.Items.GEMS_PRISMARINE, 1, 36)
+                .setInput(Items.PRISMARINE_SHARD, 1, 36)
                 .setSalvage(Items.PRISMARINE_SHARD, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)

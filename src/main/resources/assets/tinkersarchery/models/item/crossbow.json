@@ -12,7 +12,7 @@
     { "name": "bowshaft",  "index": 0 },
     { "name": "bowstring",    "index": 1, "broken": "broken_bowstring" }
   ],
-  "modifier_roots": [ "tconstruct:item/tool/hand_axe/modifiers/" ],
+  "modifier_roots": [ "tinkersarchery:item/tool/crossbow/modifiers/" ],
   "display": {
     "thirdperson_righthand": {
       "rotation": [ -90, 0, -60 ],

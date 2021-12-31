@@ -9,5 +9,5 @@
     { "name": "bowstring",    "index": 1 },
     { "name": "guide",    "index": 2 }
   ],
-  "modifier_roots": [ "tinkersarchery:item/tool/shortbow/modifiers/pulling_0/" ]
+  "modifier_roots": [ "tinkersarchery:item/tool/shortbow/modifiers/pulling_0/", "tinkersarchery:item/tool/shortbow/modifiers/" ]
 }

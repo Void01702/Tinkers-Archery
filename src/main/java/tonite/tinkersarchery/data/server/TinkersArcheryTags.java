@@ -119,6 +119,9 @@ public class TinkersArcheryTags {
             tag(MELEE_PRIMARY).add(TinkersArchery.arrow.get());
             tag(MODIFIABLE_SHOOTABLE).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get());
             tag(MODIFIABLE_PROJECTILE).add(TinkersArchery.arrow.get());
+
+            // Tables
+            tag(ANVIL_METAL).add(TinkersArchery.cobalt_tantalum_block_item.get()).add(TinkersArchery.galaxy_alloy_block_item.get());
         }
     }
 
