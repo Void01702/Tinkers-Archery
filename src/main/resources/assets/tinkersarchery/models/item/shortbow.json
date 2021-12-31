@@ -12,7 +12,7 @@
     { "name": "bowstring",    "index": 1, "broken": "broken_bowstring" },
     { "name": "guide",    "index": 2 }
   ],
-  "modifier_roots": [ "tconstruct:item/tool/hand_axe/modifiers/" ],
+  "modifier_roots": [ "tinkersarchery:item/tool/shortbow/modifiers/" ],
   "display": {
     "thirdperson_righthand": {
       "rotation": [ -80, 260, -40 ],

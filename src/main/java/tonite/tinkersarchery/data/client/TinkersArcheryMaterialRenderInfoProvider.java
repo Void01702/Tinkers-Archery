@@ -17,12 +17,12 @@ public class TinkersArcheryMaterialRenderInfoProvider extends AbstractMaterialRe
         // Melee Harvest
         buildRenderInfo(TinkersArcheryMaterialIds.tantalum).color(0xFF9EB9D4).fallbacks("metal");
         buildRenderInfo(TinkersArcheryMaterialIds.cobalt_tantalum).color(0xFF5079FF).fallbacks("metal");
-        buildRenderInfo(TinkersArcheryMaterialIds.galaxy_alloy).color(0xFF21007F).fallbacks("galaxy", "metal");
+        buildRenderInfo(TinkersArcheryMaterialIds.galaxy_alloy).color(0xFF21007F).fallbacks("galaxy", "metal").luminosity(10);
 
         // Bowstring
         buildRenderInfo(TinkersArcheryMaterialIds.slime).color(0xFF5BD141);
-        buildRenderInfo(TinkersArcheryMaterialIds.silky_cloth).color(0xFFF7CDBB);
-        buildRenderInfo(TinkersArcheryMaterialIds.blazing_string).color(0xFFFFC42E);
+        buildRenderInfo(TinkersArcheryMaterialIds.silky_cloth).color(0xFFF7CDBB).luminosity(1);
+        buildRenderInfo(TinkersArcheryMaterialIds.blazing_string).color(0xFFFFC42E).luminosity(15);
 
         buildRenderInfo(TinkersArcheryMaterialIds.steel_wire).color(0xFF959595);
 

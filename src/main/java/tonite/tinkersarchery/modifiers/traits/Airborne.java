@@ -16,7 +16,7 @@ public class Airborne extends SingleUseModifier implements IBowModifier {
 
     @Override
     public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, float drawPortion, float power, World world, LivingEntity shooter) {
-        Vector3d direction = shooter.getDeltaMovement().scale(-1);
+        Vector3d direction = shooter.getDeltaMovement().reverse();
 
         if (shooter.isOnGround()) {
             direction = new Vector3d(direction.x, 0, direction.z);

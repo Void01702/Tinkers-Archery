@@ -7,12 +7,14 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
@@ -212,13 +214,12 @@ public abstract class ShootableTool extends ModifiableItem {
 
             Vector3f arrowDirection = lookingDirection.copy();
             arrowDirection.transform(data.direction);
-            arrowDirection.add(motion);
 
             ProjectileEntity projectile = createArrow(bow, world, arrowDirection, drawPortion, shooter, arrowItem);
 
             projectile.shoot(arrowDirection.x(), arrowDirection.y(), arrowDirection.z(), power * 3.0F, 1.0F / accuracy);
 
-            supplyInfoToArrow(projectile, bow, world, new Vector3f(projectile.getDeltaMovement()), drawPortion, shooter, arrowItem);
+            supplyInfoToArrow(projectile, bow, world, projectile.getDeltaMovement().add(shooter.getDeltaMovement()), drawPortion, shooter, arrowItem);
 
             for (ModifierEntry entry : modifierList) {
                 ((IBowModifier) entry.getModifier()).onArrowShot(tool, entry.getLevel(), projectile, drawPortion, power, world, shooter);
@@ -270,7 +271,7 @@ public abstract class ShootableTool extends ModifiableItem {
         return arrow;
     }
 
-    public void supplyInfoToArrow(ProjectileEntity projectile, ItemStack bow, World world, Vector3f direction, float drawPortion, LivingEntity shooter, ItemStack arrowItem) {
+    public void supplyInfoToArrow(ProjectileEntity projectile, ItemStack bow, World world, Vector3d direction, float drawPortion, LivingEntity shooter, ItemStack arrowItem) {
 
         if (projectile instanceof ICriticalProjectile && drawPortion == 1.0F) {
             ((ICriticalProjectile)projectile).setCritical(true);
@@ -290,6 +291,12 @@ public abstract class ShootableTool extends ModifiableItem {
             if (shooter instanceof PlayerEntity && ((PlayerEntity)shooter).abilities.instabuild) {
                 arrow.pickup = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
             }
+        }
+
+        if (projectile instanceof TinkersArrowEntity) {
+            ((TinkersArrowEntity)projectile).changeDirection(direction);
+        } else {
+            projectile.setDeltaMovement(direction);
         }
     }
 

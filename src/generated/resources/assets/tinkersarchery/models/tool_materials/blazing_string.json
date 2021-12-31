@@ -1,6 +1,6 @@
 {
   "color": "FFFFC42E",
-  "luminosity": 0,
+  "luminosity": 15,
   "generator": {
     "transformer": {
       "type": "tconstruct:recolor_sprite",

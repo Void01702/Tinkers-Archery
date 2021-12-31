@@ -1,6 +1,8 @@
 package tonite.tinkersarchery.modifiers.upgrades;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.IncrementalModifier;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -10,6 +12,15 @@ import tonite.tinkersarchery.library.modifier.IBowModifier;
 public class Highlander extends IncrementalModifier implements IBowModifier {
     public Highlander() {
         super(0xFFFAFF99);
+    }
+
+    @Override
+    public ITextComponent getDisplayName(int level) {
+        // displays special names for levels of haste
+        if (level <= 5) {
+            return applyStyle(new TranslationTextComponent(getTranslationKey() + "." + level));
+        }
+        return super.getDisplayName(level);
     }
 
     public float getPower(IModifierToolStack tool, int level, float drawPortion, float power, World world, LivingEntity shooter) {

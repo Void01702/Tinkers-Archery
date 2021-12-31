@@ -9,5 +9,5 @@
     { "name": "bowstring",    "index": 1 },
     { "name": "guide",    "index": 2 }
   ],
-  "modifier_roots": [ "tconstruct:item/tool/hand_axe/modifiers/" ]
+  "modifier_roots": [ "tinkersarchery:item/tool/shortbow/modifiers/pulling_0/" ]
 }

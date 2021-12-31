@@ -1,0 +1,11 @@
+{
+  "tinkersarchery:haste": { "type": "tconstruct:normal", "luminosity": 7 },
+  "tinkersarchery:power": "tconstruct:normal",
+  "tinkersarchery:launching": "tconstruct:normal",
+  "tinkersarchery:pinpointer": "tconstruct:normal",
+  "tinkersarchery:burst": { "type": "tconstruct:normal", "luminosity": 2 },
+  "tinkersarchery:highlander": "tconstruct:normal",
+
+  "tinkersarchery:multishot": { "type": "tconstruct:normal", "luminosity": 5 }
+
+}
