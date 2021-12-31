@@ -15,24 +15,8 @@
             "color": "FF000000"
           },
           {
-            "grey": 63,
-            "color": "FF30E6E4"
-          },
-          {
-            "grey": 102,
-            "color": "FF36FFFC"
-          },
-          {
-            "grey": 140,
-            "color": "FF36FFFC"
-          },
-          {
             "grey": 178,
-            "color": "FF36FFFC"
-          },
-          {
-            "grey": 216,
-            "color": "FF36FFFC"
+            "color": "FFA8FFFD"
           },
           {
             "grey": 255,

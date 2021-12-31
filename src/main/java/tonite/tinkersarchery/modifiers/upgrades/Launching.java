@@ -13,7 +13,7 @@ import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 public class Launching extends IncrementalModifier {
     public Launching() {
-        super(0xFF3A72E7);
+        super(0xFF568112);
     }
 
     @Override

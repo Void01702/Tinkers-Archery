@@ -16,8 +16,6 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
         return "Tinkers' Archery Parts";
     }
 
-    //TODO find good colorings for materials
-
     @Override
     protected void addAllMaterials() {
         // Melee Harvest
@@ -70,30 +68,46 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                         .build());
         buildMaterial(TinkersArcheryMaterialIds.slime)
                 .statType(BowStringMaterialStats.ID)
-                .colorMapper(fromColor(0xFF5BD141));
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(255, 0xFF5BD141)
+                        .build());
         buildMaterial(TinkersArcheryMaterialIds.blazing_string)
                 .statType(BowStringMaterialStats.ID)
-                .colorMapper(fromColor(0xFFFFC42E));
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(255, 0xFFFFC42E)
+                        .build());
 
         buildMaterial(TinkersArcheryMaterialIds.steel_wire)
                 .statType(BowStringMaterialStats.ID)
-                .colorMapper(GreyToColorMapping.builderFromBlack().addARGB(63, 0xFF222626).addARGB(102, 0xFF393D3D).addARGB(140, 0xFF515454).addARGB(178, 0xFF6A6D6D).addARGB(216, 0xFF898C8C).addARGB(255, 0xFFADAFAF).build());
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(63, 0xFF222626)
+                        .addARGB(102, 0xFF393D3D)
+                        .addARGB(140, 0xFF515454)
+                        .addARGB(178, 0xFF6A6D6D)
+                        .addARGB(216, 0xFF898C8C)
+                        .addARGB(255, 0xFFADAFAF)
+                        .build());
 
         // Fletching
         buildMaterial(TinkersArcheryMaterialIds.feather)
                 .statType(ArrowFletchingMaterialStats.ID)
-                .colorMapper(fromColor(0xFFFFFFFF));
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(178, 0xFFB2B2B2)
+                        .addARGB(255, 0xFFFFFFFF)
+                        .build());
         buildMaterial(TinkersArcheryMaterialIds.leaf)
                 .statType(ArrowFletchingMaterialStats.ID)
                 .fallbacks("leaf")
-                .colorMapper(fromColor(0xFF4AD718));
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(178, 0xFF83EA5D)
+                        .addARGB(255, 0xFF4AD718)
+                        .build());
         buildMaterial(TinkersArcheryMaterialIds.slime_leaf)
                 .statType(ArrowFletchingMaterialStats.ID)
                 .fallbacks("leaf")
-                .colorMapper(fromColor(0xFF36FFFC));
-    }
-
-    private GreyToColorMapping fromColor(int color) {
-        return GreyToColorMapping.builderFromBlack().addARGB(63, GreyToColorMapping.scaleColor(0xFF393939, color, 63)).addARGB(102, GreyToColorMapping.scaleColor(0xFF666666, color, 102)).addARGB(140, GreyToColorMapping.scaleColor(0xFF8C8C8C, color, 140)).addARGB(178, GreyToColorMapping.scaleColor(0xFFB2B2B2, color, 178)).addARGB(216, GreyToColorMapping.scaleColor(0xFFD8D8D8, color, 178)).addARGB(255, GreyToColorMapping.scaleColor(0xFFFFFFFF, color, 255)).build();
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(178, 0xFFA8FFFD)
+                        .addARGB(255, 0xFF36FFFC)
+                        .build());
     }
 }

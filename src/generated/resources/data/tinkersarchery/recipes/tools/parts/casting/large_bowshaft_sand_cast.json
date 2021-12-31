@@ -4,6 +4,6 @@
     "tag": "tinkersarchery:casts/single_use/large_bowshaft"
   },
   "cast_consumed": true,
-  "item_cost": 1,
+  "item_cost": 4,
   "result": "tinkersarchery:large_bowshaft"
 }

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Burst extends Modifier implements IBowModifier {
     public Burst() {
-        super(0xFFFC921C);
+        super(0x9EF7DE);
     }
 
     @Override

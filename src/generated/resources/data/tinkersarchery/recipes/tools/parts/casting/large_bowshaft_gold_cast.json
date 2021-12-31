@@ -3,6 +3,6 @@
   "cast": {
     "tag": "tinkersarchery:casts/multi_use/large_bowshaft"
   },
-  "item_cost": 1,
+  "item_cost": 4,
   "result": "tinkersarchery:large_bowshaft"
 }

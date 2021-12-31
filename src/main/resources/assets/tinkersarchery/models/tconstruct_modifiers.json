@@ -5,7 +5,10 @@
   "tinkersarchery:pinpointer": "tconstruct:normal",
   "tinkersarchery:burst": { "type": "tconstruct:normal", "luminosity": 2 },
   "tinkersarchery:highlander": "tconstruct:normal",
+  "tinkersarchery:velocity": "tconstruct:normal",
+  "tinkersarchery:heavy": "tconstruct:normal",
+  "tinkersarchery:aquadynamic": "tconstruct:normal",
 
-  "tinkersarchery:multishot": { "type": "tconstruct:normal", "luminosity": 5 }
-
+  "tinkersarchery:multishot": { "type": "tconstruct:normal", "luminosity": 5 },
+  "tinkersarchery:piercing": "tconstruct:normal"
 }

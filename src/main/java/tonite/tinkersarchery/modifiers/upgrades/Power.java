@@ -12,7 +12,7 @@ import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 public class Power extends IncrementalModifier implements IBowModifier {
     public Power() {
-        super(0x9EF7DE);
+        super(0xEAE5DE);
     }
 
     @Override

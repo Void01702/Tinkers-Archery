@@ -162,7 +162,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
         partRecipes(finishedRecipeConsumer, TinkersArchery.bowshaft, TinkersArchery.bowshaft_cast, 2, partFolder, castFolder);
         partBuilderCompositeRecipe(finishedRecipeConsumer, TinkersArchery.bowstring, 1, partFolder);
         partRecipes(finishedRecipeConsumer, TinkersArchery.bowguide, TinkersArchery.bowguide_cast, 1, partFolder, castFolder);
-        partRecipes(finishedRecipeConsumer, TinkersArchery.large_bowshaft, TinkersArchery.large_bowshaft_cast, 1, partFolder, castFolder);
+        partRecipes(finishedRecipeConsumer, TinkersArchery.large_bowshaft, TinkersArchery.large_bowshaft_cast, 4, partFolder, castFolder);
         partRecipes(finishedRecipeConsumer, TinkersArchery.crossbow_arm, TinkersArchery.crossbow_arm_cast, 2, partFolder, castFolder);
         partRecipes(finishedRecipeConsumer, TinkersArchery.arrowhead, TinkersArchery.arrowhead_cast, 2, partFolder, castFolder);
         partRecipes(finishedRecipeConsumer, TinkersArchery.arrow_shaft, TinkersArchery.arrow_shaft_cast, 1, partFolder, castFolder);
