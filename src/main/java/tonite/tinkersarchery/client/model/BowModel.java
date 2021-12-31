@@ -387,6 +387,8 @@ public class BowModel implements IModelGeometry<BowModel> {
             } catch (ExecutionException e) {
                 //log.error(e);
                 return originalModel;
+            } catch (RuntimeException e) {
+                return originalModel;
             }
         }
     }

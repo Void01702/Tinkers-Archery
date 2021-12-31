@@ -9,5 +9,5 @@
     { "name": "bowshaft",  "index": 0 },
     { "name": "bowstring",    "index": 1 }
   ],
-  "modifier_roots": [ "tinkersarchery:item/tool/crossbow/modifiers/pulling_2/", "tinkersarchery:item/tool/crossbow/modifiers/" ]
+  "modifier_roots": [ "tinkersarchery:item/tool/crossbow/modifiers/pulling_2/", "tinkersarchery:item/tool/crossbow/modifiers/pulling_1/", "tinkersarchery:item/tool/crossbow/modifiers/pulling_0/", "tinkersarchery:item/tool/crossbow/modifiers/" ]
 }

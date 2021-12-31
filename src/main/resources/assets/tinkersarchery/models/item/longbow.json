@@ -15,8 +15,8 @@
     "large_guide": "tinkersarchery:item/tool/longbow/large/guide"
   },
   "modifier_roots": {
-    "small": [ "tconstruct:item/tool/cleaver/modifiers/" ],
-    "large": [ "tconstruct:item/tool/cleaver/large/modifiers/" ]
+    "small": [ "tinkersarchery:item/tool/longbow/modifiers/" ],
+    "large": [ "tinkersarchery:item/tool/longbow/large/modifiers/" ]
   },
   "large": true,
   "large_offset": [0, 0],
