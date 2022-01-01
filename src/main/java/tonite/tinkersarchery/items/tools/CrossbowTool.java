@@ -1,8 +1,9 @@
 package tonite.tinkersarchery.items.tools;
 
-import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.*;
 import net.minecraft.stats.Stats;
@@ -10,20 +11,18 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import tonite.tinkersarchery.TinkersArchery;
-import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.ShootableTool;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class CrossbowTool extends ShootableTool {
 
@@ -33,10 +32,19 @@ public class CrossbowTool extends ShootableTool {
 
     @Override
     public int getItemAmount(ItemStack itemStack, int desiredAmount, boolean isHand) {
-        if (itemStack.getItem() == Items.FIREWORK_ROCKET) {
-            return ((IProjectileItem)itemStack.getItem()).getAmmo(itemStack, desiredAmount);
+        if (itemStack.getItem() == Items.FIREWORK_ROCKET && isHand) {
+            return itemStack.getCount();
         } else {
             return super.getItemAmount(itemStack, desiredAmount, isHand);
+        }
+    }
+
+    @Override
+    public ProjectileEntity createArrow(ItemStack bow, World world, Vector3f direction, float drawPortion, LivingEntity shooter, ItemStack arrowItem) {
+        if (arrowItem.getItem() == Items.FIREWORK_ROCKET) {
+            return new FireworkRocketEntity(world, arrowItem, shooter, shooter.getX(), shooter.getEyeY() - (double)0.15F, shooter.getZ(), true);
+        } else {
+            return super.createArrow(bow, world, direction, drawPortion, shooter, arrowItem);
         }
     }
 

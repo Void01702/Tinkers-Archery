@@ -629,16 +629,20 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     }
 
+    public ToolStack getTool(){
+        return toolStack;
+    }
+
     public void setBow(ItemStack bow){
 
         if (bow != null) {
             bowStack = bow.copy();
 
-            toolStack = ToolStack.from(bow);
+            bowToolStack = ToolStack.from(bow);
         } else {
             bowStack = null;
 
-            toolStack = null;
+            bowToolStack = null;
         }
 
 

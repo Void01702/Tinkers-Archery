@@ -21,7 +21,6 @@ import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public abstract class ShootableTool extends ModifiableItem {
     public ShootableTool(Properties properties, ToolDefinition toolDefinition) {
@@ -121,13 +120,11 @@ public abstract class ShootableTool extends ModifiableItem {
     public int[] getArrowCounts(ItemStack bow, World world, LivingEntity shooter, float drawPortion) {
         List<ModifierEntry> modifierList = new ArrayList<>();
 
-        ToolStack tool = null;
-
         if(!bow.hasTag()) {
             return new int[0];
         }
 
-        tool = ToolStack.from(bow);
+        ToolStack tool = ToolStack.from(bow);
 
         for (ModifierEntry m : tool.getModifierList()) {
             if (m.getModifier() instanceof IBowModifier){
@@ -160,20 +157,15 @@ public abstract class ShootableTool extends ModifiableItem {
 
     public void shootBow(ItemStack bow, World world, LivingEntity shooter, float drawPortion, List<AmmoListEntry> arrowItems, int[] arrowCounts){
 
-        float powerModifier = 1f;
-        float accuracyModifier = 1f;
-
-        ToolStack tool = null;
-
         List<ModifierEntry> modifierList = new ArrayList<>();
 
         if(!bow.hasTag()) {
             return;
         }
 
-        tool = ToolStack.from(bow);
-        powerModifier = tool.getStats().getFloat(BowAndArrowToolStats.ELASTICITY);
-        accuracyModifier = tool.getStats().getFloat(BowAndArrowToolStats.ACCURACY);
+        ToolStack tool = ToolStack.from(bow);
+        float powerModifier = tool.getStats().getFloat(BowAndArrowToolStats.ELASTICITY);
+        float accuracyModifier = tool.getStats().getFloat(BowAndArrowToolStats.ACCURACY);
 
         for (ModifierEntry m : tool.getModifierList()) {
             if (m.getModifier() instanceof IBowModifier){
@@ -198,8 +190,8 @@ public abstract class ShootableTool extends ModifiableItem {
             ((IBowModifier) entry.getModifier()).onReleaseBow(tool, entry.getLevel(), drawPortion, power, accuracy, arrows, arrowCounts[i], world, shooter);
         }
 
-        Vector3f motion = new Vector3f( shooter.getDeltaMovement() );
-        motion = new Vector3f(motion.x(), shooter.isOnGround() ? 0.0f : motion.y(), motion.z());
+        Vector3d motion = shooter.getDeltaMovement();
+        motion = new Vector3d(motion.x(), shooter.isOnGround() ? 0.0f : motion.y(), motion.z());
 
         Vector3f lookingDirection = new Vector3f( shooter.getViewVector(1.0F) );
 
@@ -219,7 +211,7 @@ public abstract class ShootableTool extends ModifiableItem {
 
             projectile.shoot(arrowDirection.x(), arrowDirection.y(), arrowDirection.z(), power * 3.0F, 1.0F / accuracy);
 
-            supplyInfoToArrow(projectile, bow, world, projectile.getDeltaMovement().add(shooter.getDeltaMovement()), drawPortion, shooter, arrowItem);
+            supplyInfoToArrow(projectile, bow, world, projectile.getDeltaMovement().add(motion), drawPortion, shooter, arrowItem);
 
             for (ModifierEntry entry : modifierList) {
                 ((IBowModifier) entry.getModifier()).onArrowShot(tool, entry.getLevel(), projectile, drawPortion, power, world, shooter);

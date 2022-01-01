@@ -28,7 +28,7 @@ public class TinkersArcheryClient {
     static void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
 
-        RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW.get(), TinkersArrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW.get(), (renderFactory) -> new TinkersArrowRenderer(renderFactory, new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrowhead.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_shaft.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_fletching.png")));
 
         event.enqueueWork(() ->
         {
