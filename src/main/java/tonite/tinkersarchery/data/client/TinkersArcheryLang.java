@@ -3,22 +3,17 @@ package tonite.tinkersarchery.data.client;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.RegistryObject;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
-import slimeknights.tconstruct.library.materials.stats.IMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
-import slimeknights.tconstruct.library.tools.stat.ToolStatId;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.stats.*;
-
-import java.util.function.Supplier;
 
 public class TinkersArcheryLang extends LanguageProvider {
 
@@ -30,7 +25,7 @@ public class TinkersArcheryLang extends LanguageProvider {
     protected void addTranslations() {
 
         // Creative Tab
-        add("itemGroup.tinkersarchery", "Tinkers Archery");
+        add("itemGroup.tinkersarchery", "Tinkers' Archery");
 
         // Blocks
         addBlock(TinkersArchery.tantalum_ore, "Tantalum Ore");
@@ -82,6 +77,10 @@ public class TinkersArcheryLang extends LanguageProvider {
         // Entities
         addEntityType(TinkersArchery.TINKERS_ARROW, "Tinkers' Arrow");
 
+        // Effects
+        addEffect(TinkersArchery.groovyEffect, "Groovy");
+        addEffect(TinkersArchery.burstEffect, "Burst");
+
         // Materials
         addMaterial(TinkersArcheryMaterialIds.tantalum, "Tantalum", "Tantalizingly Accurate", "Bows are 40% per level more accurate");
         addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, "Cobalt Tantalum", "Yes, this is its formal name", "Arrows shot from this have 0.2 per level added to thier weight");
@@ -128,6 +127,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addIncrementalModifier(TinkersArchery.VELOCITY_MODIFIER, "Velocity", new String[]{"Velocity", "High Velocity", "Higher Velocity", "Highest Velocity", "Ludicrous Speed"}, "Ludicrous Speed. Ludicrous Speed! GO!", "Arrows travel faster");
         addIncrementalModifier(TinkersArchery.HEAVY_MODIFIER, "Heavy", new String[]{"Heavy", "Heavier", "Heaviest", "Heaviester", "Heaviestest"}, "F = ma", "Arrows are heavier, making them follow a much more favorable trajectory");
         addIncrementalModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", new String[]{"Aquadynamic", "Super Aquadynamic", "Ultra Aquadynamic", "Mega Super Aquadynamic", "Mega Ultra Aquadynamic"}, "Enguarde", "Arrows travel better in water");
+        addIncrementalModifier(TinkersArchery.PINPOINTER_ARROW_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharp Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharper Than The Sharpest Pinpointer"}, "Legolas got nothing on this", "The arrow is more accurate");
 
         // Stats
         addStat(BowMaterialStats.ID, "Bow");

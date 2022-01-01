@@ -21,7 +21,7 @@ public class Groovy extends Modifier implements IBowModifier {
 
             int effectLevel = TinkersArchery.groovyEffect.get().getLevel(shooter) + 1;
 
-            return drawSpeed * (1 + effectLevel * level * 0.1f);
+            return drawSpeed * (1 + effectLevel * 0.1f);
 
         } else {
 
@@ -33,7 +33,7 @@ public class Groovy extends Modifier implements IBowModifier {
     public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, LivingEntity shooter) {
         if(drawPortion > 0.75) {
             int effectLevel = Math.min(5 + (level - 1) * 3, TinkersArchery.groovyEffect.get().getLevel(shooter) + 1);
-            TinkersArchery.groovyEffect.get().apply(shooter, 5 * 20, effectLevel);
+            TinkersArchery.groovyEffect.get().apply(shooter, 5 * 20, effectLevel, true);
         }
     }
 }

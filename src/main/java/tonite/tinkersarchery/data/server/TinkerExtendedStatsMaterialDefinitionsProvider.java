@@ -3,10 +3,8 @@ package tonite.tinkersarchery.data.server;
 import net.minecraft.data.DataGenerator;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialDataProvider;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialStatsDataProvider;
-import slimeknights.tconstruct.library.data.material.AbstractMaterialTraitDataProvider;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
-import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.stats.*;
 
 import static slimeknights.tconstruct.library.utils.HarvestLevels.*;

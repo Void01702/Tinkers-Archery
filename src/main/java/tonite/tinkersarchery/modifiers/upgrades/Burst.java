@@ -35,7 +35,7 @@ public class Burst extends Modifier implements IBowModifier {
     public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, LivingEntity shooter) {
         if(tool.getPersistentData().getInt(TinkersArchery.getResource("burst_count")) > 0 && drawPortion > 0.75) {
             int duration = 20;
-            TinkersArchery.burstEffect.get().apply(shooter, duration);
+            TinkersArchery.burstEffect.get().apply(shooter, duration, 0, true);
         }
     }
 }

@@ -3,7 +3,6 @@ package tonite.tinkersarchery.data.server;
 import net.minecraft.data.DataGenerator;
 import slimeknights.tconstruct.library.data.tinkering.AbstractStationSlotLayoutProvider;
 import tonite.tinkersarchery.TinkersArchery;
-import tonite.tinkersarchery.tools.BowAndArrowDefinitions;
 
 public class TinkersArcheryToolSlotLayouts extends AbstractStationSlotLayoutProvider {
 

@@ -1,7 +1,6 @@
 package tonite.tinkersarchery.data.client;
 
 import slimeknights.tconstruct.library.client.data.material.AbstractPartSpriteProvider;
-import slimeknights.tconstruct.tools.stats.ExtraMaterialStats;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
 import tonite.tinkersarchery.stats.BowStringMaterialStats;

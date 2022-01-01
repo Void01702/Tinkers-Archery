@@ -1,18 +1,33 @@
 package tonite.tinkersarchery.items.tools;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
+import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.TooltipFlag;
+import slimeknights.tconstruct.library.utils.TooltipKey;
+import tonite.tinkersarchery.data.server.TinkersArcheryTags;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
+import tonite.tinkersarchery.stats.BowAndArrowToolStats;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ArrowTool extends ModifiableItem implements IProjectileItem {
 
@@ -67,5 +82,37 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
                 ((IProjectileModifier) m.getModifier()).onArrowShot(toolStack, m.getLevel(), projectile, newProjectile.getOriginalDirection(), projectile.getOwner());
             }
         }
+    }
+
+    @Override
+    public List<ITextComponent> getStatInformation(IModifierToolStack tool, @Nullable PlayerEntity player, List<ITextComponent> tooltips, TooltipKey key, TooltipFlag tooltipFlag) {
+        TooltipBuilder builder = new TooltipBuilder(tool, tooltips);
+        Item item = tool.getItem();
+
+        if (TinkerTags.Items.DURABILITY.contains(item)) {
+            builder.addDurability();
+        }
+        if (TinkerTags.Items.MELEE.contains(item)) {
+            builder.addWithAttribute(ToolStats.ATTACK_DAMAGE, Attributes.ATTACK_DAMAGE);
+            builder.add(ToolStats.ATTACK_SPEED);
+        }
+        if (TinkerTags.Items.HARVEST.contains(item)) {
+            if (TinkerTags.Items.HARVEST_PRIMARY.contains(tool.getItem())) {
+                builder.add(ToolStats.HARVEST_LEVEL);
+            }
+            builder.add(ToolStats.MINING_SPEED);
+        }
+        if (TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE.contains(item)) {
+            builder.add(BowAndArrowToolStats.SPEED);
+            builder.add(BowAndArrowToolStats.ACCURACY);
+            builder.add(BowAndArrowToolStats.WEIGHT);
+        }
+
+        builder.addAllFreeSlots();
+
+        for (ModifierEntry entry : tool.getModifierList()) {
+            entry.getModifier().addInformation(tool, entry.getLevel(), player, tooltips, key, tooltipFlag);
+        }
+        return tooltips;
     }
 }

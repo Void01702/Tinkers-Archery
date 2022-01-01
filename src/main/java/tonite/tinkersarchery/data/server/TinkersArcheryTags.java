@@ -1,15 +1,16 @@
 package tonite.tinkersarchery.data.server;
 
+import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.FluidTagsProvider;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.common.registration.CastItemObject;
@@ -17,13 +18,17 @@ import tonite.tinkersarchery.TinkersArchery;
 
 import javax.annotation.Nullable;
 
-import java.util.function.Supplier;
-
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 
 public class TinkersArcheryTags {
 
     public static class TinkersArcheryBlockTags extends BlockTagsProvider {
+
+        // Materials
+        public static final INamedTag<Block> TANTALUM_ORE = BlockTags.bind("forge:ores/tantalum");
+        public static final INamedTag<Block> TANTALUM_BLOCK = BlockTags.bind("forge:storage_blocks/tantalum");
+        public static final INamedTag<Block> COBALT_TANTALUM_BLOCK = BlockTags.bind("forge:storage_blocks/cobalt_tantalum");
+        public static final INamedTag<Block> GALAXY_ALLOY_BLOCK = BlockTags.bind("forge:storage_blocks/galaxy_alloy");
 
         public TinkersArcheryBlockTags(DataGenerator p_i48256_1_, @Nullable ExistingFileHelper existingFileHelper) {
             super(p_i48256_1_, TinkersArchery.MOD_ID, existingFileHelper);
@@ -31,7 +36,10 @@ public class TinkersArcheryTags {
 
         @Override
         public void addTags(){
-
+            tag(TANTALUM_ORE).add(TinkersArchery.tantalum_ore.get());
+            tag(TANTALUM_BLOCK).add(TinkersArchery.tantalum_block.get());
+            tag(COBALT_TANTALUM_BLOCK).add(TinkersArchery.cobalt_tantalum_block.get());
+            tag(GALAXY_ALLOY_BLOCK).add(TinkersArchery.galaxy_alloy_block.get());
         }
 
     }

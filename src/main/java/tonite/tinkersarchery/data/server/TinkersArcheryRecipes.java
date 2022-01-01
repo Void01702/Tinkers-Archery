@@ -5,9 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
@@ -15,12 +13,9 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import net.minecraftforge.fluids.FluidAttributes;
-import net.minecraftforge.fml.RegistryObject;
 import slimeknights.mantle.recipe.ingredient.IngredientWithout;
-import slimeknights.tconstruct.common.TinkerModule;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.fluids.TinkerFluids;
-import slimeknights.tconstruct.library.data.recipe.ICommonRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.ISmelteryRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
@@ -44,17 +39,17 @@ import java.util.function.Supplier;
 
 public class TinkersArcheryRecipes extends RecipeProvider implements IConditionBuilder, IMaterialRecipeHelper, IToolRecipeHelper, ISmelteryRecipeHelper {
 
-    private static String toolFolder = "tools/building/";
-    private static String partFolder = "tools/parts/";
-    private static String castFolder = "tools/casts/";
-    private static String modifierFolder = "tools/modifiers/";
-    private static String abilityFolder = modifierFolder + "ability/";
-    private static String upgradeFolder = modifierFolder + "upgrade/";
-    private static String salvageFolder = modifierFolder + "salvage/";
-    private static String castingFolder = "smeltery/casting/metal/";
-    private static String meltingFolder = "smeltery/melting/metal/";
-    private static String materialFolder = "tools/materials/";
-    private static String alloyFolder = "smeltery/alloys/";
+    private static final String toolFolder = "tools/building/";
+    private static final String partFolder = "tools/parts/";
+    private static final String castFolder = "tools/casts/";
+    private static final String modifierFolder = "tools/modifiers/";
+    private static final String abilityFolder = modifierFolder + "ability/";
+    private static final String upgradeFolder = modifierFolder + "upgrade/";
+    private static final String salvageFolder = modifierFolder + "salvage/";
+    private static final String castingFolder = "smeltery/casting/metal/";
+    private static final String meltingFolder = "smeltery/melting/metal/";
+    private static final String materialFolder = "tools/materials/";
+    private static final String alloyFolder = "smeltery/alloys/";
 
     public TinkersArcheryRecipes(DataGenerator gen) {
         super(gen);
@@ -252,14 +247,6 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSlots(SlotType.UPGRADE, 1)
                 .buildSalvage(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, salvageFolder,"_bow"))
                 .build(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_bow"));
-        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.PINPOINTER_MODIFIER.get())
-                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
-                .setInput(Items.OBSIDIAN, 2, 8)
-                .setSalvage(Items.OBSIDIAN, false)
-                .setMaxLevel(5)
-                .setSlots(SlotType.UPGRADE, 1)
-                .buildSalvage(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, salvageFolder, "_arrow"))
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_arrow"));
 
         ModifierRecipeBuilder.modifier(TinkersArchery.BURST_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
@@ -325,6 +312,15 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
                 .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_bricks"));
+
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.PINPOINTER_ARROW_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .setInput(Items.OBSIDIAN, 2, 8)
+                .setSalvage(Items.OBSIDIAN, false)
+                .setMaxLevel(5)
+                .setSlots(SlotType.UPGRADE, 1)
+                .buildSalvage(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, salvageFolder, "_arrow"))
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_arrow"));
     }
 
     private void compressionRecipes(Consumer<IFinishedRecipe> consumer, Item block, Item ingot, Item nugget, String name) {

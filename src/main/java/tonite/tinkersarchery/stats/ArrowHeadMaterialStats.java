@@ -41,7 +41,7 @@ public class ArrowHeadMaterialStats extends HeadMaterialStats {
     public List<ITextComponent> getLocalizedInfo() {
         List<ITextComponent> info = super.getLocalizedInfo();
 
-        info.add(BowAndArrowToolStats.ELASTICITY.formatValue(this.speed));
+        info.add(BowAndArrowToolStats.SPEED.formatValue(this.speed));
         info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));
         info.add(BowAndArrowToolStats.WEIGHT.formatValue(this.weight));
 

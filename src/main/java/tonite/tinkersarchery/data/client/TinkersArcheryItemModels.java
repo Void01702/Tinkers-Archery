@@ -1,9 +1,7 @@
 package tonite.tinkersarchery.data.client;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 

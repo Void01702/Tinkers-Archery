@@ -6,7 +6,7 @@
   "slots": {
     "upgrades": 1
   },
-  "modifier": "tinkersarchery:pinpointer",
+  "modifier": "tinkersarchery:pinpointer_arrow",
   "min_level": 1,
   "salvage": {
     "item": "minecraft:obsidian",

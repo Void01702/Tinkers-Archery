@@ -9,7 +9,7 @@ import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 public class Velocity extends IncrementalModifier {
     public Velocity() {
-        super(0xFFFFF6B9);
+        super(0xFF0061FF);
     }
 
     @Override

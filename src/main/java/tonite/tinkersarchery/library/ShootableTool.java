@@ -9,16 +9,26 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
+import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
+import slimeknights.tconstruct.library.tools.helper.TooltipUtil;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.TooltipFlag;
+import slimeknights.tconstruct.library.utils.TooltipKey;
+import tonite.tinkersarchery.data.server.TinkersArcheryTags;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -307,6 +317,28 @@ public abstract class ShootableTool extends ModifiableItem {
         }
 
         ammo.itemStack.shrink(ammo.amount);
+    }
+
+    @Override
+    public List<ITextComponent> getStatInformation(IModifierToolStack tool, @Nullable PlayerEntity player, List<ITextComponent> tooltips, TooltipKey key, TooltipFlag tooltipFlag) {
+        TooltipBuilder builder = new TooltipBuilder(tool, tooltips);
+        Item item = tool.getItem();
+
+        if (TinkerTags.Items.DURABILITY.contains(item)) {
+            builder.addDurability();
+        }
+        if (TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE.contains(item)) {
+            builder.add(BowAndArrowToolStats.ELASTICITY);
+            builder.add(BowAndArrowToolStats.DRAW_SPEED);
+            builder.add(BowAndArrowToolStats.ACCURACY);
+        }
+
+        builder.addAllFreeSlots();
+
+        for (ModifierEntry entry : tool.getModifierList()) {
+            entry.getModifier().addInformation(tool, entry.getLevel(), player, tooltips, key, tooltipFlag);
+        }
+        return tooltips;
     }
 
     public static class AmmoListEntry {

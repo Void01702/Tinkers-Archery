@@ -57,6 +57,7 @@ import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 import slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider;
+import slimeknights.tconstruct.tools.modifiers.effect.NoMilkEffect;
 import tonite.tinkersarchery.data.client.*;
 import tonite.tinkersarchery.data.server.*;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
@@ -176,13 +177,14 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> POWER_MODIFIER = MODIFIERS.register("power", Power::new);
     public static final RegistryObject<Modifier> LAUNCHING_MODIFIER = MODIFIERS.register("launching", Launching::new);
     public static final RegistryObject<Modifier> PINPOINTER_MODIFIER = MODIFIERS.register("pinpointer", Pinpointer::new);
+    public static final RegistryObject<Modifier> PINPOINTER_ARROW_MODIFIER = MODIFIERS.register("pinpointer_arrow", Pinpointer::new);
     public static final RegistryObject<Modifier> BURST_MODIFIER = MODIFIERS.register("burst", Burst::new);
     public static final RegistryObject<Modifier> HIGHLANDER_MODIFIER = MODIFIERS.register("highlander", Highlander::new);
     public static final RegistryObject<Modifier> VELOCITY_MODIFIER = MODIFIERS.register("velocity", Velocity::new);
     public static final RegistryObject<Modifier> HEAVY_MODIFIER = MODIFIERS.register("heavy", Heavy::new);
     public static final RegistryObject<Modifier> AQUADYNAMIC_MODIFIER = MODIFIERS.register("aquadynamic", Aquadynamic::new);
 
-    private static final IntFunction<Supplier<TinkerEffect>> MARKER_EFFECT = color -> () -> new TinkerEffect(EffectType.BENEFICIAL, color, false);
+    private static final IntFunction<Supplier<TinkerEffect>> MARKER_EFFECT = color -> () -> new NoMilkEffect(EffectType.BENEFICIAL, color, true);
     public static RegistryObject<TinkerEffect> burstEffect = EFFECTS.register("burst", MARKER_EFFECT.apply(0xFFFC921C));
     public static RegistryObject<TinkerEffect> groovyEffect = EFFECTS.register("groovy", MARKER_EFFECT.apply(0xFF21007F));
 

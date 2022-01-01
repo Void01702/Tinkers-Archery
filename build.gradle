@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = "1.0.0"
 group = 'tonite.tinkersarchery' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'tinkersarchery'
 
@@ -139,7 +139,7 @@ jar {
             "Specification-Vendor": "tonite",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
+            "Implementation-Version": "1.0.0",
             "Implementation-Vendor" :"tonite",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
