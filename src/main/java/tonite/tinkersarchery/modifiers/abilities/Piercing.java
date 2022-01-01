@@ -5,10 +5,8 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.vector.Vector3d;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.IPiercingProjectile;
-import tonite.tinkersarchery.library.projectileinterfaces.IWaterInertiaProjectile;
 
 public class Piercing extends Modifier implements IProjectileModifier {
     public Piercing() {

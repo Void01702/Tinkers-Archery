@@ -31,7 +31,7 @@ public class Superslime extends SingleUseModifier implements IBowModifier {
         int current = overslime.getOverslime(tool);
         int cap = overslime.getCapacity(tool);
 
-        return (((float)current)/ cap) * level * baseDrawSpeed + drawSpeed;
+        return (((float)current)/ cap) * level * baseDrawSpeed * DRAW_SPEED_BOOST + drawSpeed;
 
     }
 
@@ -42,7 +42,7 @@ public class Superslime extends SingleUseModifier implements IBowModifier {
         int current = overslime.getOverslime(tool);
         int cap = overslime.getCapacity(tool);
 
-        return (((float)current)/ cap) * drawPortion + power;
+        return (((float)current)/ cap) * drawPortion * POWER_BOOST + power;
 
     }
 }

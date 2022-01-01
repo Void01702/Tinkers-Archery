@@ -1,11 +1,7 @@
 package tonite.tinkersarchery.modifiers.traits;
 
-import net.minecraft.item.Item;
 import slimeknights.tconstruct.library.modifiers.Modifier;
-import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.context.ToolRebuildContext;
-import slimeknights.tconstruct.library.tools.nbt.IModDataReadOnly;
-import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 

@@ -1,7 +1,5 @@
 package tonite.tinkersarchery.items.tools;
 
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -14,12 +12,10 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
-import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.ShootableTool;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class BowTool extends ShootableTool {
     public static final ToolType TOOL_TYPE = ToolType.get("shortbow");
@@ -53,7 +49,7 @@ public class BowTool extends ShootableTool {
                         });
                     }
 
-                    world.playSound((PlayerEntity)null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + drawPortion * 0.5F);
+                    world.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + drawPortion * 0.5F);
 
                     consumeAmmo(ammoList, playerentity);
 

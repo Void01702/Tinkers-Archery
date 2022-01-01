@@ -1,7 +1,6 @@
 package tonite.tinkersarchery.tools;
 
 import slimeknights.tconstruct.library.tools.ToolDefinition;
-import tonite.tinkersarchery.TinkersArchery;
 
 import static tonite.tinkersarchery.TinkersArchery.*;
 

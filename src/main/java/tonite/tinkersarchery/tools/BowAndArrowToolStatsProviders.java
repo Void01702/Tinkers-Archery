@@ -7,10 +7,6 @@ import slimeknights.tconstruct.library.tools.definition.IToolStatProvider;
 import slimeknights.tconstruct.library.tools.definition.PartRequirement;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinitionData;
 import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
-import slimeknights.tconstruct.tools.MeleeHarvestToolStatsBuilder;
-import slimeknights.tconstruct.tools.stats.ExtraMaterialStats;
-import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
-import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import tonite.tinkersarchery.stats.*;
 
 import java.util.List;

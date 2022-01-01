@@ -2,29 +2,19 @@ package tonite.tinkersarchery.library.util;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
-import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
-import slimeknights.tconstruct.library.tools.item.IModifiableWeapon;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
-import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IDamageProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IKnockbackProjectile;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class ProjectileAttackUtil {
 

@@ -1,10 +1,8 @@
 package tonite.tinkersarchery.library;
 
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public abstract class ProjectileTrajectory extends ForgeRegistryEntry<ProjectileTrajectory> {
 

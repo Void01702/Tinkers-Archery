@@ -2,12 +2,8 @@ package tonite.tinkersarchery.library.modifier;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.world.World;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 
 public interface IProjectileModifier {

@@ -6,14 +6,9 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import slimeknights.tconstruct.library.modifiers.IncrementalModifier;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
-import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.IWaterInertiaProjectile;
-
-import java.util.function.Supplier;
 
 public class Aquadynamic extends IncrementalModifier implements IProjectileModifier {
 

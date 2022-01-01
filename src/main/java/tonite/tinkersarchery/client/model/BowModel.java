@@ -41,8 +41,6 @@ import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import slimeknights.tconstruct.library.tools.nbt.MaterialIdNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import tonite.tinkersarchery.TinkersArchery;
-import tonite.tinkersarchery.items.tools.BowTool;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -180,9 +178,8 @@ public class BowModel implements IModelGeometry<BowModel> {
         Consumer<ImmutableList<BakedQuad>> largeConsumer = largeBuilder::addAll;
         // for large tools, we don't need non-south small quads
         if (largeTransforms != null) {
-            smallConsumer = quads -> {
+            smallConsumer = quads ->
                 smallBuilder.addAll(quads.stream().filter(quad -> quad.getDirection() == Direction.SOUTH).collect(Collectors.toList()));
-            };
         } else {
             smallConsumer = smallBuilder::addAll;
         }

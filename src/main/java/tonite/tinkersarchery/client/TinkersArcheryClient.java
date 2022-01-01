@@ -9,7 +9,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import slimeknights.tconstruct.gadgets.client.FancyItemFrameRenderer;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.client.model.BowModel;
 import tonite.tinkersarchery.client.renderer.TinkersArrowRenderer;

@@ -8,7 +8,6 @@ import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
-import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import tonite.tinkersarchery.TinkersArchery;
 

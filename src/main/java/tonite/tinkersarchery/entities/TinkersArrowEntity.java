@@ -16,7 +16,6 @@ import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -149,7 +148,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
         ResourceLocation trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
 
-        if (trajectoryString != null && ResourceLocation.isValidResourceLocation(trajectoryString)) {
+        if (ResourceLocation.isValidResourceLocation(trajectoryString)) {
             trajectoryId = ResourceLocation.tryParse(trajectoryString);
 
             if ( !TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsKey(trajectoryId)) {
@@ -217,7 +216,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
         BlockPos blockpos = this.blockPosition();
         BlockState blockstate = this.level.getBlockState(blockpos);
-        if (!blockstate.isAir(this.level, blockpos)) {
+        if (!blockstate.isAir(this.level, blockpos) ) {
             VoxelShape voxelshape = blockstate.getCollisionShape(this.level, blockpos);
             if (!voxelshape.isEmpty()) {
                 Vector3d vector3d1 = this.position();
@@ -254,7 +253,6 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
                 if (this.isInWater()) {
                     for(int j = 0; j < 4; ++j) {
-                        float f4 = 0.25F;
                         this.level.addParticle(ParticleTypes.BUBBLE, getX() - arrowMotion.x * 0.25D, getY() - arrowMotion.y * 0.25D, getZ() - arrowMotion.z * 0.25D, arrowMotion.x, arrowMotion.y, arrowMotion.z);
                     }
 
@@ -274,7 +272,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
                 modifiedPosition = raytraceresult.getLocation();
             }
 
-            while (!this.removed) {
+            while (this.isAlive()) {
                 EntityRayTraceResult entityraytraceresult = this.findHitEntity(position, modifiedPosition);
                 if (entityraytraceresult != null) {
                     raytraceresult = entityraytraceresult;
@@ -342,7 +340,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     private void startFalling() {
         this.inGround = false;
         Vector3d vector3d = this.getDeltaMovement();
-        this.setDeltaMovement(vector3d.multiply((double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
+        this.setDeltaMovement(vector3d.multiply(this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F));
         this.inGroundTime = 0;
         this.tickCount = 0;
     }
@@ -375,13 +373,8 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
         Entity entity1 = this.getOwner();
         //DamageSource damagesource;
-        if (entity1 == null) {
-            //damagesource = DamageSource.thrown(this, this);
-        } else {
-            //damagesource = DamageSource.thrown(this, entity1);
-            if (entity1 instanceof LivingEntity) {
-                ((LivingEntity)entity1).setLastHurtMob(entity);
-            }
+        if (entity1 instanceof LivingEntity) {
+            ((LivingEntity)entity1).setLastHurtMob(entity);
         }
 
         boolean flag = entity.getType() == EntityType.ENDERMAN;
@@ -474,7 +467,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         Vector3d direction = getDeltaMovement();
         Vector3d positionDifference = BlockRayTraceResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
         this.setDeltaMovement(positionDifference);
-        Vector3d vector3d1 = positionDifference.normalize().scale((double)0.05F);
+        Vector3d vector3d1 = positionDifference.normalize().scale(0.05F);
         this.setPosRaw(this.getX() - vector3d1.x, this.getY() - vector3d1.y, this.getZ() - vector3d1.z);
         this.playSound(SoundEvents.ARROW_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.inGround = true;
@@ -553,7 +546,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
         ResourceLocation trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
 
-        if (trajectoryString != null && ResourceLocation.isValidResourceLocation(trajectoryString)) {
+        if (ResourceLocation.isValidResourceLocation(trajectoryString)) {
             trajectoryId = ResourceLocation.tryParse(trajectoryString);
             if ( !TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsKey(trajectoryId)) {
                 trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
