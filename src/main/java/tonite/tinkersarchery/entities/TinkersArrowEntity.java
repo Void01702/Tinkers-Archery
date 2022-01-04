@@ -86,15 +86,17 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         this.setPos(xPos, yPos, zPos);
     }
 
-    public TinkersArrowEntity(World world, LivingEntity shooter) {
+    public TinkersArrowEntity(World world, LivingEntity shooter, StatsNBT stats) {
         this(shooter.getX(), shooter.getEyeY() - 0.1D, shooter.getZ(), world);
         this.setOwner(shooter);
+
+        this.stats = stats;
     }
 
     @Override
     public void shoot(double xDirection, double yDirection, double zDirection, float power, float inaccuracy){
 
-        super.shoot(xDirection, yDirection, zDirection, power, inaccuracy / toolStack.getStats().getFloat(BowAndArrowToolStats.ACCURACY));
+        super.shoot(xDirection, yDirection, zDirection, power * stats.getFloat(BowAndArrowToolStats.SPEED), inaccuracy / stats.getFloat(BowAndArrowToolStats.ACCURACY));
 
         originalDirection = getDeltaMovement();
         numTicks = 0;

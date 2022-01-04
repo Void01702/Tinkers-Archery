@@ -80,7 +80,9 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
 
     @Override
     public ProjectileEntity createProjectile(ItemStack ammo, World world, LivingEntity player, ItemStack bow) {
-        return new TinkersArrowEntity(world, player);
+        ToolStack tool = ToolStack.from(ammo);
+
+        return new TinkersArrowEntity(world, player, tool.getStats());
     }
 
     @Override
