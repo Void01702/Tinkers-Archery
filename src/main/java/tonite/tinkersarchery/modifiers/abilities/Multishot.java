@@ -25,6 +25,6 @@ public class Multishot extends Modifier implements IBowModifier {
     }
 
     @Override
-    public int getArrowCount(IModifierToolStack tool, int level, float drawPortion, World world, LivingEntity shooter) { return 2; }
+    public int getArrowCount(IModifierToolStack tool, int level, float drawPortion, World world, LivingEntity shooter) { return 2 * level; }
 
 }

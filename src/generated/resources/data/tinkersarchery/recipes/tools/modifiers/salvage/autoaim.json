@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "modifier": "tinkersarchery:autoaim",
+  "min_level": 1,
+  "salvage": [
+    {
+      "item": "minecraft:comparator",
+      "chance": 0.7
+    },
+    {
+      "item": "minecraft:ender_eye",
+      "chance": 0.5
+    },
+    {
+      "item": "tinkersarchery:tantalum_ingot",
+      "chance": 0.3
+    }
+  ]
+}

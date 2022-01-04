@@ -65,7 +65,6 @@ import tonite.tinkersarchery.items.tools.ArrowTool;
 import tonite.tinkersarchery.items.tools.BowTool;
 import tonite.tinkersarchery.items.tools.CrossbowTool;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
-import tonite.tinkersarchery.modifiers.*;
 import tonite.tinkersarchery.modifiers.abilities.*;
 import tonite.tinkersarchery.modifiers.traits.*;
 import tonite.tinkersarchery.modifiers.upgrades.*;
@@ -73,6 +72,7 @@ import tonite.tinkersarchery.stats.*;
 import tonite.tinkersarchery.tools.BowAndArrowDefinitions;
 import tonite.tinkersarchery.trajectories.*;
 
+import java.util.Locale;
 import java.util.function.IntFunction;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -160,18 +160,22 @@ public class TinkersArchery
     public static final CastItemObject arrow_shaft_cast = ITEMS_EXTENDED.registerCast("arrow_shaft", TINKERS_ARCHERY_PROPS);
 
     public static final RegistryObject<Modifier> ACCURATE_MODIFIER = MODIFIERS.register("accurate", Accurate::new);
+    public static final RegistryObject<Modifier> FINISHING_MODIFIER = MODIFIERS.register("finishing", Finishing::new);
     public static final RegistryObject<Modifier> WEIGHTY_MODIFIER = MODIFIERS.register("weighty", Weighty::new);
+    public static final RegistryObject<Modifier> SWIFTSTRIKE_MODIFIER = MODIFIERS.register("swiftstrike", Swiftstrike::new);
     public static final RegistryObject<Modifier> GROOVY_MODIFIER = MODIFIERS.register("groovy", Groovy::new);
+    public static final RegistryObject<Modifier> CHAINING_MODIFIER = MODIFIERS.register("chaining", Chaining::new);
     public static final RegistryObject<Modifier> CLEAN_MODIFIER = MODIFIERS.register("clean", Clean::new);
     public static final RegistryObject<Modifier> SUPERSLIME_MODIFIER = MODIFIERS.register("superslime", Superslime::new);
-    public static final RegistryObject<Modifier> FINISHING_MODIFIER = MODIFIERS.register("finishing", Finishing::new);
     public static final RegistryObject<Modifier> UPLIFTING_MODIFIER = MODIFIERS.register("uplifting", Uplifting::new);
     public static final RegistryObject<Modifier> BLAZING_MODIFIER = MODIFIERS.register("blazing", Blazing::new);
     public static final RegistryObject<Modifier> SLICING_MODIFIER = MODIFIERS.register("slicing", Slicing::new);
     public static final RegistryObject<Modifier> AIRBORNE_MODIFIER = MODIFIERS.register("airborne", Airborne::new);
 
     public static final RegistryObject<Modifier> MULTISHOT_MODIFIER = MODIFIERS.register("multishot", Multishot::new);
+    public static final RegistryObject<Modifier> AUTOAIM_MODIFIER = MODIFIERS.register("autoaim", Autoaim::new);
     public static final RegistryObject<Modifier> PIERCING_MODIFIER = MODIFIERS.register("piercing", Piercing::new);
+    public static final RegistryObject<Modifier> EXPLOSIVE_MODIFIER = MODIFIERS.register("explosive", Explosive::new);
 
     public static final RegistryObject<Modifier> HASTE_MODIFIER = MODIFIERS.register("haste", Haste::new);
     public static final RegistryObject<Modifier> POWER_MODIFIER = MODIFIERS.register("power", Power::new);
@@ -180,6 +184,7 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> PINPOINTER_ARROW_MODIFIER = MODIFIERS.register("pinpointer_arrow", Pinpointer::new);
     public static final RegistryObject<Modifier> BURST_MODIFIER = MODIFIERS.register("burst", Burst::new);
     public static final RegistryObject<Modifier> HIGHLANDER_MODIFIER = MODIFIERS.register("highlander", Highlander::new);
+    public static final RegistryObject<Modifier> MOBILE_MODIFIER = MODIFIERS.register("mobile", Mobile::new);
     public static final RegistryObject<Modifier> VELOCITY_MODIFIER = MODIFIERS.register("velocity", Velocity::new);
     public static final RegistryObject<Modifier> HEAVY_MODIFIER = MODIFIERS.register("heavy", Heavy::new);
     public static final RegistryObject<Modifier> AQUADYNAMIC_MODIFIER = MODIFIERS.register("aquadynamic", Aquadynamic::new);
@@ -187,6 +192,7 @@ public class TinkersArchery
     private static final IntFunction<Supplier<TinkerEffect>> MARKER_EFFECT = color -> () -> new NoMilkEffect(EffectType.BENEFICIAL, color, true);
     public static RegistryObject<TinkerEffect> burstEffect = EFFECTS.register("burst", MARKER_EFFECT.apply(0xFFFC921C));
     public static RegistryObject<TinkerEffect> groovyEffect = EFFECTS.register("groovy", MARKER_EFFECT.apply(0xFF21007F));
+    public static RegistryObject<TinkerEffect> chainingEffect = EFFECTS.register("chaining", MARKER_EFFECT.apply(0xFF21007F));
 
     public static final RegistryObject<EntityType<TinkersArrowEntity>> TINKERS_ARROW =
             ENTITY_TYPES.register("tinkers_arrow",
@@ -322,6 +328,10 @@ public class TinkersArchery
 
     public static ResourceLocation getResource(String name){
         return new ResourceLocation(MOD_ID, name);
+    }
+
+    public static String prefix(String name) {
+        return String.format("%s.%s", MOD_ID, name.toLowerCase(Locale.US));
     }
 
     private static FluidAttributes.Builder hotBuilder() {

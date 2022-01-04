@@ -57,6 +57,8 @@ public class BowTool extends ShootableTool {
                 }
             }
         }
+
+        super.releaseUsing(bow, world, shooter, held_ticks);
     }
 
     public static float getPowerForTime(int time, float drawspeedModifier) {

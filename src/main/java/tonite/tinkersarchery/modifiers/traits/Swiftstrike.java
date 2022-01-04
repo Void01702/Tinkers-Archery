@@ -1,23 +1,22 @@
-package tonite.tinkersarchery.modifiers;
+package tonite.tinkersarchery.modifiers.traits;
 
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 
-public class Finishing extends Modifier {
+public class Swiftstrike extends Modifier {
 
-    public static float HEALTH_PORTION = 0.5f;
-    public static float MULTIPLIER = 3;
+    public static float MULTIPLIER = 2f;
 
-    public Finishing() {
-        super(1908001);
+    public Swiftstrike() {
+        super(0xFF5079FF);
     }
 
     @Override
     public float getEntityDamage(IModifierToolStack tool, int level, ToolAttackContext context, float baseDamage, float damage) {
-        if (context.getLivingTarget().getHealth()/context.getLivingTarget().getMaxHealth() < HEALTH_PORTION) {
-            return damage * MULTIPLIER;
-        }else{
+        if (context.getAttacker() != null) {
+            return damage * (float) (1 + context.getAttacker().getDeltaMovement().length() * level * MULTIPLIER);
+        } else {
             return damage;
         }
     }

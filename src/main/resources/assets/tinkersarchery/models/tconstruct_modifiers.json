@@ -11,5 +11,6 @@
   "tinkersarchery:pinpointer_arrow": "tconstruct:normal",
 
   "tinkersarchery:multishot": { "type": "tconstruct:normal", "luminosity": 5 },
-  "tinkersarchery:piercing": "tconstruct:normal"
+  "tinkersarchery:piercing": "tconstruct:normal",
+  "tinkersarchery:explosive": "tconstruct:normal"
 }

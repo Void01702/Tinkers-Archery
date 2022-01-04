@@ -94,7 +94,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     @Override
     public void shoot(double xDirection, double yDirection, double zDirection, float power, float inaccuracy){
 
-        super.shoot(xDirection, yDirection, zDirection, power, inaccuracy);
+        super.shoot(xDirection, yDirection, zDirection, power, inaccuracy / toolStack.getStats().getFloat(BowAndArrowToolStats.ACCURACY));
 
         originalDirection = getDeltaMovement();
         numTicks = 0;

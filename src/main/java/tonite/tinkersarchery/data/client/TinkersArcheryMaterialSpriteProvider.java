@@ -40,16 +40,16 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                         .addARGB(216, 0xFF8CA0C7)
                         .addARGB(255, 0xFF90B1F3)
                         .build());
-        ResourceLocation galaxyALloyTexture = TinkersArchery.getResource("item/generator/galaxy_alloy");
+        ResourceLocation galaxyAlloyTexture = TinkersArchery.getResource("item/generator/galaxy_alloy");
         buildMaterial(TinkersArcheryMaterialIds.galaxy_alloy)
                 .meleeHarvest()
                 .fallbacks("galaxy", "metal")
                 .transformer(GreyToSpriteTransformer.builderFromBlack()
                         .addARGB(63, 0xFF03001B)
                         .addARGB(102, 0xFF090035)
-                        .addTexture(140, galaxyALloyTexture)
-                        .addTexture(178, galaxyALloyTexture)
-                        .addTexture(216, galaxyALloyTexture)
+                        .addTexture(140, galaxyAlloyTexture)
+                        .addTexture(178, galaxyAlloyTexture)
+                        .addTexture(216, galaxyAlloyTexture)
                         .addARGB(255, 0xFF290097)
                         .build());
 

@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:modifier",
+  "inputs": [
+    {
+      "item": "minecraft:comparator"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "tag": "forge:ingots/tantalum"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "minecraft:comparator"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/shootable"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "result": {
+    "name": "tinkersarchery:autoaim",
+    "level": 1
+  }
+}

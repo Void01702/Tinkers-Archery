@@ -6,33 +6,56 @@ import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.vector.Quaternion;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.common.config.Config;
+import slimeknights.tconstruct.library.materials.MaterialRegistry;
+import slimeknights.tconstruct.library.materials.definition.IMaterial;
+import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.ToolDefinition;
+import slimeknights.tconstruct.library.tools.definition.PartRequirement;
+import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
 import slimeknights.tconstruct.library.tools.helper.TooltipUtil;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
+import slimeknights.tconstruct.library.tools.nbt.MaterialIdNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.library.utils.TooltipFlag;
 import slimeknights.tconstruct.library.utils.TooltipKey;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
+import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.data.server.TinkersArcheryTags;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
+import tonite.tinkersarchery.stats.BowStringMaterialStats;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ShootableTool extends ModifiableItem {
+
+    private static final List<MaterialId> RENDER_MATERIALS = Arrays.asList(
+            new MaterialId(TConstruct.MOD_ID, "ui_render_handle"),
+            new MaterialId(TConstruct.MOD_ID, "ui_render_head"),
+            new MaterialId(TConstruct.MOD_ID, "ui_render_extra"),
+            new MaterialId(TConstruct.MOD_ID, "ui_render_large"));
+
+    private ItemStack toolForRendering;
+
     public ShootableTool(Properties properties, ToolDefinition toolDefinition) {
         super(properties, toolDefinition);
     }
@@ -339,6 +362,92 @@ public abstract class ShootableTool extends ModifiableItem {
             entry.getModifier().addInformation(tool, entry.getLevel(), player, tooltips, key, tooltipFlag);
         }
         return tooltips;
+    }
+
+    @Override
+    public ItemStack getRenderTool() {
+        if (toolForRendering == null) {
+            // if no parts, just return the item directly with the display tag
+            toolForRendering = new ItemStack(this);
+            if (getToolDefinition().isMultipart()) {
+                toolForRendering = new MaterialIdNBT(RENDER_MATERIALS).updateStack(toolForRendering);
+            }
+            toolForRendering.getOrCreateTag().putBoolean(TooltipUtil.KEY_DISPLAY, true);
+        }
+        return toolForRendering;
+    }
+
+    @Override
+    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+        if (allowdedIn(group)) {
+            ToolDefinition definition = getToolDefinition();
+            boolean isMultipart = definition.isMultipart();
+            if (!definition.isDataLoaded() || (isMultipart && !MaterialRegistry.isFullyLoaded())) {
+                // not loaded? cannot properly build it
+                items.add(new ItemStack(this));
+            } else if (!isMultipart) {
+                // no parts? just add this item
+                items.add(ToolBuildHandler.buildItemFromMaterials(this, Collections.emptyList()));
+            } else {
+                // if a specific material is set, show just that
+                String showOnlyId = Config.COMMON.showOnlyToolMaterial.get();
+                boolean added = false;
+                if (!showOnlyId.isEmpty()) {
+                    MaterialId materialId = MaterialId.tryCreate(showOnlyId);
+                    if (materialId != null) {
+                        IMaterial material = MaterialRegistry.getMaterial(materialId);
+                        if (material != IMaterial.UNKNOWN) {
+                            if (addSubItem(this, items, material, new IMaterial[0])) {
+                                added = true;
+                            }
+                        }
+                    }
+                }
+                // if the material was not applicable or we do not have a filter set, search the rest
+                if (!added) {
+                    for (IMaterial material : MaterialRegistry.getInstance().getVisibleMaterials()) {
+                        // if we added it and we want a single material, we are done
+                        if (addSubItem(this, items, material, new IMaterial[0]) && !showOnlyId.isEmpty()) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static boolean addSubItem(IModifiable item, List<ItemStack> items, IMaterial material, IMaterial[] fixedMaterials) {
+        List<PartRequirement> required = item.getToolDefinition().getData().getParts();
+        List<IMaterial> materials = new ArrayList<>(required.size());
+        for (int i = 0; i < required.size(); i++) {
+            if (fixedMaterials.length > i && fixedMaterials[i] != null && required.get(i).canUseMaterial(fixedMaterials[i])) {
+                materials.add(fixedMaterials[i]);
+            } else if (required.get(i).getStatType() == BowStringMaterialStats.ID && material.getIdentifier().equals(MaterialIds.wood) && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.string))) {
+                materials.add(MaterialRegistry.getMaterial(MaterialIds.string));
+            } else if (required.get(i).canUseMaterial(material)) {
+                materials.add(material);
+            } else if (required.get(i).getStatType() == BowStringMaterialStats.ID) {
+                if (material.getIdentifier().getPath().contains("slime") && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.slime))) {
+                    materials.add(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.slime));
+                } else if (material.getTier() <= 1 && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.wood))) {
+                    materials.add(MaterialRegistry.getMaterial(MaterialIds.wood));
+                } else if (material.getTier() <= 2 && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.skyslimeVine))) {
+                    materials.add(MaterialRegistry.getMaterial(MaterialIds.skyslimeVine));
+                } else if (material.getTier() <= 3 && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.silky_cloth))) {
+                    materials.add(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.silky_cloth));
+                } else if (material.getTier() <= 4 && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.blazing_string))) {
+                    materials.add(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.blazing_string));
+                } else if (required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.enderslimeVine))) {
+                    materials.add(MaterialRegistry.getMaterial(MaterialIds.enderslimeVine));
+                } else if (required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.string))) {
+                    materials.add(MaterialRegistry.getMaterial(MaterialIds.string));
+                }
+            } else {
+                return false;
+            }
+        }
+        items.add(ToolBuildHandler.buildItemFromMaterials(item, materials));
+        return true;
     }
 
     public static class AmmoListEntry {

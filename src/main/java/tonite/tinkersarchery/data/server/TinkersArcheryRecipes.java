@@ -95,6 +95,18 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> finishedRecipeConsumer) {
 
+        // Smelting Recipes
+        ConditionalRecipe.builder().addCondition(this.TRUE())
+                .addRecipe( CookingRecipeBuilder.smelting(Ingredient.of(TinkersArchery.tantalum_ore_item.get()), TinkersArchery.tantalum_ingot.get(), 1.0F, 200)
+                        .unlockedBy("has_ore", has(TinkersArchery.tantalum_ore_item.get())):: save)
+                .generateAdvancement()
+                .build(finishedRecipeConsumer, new ResourceLocation(TinkersArchery.MOD_ID, "tantalum_ingot"));
+        ConditionalRecipe.builder().addCondition(this.TRUE())
+                .addRecipe( CookingRecipeBuilder.blasting(Ingredient.of(TinkersArchery.tantalum_ore_item.get()), TinkersArchery.tantalum_ingot.get(), 1.0F, 100)
+                        .unlockedBy("has_ore", has(TinkersArchery.tantalum_ore_item.get())):: save)
+                .generateAdvancement()
+                .build(finishedRecipeConsumer, new ResourceLocation(TinkersArchery.MOD_ID, "tantalum_ingot_from_blasting"));
+
         // Compression Recipes
         compressionRecipes(finishedRecipeConsumer,
                 TinkersArchery.tantalum_block_item.get(),
@@ -184,6 +196,21 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.MULTISHOT_MODIFIER, salvageFolder))
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.MULTISHOT_MODIFIER, abilityFolder));
 
+        ModifierRecipeBuilder.modifier(TinkersArchery.AUTOAIM_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
+                .addInput(Items.COMPARATOR)
+                .addInput(Items.ENDER_EYE)
+                .addInput(TinkersArcheryTags.TinkersArcheryItemTags.TANTALUM_INGOT)
+                .addInput(Items.ENDER_EYE)
+                .addInput(Items.COMPARATOR)
+                .addSalvage(Items.COMPARATOR, 0.7f)
+                .addSalvage(Items.ENDER_EYE, 0.5f)
+                .addSalvage(TinkersArchery.tantalum_ingot.get(), 0.3f)
+                .setMaxLevel(1)
+                .setSlots(SlotType.ABILITY, 1)
+                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.AUTOAIM_MODIFIER, salvageFolder))
+                .build(finishedRecipeConsumer, prefix(TinkersArchery.AUTOAIM_MODIFIER, abilityFolder));
+
         ModifierRecipeBuilder.modifier(TinkersArchery.PIERCING_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .addInput(Items.FLINT)
@@ -197,6 +224,19 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSlots(SlotType.ABILITY, 1)
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.PIERCING_MODIFIER, salvageFolder))
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.PIERCING_MODIFIER, abilityFolder));
+
+        ModifierRecipeBuilder.modifier(TinkersArchery.EXPLOSIVE_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .addInput(Items.GUNPOWDER)
+                .addInput(Items.GUNPOWDER)
+                .addInput(Items.TNT)
+                .addInput(Items.GUNPOWDER)
+                .addInput(Items.GUNPOWDER)
+                .addSalvage(Items.GUNPOWDER, 0.7f)
+                .addSalvage(Items.TNT, 0.3f)
+                .setSlots(SlotType.ABILITY, 1)
+                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.EXPLOSIVE_MODIFIER, salvageFolder))
+                .build(finishedRecipeConsumer, prefix(TinkersArchery.EXPLOSIVE_MODIFIER, abilityFolder));
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HASTE_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
