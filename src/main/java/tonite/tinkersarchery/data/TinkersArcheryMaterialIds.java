@@ -19,6 +19,7 @@ public class TinkersArcheryMaterialIds {
 
     // Fletchings
     public static final MaterialId feather = id("feather");
+    public static final MaterialId paper = id("paper");
     public static final MaterialId leaf = id("leaf");
     public static final MaterialId slime_leaf = id("slime_leaf");
 

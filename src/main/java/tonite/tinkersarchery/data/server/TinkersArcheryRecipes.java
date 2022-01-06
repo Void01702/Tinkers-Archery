@@ -162,6 +162,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
         materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.feather, Ingredient.of(Tags.Items.FEATHERS), 1, 1, materialFolder + "feather");
         materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.leaf, new IngredientWithout(Ingredient.of(ItemTags.LEAVES), Ingredient.of(TinkerTags.Items.SLIMY_LEAVES)), 1, 1, materialFolder + "leaf");
         materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.slime_leaf, Ingredient.of(TinkerTags.Items.SLIMY_LEAVES), 1, 1, materialFolder + "slime_leaf");
+        materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.paper, Ingredient.of(Items.PAPER), 1, 1, materialFolder + "paper");
 
         materialComposite(finishedRecipeConsumer, MaterialIds.string, TinkersArcheryMaterialIds.blazing_string, TinkerFluids.blazingBlood, FluidAttributes.BUCKET_VOLUME / 10, false, materialFolder);
 

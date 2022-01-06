@@ -21,19 +21,20 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
 
     @Override
     protected void addMaterials() {
-        addMaterial(TinkersArcheryMaterialIds.tantalum, 2, ORDER_BOW, false,  0xFF9EB9D4);
-        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 3, ORDER_BOW + ORDER_NETHER, false,  0xFF5079FF);
-        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, 4, ORDER_BOW + ORDER_NETHER, false,  0xFF21007F);
+        addMaterial(TinkersArcheryMaterialIds.tantalum, 2, ORDER_BOW, false,  0x9EB9D4);
+        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 3, ORDER_BOW + ORDER_NETHER, false,  0x5079FF);
+        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, 4, ORDER_BOW + ORDER_NETHER, false,  0x21007F);
 
-        addMaterial(TinkersArcheryMaterialIds.slime, 2, ORDER_BOW + ORDER_BINDING, true,  0xFF5BD141);
-        addMaterial(TinkersArcheryMaterialIds.silky_cloth, 3, ORDER_BOW + ORDER_BINDING, true,  0xFFF7CDBB);
-        addMaterial(TinkersArcheryMaterialIds.blazing_string, 4, ORDER_BOW + ORDER_BINDING + ORDER_NETHER, false,  0xFFFFC42E);
+        addMaterial(TinkersArcheryMaterialIds.slime, 2, ORDER_BOW + ORDER_BINDING, true,  0x5BD141);
+        addMaterial(TinkersArcheryMaterialIds.silky_cloth, 3, ORDER_BOW + ORDER_BINDING, true,  0xF7CDBB);
+        addMaterial(TinkersArcheryMaterialIds.blazing_string, 4, ORDER_BOW + ORDER_BINDING + ORDER_NETHER, false,  0xFFC42E);
 
-        addMaterial(TinkersArcheryMaterialIds.steel_wire, 3, ORDER_BOW + ORDER_COMPAT + ORDER_BINDING, true,  0xFF7B0000);
+        addMaterial(TinkersArcheryMaterialIds.steel_wire, 3, ORDER_BOW + ORDER_COMPAT + ORDER_BINDING, true,  0x7B0000);
 
-        addMaterial(TinkersArcheryMaterialIds.feather, 1, ORDER_BOW, true,  0xFFFFFFFF);
-        addMaterial(TinkersArcheryMaterialIds.leaf, 1, ORDER_BOW, true,  0xFF4AD718);
-        addMaterial(TinkersArcheryMaterialIds.slime_leaf, 1, ORDER_BOW, true,  0xFF36FFFC);
+        addMaterial(TinkersArcheryMaterialIds.feather, 1, ORDER_BOW, true,  0xFFFFFF);
+        addMaterial(TinkersArcheryMaterialIds.paper, 1, ORDER_BOW, true,  0xFFFFFF);
+        addMaterial(TinkersArcheryMaterialIds.leaf, 1, ORDER_BOW, true,  0x4AD718);
+        addMaterial(TinkersArcheryMaterialIds.slime_leaf, 1, ORDER_BOW, true,  0x36FFFC);
     }
 
     @Override
@@ -66,6 +67,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addDefaultTraits(TinkersArcheryMaterialIds.steel_wire, TinkersArchery.SLICING_MODIFIER.get());
 
             addDefaultTraits(TinkersArcheryMaterialIds.feather, TinkersArchery.GRAVITY_TRAJECTORY_MODIFIER.get());
+            addDefaultTraits(TinkersArcheryMaterialIds.paper, TinkersArchery.LOOPING_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.leaf, TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.slime_leaf, TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.ID, TinkersArchery.FLYING_TRAJECTORY_MODIFIER.get());
@@ -120,6 +122,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
 
             // fletching
             addMaterialStats(TinkersArcheryMaterialIds.feather, ArrowFletchingMaterialStats.DEFAULT);
+            addMaterialStats(TinkersArcheryMaterialIds.paper, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.leaf, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.slime_leaf, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.DEFAULT);

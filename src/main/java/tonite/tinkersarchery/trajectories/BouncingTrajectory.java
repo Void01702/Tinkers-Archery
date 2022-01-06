@@ -43,7 +43,7 @@ public class BouncingTrajectory extends ProjectileTrajectory {
         public BouncingData(double weight) {
             this.gravity = 0.15 / weight;
             this.bounceLength =  (int)(BOUNCE_LENGTH * weight);
-            this.startVelocity = gravity * bounceLength / 2;
+            this.startVelocity = gravity * (bounceLength - 1) / 2f;
         }
     }
 }

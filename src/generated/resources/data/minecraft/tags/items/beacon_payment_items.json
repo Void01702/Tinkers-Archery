@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ingots/tantalum",
+    "#forge:ingots/cobalt_tantalum",
+    "#forge:ingots/galaxy_alloy"
+  ]
+}

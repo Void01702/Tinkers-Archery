@@ -94,6 +94,12 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                         .addARGB(178, 0xFFB2B2B2)
                         .addARGB(255, 0xFFFFFFFF)
                         .build());
+        buildMaterial(TinkersArcheryMaterialIds.paper)
+                .statType(ArrowFletchingMaterialStats.ID)
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(178, 0xFFF0F0F0)
+                        .addARGB(255, 0xFFF0F0F0)
+                        .build());
         buildMaterial(TinkersArcheryMaterialIds.leaf)
                 .statType(ArrowFletchingMaterialStats.ID)
                 .fallbacks("leaf")

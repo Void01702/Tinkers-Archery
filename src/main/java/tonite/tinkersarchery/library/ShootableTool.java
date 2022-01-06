@@ -237,7 +237,7 @@ public abstract class ShootableTool extends ModifiableItem {
 
         for (IBowModifier.ArrowData data: arrows) {
 
-            Vector3f arrowDirection = lookingDirection.copy();
+            Vector3f arrowDirection = new Vector3f(lookingDirection.x(), lookingDirection.y(), lookingDirection.z());
             arrowDirection.transform(data.direction);
 
             ProjectileEntity projectile = createArrow(bow, world, arrowDirection, drawPortion, shooter, arrowItem);

@@ -40,6 +40,8 @@ public class TinkersArcheryTags {
             tag(TANTALUM_BLOCK).add(TinkersArchery.tantalum_block.get());
             tag(COBALT_TANTALUM_BLOCK).add(TinkersArchery.cobalt_tantalum_block.get());
             tag(GALAXY_ALLOY_BLOCK).add(TinkersArchery.galaxy_alloy_block.get());
+
+            tag(BlockTags.BEACON_BASE_BLOCKS).addTags(TANTALUM_BLOCK, COBALT_TANTALUM_BLOCK, GALAXY_ALLOY_BLOCK);
         }
 
     }
@@ -110,6 +112,8 @@ public class TinkersArcheryTags {
             tag(GALAXY_ALLOY_BLOCK).add(TinkersArchery.galaxy_alloy_block_item.get());
             tag(GALAXY_ALLOY_INGOT).add(TinkersArchery.galaxy_alloy_ingot.get());
             tag(GALAXY_ALLOY_NUGGET).add(TinkersArchery.galaxy_alloy_nugget.get());
+
+            tag(ItemTags.BEACON_PAYMENT_ITEMS).addTags(TANTALUM_INGOT, COBALT_TANTALUM_INGOT, GALAXY_ALLOY_INGOT);
 
             // Casts
             addCast(TinkersArchery.bowshaft_cast, BOWSHAFT_CAST, BOWSHAFT_CAST_SINGLE);

@@ -66,6 +66,8 @@ import tonite.tinkersarchery.items.tools.BowTool;
 import tonite.tinkersarchery.items.tools.CrossbowTool;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.modifiers.abilities.*;
+import tonite.tinkersarchery.modifiers.slotless.flares.FlameFlare;
+import tonite.tinkersarchery.modifiers.slotless.flares.ShulkerFlare;
 import tonite.tinkersarchery.modifiers.traits.*;
 import tonite.tinkersarchery.modifiers.upgrades.*;
 import tonite.tinkersarchery.stats.*;
@@ -189,6 +191,9 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> HEAVY_MODIFIER = MODIFIERS.register("heavy", Heavy::new);
     public static final RegistryObject<Modifier> AQUADYNAMIC_MODIFIER = MODIFIERS.register("aquadynamic", Aquadynamic::new);
 
+    public static final RegistryObject<Modifier> FLAME_FLARE_MODIFIER = MODIFIERS.register("flame_flare", FlameFlare::new);
+    public static final RegistryObject<Modifier> SHULKER_FLARE_MODIFIER = MODIFIERS.register("shulker_flare", ShulkerFlare::new);
+
     private static final IntFunction<Supplier<TinkerEffect>> MARKER_EFFECT = color -> () -> new NoMilkEffect(EffectType.BENEFICIAL, color, true);
     public static RegistryObject<TinkerEffect> burstEffect = EFFECTS.register("burst", MARKER_EFFECT.apply(0xFFFC921C));
     public static RegistryObject<TinkerEffect> groovyEffect = EFFECTS.register("groovy", MARKER_EFFECT.apply(0xFF21007F));
@@ -208,12 +213,14 @@ public class TinkersArchery
     public static final RegistryObject<ProjectileTrajectory> ANTIGRAVITY = PROJECTILE_TRAJECTORIES.register("antigravity", AntigravityTrajectory::new);
     public static final RegistryObject<ProjectileTrajectory> TWIRLING = PROJECTILE_TRAJECTORIES.register("twirling", TwirlingTrajectory::new);
     public static final RegistryObject<ProjectileTrajectory> BOUNCING = PROJECTILE_TRAJECTORIES.register("bouncing", BouncingTrajectory::new);
+    public static final RegistryObject<ProjectileTrajectory> LOOPING = PROJECTILE_TRAJECTORIES.register("looping", LoopingTrajectory::new);
 
     public static final RegistryObject<Modifier> GRAVITY_TRAJECTORY_MODIFIER = MODIFIERS.register("gravity_trajectory", () -> new TrajectoryApplier(0xFFADADAD, GRAVITY::get));
     public static final RegistryObject<Modifier> FLYING_TRAJECTORY_MODIFIER = MODIFIERS.register("flying_trajectory", () -> new TrajectoryApplier(0xFFF7CDBB, FLYING::get));
     public static final RegistryObject<Modifier> ANTIGRAVITY_TRAJECTORY_MODIFIER = MODIFIERS.register("antigravity_trajectory", () -> new TrajectoryApplier(0xFFC3B9A1, ANTIGRAVITY::get));
     public static final RegistryObject<Modifier> TWIRLING_TRAJECTORY_MODIFIER = MODIFIERS.register("twirling_trajectory", () -> new TrajectoryApplier(0xFF4AD718, TWIRLING::get));
     public static final RegistryObject<Modifier> BOUNCING_TRAJECTORY_MODIFIER = MODIFIERS.register("bouncing_trajectory", () -> new TrajectoryApplier(0xFF36FFFC, BOUNCING::get));
+    public static final RegistryObject<Modifier> LOOPING_TRAJECTORY_MODIFIER = MODIFIERS.register("looping_trajectory", () -> new TrajectoryApplier(0xFFFFFFFF, LOOPING::get));
 
     public static ConfiguredFeature<?, ?> TANTALUM_ORE_FEATURE;
 

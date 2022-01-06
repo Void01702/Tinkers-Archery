@@ -62,7 +62,7 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
         if (hasInfinity(ammo)) {
             return desiredAmount;
         }
-        if (getDamage(ammo) < getMaxDamage(ammo) - 1) {
+        if (getDamage(ammo) < getMaxDamage(ammo)) {
             return damageItem(ammo, desiredAmount, player, a -> {});
         } else {
             return 0;

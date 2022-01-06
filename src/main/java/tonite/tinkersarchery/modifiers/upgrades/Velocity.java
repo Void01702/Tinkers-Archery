@@ -27,6 +27,6 @@ public class Velocity extends IncrementalModifier {
         // currently gives +5 speed per level
         // for comparison, vanilla gives +2, 5, 10, 17, 26 for efficiency I to V
         // 5 per level gives us          +5, 10, 15, 20, 25 for 5 levels
-        BowAndArrowToolStats.ELASTICITY.multiply(builder, 1 + scaledLevel * 0.25f);
+        BowAndArrowToolStats.SPEED.multiply(builder, 1 + scaledLevel * 0.25f);
     }
 }

@@ -28,6 +28,7 @@ public class TinkersArcheryMaterialRenderInfoProvider extends AbstractMaterialRe
 
         // Fletching
         buildRenderInfo(TinkersArcheryMaterialIds.feather).color(0xFFFFFFFF);
+        buildRenderInfo(TinkersArcheryMaterialIds.paper).color(0xFFF0F0F0);
         buildRenderInfo(TinkersArcheryMaterialIds.leaf).color(0xFF4AD718).fallbacks("leaf");
         buildRenderInfo(TinkersArcheryMaterialIds.slime_leaf).color(0xFF36FFFC).fallbacks("leaf");
     }

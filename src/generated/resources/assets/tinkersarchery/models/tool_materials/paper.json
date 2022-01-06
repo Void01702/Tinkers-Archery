@@ -1,0 +1,30 @@
+{
+  "color": "FFF0F0F0",
+  "luminosity": 0,
+  "generator": {
+    "transformer": {
+      "type": "tconstruct:recolor_sprite",
+      "color_mapping": {
+        "type": "tconstruct:grey_to_color",
+        "palette": [
+          {
+            "grey": 0,
+            "color": "FF000000"
+          },
+          {
+            "grey": 178,
+            "color": "FFF0F0F0"
+          },
+          {
+            "grey": 255,
+            "color": "FFF0F0F0"
+          }
+        ]
+      }
+    },
+    "supportedStats": [
+      "tinkersarchery:arrow_fletching"
+    ],
+    "ignoreMaterialStats": false
+  }
+}

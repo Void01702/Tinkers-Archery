@@ -95,6 +95,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addMaterial(TinkersArcheryMaterialIds.feather, "Feather", "", "");
         addMaterial(TinkersArcheryMaterialIds.leaf, "Leaf", "", "");
         addMaterial(TinkersArcheryMaterialIds.slime_leaf, "Slime Leaf", "", "");
+        addMaterial(TinkersArcheryMaterialIds.paper, "Paper", "", "");
 
         // Modifiers
         addModifier(TinkersArchery.ACCURATE_MODIFIER, "Accurate", "What good is a bow that doesn't shoot where you point?", "The bow is more accurate");
@@ -118,6 +119,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addModifier(TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER, "Twirling Trajectory", "Do a barrel roll", "Arrows twirl around in the air");
         addModifier(TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER, "Bouncing Trajectory", "Hippity Hoppity", "Arrows bounce in the air");
         addModifier(TinkersArchery.ANTIGRAVITY_TRAJECTORY_MODIFIER, "Antigravity Trajectory", "Zero G", "Arrows don't obey gravity");
+        addModifier(TinkersArchery.LOOPING_TRAJECTORY_MODIFIER, "Looping Trajectory", "Woah... Woah", "Arrows loop once in the air before flying straight then loop again");
 
         addModifier(TinkersArchery.MULTISHOT_MODIFIER, "Multishot", "Now with 3 times the projectiles", "Bow shoots additional arrows");
         addModifier(TinkersArchery.AUTOAIM_MODIFIER, "Autoaim", "I never miss", "Arrows shoot in the direction of the nearest entity");
