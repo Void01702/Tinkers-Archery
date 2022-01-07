@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.IncrementalModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
+import tonite.tinkersarchery.library.projectileinterfaces.IDamageProjectile;
 
 public class Power extends IncrementalModifier implements IBowModifier {
     public Power() {
@@ -26,9 +27,11 @@ public class Power extends IncrementalModifier implements IBowModifier {
 
     @Override
     public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, float drawPortion, float power, World world, LivingEntity shooter) {
-        if (arrow instanceof AbstractArrowEntity) {
-            float scaledLevel = getScaledLevel(tool.getPersistentData(), level);
+        float scaledLevel = getScaledLevel(tool.getPersistentData(), level);
 
+        if (arrow instanceof IDamageProjectile) {
+            ((IDamageProjectile)arrow).setDamage(((IDamageProjectile)arrow).getDamage() * (1 + 0.3f * scaledLevel));
+        } else if (arrow instanceof AbstractArrowEntity) {
             ((AbstractArrowEntity)arrow).setBaseDamage(((AbstractArrowEntity)arrow).getBaseDamage() * (1 + 0.3 * scaledLevel));
         }
     }

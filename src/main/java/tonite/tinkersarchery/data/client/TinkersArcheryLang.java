@@ -11,6 +11,7 @@ import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.stats.*;
@@ -83,19 +84,31 @@ public class TinkersArcheryLang extends LanguageProvider {
         addEffect(TinkersArchery.burstEffect, "Burst");
 
         // Materials
-        addMaterial(TinkersArcheryMaterialIds.tantalum, "Tantalum", "Tantalizingly Accurate", "Deal double damage to enemies below half health.");
-        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, "Cobalt Tantalum", "Yes, this is its formal name", "Deal more damage the faster you are moving");
-        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, "Niillite", "Reach for the stars", "Killing an enemy causes your next attack with this weapon to deal level times more damage");
+        addMaterial(TinkersArcheryMaterialIds.tantalum, "Tantalum", "Tantalizingly Accurate", "Deal 25% per level more damage to enemies below half health.", "Bows are 40% per level more accurate per level.");
+        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, "Cobalt Tantalum", "Yes, this is its formal name", "Deal more damage the faster you are moving", "Arrows shot from bows have 20% per level more weight, making the follow more favorable trajectories.");
+        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, "Niillite", "Reach for the stars", "Killing an enemy causes your next attack with this weapon to deal 50% per level more damage", "Each shot from a bow increases the draw speed of the next shot by 5% up to a maximum of 6 times per level.");
 
-        addMaterial(TinkersArcheryMaterialIds.silky_cloth, "Silky Cloth", "", "");
-        addMaterial(TinkersArcheryMaterialIds.slime, "Slime", "", "");
-        addMaterial(TinkersArcheryMaterialIds.blazing_string, "Blazing String", "", "");
-        addMaterial(TinkersArcheryMaterialIds.steel_wire, "Steel Wire", "", "");
+        addMaterial(TinkersArcheryMaterialIds.silky_cloth, "Silky Cloth", "Bling", "", "Arrows are shot slightly upwards to help with aiming.");
+        addMaterial(TinkersArcheryMaterialIds.slime, "Slime", "Bouncy", "", "At full Overslime, this bow has 0.5 more Draw Speed and Elasticity.");
+        addMaterial(TinkersArcheryMaterialIds.blazing_string, "Blazing String", "Hot Hot Ouch Ouch Ooh Ouch Hot Ouch", "", "Arrows are on fire.");
+        addMaterial(TinkersArcheryMaterialIds.steel_wire, "Steel Wire", "Clay is no match for power of steel wire!", "", "Arrows are always critical.");
 
-        addMaterial(TinkersArcheryMaterialIds.feather, "Feather", "", "");
-        addMaterial(TinkersArcheryMaterialIds.leaf, "Leaf", "", "");
-        addMaterial(TinkersArcheryMaterialIds.slime_leaf, "Slime Leaf", "", "");
-        addMaterial(TinkersArcheryMaterialIds.paper, "Paper", "", "");
+        addMaterial(TinkersArcheryMaterialIds.feather, "Feather", "Ka-kah", "", "");
+        addMaterial(TinkersArcheryMaterialIds.leaf, "Leaf", "It's organic!", "", "");
+        addMaterial(TinkersArcheryMaterialIds.slime_leaf, "Slime Leaf", "It's definitely the wood of a slime.", "", "");
+        addMaterial(TinkersArcheryMaterialIds.paper, "Paper", "Aeroplanes Ahead!", "", "");
+
+        addBowString(MaterialIds.string, "The bow is 100% more accurate when fully drawn.");
+        addBowString(MaterialIds.skyslimeVine, "Cancels out your velocity added to the arrow.");
+
+        addFlavor(MaterialIds.phantom, "Spooky.");
+
+        addFletching(TinkersArcheryMaterialIds.feather, "Arrows fall under the force of gravity like any other object would.", "However, weight affects acceleration. The higher the weight, the less there will be.");
+        addFletching(TinkersArcheryMaterialIds.leaf, "Arrows twirl around in the air for some time, and then fall.", "Weight affects how tight the twirling is and how far it goes.");
+        addFletching(TinkersArcheryMaterialIds.paper, "Arrows fly a bit, then loop, then fly parallel to the ground, then loop again, the fly downwards.", "Weight affects how tight the loop is and how far it goes.");
+        addFletching(TinkersArcheryMaterialIds.slime_leaf, "Arrows bounce 5 times in the air.", "Weight affects how high the arrow bounces.");
+        addFletching(TinkersArcheryMaterialIds.silky_cloth, "Arrows fly upwards a bit then fall to the ground.", "Weight affects how quickly the arrow flies upwards and falls.");
+        addFletching(MaterialIds.phantom, "Arrows fly in a straight line, slowing down before starting to fall.", "Weight affects how quickly the arrow slows down and how far the arrow goes before falling.");
 
         // Modifiers
         addModifier(TinkersArchery.ACCURATE_MODIFIER, "Accurate", "What good is a bow that doesn't shoot where you point?", "The bow is more accurate");
@@ -119,7 +132,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addModifier(TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER, "Twirling Trajectory", "Do a barrel roll", "Arrows twirl around in the air");
         addModifier(TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER, "Bouncing Trajectory", "Hippity Hoppity", "Arrows bounce in the air");
         addModifier(TinkersArchery.ANTIGRAVITY_TRAJECTORY_MODIFIER, "Antigravity Trajectory", "Zero G", "Arrows don't obey gravity");
-        addModifier(TinkersArchery.LOOPING_TRAJECTORY_MODIFIER, "Looping Trajectory", "Woah... Woah", "Arrows loop once in the air before flying straight then loop again");
+        addModifier(TinkersArchery.LOOPING_TRAJECTORY_MODIFIER, "Looping Trajectory", "Whooh... Whooh", "Arrows loop once in the air before flying straight then loop again");
 
         addModifier(TinkersArchery.MULTISHOT_MODIFIER, "Multishot", "Now with 3 times the projectiles", "Bow shoots additional arrows");
         addModifier(TinkersArchery.AUTOAIM_MODIFIER, "Autoaim", "I never miss", "Arrows shoot in the direction of the nearest entity");
@@ -136,6 +149,9 @@ public class TinkersArcheryLang extends LanguageProvider {
         addIncrementalModifier(TinkersArchery.HEAVY_MODIFIER, "Heavy", new String[]{"Heavy", "Heavier", "Heaviest", "Heaviester", "Heaviestest"}, "F = ma", "Arrows are heavier, making them follow a much more favorable trajectory");
         addIncrementalModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", new String[]{"Aquadynamic", "Super Aquadynamic", "Ultra Aquadynamic", "Mega Super Aquadynamic", "Mega Ultra Aquadynamic"}, "Enguarde", "Arrows travel better in water");
         addIncrementalModifier(TinkersArchery.PINPOINTER_ARROW_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharp Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharper Than The Sharpest Pinpointer"}, "Legolas got nothing on this", "The arrow is more accurate");
+
+        addIncrementalModifier(TinkersArchery.FLAME_FLARE_MODIFIER, "Flame Flare", new String[]{"Flame Flare", "Soul Flame Flare"}, "Flameo Hotman!", "Arrows leave a trail of visual fire");
+        addModifier(TinkersArchery.SHULKER_FLARE_MODIFIER, "Shulker Flare", "Bright!", "Arrows leave a trail of end rod particles");
 
         // Stats
         addStat(BowMaterialStats.ID, "Bow");
@@ -186,13 +202,31 @@ public class TinkersArcheryLang extends LanguageProvider {
 
     }
 
-    public void addMaterial(MaterialId material, String name, String flavour, String desc) {
+    public void addMaterial(MaterialId material, String name, String flavour, String desc, String bow) {
         String id = material.getPath();
         add("material.tinkersarchery." + id, name);
         if (!flavour.equals(""))
             add("material.tinkersarchery." + id + ".flavor", flavour);
         if (!desc.equals(""))
             add("material.tinkersarchery." + id + ".encyclopedia", desc);
+        if (!bow.equals(""))
+            add("material.tinkersarchery." + id + ".bow", bow);
+    }
+
+    public void addBowString(MaterialId material, String bow) {
+        String id = material.getPath();
+        add("material." + material.getNamespace() + "." + id + ".bow", bow);
+    }
+
+    public void addFletching(MaterialId material, String arrow, String weight) {
+        String id = material.getPath();
+        add("material." + material.getNamespace() + "." + id + ".arrow", arrow);
+        add("material." + material.getNamespace() + "." + id + ".weight", weight);
+    }
+
+    public void addFlavor(MaterialId material, String flavor) {
+        String id = material.getPath();
+        add("material." + material.getNamespace() + "." + id + ".flavor", flavor);
     }
 
     public void addModifier(RegistryObject<Modifier> modifier, String name, String flavour, String desc) {

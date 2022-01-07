@@ -29,7 +29,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
         addMaterial(TinkersArcheryMaterialIds.silky_cloth, 3, ORDER_BOW + ORDER_BINDING, true,  0xF7CDBB);
         addMaterial(TinkersArcheryMaterialIds.blazing_string, 4, ORDER_BOW + ORDER_BINDING + ORDER_NETHER, false,  0xFFC42E);
 
-        addMaterial(TinkersArcheryMaterialIds.steel_wire, 3, ORDER_BOW + ORDER_COMPAT + ORDER_BINDING, true,  0x7B0000);
+        addMaterial(TinkersArcheryMaterialIds.steel_wire, 3, ORDER_BOW + ORDER_COMPAT + ORDER_BINDING, true,  0x393D3D);
 
         addMaterial(TinkersArcheryMaterialIds.feather, 1, ORDER_BOW, true,  0xFFFFFF);
         addMaterial(TinkersArcheryMaterialIds.paper, 1, ORDER_BOW, true,  0xFFFFFF);

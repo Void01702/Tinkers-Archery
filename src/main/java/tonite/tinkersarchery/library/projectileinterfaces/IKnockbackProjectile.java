@@ -6,4 +6,6 @@ public interface IKnockbackProjectile {
 
     float getKnockback();
 
+    float calculateKnockback();
+
 }

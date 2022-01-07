@@ -194,7 +194,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     }
 
     private Vector3d getArrowMotion() {
-        float weight = getWeight();
+        float weight = calculateWeight();
 
         try {
             return trajectory.getMotionDirection(numTicks, originalDirection, weight, trajectoryData);
@@ -477,7 +477,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         this.setCritical(false);
         this.setPierceLevel(0);
         setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
-        trajectoryData = trajectory.onCreated(originalDirection, getWeight());
+        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight());
         this.resetPiercedEntities();
         for (ModifierEntry m: projectileModifierList) {
             ((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, this.lastState, direction);
@@ -526,7 +526,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         buffer.writeInt(numTicks);
 
         CompoundNBT trajectoryNBT = new CompoundNBT();
-        trajectory.save(trajectoryNBT, originalDirection, getWeight(), trajectoryData);
+        trajectory.save(trajectoryNBT, originalDirection, calculateWeight(), trajectoryData);
         buffer.writeNbt(trajectoryNBT);
 
         buffer.writeInt(pierceLevel);
@@ -559,7 +559,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
         numTicks = additionalData.readInt();
 
-        trajectory.load(originalDirection, getWeight(), trajectoryData, additionalData.readNbt());
+        trajectory.load(originalDirection, calculateWeight(), trajectoryData, additionalData.readNbt());
 
         pierceLevel = additionalData.readInt();
         bonusDamage = additionalData.readFloat();
@@ -588,7 +588,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     public void setTrajectory(ProjectileTrajectory trajectory) {
         this.trajectory = trajectory;
-        trajectoryData = trajectory.onCreated(originalDirection, getWeight());
+        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight());
     }
 
     public ProjectileTrajectory getTrajectory() {
@@ -674,6 +674,11 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     @Override
     public float getDamage() {
+        return bonusDamage;
+    }
+
+    @Override
+    public float calculateDamage() {
 
         float result = stats.getFloat(ToolStats.ATTACK_DAMAGE) + bonusDamage;
 
@@ -695,6 +700,11 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     @Override
     public float getWeight() {
+        return weightBonus;
+    }
+
+    @Override
+    public float calculateWeight() {
         return stats.getFloat(BowAndArrowToolStats.WEIGHT) + weightBonus;
     }
 }

@@ -45,7 +45,7 @@ public class ProjectileAttackUtil {
         float knockback;
 
         if (projectile instanceof IDamageProjectile) {
-            damage = ((IDamageProjectile)projectile).getDamage();
+            damage = ((IDamageProjectile)projectile).calculateDamage();
         } else {
             damage = tool.getDamage();
         }
@@ -65,7 +65,7 @@ public class ProjectileAttackUtil {
         }
 
         if (projectile instanceof IKnockbackProjectile) {
-            knockback = ((IKnockbackProjectile)projectile).getKnockback();
+            knockback = ((IKnockbackProjectile)projectile).calculateKnockback();
         } else {
             knockback = 0.4f;
         }

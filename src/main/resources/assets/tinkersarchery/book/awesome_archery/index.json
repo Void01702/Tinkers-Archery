@@ -1,0 +1,105 @@
+[
+  {
+    "name": "introduction",
+    "data": "sections/introduction.json",
+    "icon": {
+      "item": {
+        "id": "tinkersarchery:bowshaft",
+        "nbt": {
+          "Material": "tconstruct:wood"
+        }
+      }
+    }
+  },
+  {
+    "name": "tools",
+    "data": "sections/tools.json",
+    "icon": {
+      "item": {
+        "id": "tinkersarchery:shortbow",
+        "nbt": {
+          "tic_broken": false,
+          "tic_display_tool": true,
+          "Damage": 0,
+          "tic_materials": [
+            "tconstruct:ui_render_handle",
+            "tconstruct:ui_render_head",
+            "tconstruct:ui_render_extra"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "bow_materials",
+    "icon": {
+      "item": {
+        "id": "minecraft:stick"
+      }
+    }
+  },
+  {
+    "name": "bowstring_materials",
+    "icon": {
+      "item": {
+        "id": "minecraft:string"
+      }
+    }
+  },
+  {
+    "name": "modifier_bow",
+    "data": "sections/modifier_bow.json",
+    "icon": {
+      "item": {
+        "id": "tconstruct:creative_slot",
+        "nbt": {
+          "slot": "upgrades"
+        }
+      }
+    }
+  },
+  {
+    "name": "arrows",
+    "data": "sections/arrows.json",
+    "icon": {
+      "item": {
+        "id": "tinkersarchery:arrow",
+        "nbt": {
+          "tic_broken": false,
+          "tic_display_tool": true,
+          "Damage": 0,
+          "tic_materials": [
+            "tconstruct:ui_render_head",
+            "tconstruct:ui_render_handle",
+            "tconstruct:ui_render_extra"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "arrow_materials",
+    "icon": {
+      "item": {
+        "id": "minecraft:flint"
+      }
+    }
+  },
+  {
+    "name": "arrow_fletching_materials",
+    "icon": {
+      "item": {
+        "id": "minecraft:feather"
+      }
+    }
+  },
+  {
+    "name": "modifier_arrow",
+    "data": "sections/modifier_arrow.json",
+    "icon": {
+      "item": {
+        "id": "tconstruct:creative_slot"
+      }
+    }
+  }
+]

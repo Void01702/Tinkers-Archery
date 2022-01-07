@@ -40,6 +40,8 @@ public class TinkersArcheryItemModels extends ItemModelProvider {
         castModels(TinkersArchery.large_bowshaft_cast);
         castModels(TinkersArchery.arrowhead_cast);
         castModels(TinkersArchery.arrow_shaft_cast);
+
+        itemWithModel(TinkersArchery.awesome_archery, "item/generated");
     }
 
     public void itemWithModel(RegistryObject<? extends Item> registryObject, String parent) {

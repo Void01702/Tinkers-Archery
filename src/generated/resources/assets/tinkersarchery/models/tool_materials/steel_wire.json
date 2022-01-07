@@ -1,5 +1,5 @@
 {
-  "color": "FF959595",
+  "color": "FF393D3D",
   "luminosity": 0,
   "generator": {
     "transformer": {
@@ -12,28 +12,8 @@
             "color": "FF000000"
           },
           {
-            "grey": 63,
-            "color": "FF222626"
-          },
-          {
-            "grey": 102,
-            "color": "FF393D3D"
-          },
-          {
-            "grey": 140,
-            "color": "FF515454"
-          },
-          {
-            "grey": 178,
-            "color": "FF6A6D6D"
-          },
-          {
-            "grey": 216,
-            "color": "FF898C8C"
-          },
-          {
             "grey": 255,
-            "color": "FFADAFAF"
+            "color": "FF393D3D"
           }
         ]
       }

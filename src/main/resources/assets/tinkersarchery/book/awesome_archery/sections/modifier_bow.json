@@ -1,0 +1,45 @@
+[
+  {
+    "name": "group_upgrade",
+    "type": "text",
+    "data": "modifier_bow/upgrade.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/upgrade/haste.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/upgrade/power.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/upgrade/launching.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/upgrade/pinpointer.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/upgrade/highlander.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/upgrade/burst.json"
+  },
+
+  {
+    "name": "group_ability",
+    "type": "text",
+    "data": "modifier_bow/ability.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/ability/multishot.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_bow/ability/autoaim.json"
+  }
+]

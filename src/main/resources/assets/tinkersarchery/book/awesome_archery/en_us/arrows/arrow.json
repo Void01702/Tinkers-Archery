@@ -1,0 +1,18 @@
+{
+  "tool": "tinkersarchery:arrow",
+  "text": [
+    {
+      "text": "The arrow is the ammunition of bows, but is also usable as a melee weapon."
+    },
+	 {
+      "text": "\n"
+    }
+  
+  ],
+  "properties": [
+    "30% Durability",
+    "40% + 1.25 Damage",
+    "2 Attack Speed",
+    "75% Mining Speed"
+  ]
+}

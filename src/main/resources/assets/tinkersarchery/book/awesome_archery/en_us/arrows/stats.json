@@ -1,0 +1,9 @@
+{
+  "title": "Stats",
+  "text": [
+    { "text": "Like Bows, Arrows have different stats to their Melee and Harvest counterparts. However, arrows also retain those stats." },
+    { "text": "The first is Speed - Speed refers to how quickly through the air arrows fly.", "paragraph": true },
+    { "text": "Next is Weight - I did some testing and found out that heavier arrows fly farther. Using different trajectories, I found that heavier arrows follow more favorable trajectories.", "paragraph": true },
+    { "text": "Finally, there's Accuracy - It's the same as accuracy for bows.", "paragraph": true }
+  ]
+}

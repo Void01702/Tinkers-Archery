@@ -1,0 +1,9 @@
+{
+  "coverTexture": "tinkersarchery:book/images/covers/archery_cover.png",
+  "coverColor": -1,
+  "bookTexture": "tinkersarchery:book/images/covers/archery_pages.png",
+  "arrowColor": -1,
+  "slotColor": 0xFDF500,
+  "drawSectionListText": true,
+  "centerPageTitles": true
+}

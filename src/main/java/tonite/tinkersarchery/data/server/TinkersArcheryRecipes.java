@@ -22,6 +22,7 @@ import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.modifiers.ModifierMatch;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.IncrementalModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
@@ -45,6 +46,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
     private static final String modifierFolder = "tools/modifiers/";
     private static final String abilityFolder = modifierFolder + "ability/";
     private static final String upgradeFolder = modifierFolder + "upgrade/";
+    private static final String slotlessFolder = modifierFolder + "slotless/";
     private static final String salvageFolder = modifierFolder + "salvage/";
     private static final String castingFolder = "smeltery/casting/metal/";
     private static final String meltingFolder = "smeltery/melting/metal/";
@@ -362,6 +364,24 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSlots(SlotType.UPGRADE, 1)
                 .buildSalvage(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, salvageFolder, "_arrow"))
                 .build(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_arrow"));
+
+        ModifierRecipeBuilder.modifier(TinkersArchery.FLAME_FLARE_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .addInput(Items.TORCH)
+                .setMaxLevel(1)
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.FLAME_FLARE_MODIFIER, slotlessFolder, "_level_1"));
+        ModifierRecipeBuilder.modifier(TinkersArchery.FLAME_FLARE_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .addInput(Items.SOUL_TORCH)
+                .setRequirements(ModifierMatch.entry(TinkersArchery.FLAME_FLARE_MODIFIER.get()))
+                .setMaxLevel(2)
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.FLAME_FLARE_MODIFIER, slotlessFolder, "_level_2"));
+
+        ModifierRecipeBuilder.modifier(TinkersArchery.SHULKER_FLARE_MODIFIER.get())
+                .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
+                .addInput(Items.END_ROD)
+                .setMaxLevel(1)
+                .build(finishedRecipeConsumer, prefix(TinkersArchery.SHULKER_FLARE_MODIFIER, slotlessFolder));
     }
 
     private void compressionRecipes(Consumer<IFinishedRecipe> consumer, Item block, Item ingot, Item nugget, String name) {

@@ -14,8 +14,9 @@
     "base": {},
     "multipliers": {
       "tconstruct:durability": 7.0,
-      "tinkersarchery:elasticity": 1.2,
-      "tinkersarchery:draw_speed": 0.8
+      "tinkersarchery:elasticity": 1.1,
+      "tinkersarchery:draw_speed": 0.8,
+      "tinkersarchery:accuracy": 0.8
     }
   },
   "slots": {

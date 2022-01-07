@@ -6,4 +6,6 @@ public interface IWeightProjectile {
 
     float getWeight();
 
+    float calculateWeight();
+
 }

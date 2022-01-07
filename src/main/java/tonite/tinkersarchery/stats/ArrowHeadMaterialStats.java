@@ -1,6 +1,7 @@
 package tonite.tinkersarchery.stats;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
@@ -15,7 +16,7 @@ public class ArrowHeadMaterialStats extends HeadMaterialStats {
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("arrowhead"));
     public static final ArrowHeadMaterialStats DEFAULT = new ArrowHeadMaterialStats();
 
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), ToolStats.HARVEST_LEVEL.getDescription(), ToolStats.MINING_SPEED.getDescription(), ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.SPEED.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ToolStats.DURABILITY.getDescription(), /*ToolStats.HARVEST_LEVEL.getDescription(), ToolStats.MINING_SPEED.getDescription(),*/ ToolStats.ATTACK_DAMAGE.getDescription(), BowAndArrowToolStats.SPEED.getDescription(), BowAndArrowToolStats.ACCURACY.getDescription(), BowAndArrowToolStats.WEIGHT.getDescription());
 
     private float speed;
     private float weight;
@@ -39,7 +40,10 @@ public class ArrowHeadMaterialStats extends HeadMaterialStats {
 
     @Override
     public List<ITextComponent> getLocalizedInfo() {
-        List<ITextComponent> info = super.getLocalizedInfo();
+        List<ITextComponent> info = Lists.newArrayList();
+
+        info.add(ToolStats.DURABILITY.formatValue(this.getDurability()));
+        info.add(ToolStats.ATTACK_DAMAGE.formatValue(this.getAttack()));
 
         info.add(BowAndArrowToolStats.SPEED.formatValue(this.speed));
         info.add(BowAndArrowToolStats.ACCURACY.formatValue(this.accuracy));

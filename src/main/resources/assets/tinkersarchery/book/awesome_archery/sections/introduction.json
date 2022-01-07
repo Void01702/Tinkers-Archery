@@ -1,0 +1,7 @@
+[
+  {
+    "name": "introduction",
+    "type": "text",
+    "data": "intro/welcome.json"
+  }
+]

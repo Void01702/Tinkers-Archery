@@ -1,0 +1,51 @@
+[
+  {
+    "name": "group_upgrade",
+    "type": "text",
+    "data": "modifier_arrow/upgrade.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/upgrade/velocity.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/upgrade/pinpointer.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/upgrade/heavy.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/upgrade/aquadynamic.json"
+  },
+
+  {
+    "name": "group_flares",
+    "type": "text",
+    "data": "modifier_arrow/flares.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/flares/flame_flare.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/flares/shulker_flare.json"
+  },
+
+  {
+    "name": "group_ability",
+    "type": "text",
+    "data": "modifier_arrow/ability.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/ability/piercing.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifier_arrow/ability/explosive.json"
+  }
+]

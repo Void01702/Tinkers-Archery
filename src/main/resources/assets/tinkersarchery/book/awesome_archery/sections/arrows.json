@@ -1,0 +1,22 @@
+[
+  {
+    "name": "introduction",
+    "type": "text",
+    "data": "arrows/introduction.json"
+  },
+  {
+    "name": "fletching",
+    "type": "showcase",
+    "data": "arrows/fletching.json"
+  },
+  {
+    "name": "stats",
+    "type": "text",
+    "data": "arrows/stats.json"
+  },
+  {
+    "name": "arrow",
+    "type": "tool",
+    "data": "arrows/arrow.json"
+  }
+]

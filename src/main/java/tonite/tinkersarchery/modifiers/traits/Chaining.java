@@ -10,7 +10,7 @@ import tonite.tinkersarchery.TinkersArchery;
 
 public class Chaining extends Modifier {
 
-    public static float MULTIPLIER = 1;
+    public static float MULTIPLIER = 0.5f;
 
     public Chaining() {
         super(0xFF21007F);

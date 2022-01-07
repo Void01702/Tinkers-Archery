@@ -32,7 +32,7 @@ public class Groovy extends Modifier implements IBowModifier {
     @Override
     public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, LivingEntity shooter) {
         if(drawPortion > 0.75) {
-            int effectLevel = Math.min(5 + (level - 1) * 3, TinkersArchery.groovyEffect.get().getLevel(shooter) + 1);
+            int effectLevel = Math.min(5 + (level - 1) * 6, TinkersArchery.groovyEffect.get().getLevel(shooter) + 1);
             TinkersArchery.groovyEffect.get().apply(shooter, 5 * 20, effectLevel, true);
         }
     }

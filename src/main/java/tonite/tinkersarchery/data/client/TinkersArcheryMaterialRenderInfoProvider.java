@@ -24,7 +24,7 @@ public class TinkersArcheryMaterialRenderInfoProvider extends AbstractMaterialRe
         buildRenderInfo(TinkersArcheryMaterialIds.silky_cloth).color(0xFFF7CDBB).luminosity(1);
         buildRenderInfo(TinkersArcheryMaterialIds.blazing_string).color(0xFFFFC42E).luminosity(15);
 
-        buildRenderInfo(TinkersArcheryMaterialIds.steel_wire).color(0xFF959595);
+        buildRenderInfo(TinkersArcheryMaterialIds.steel_wire).color(0xFF393D3D);
 
         // Fletching
         buildRenderInfo(TinkersArcheryMaterialIds.feather).color(0xFFFFFFFF);

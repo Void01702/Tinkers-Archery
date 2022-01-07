@@ -11,7 +11,7 @@ public class BowAndArrowToolStats {
 
     public static final FloatToolStat DRAW_SPEED = ToolStats.register(new FloatToolStat(name("draw_speed"), 0xFFAA0F01, 1, 0.01f, 1024));
 
-    public static final FloatToolStat ACCURACY = ToolStats.register(new FloatToolStat(name("accuracy"), 0xFFFFF6B9, 1, 0.01f, 1024));
+    public static final FloatToolStat ACCURACY = ToolStats.register(new FloatToolStat(name("accuracy"), 0xFFFFE858, 1, 0.01f, 1024));
 
     public static final FloatToolStat SPEED = ToolStats.register(new FloatToolStat(name("speed"), 0xFF0061FF, 1, 0, 1024));
 

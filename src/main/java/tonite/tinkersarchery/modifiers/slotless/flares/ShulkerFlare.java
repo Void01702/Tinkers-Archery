@@ -3,13 +3,14 @@ package tonite.tinkersarchery.modifiers.slotless.flares;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.particles.ParticleTypes;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 
 // Thanks to _XyJ_ for some ideas
-public class ShulkerFlare extends Modifier implements IProjectileModifier {
+public class ShulkerFlare extends SingleUseModifier implements IProjectileModifier {
     public ShulkerFlare() {
-        super(0xFF8A8A8A);
+        super(0xFFD0D0D0);
     }
 
     @Override

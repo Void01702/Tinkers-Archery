@@ -9,6 +9,7 @@ import slimeknights.tconstruct.library.tools.stat.IToolStat;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import tonite.tinkersarchery.TinkersArchery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArrowShaftMaterialStats extends HandleMaterialStats {
@@ -29,7 +30,7 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
     private static final ITextComponent SPEED_DESCRIPTION = makeTooltip(TinkersArchery.getResource("speed.multiplier_description"));
     private static final ITextComponent ACCURACY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("accuracy.multiplier_description"));
     private static final ITextComponent WEIGHT_DESCRIPTION = makeTooltip(TinkersArchery.getResource("weight.multiplier_description"));
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(DURABILITY_DESCRIPTION, ATTACK_DAMAGE_DESCRIPTION, ATTACK_SPEED_DESCRIPTION, MINING_SPEED_DESCRIPTION, SPEED_DESCRIPTION, ACCURACY_DESCRIPTION, WEIGHT_DESCRIPTION);
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(DURABILITY_DESCRIPTION, ATTACK_DAMAGE_DESCRIPTION, ATTACK_SPEED_DESCRIPTION, /*MINING_SPEED_DESCRIPTION,*/ SPEED_DESCRIPTION, ACCURACY_DESCRIPTION, WEIGHT_DESCRIPTION);
 
     private float speed;
     private float weight;
@@ -53,7 +54,11 @@ public class ArrowShaftMaterialStats extends HandleMaterialStats {
 
     @Override
     public List<ITextComponent> getLocalizedInfo() {
-        List<ITextComponent> info = super.getLocalizedInfo();
+        List<ITextComponent> info = new ArrayList<>();
+
+        info.add(formatDurability(this.getDurability()));
+        info.add(formatAttackDamage(this.getAttackDamage()));
+        info.add(formatAttackSpeed(this.getAttackSpeed()));
 
         info.add(format(SPEED_PREFIX, this.speed));
         info.add(format(ACCURACY_PREFIX, this.accuracy));

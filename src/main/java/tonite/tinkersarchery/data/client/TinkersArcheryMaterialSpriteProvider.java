@@ -79,12 +79,7 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
         buildMaterial(TinkersArcheryMaterialIds.steel_wire)
                 .statType(BowStringMaterialStats.ID)
                 .colorMapper(GreyToColorMapping.builderFromBlack()
-                        .addARGB(63, 0xFF222626)
-                        .addARGB(102, 0xFF393D3D)
-                        .addARGB(140, 0xFF515454)
-                        .addARGB(178, 0xFF6A6D6D)
-                        .addARGB(216, 0xFF898C8C)
-                        .addARGB(255, 0xFFADAFAF)
+                        .addARGB(255, 0xFF393D3D)
                         .build());
 
         // Fletching

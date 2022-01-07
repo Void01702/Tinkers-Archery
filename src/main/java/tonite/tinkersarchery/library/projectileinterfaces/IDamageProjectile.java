@@ -6,4 +6,6 @@ public interface IDamageProjectile {
 
     float getDamage();
 
+    float calculateDamage();
+
 }

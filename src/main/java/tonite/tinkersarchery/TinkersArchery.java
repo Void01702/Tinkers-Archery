@@ -28,6 +28,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -53,14 +54,17 @@ import slimeknights.tconstruct.library.data.material.AbstractMaterialDataProvide
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
+import slimeknights.tconstruct.shared.TinkerClient;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 import slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider;
 import slimeknights.tconstruct.tools.modifiers.effect.NoMilkEffect;
+import tonite.tinkersarchery.client.TinkersArcheryClient;
 import tonite.tinkersarchery.data.client.*;
 import tonite.tinkersarchery.data.server.*;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.items.AwesomeArcheryBook;
 import tonite.tinkersarchery.items.tools.ArrowTool;
 import tonite.tinkersarchery.items.tools.BowTool;
 import tonite.tinkersarchery.items.tools.CrossbowTool;
@@ -149,6 +153,8 @@ public class TinkersArchery
     public static final RegistryObject<Item> tantalum_nugget = ITEMS.register("tantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> cobalt_tantalum_nugget = ITEMS.register("cobalt_tantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> galaxy_alloy_nugget = ITEMS.register("galaxy_alloy_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
+
+    public static final RegistryObject<Item> awesome_archery = ITEMS.register("awesome_archery", () -> new AwesomeArcheryBook(TINKERS_ARCHERY_PROPS));
 
     public static final FluidObject molten_tantalum = FLUIDS.register("molten_tantalum", hotBuilder().temperature(900), Material.LAVA, 12);
     public static final FluidObject molten_cobalt_tantalum = FLUIDS.register("molten_cobalt_tantalum", hotBuilder().temperature(1200), Material.LAVA, 12);
@@ -245,6 +251,8 @@ public class TinkersArchery
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> TinkersArcheryClient::onConstruct);
 
     }
 

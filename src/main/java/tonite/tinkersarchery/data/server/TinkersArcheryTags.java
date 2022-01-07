@@ -115,6 +115,9 @@ public class TinkersArcheryTags {
 
             tag(ItemTags.BEACON_PAYMENT_ITEMS).addTags(TANTALUM_INGOT, COBALT_TANTALUM_INGOT, GALAXY_ALLOY_INGOT);
 
+            // Books
+            tag(ItemTags.bind("tconstruct:guides")).add(TinkersArchery.awesome_archery.get());
+
             // Casts
             addCast(TinkersArchery.bowshaft_cast, BOWSHAFT_CAST, BOWSHAFT_CAST_SINGLE);
             addCast(TinkersArchery.bowguide_cast, BOWGUIDE_CAST, BOWGUIDE_CAST_SINGLE);

@@ -7,7 +7,7 @@ import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 public class Finishing extends Modifier {
 
     public static float HEALTH_PORTION = 0.5f;
-    public static float MULTIPLIER = 1;
+    public static float MULTIPLIER = 0.25f;
 
     public Finishing() {
         super(0xFF9EB9D4);

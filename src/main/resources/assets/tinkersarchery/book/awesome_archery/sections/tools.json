@@ -1,0 +1,22 @@
+[
+  {
+    "name": "info",
+    "type": "text",
+    "data": "tools/info.json"
+  },
+  {
+    "name": "shortbow",
+    "type": "tool",
+    "data": "tools/shortbow.json"
+  },
+  {
+    "name": "crossbow",
+    "type": "tool",
+    "data": "tools/crossbow.json"
+  },
+  {
+    "name": "longbow",
+    "type": "tool",
+    "data": "tools/longbow.json"
+  }
+]

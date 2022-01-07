@@ -1,0 +1,16 @@
+{
+  "type": "tconstruct:modifier",
+  "inputs": [
+    {
+      "item": "minecraft:torch"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "result": {
+    "name": "tinkersarchery:flame_flare",
+    "level": 1
+  },
+  "max_level": 1
+}
