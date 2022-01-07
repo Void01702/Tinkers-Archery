@@ -2,9 +2,6 @@
   "type": "tconstruct:modifier",
   "inputs": [
     {
-      "item": "minecraft:spectral_arrow"
-    },
-    {
       "tag": "forge:gems/emerald"
     },
     {
@@ -12,6 +9,9 @@
     },
     {
       "tag": "forge:gems/emerald"
+    },
+    {
+      "item": "minecraft:spectral_arrow"
     },
     {
       "item": "minecraft:spectral_arrow"

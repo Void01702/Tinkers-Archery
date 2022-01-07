@@ -2,9 +2,6 @@
   "type": "tconstruct:modifier",
   "inputs": [
     {
-      "item": "minecraft:flint"
-    },
-    {
       "tag": "forge:gems/quartz"
     },
     {
@@ -12,6 +9,9 @@
     },
     {
       "tag": "forge:gems/quartz"
+    },
+    {
+      "item": "minecraft:flint"
     },
     {
       "item": "minecraft:flint"

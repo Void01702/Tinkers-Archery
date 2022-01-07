@@ -45,6 +45,8 @@ public class TinkersArcheryLang extends LanguageProvider {
         addItem(TinkersArchery.galaxy_alloy_ingot, "Niillite Ingot");
         addItem(TinkersArchery.galaxy_alloy_nugget, "Niillite Nugget");
 
+        addItem(TinkersArchery.awesome_archery, "Awesome Archery");
+
         // Tools
         addTool(TinkersArchery.shortbow, "Shortbow", "The shortbow is a simple bow. It has a range comparable to a regular bow, but the potential of a much greater one.");
         addTool(TinkersArchery.crossbow, "Crossbow", "The crossbow holds shots. It is harder to draw, but that makes shooting it much more satisfying." );
