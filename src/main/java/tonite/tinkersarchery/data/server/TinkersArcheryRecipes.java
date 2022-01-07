@@ -28,6 +28,7 @@ import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBui
 import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.part.IMaterialItem;
+import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerMaterials;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
@@ -96,6 +97,17 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
     }
 
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> finishedRecipeConsumer) {
+
+        // Book Recipe
+        ConditionalRecipe.builder().addCondition(this.TRUE())
+                .addRecipe( ShapelessRecipeBuilder.shapeless(() -> TinkersArchery.awesome_archery.get(), 1)
+                        .requires(Items.BOOK)
+                        .requires(Items.FEATHER)
+                        .group("")
+                        .unlockedBy("has_book", has(TinkerCommons.materialsAndYou))
+                        ::save )
+                .generateAdvancement()
+                .build(finishedRecipeConsumer, new ResourceLocation(TinkersArchery.MOD_ID, TinkersArchery.awesome_archery.getId().getPath()));
 
         // Smelting Recipes
         ConditionalRecipe.builder().addCondition(this.TRUE())
