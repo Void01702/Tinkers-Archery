@@ -1,16 +1,22 @@
 package tonite.tinkersarchery.modifiers.traits;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.ITextComponent;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.TooltipFlag;
+import slimeknights.tconstruct.library.utils.TooltipKey;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import tonite.tinkersarchery.TinkersArchery;
 
-public class Chaining extends Modifier {
+import javax.annotation.Nullable;
+import java.util.List;
 
-    public static float MULTIPLIER = 0.5f;
+public class Chaining extends Modifier {
 
     public Chaining() {
         super(0xFF21007F);
@@ -19,7 +25,7 @@ public class Chaining extends Modifier {
     @Override
     public float getEntityDamage(IModifierToolStack tool, int level, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getAttacker().hasEffect(TinkersArchery.chainingEffect.get())) {
-            return damage * (1 + level * MULTIPLIER);
+            return damage + (tool.getModifier(ToolStats.ATTACK_DAMAGE) * 3 * level);
         }
         return damage;
     }
@@ -37,5 +43,18 @@ public class Chaining extends Modifier {
             }
         }
         return 0;
+    }
+
+    @Override
+    public void addInformation(IModifierToolStack tool, int level, @Nullable PlayerEntity player, List<ITextComponent> tooltip, TooltipKey key, TooltipFlag flag) {
+        float bonus = level * 3;
+        if (player != null && key == TooltipKey.SHIFT) {
+            bonus = 0;
+
+            if (player.hasEffect(TinkersArchery.chainingEffect.get())) {
+                bonus = level * 3;
+            }
+        }
+        addDamageTooltip(tool, bonus, tooltip);
     }
 }

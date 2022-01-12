@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.texture.*;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix3f;
@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.client.materials.MaterialRenderInfo;
 import slimeknights.tconstruct.library.client.materials.MaterialRenderInfoLoader;
 import slimeknights.tconstruct.library.materials.definition.IMaterial;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
 
 import java.util.Optional;
 
@@ -40,7 +41,7 @@ public class TinkersArrowRenderer extends EntityRenderer<TinkersArrowEntity> {
 
     public TextureInformation getTextureLocation(TinkersArrowEntity entity, int partIndex) {
         if (partIndex >= 0 && partIndex < textureLocations.length) {
-            IMaterial material = entity.getTool().getMaterial(partIndex);
+            IMaterial material = entity.getMaterial(partIndex);
 
             if (material != null) {
                 // first, find a render info
@@ -86,8 +87,8 @@ public class TinkersArrowRenderer extends EntityRenderer<TinkersArrowEntity> {
         p_225623_4_.scale(0.05625F, 0.05625F, 0.05625F);
         p_225623_4_.translate(-4.0D, 0.0D, 0.0D);
 
-        if (arrow.getTool() != null) {
-            for (int i = 0; i < arrow.getTool().getMaterialsList().size(); i++) {
+        if (arrow.hasTool()) {
+            for (int i = 0; i < arrow.getNumMaterials(); i++) {
                 renderPart(i, arrow, p_225623_4_, p_225623_5_, p_225623_6_);
             }
         } else {

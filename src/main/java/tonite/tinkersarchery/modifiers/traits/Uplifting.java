@@ -6,8 +6,9 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
+import tonite.tinkersarchery.library.projectileinterfaces.ITrajectoryProjectile;
 
 public class Uplifting extends SingleUseModifier implements IBowModifier {
     public Uplifting() {
@@ -16,11 +17,11 @@ public class Uplifting extends SingleUseModifier implements IBowModifier {
 
     @Override
     public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, float drawPortion, float power, World world, LivingEntity shooter){
-        if (arrow instanceof TinkersArrowEntity) {
-            TinkersArrowEntity newArrow = (TinkersArrowEntity)arrow;
-            newArrow.changeDirection(arrow.getDeltaMovement().add(new Vector3d(0, level * power * 0.5, 0)));
+        if (arrow instanceof ITrajectoryProjectile) {
+            ITrajectoryProjectile newArrow = (ITrajectoryProjectile)arrow;
+            newArrow.setOriginalDirection(newArrow.getOriginalDirection().add(new Vector3d(0, level * power * 0.5 / 3, 0)));
         } else {
-            arrow.setDeltaMovement(arrow.getDeltaMovement().add(new Vector3d(0, level * power * 0.5, 0)));
+            arrow.setDeltaMovement(arrow.getDeltaMovement().add(new Vector3d(0, level * power * 0.5 / 3, 0)));
         }
     }
 }

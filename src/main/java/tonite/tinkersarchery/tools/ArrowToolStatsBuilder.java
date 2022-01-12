@@ -41,13 +41,13 @@ public class ArrowToolStatsBuilder extends ToolStatsBuilder {
     @Override
     protected void setStats(StatsNBT.Builder builder) {
         // add in specific stat types handled by our materials
-        builder.set(ToolStats.DURABILITY, buildDurability());
+        builder.set(BowAndArrowToolStats.COUNT, buildCount());
         builder.set(ToolStats.HARVEST_LEVEL, buildHarvestLevel());
         builder.set(ToolStats.ATTACK_DAMAGE, buildAttackDamage());
         builder.set(ToolStats.ATTACK_SPEED, buildAttackSpeed());
         builder.set(ToolStats.MINING_SPEED, buildMiningSpeed());
-        builder.set(BowAndArrowToolStats.SPEED, buildSpeed());
         builder.set(BowAndArrowToolStats.WEIGHT, buildWeight());
+        builder.set(BowAndArrowToolStats.STABILITY, buildStability());
         builder.set(BowAndArrowToolStats.ACCURACY, buildAccuracy());
     }
 
@@ -55,16 +55,16 @@ public class ArrowToolStatsBuilder extends ToolStatsBuilder {
     protected boolean handles(IToolStat<?> stat) {
         return stat == ToolStats.DURABILITY || stat == ToolStats.HARVEST_LEVEL
                 || stat == ToolStats.ATTACK_DAMAGE || stat == ToolStats.ATTACK_SPEED || stat == ToolStats.MINING_SPEED
-                || stat == BowAndArrowToolStats.SPEED || stat == BowAndArrowToolStats.WEIGHT || stat == BowAndArrowToolStats.ELASTICITY;
+                || stat == BowAndArrowToolStats.WEIGHT || stat == BowAndArrowToolStats.ELASTICITY;
     }
 
 
     /** Builds durability for the tool */
-    public float buildDurability() {
-        double averageHeadDurability = getAverageValue(arrowheads, ArrowHeadMaterialStats::getDurability) + toolData.getBonus(ToolStats.DURABILITY);
-        double averageHandleModifier = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getDurability, 1);
+    public float buildCount() {
+        double averageHeadCount = getAverageValue(arrowheads, ArrowHeadMaterialStats::getCount) + toolData.getBonus(BowAndArrowToolStats.COUNT);
+        double averageHandleCount = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getCount, 1);
         // durability should never be below 1
-        return Math.max(1, (int)(averageHeadDurability * averageHandleModifier));
+        return Math.max(1, (int)(averageHeadCount * averageHandleCount));
     }
 
     /** Builds mining speed for the tool */
@@ -97,18 +97,18 @@ public class ArrowToolStatsBuilder extends ToolStatsBuilder {
         return (float)Math.max(0.0d, averageHeadAttack * averageHandle);
     }
 
-    public float buildSpeed() {
-        double averageArrowheadSpeed = getAverageValue(arrowheads, ArrowHeadMaterialStats::getSpeed) + toolData.getBonus(BowAndArrowToolStats.SPEED);
-        double averageArrowShaftSpeed = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getSpeed, 1);
-
-        return (float)Math.max(0.1d, averageArrowheadSpeed * averageArrowShaftSpeed);
-    }
-
     public float buildWeight() {
         double averageArrowheadWeight = getAverageValue(arrowheads, ArrowHeadMaterialStats::getWeight) + toolData.getBonus(BowAndArrowToolStats.WEIGHT);
         double averageArrowShaftWeight = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getWeight, 1);
 
         return (float)Math.max(0.1d, averageArrowheadWeight * averageArrowShaftWeight);
+    }
+
+    public float buildStability() {
+        double averageArrowheadStability = getAverageValue(arrowheads, ArrowHeadMaterialStats::getStability) + toolData.getBonus(BowAndArrowToolStats.STABILITY);
+        double averageArrowShaftStability = getAverageValue(arrowshafts, ArrowShaftMaterialStats::getStability, 1);
+
+        return (float)Math.max(0.1d, averageArrowheadStability * averageArrowShaftStability);
     }
 
     public float buildAccuracy() {

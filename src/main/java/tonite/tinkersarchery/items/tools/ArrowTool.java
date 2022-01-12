@@ -32,7 +32,7 @@ import slimeknights.tconstruct.library.utils.TooltipKey;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.data.server.TinkersArcheryTags;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
 import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
@@ -82,12 +82,12 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
     public ProjectileEntity createProjectile(ItemStack ammo, World world, LivingEntity player, ItemStack bow) {
         ToolStack tool = ToolStack.from(ammo);
 
-        return new TinkersArrowEntity(world, player, tool.getStats());
+        return new TinkersArrowEntityOld(world, player, tool.getStats());
     }
 
     @Override
     public void supplyInfoToProjectile(ProjectileEntity projectile, ItemStack ammo, World world, LivingEntity shooter, ItemStack bow) {
-        TinkersArrowEntity newProjectile = ((TinkersArrowEntity)projectile);
+        TinkersArrowEntityOld newProjectile = ((TinkersArrowEntityOld)projectile);
         newProjectile.setTool(ammo);
         newProjectile.setBow(bow);
 
@@ -119,7 +119,6 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
             builder.add(ToolStats.MINING_SPEED);
         }
         if (TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE.contains(item)) {
-            builder.add(BowAndArrowToolStats.SPEED);
             builder.add(BowAndArrowToolStats.ACCURACY);
             builder.add(BowAndArrowToolStats.WEIGHT);
         }

@@ -23,7 +23,8 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.bowstring)
                 .part(TinkersArchery.bowguide)
                 //stats
-                .multiplier(ToolStats.DURABILITY, 6.5f)
+                .multiplier(ToolStats.DURABILITY, 1.1f)
+                .stat(ToolStats.DURABILITY, 100)
                 .startingSlots(SlotType.UPGRADE, 3)
                 .startingSlots(SlotType.ABILITY, 1);
 
@@ -33,7 +34,8 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.bowstring)
                 .part(TinkersArchery.crossbow_arm)
                 //stats
-                .multiplier(ToolStats.DURABILITY, 7f)
+                .multiplier(ToolStats.DURABILITY, 1.3f)
+                .stat(ToolStats.DURABILITY, 100)
                 .multiplier(BowAndArrowToolStats.ELASTICITY, 1.1f)
                 .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.8f)
                 .multiplier(BowAndArrowToolStats.ACCURACY, 0.8f)
@@ -47,7 +49,8 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.bowstring)
                 .part(TinkersArchery.bowguide)
                 //stats
-                .multiplier(ToolStats.DURABILITY, 8f)
+                .multiplier(ToolStats.DURABILITY, 2f)
+                .stat(ToolStats.DURABILITY, 200)
                 .multiplier(BowAndArrowToolStats.ELASTICITY, 1.35f)
                 .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.65f)
                 .multiplier(BowAndArrowToolStats.ACCURACY, 1.25f)
@@ -62,13 +65,11 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.arrow_shaft)
                 .part(TinkersArchery.arrow_fletching)
                 //stats
-                .stat(ToolStats.ATTACK_DAMAGE, 1.5f)
+                .stat(ToolStats.ATTACK_DAMAGE, 3.75f)
                 .stat(ToolStats.ATTACK_SPEED, 2f)
-                .multiplier(ToolStats.DURABILITY, 0.3f)
                 .multiplier(ToolStats.ATTACK_DAMAGE, 0.4f)
                 .multiplier(ToolStats.MINING_SPEED, 0.75f)
-                .startingSlots(SlotType.UPGRADE, 3)
-                .startingSlots(SlotType.ABILITY, 1);
+                .startingSlots(SlotType.UPGRADE, 3);
     }
 
     @Override

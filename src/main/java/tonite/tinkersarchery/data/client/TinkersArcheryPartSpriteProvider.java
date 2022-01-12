@@ -3,6 +3,8 @@ package tonite.tinkersarchery.data.client;
 import slimeknights.tconstruct.library.client.data.material.AbstractPartSpriteProvider;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
+import tonite.tinkersarchery.stats.BowGuideMaterialStats;
+import tonite.tinkersarchery.stats.BowMaterialStats;
 import tonite.tinkersarchery.stats.BowStringMaterialStats;
 
 public class TinkersArcheryPartSpriteProvider extends AbstractPartSpriteProvider {
@@ -21,20 +23,20 @@ public class TinkersArcheryPartSpriteProvider extends AbstractPartSpriteProvider
         addPart("arrow_fletching", ArrowFletchingMaterialStats.ID);
 
         buildTool("shortbow")
-                .addHead("bowshaft").addHead("bowshaft_pulling_1").addHead("bowshaft_pulling_2")
+                .addPart("bowshaft", BowMaterialStats.ID).addPart("bowshaft_pulling_1", BowMaterialStats.ID).addPart("bowshaft_pulling_2", BowMaterialStats.ID)
                 .addBreakablePart("bowstring", BowStringMaterialStats.ID).addPart("bowstring_pulling_0", BowStringMaterialStats.ID).addPart("bowstring_pulling_1", BowStringMaterialStats.ID).addPart("bowstring_pulling_2", BowStringMaterialStats.ID)
-                .addHandle("guide");
+                .addPart("guide", BowGuideMaterialStats.ID);
 
         buildTool("crossbow")
-                .addHead("bowshaft")
+                .addPart("bowshaft", BowMaterialStats.ID)
                 .addBreakablePart("bowstring", BowStringMaterialStats.ID).addPart("bowstring_pulling_0", BowStringMaterialStats.ID).addPart("bowstring_pulling_1", BowStringMaterialStats.ID).addPart("bowstring_pulling_2", BowStringMaterialStats.ID)
-                .addHandle("crossbow_arm");
+                .addPart("crossbow_arm", BowGuideMaterialStats.ID);
 
         buildTool("longbow").withLarge()
-                .addHead("bowshaft_left").addHead("bowshaft_left_pulling_0").addHead("bowshaft_left_pulling_1").addHead("bowshaft_left_pulling_2")
-                .addHead("bowshaft_right").addHead("bowshaft_right_pulling_0").addHead("bowshaft_right_pulling_1").addHead("bowshaft_right_pulling_2")
+                .addPart("bowshaft_left", BowMaterialStats.ID).addPart("bowshaft_left_pulling_0", BowMaterialStats.ID).addPart("bowshaft_left_pulling_1", BowMaterialStats.ID).addPart("bowshaft_left_pulling_2", BowMaterialStats.ID)
+                .addPart("bowshaft_right", BowMaterialStats.ID).addPart("bowshaft_right_pulling_0", BowMaterialStats.ID).addPart("bowshaft_right_pulling_1", BowMaterialStats.ID).addPart("bowshaft_right_pulling_2", BowMaterialStats.ID)
                 .addBreakablePart("bowstring", BowStringMaterialStats.ID).addPart("bowstring_pulling_0", BowStringMaterialStats.ID).addPart("bowstring_pulling_1", BowStringMaterialStats.ID).addPart("bowstring_pulling_2", BowStringMaterialStats.ID)
-                .addHandle("guide");
+                .addPart("guide", BowGuideMaterialStats.ID);
 
         buildTool("arrow").addHead("arrowhead").addHandle("arrow_shaft").addPart("arrow_fletching", ArrowFletchingMaterialStats.ID);
     }

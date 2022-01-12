@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "input": "tconstruct:string",
+  "fluid": {
+    "tag": "tconstruct:molten_rose_gold",
+    "amount": 144
+  },
+  "temperature": 550,
+  "output": "tinkersarchery:silky_cloth"
+}

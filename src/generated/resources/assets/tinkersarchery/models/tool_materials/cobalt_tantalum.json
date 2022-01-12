@@ -16,27 +16,27 @@
           },
           {
             "grey": 63,
-            "color": "FF575757"
+            "color": "FF403C67"
           },
           {
             "grey": 102,
-            "color": "FF727272"
+            "color": "FF4F5089"
           },
           {
             "grey": 140,
-            "color": "FF7B808B"
+            "color": "FFA59CCF"
           },
           {
             "grey": 178,
-            "color": "FF8491AB"
+            "color": "FFB2BDFF"
           },
           {
             "grey": 216,
-            "color": "FF8CA0C7"
+            "color": "FFC6D6FF"
           },
           {
             "grey": 255,
-            "color": "FF90B1F3"
+            "color": "FFE5F2FF"
           }
         ]
       }
@@ -45,7 +45,9 @@
       "tconstruct:head",
       "tconstruct:handle",
       "tconstruct:extra",
-      "tconstruct:repair_kit"
+      "tconstruct:repair_kit",
+      "tinkersarchery:bow",
+      "tinkersarchery:bowguide"
     ],
     "ignoreMaterialStats": false
   }

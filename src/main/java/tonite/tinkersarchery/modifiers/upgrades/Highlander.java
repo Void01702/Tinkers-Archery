@@ -39,6 +39,6 @@ public class Highlander extends IncrementalModifier implements IBowModifier {
             }
         }
 
-        return power * (1 + getScaledLevel(tool, level) * multiplier);
+        return power + getScaledLevel(tool, level) * multiplier;
     }
 }

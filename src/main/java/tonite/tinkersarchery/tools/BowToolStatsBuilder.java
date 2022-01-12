@@ -66,9 +66,9 @@ public class BowToolStatsBuilder extends ToolStatsBuilder {
     public float buildElasticity() {
         double averageBowshaftElasticity = getAverageValue(bowshafts, BowMaterialStats::getElasticity) + toolData.getBonus(BowAndArrowToolStats.ELASTICITY);
         double averageBowstringElasticity = getAverageValue(bowstrings, BowStringMaterialStats::getElasticity, 1);
-        double averageBowguideElasticity = getAverageValue(bowguides, BowGuideMaterialStats::getElasticity, 1);
+        //double averageBowguideElasticity = getAverageValue(bowguides, BowGuideMaterialStats::getElasticity, 1);
 
-        return (float)Math.max(0.1d, averageBowshaftElasticity * averageBowstringElasticity * averageBowguideElasticity);
+        return (float)Math.max(0.1d, averageBowshaftElasticity * averageBowstringElasticity);
     }
 
     public float buildDrawSpeed() {
@@ -79,9 +79,9 @@ public class BowToolStatsBuilder extends ToolStatsBuilder {
     }
 
     public float buildAccuracy() {
-        double averageBowguideAccuracy = getAverageValue(bowguides, BowGuideMaterialStats::getAccuracy) + toolData.getBonus(BowAndArrowToolStats.ACCURACY);
+        //double averageBowguideAccuracy = getAverageValue(bowguides, BowGuideMaterialStats::getAccuracy) + toolData.getBonus(BowAndArrowToolStats.ACCURACY);
         double averageBowstringAccuracy = getAverageValue(bowstrings, BowStringMaterialStats::getAccuracy, 1);
 
-        return (float)Math.max(0.1d, averageBowstringAccuracy * averageBowguideAccuracy);
+        return (float)Math.max(0.1d, averageBowstringAccuracy);
     }
 }

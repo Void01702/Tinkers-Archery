@@ -30,9 +30,9 @@ public class Power extends IncrementalModifier implements IBowModifier {
         float scaledLevel = getScaledLevel(tool.getPersistentData(), level);
 
         if (arrow instanceof IDamageProjectile) {
-            ((IDamageProjectile)arrow).setDamage(((IDamageProjectile)arrow).getDamage() * (1 + 0.3f * scaledLevel));
+            ((IDamageProjectile)arrow).setDamage(((IDamageProjectile)arrow).getDamage() + 0.5f + 0.5f * scaledLevel);
         } else if (arrow instanceof AbstractArrowEntity) {
-            ((AbstractArrowEntity)arrow).setBaseDamage(((AbstractArrowEntity)arrow).getBaseDamage() * (1 + 0.3 * scaledLevel));
+            ((AbstractArrowEntity)arrow).setBaseDamage(((AbstractArrowEntity)arrow).getBaseDamage() + 0.5f + 0.5f * scaledLevel);
         }
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 public class Airborne extends SingleUseModifier implements IBowModifier {
@@ -22,8 +22,8 @@ public class Airborne extends SingleUseModifier implements IBowModifier {
             direction = new Vector3d(direction.x, 0, direction.z);
         }
 
-        if (arrow instanceof TinkersArrowEntity) {
-            ((TinkersArrowEntity)arrow).changeDirection(((TinkersArrowEntity)arrow).getOriginalDirection().add(direction));
+        if (arrow instanceof TinkersArrowEntityOld) {
+            ((TinkersArrowEntityOld)arrow).changeDirection(((TinkersArrowEntityOld)arrow).getOriginalDirection().add(direction));
         } else {
             arrow.setDeltaMovement(arrow.getDeltaMovement().add(direction));
         }

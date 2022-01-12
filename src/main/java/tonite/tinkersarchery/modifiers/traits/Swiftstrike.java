@@ -1,8 +1,16 @@
 package tonite.tinkersarchery.modifiers.traits;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.ITextComponent;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
+import slimeknights.tconstruct.library.utils.TooltipFlag;
+import slimeknights.tconstruct.library.utils.TooltipKey;
+import tonite.tinkersarchery.TinkersArchery;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class Swiftstrike extends Modifier {
 
@@ -19,5 +27,11 @@ public class Swiftstrike extends Modifier {
         } else {
             return damage;
         }
+    }
+
+    @Override
+    public void addInformation(IModifierToolStack tool, int level, @Nullable PlayerEntity player, List<ITextComponent> tooltip, TooltipKey key, TooltipFlag flag) {
+        float bonus = level * 2;
+        addDamageTooltip(tool, bonus, tooltip);
     }
 }

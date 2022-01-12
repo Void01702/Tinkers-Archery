@@ -34,9 +34,10 @@ import slimeknights.tconstruct.library.utils.TooltipKey;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.data.server.TinkersArcheryTags;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
+import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
+import tonite.tinkersarchery.library.projectileinterfaces.IStoreBowProjectile;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 import tonite.tinkersarchery.stats.BowStringMaterialStats;
 
@@ -218,7 +219,7 @@ public abstract class ShootableTool extends ModifiableItem {
 
         arrows.add(new IBowModifier.ArrowData(Quaternion.ONE, power, accuracy));
 
-        for(int i = 0; i < modifierList.size(); i++) {
+        for(int i = 0; i < Math.min(modifierList.size(), arrowCounts.length); i++) {
             ModifierEntry entry = modifierList.get(i);
             ((IBowModifier) entry.getModifier()).onReleaseBow(tool, entry.getLevel(), drawPortion, power, accuracy, arrows, arrowCounts[i], world, shooter);
         }
@@ -242,7 +243,7 @@ public abstract class ShootableTool extends ModifiableItem {
 
             ProjectileEntity projectile = createArrow(bow, world, arrowDirection, drawPortion, shooter, arrowItem);
 
-            projectile.shoot(arrowDirection.x(), arrowDirection.y(), arrowDirection.z(), power * 3.0F, 1.0F / accuracy);
+            projectile.shoot(arrowDirection.x(), arrowDirection.y(), arrowDirection.z(), power, 1.0F / accuracy);
 
             supplyInfoToArrow(projectile, bow, world, projectile.getDeltaMovement().add(motion), drawPortion, shooter, arrowItem);
 
@@ -306,6 +307,10 @@ public abstract class ShootableTool extends ModifiableItem {
             ((IProjectileItem)arrowItem.getItem()).supplyInfoToProjectile(projectile, arrowItem, world, shooter, bow);
         }
 
+        if (projectile instanceof IStoreBowProjectile) {
+            ((IStoreBowProjectile)projectile).setBow(bow);
+        }
+
         if (projectile instanceof AbstractArrowEntity) {
             AbstractArrowEntity arrow = (AbstractArrowEntity)projectile;
 
@@ -318,8 +323,8 @@ public abstract class ShootableTool extends ModifiableItem {
             }
         }
 
-        if (projectile instanceof TinkersArrowEntity) {
-            ((TinkersArrowEntity)projectile).changeDirection(direction);
+        if (projectile instanceof TinkersArrowEntityOld) {
+            ((TinkersArrowEntityOld)projectile).changeDirection(direction);
         } else {
             projectile.setDeltaMovement(direction);
         }

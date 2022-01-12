@@ -6,12 +6,12 @@ import tonite.tinkersarchery.library.ProjectileTrajectory;
 
 public class LoopingTrajectory extends ProjectileTrajectory {
 
-    public static final float ANGLE = (float)(Math.PI / 10);
+    public static final float ANGLE = (float)(Math.PI / 8);
     public static final int INITIAL_STRAIGHT_TIME = 10;
     public static final int MIDDLE_STRAIGHT_TIME = 30;
 
     @Override
-    public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, Object internalData) {
+    public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, float stability, float resistance, Object internalData) {
         LoopingData data = (LoopingData)internalData;
 
         if (time > INITIAL_STRAIGHT_TIME) {
@@ -56,7 +56,7 @@ public class LoopingTrajectory extends ProjectileTrajectory {
     }
 
     @Override
-    public void load(Vector3d originalDirection, float weight, Object internalData, CompoundNBT data) {
+    public void load(Vector3d originalDirection, float weight, float stability, Object internalData, CompoundNBT data) {
         LoopingData loopingData = (LoopingData)internalData;
 
         loopingData.currentSin = data.getFloat("Sin");
@@ -64,12 +64,12 @@ public class LoopingTrajectory extends ProjectileTrajectory {
     }
 
     @Override
-    public Object onCreated(Vector3d originalDirection, float weight) {
-        return new LoopingData(originalDirection, weight);
+    public Object onCreated(Vector3d originalDirection, float weight, float stability) {
+        return new LoopingData(originalDirection, weight, stability);
     }
 
     @Override
-    public void save(CompoundNBT data, Vector3d originalDirection, float weight, Object internalData) {
+    public void save(CompoundNBT data, Vector3d originalDirection, float weight, float stability, Object internalData) {
         LoopingData loopingData = (LoopingData)internalData;
 
         data.putFloat("Sin", loopingData.currentSin);
@@ -92,9 +92,9 @@ public class LoopingTrajectory extends ProjectileTrajectory {
         public Vector3d flatForward;
         public Vector3d immediatelyUp;
 
-        public LoopingData(Vector3d originalDirection, float weight) {
+        public LoopingData(Vector3d originalDirection, float weight, float stability) {
 
-            float angle = ANGLE * weight;
+            float angle = ANGLE * stability;
 
             currentSin = 0;
             currentCos = 1;
@@ -106,7 +106,7 @@ public class LoopingTrajectory extends ProjectileTrajectory {
             up = right.cross(originalDirection).normalize().scale(originalDirection.length());
             flatForward = new Vector3d(0, 1d, 0).cross(right).scale(originalDirection.length());
 
-            straightTime = (int)(MIDDLE_STRAIGHT_TIME * weight);
+            straightTime = (int)(MIDDLE_STRAIGHT_TIME / weight);
 
             finalLoopTime = (int)(3 * Math.PI / (2 * angle));
 

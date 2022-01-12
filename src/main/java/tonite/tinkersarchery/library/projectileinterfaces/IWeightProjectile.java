@@ -8,4 +8,10 @@ public interface IWeightProjectile {
 
     float calculateWeight();
 
+    void setStability(float stability);
+
+    float getStability();
+
+    float calculateStability();
+
 }

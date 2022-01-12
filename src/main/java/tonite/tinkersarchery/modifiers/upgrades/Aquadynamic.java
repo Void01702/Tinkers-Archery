@@ -30,7 +30,7 @@ public class Aquadynamic extends IncrementalModifier implements IProjectileModif
         if(arrow instanceof IWaterInertiaProjectile) {
             IWaterInertiaProjectile projectile = (IWaterInertiaProjectile) arrow;
 
-            projectile.setWaterInertia(projectile.getWaterInertia() + 0.2f * getScaledLevel(tool, level));
+            projectile.setWaterInertia(projectile.getWaterInertiaMultiplier() + 0.3f * getScaledLevel(tool, level));
         }
     }
 }

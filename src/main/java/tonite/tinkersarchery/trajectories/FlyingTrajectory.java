@@ -13,7 +13,7 @@ public class FlyingTrajectory extends ProjectileTrajectory {
     public static final double GRAVITY = 0.05f;
 
     @Override
-    public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, Object data) {
+    public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, float stability, float resistance, Object data) {
 
 
         if (time <= ((FlyingData)data).cutoffTicks) {
@@ -28,16 +28,16 @@ public class FlyingTrajectory extends ProjectileTrajectory {
     }
 
     @Override
-    public void load(Vector3d originalDirection, float weight, Object internalData, CompoundNBT data) {
+    public void load(Vector3d originalDirection, float weight, float stability, Object internalData, CompoundNBT data) {
     }
 
     @Override
-    public Object onCreated(Vector3d originalDirection, float weight) {
+    public Object onCreated(Vector3d originalDirection, float weight, float stability) {
         return new FlyingData(weight);
     }
 
     @Override
-    public void save(CompoundNBT data, Vector3d originalDirection, float weight, Object o) {
+    public void save(CompoundNBT data, Vector3d originalDirection, float weight, float stability, Object o) {
 
     }
 

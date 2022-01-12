@@ -3,6 +3,7 @@ package tonite.tinkersarchery.library.util;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
@@ -19,7 +20,11 @@ import tonite.tinkersarchery.library.projectileinterfaces.IKnockbackProjectile;
 public class ProjectileAttackUtil {
 
     public static boolean dealDefaultDamage(ProjectileEntity projectile, LivingEntity attacker, Entity target, float damage) {
-        return target.hurt(DamageSource.thrown(projectile, attacker), damage);
+        if (projectile instanceof AbstractArrowEntity) {
+            return target.hurt(DamageSource.arrow((AbstractArrowEntity)projectile, attacker), damage);
+        } else {
+            return target.hurt(DamageSource.thrown(projectile, attacker), damage);
+        }
     }
 
     public static boolean attackEntity(Item weapon, ProjectileEntity projectile, IModifierToolStack tool, LivingEntity attackerLiving,

@@ -11,6 +11,7 @@ import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
@@ -51,7 +52,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addTool(TinkersArchery.shortbow, "Shortbow", "The shortbow is a simple bow. It has a range comparable to a regular bow, but the potential of a much greater one.");
         addTool(TinkersArchery.crossbow, "Crossbow", "The crossbow holds shots. It is harder to draw, but that makes shooting it much more satisfying." );
         addTool(TinkersArchery.longbow, "Longbow", "The longbow shoots arrows very far. It takes so much effort to draw, but the arrows hit that much more harder." );
-        addTool(TinkersArchery.arrow, "Arrow", "The arrow is used as ammunition for bows. It is also a viable melee weapon.");
+        addTool(TinkersArchery.tinkers_arrow, "Tinkers' Arrow", "The arrow is the primary form of ammunition for bows.");
 
         // Tool Parts
 
@@ -78,7 +79,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addFluid(TinkersArchery.molten_galaxy_alloy, "Molten Niillite");
 
         // Entities
-        addEntityType(TinkersArchery.TINKERS_ARROW, "Tinkers' Arrow");
+        addEntityType(TinkersArchery.TINKERS_ARROW_OLD, "Tinkers' Arrow");
 
         // Effects
         addEffect(TinkersArchery.groovyEffect, "Groovy");
@@ -87,11 +88,11 @@ public class TinkersArcheryLang extends LanguageProvider {
 
         // Materials
         addMaterial(TinkersArcheryMaterialIds.tantalum, "Tantalum", "Tantalizingly Accurate", "Deal 25% per level more damage to enemies below half health.", "Bows are 40% per level more accurate per level.");
-        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, "Cobalt Tantalum", "Yes, this is its formal name", "Deal more damage the faster you are moving", "Arrows shot from bows have 20% per level more weight, making the follow more favorable trajectories.");
-        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, "Niillite", "Reach for the stars", "Killing an enemy causes your next attack with this weapon to deal 50% per level more damage", "Each shot from a bow increases the draw speed of the next shot by 5% up to a maximum of 6 times per level.");
+        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, "Cobalt Tantalum", "Yes, this is its formal name", "Deal more damage the faster you are moving", "Arrows shot from bows have 0.2 per level more stability, making the follow more favorable trajectories.");
+        addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, "Niillite", "Reach for the stars", "Killing an enemy causes your next attack with this weapon to deal 50% per level more damage", "Each shot from a bow increases the draw speed of the next shot by 0.2 up to a maximum of 6 times per level.");
 
-        addMaterial(TinkersArcheryMaterialIds.silky_cloth, "Silky Cloth", "Bling", "", "Arrows are shot slightly upwards to help with aiming.");
-        addMaterial(TinkersArcheryMaterialIds.slime, "Slime", "Bouncy", "", "At full Overslime, this bow has 0.5 more Draw Speed and Elasticity.");
+        addMaterial(TinkersArcheryMaterialIds.silky_cloth, "Silky Cloth", "Very soft on the skin", "", "Arrows are shot slightly upwards to help with aiming.");
+        addMaterial(TinkersArcheryMaterialIds.slime, "Slime", "Bouncy", "", "At full Overslime, the bow has 0.5 more Draw Speed and Draw Weight.");
         addMaterial(TinkersArcheryMaterialIds.blazing_string, "Blazing String", "Hot Hot Ouch Ouch Ooh Ouch Hot Ouch", "", "Arrows are on fire.");
         addMaterial(TinkersArcheryMaterialIds.steel_wire, "Steel Wire", "Clay is no match for power of steel wire!", "", "Arrows are always critical.");
 
@@ -105,41 +106,42 @@ public class TinkersArcheryLang extends LanguageProvider {
 
         addFlavor(MaterialIds.phantom, "Spooky.");
 
-        addFletching(TinkersArcheryMaterialIds.feather, "Arrows fall under the force of gravity like any other object would.", "However, weight affects acceleration. The higher the weight, the less there will be.");
-        addFletching(TinkersArcheryMaterialIds.leaf, "Arrows twirl around in the air for some time, and then fall.", "Weight affects how tight the twirling is and how far it goes.");
-        addFletching(TinkersArcheryMaterialIds.paper, "Arrows fly a bit, then loop, then fly parallel to the ground, then loop again, the fly downwards.", "Weight affects how tight the loop is and how far it goes.");
-        addFletching(TinkersArcheryMaterialIds.slime_leaf, "Arrows bounce 5 times in the air.", "Weight affects how high the arrow bounces.");
+        addFletching(TinkersArcheryMaterialIds.feather, "Arrows fall under the force of gravity like any other object would.", "Lighter arrows fall slower, and stabler arrows slow down slower.");
+        addFletching(TinkersArcheryMaterialIds.leaf, "Arrows twirl around in the air for some time, and then fall.", "Lighter arrows slow down slower and stabler arrows twirl tighter.");
+        addFletching(TinkersArcheryMaterialIds.paper, "Arrows fly a bit, then loop, then fly parallel to the ground, then loop again, the fly downwards.", "Lighter arrows fly farther and stabler arrows loop tighter.");
+        addFletching(TinkersArcheryMaterialIds.slime_leaf, "Arrows bounce 5 times in the air.", "Lighter arrows fall slower, and stabler arrows slow down slower.");
         addFletching(TinkersArcheryMaterialIds.silky_cloth, "Arrows fly upwards a bit then fall to the ground.", "Weight affects how quickly the arrow flies upwards and falls.");
-        addFletching(MaterialIds.phantom, "Arrows fly in a straight line, slowing down before starting to fall.", "Weight affects how quickly the arrow slows down and how far the arrow goes before falling.");
+        addFletching(MaterialIds.phantom, "Arrows fly in a straight line, slowing down before starting to fall.", "Lighter arrows fly farther and stabler arrows fall slower after beginning to fall.");
 
         // Modifiers
         addModifier(TinkersArchery.ACCURATE_MODIFIER, "Accurate", "What good is a bow that doesn't shoot where you point?", "The bow is more accurate");
-        addModifier(TinkersArchery.FINISHING_MODIFIER, "Finishing", "Leaves falling from trees / Snow drifting onto the ground / Life leaving your corpse", "Deal more damage to enemies with low health");
-        addModifier(TinkersArchery.WEIGHTY_MODIFIER, "Weighty", "Magic?", "Makes arrows heavier, making them follow more favorable trajectories");
-        addModifier(TinkersArchery.SWIFTSTRIKE_MODIFIER, "Swiftstrike", "Let's have a chat, shall we?", "Moving faster causes you to deal more damage");
-        addModifier(TinkersArchery.GROOVY_MODIFIER, "Groovy", "In the Groove", "The more you shoot, the faster you draw");
-        addModifier(TinkersArchery.CHAINING_MODIFIER, "Chaining", "Killstreak", "Deal multiplied damage after killing an enemy");
+        addTooltipModifier(TinkersArchery.FINISHING_MODIFIER, "Finishing", "Leaves falling from trees / Snow drifting onto the ground / Life leaving your corpse", "Deal more damage to enemies with low health", ToolStats.ATTACK_DAMAGE, "Damage under Half Health");
+        addModifier(TinkersArchery.STABLE_MODIFIER, "Stable", "Steady Now", "Makes arrows stabler, making them follow more favorable trajectories");
+        addTooltipModifier(TinkersArchery.SWIFTSTRIKE_MODIFIER, "Swiftstrike", "Let's have a chat, shall we?", "Moving faster causes you to deal more damage", ToolStats.ATTACK_DAMAGE, "Moving Damage");
+        addTooltipModifier(TinkersArchery.GROOVY_MODIFIER, "Groovy", "In the Groove", "The more you shoot, the faster you draw", BowAndArrowToolStats.DRAW_SPEED, "Groovy Draw Speed");
+        addTooltipModifier(TinkersArchery.CHAINING_MODIFIER, "Chaining", "Killstreak", "Deal multiplied damage after killing an enemy", ToolStats.ATTACK_DAMAGE, "Chaining Damage");
 
         addModifier(TinkersArchery.AIRBORNE_MODIFIER, "Airborne", "Take to the skies", "Your velocity is no longer added to the arrow when shot from the bow");
 
-        addModifier(TinkersArchery.CLEAN_MODIFIER, "Clean", "Simple", "The more drawn your bow, the more accurate it is");
+        addTooltipModifier(TinkersArchery.CLEAN_MODIFIER, "Clean", "Simple", "The more drawn your bow, the more accurate it is", BowAndArrowToolStats.ACCURACY, "Fully Drawn Accuracy");
         addModifier(TinkersArchery.UPLIFTING_MODIFIER, "Uplifting", "Rise to the heavens", "Arrows are shot slightly upwards to help you aim");
-        addModifier(TinkersArchery.SUPERSLIME_MODIFIER, "Superslime", "Byoing", "The more overslime you have on your bow, the faster you'll draw and the further arrows will go");
+        addTooltipModifier(TinkersArchery.SUPERSLIME_MODIFIER, "Superslime", "Byoing", "The more overslime you have on your bow, the faster you'll draw and the further arrows will go", BowAndArrowToolStats.ELASTICITY, "Superslime Draw Weight");
+        addTooltipModifier(TinkersArchery.SUPERSLIME_MODIFIER, BowAndArrowToolStats.DRAW_SPEED, "Superslime Draw Speed");
         addModifier(TinkersArchery.BLAZING_MODIFIER, "Blazing", "Flame I", "Arrows are on fire");
 
         addModifier(TinkersArchery.SLICING_MODIFIER, "Slicing", "Cuts clay easily", "Arrows are always critical");
 
         addModifier(TinkersArchery.GRAVITY_TRAJECTORY_MODIFIER, "Gravity Trajectory", "Like Newton and the Apple", "Arrows act like they should and fall to the ground in a parabolic trajectory");
-        addModifier(TinkersArchery.FLYING_TRAJECTORY_MODIFIER, "Flying Trajectory", "What goes up", "Arrows fly upwards a bit before falling back to the ground");
+        //addModifier(TinkersArchery.FLYING_TRAJECTORY_MODIFIER, "Flying Trajectory", "What goes up", "Arrows fly upwards a bit before falling back to the ground");
         addModifier(TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER, "Twirling Trajectory", "Do a barrel roll", "Arrows twirl around in the air");
-        addModifier(TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER, "Bouncing Trajectory", "Hippity Hoppity", "Arrows bounce in the air");
+        addModifier(TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER, "Bouncing Trajectory", "Hippity Hoppity", "Arrows bounce on the ground");
         addModifier(TinkersArchery.ANTIGRAVITY_TRAJECTORY_MODIFIER, "Antigravity Trajectory", "Zero G", "Arrows don't obey gravity");
         addModifier(TinkersArchery.LOOPING_TRAJECTORY_MODIFIER, "Looping Trajectory", "Whooh... Whooh", "Arrows loop once in the air before flying straight then loop again");
 
         addModifier(TinkersArchery.MULTISHOT_MODIFIER, "Multishot", "Now with 3 times the projectiles", "Bow shoots additional arrows");
         addModifier(TinkersArchery.AUTOAIM_MODIFIER, "Autoaim", "I never miss", "Arrows shoot in the direction of the nearest entity");
-        addModifier(TinkersArchery.PIERCING_MODIFIER, "Piercing", "Pierce the heavens", "Arrows pierce through targets");
-        addModifier(TinkersArchery.EXPLOSIVE_MODIFIER, "Explosive", "Boom", "Arrow explodes on impact");
+        //addModifier(TinkersArchery.PIERCING_MODIFIER, "Piercing", "Pierce the heavens", "Arrows pierce through targets");
+        //addModifier(TinkersArchery.EXPLOSIVE_MODIFIER, "Explosive", "Boom", "Arrow explodes on impact");
 
         addIncrementalModifier(TinkersArchery.HASTE_MODIFIER, "Haste", new String[]{"Haste", "Hastier", "Hastiest", "Hastiester", "Hastiestest"}, "Science!", "Magic red dust makes bow draw faster!");
         addIncrementalModifier(TinkersArchery.POWER_MODIFIER, "Power", new String[]{"Power", "Powerer", "Powerest", "Powerester", "Powerestest"}, "But how does it work?", "Arrows deal more damage");
@@ -147,13 +149,13 @@ public class TinkersArcheryLang extends LanguageProvider {
         addIncrementalModifier(TinkersArchery.PINPOINTER_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharp Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharper Than The Sharpest Pinpointer"}, "Legolas got nothing on this", "The bow is more accurate");
         addModifier(TinkersArchery.BURST_MODIFIER, "Burst", "With every death comes honor", "The next time you consecutively draw your bow, it will draw much faster");
         addIncrementalModifier(TinkersArchery.HIGHLANDER_MODIFIER, "Highlander", new String[]{"Highlander", "Higherlander", "Highestlander", "Highesterlander", "Highestestlander"}, "Then I took an arrow to the knee", "Arrows are shot further at higher altitudes");
-        addIncrementalModifier(TinkersArchery.VELOCITY_MODIFIER, "Velocity", new String[]{"Velocity", "High Velocity", "Higher Velocity", "Highest Velocity", "Ludicrous Speed"}, "Ludicrous Speed. Ludicrous Speed! GO!", "Arrows travel faster");
+        /*addIncrementalModifier(TinkersArchery.VELOCITY_MODIFIER, "Velocity", new String[]{"Velocity", "High Velocity", "Higher Velocity", "Highest Velocity", "Ludicrous Speed"}, "Ludicrous Speed. Ludicrous Speed! GO!", "Arrows travel faster");
         addIncrementalModifier(TinkersArchery.HEAVY_MODIFIER, "Heavy", new String[]{"Heavy", "Heavier", "Heaviest", "Heaviester", "Heaviestest"}, "F = ma", "Arrows are heavier, making them follow a much more favorable trajectory");
         addIncrementalModifier(TinkersArchery.AQUADYNAMIC_MODIFIER, "Aquadynamic", new String[]{"Aquadynamic", "Super Aquadynamic", "Ultra Aquadynamic", "Mega Super Aquadynamic", "Mega Ultra Aquadynamic"}, "Enguarde", "Arrows travel better in water");
         addIncrementalModifier(TinkersArchery.PINPOINTER_ARROW_MODIFIER, "Pinpointer", new String[]{"Pinpointer", "Sharp Pinpointer", "Sharper Pinpointer", "Sharpest Pinpointer", "Sharper Than The Sharpest Pinpointer"}, "Legolas got nothing on this", "The arrow is more accurate");
 
         addIncrementalModifier(TinkersArchery.FLAME_FLARE_MODIFIER, "Flame Flare", new String[]{"Flame Flare", "Soul Flame Flare"}, "Flameo Hotman!", "Arrows leave a trail of visual fire");
-        addModifier(TinkersArchery.SHULKER_FLARE_MODIFIER, "Shulker Flare", "Bright!", "Arrows leave a trail of end rod particles");
+        addModifier(TinkersArchery.SHULKER_FLARE_MODIFIER, "Shulker Flare", "Bright!", "Arrows leave a trail of end rod particles");*/
 
         // Stats
         addStat(BowMaterialStats.ID, "Bow");
@@ -164,11 +166,12 @@ public class TinkersArcheryLang extends LanguageProvider {
         addStat(ArrowFletchingMaterialStats.ID, "Fletching");
 
         // Tool Stats
-        addToolStat(BowAndArrowToolStats.ELASTICITY, "Elasticity", "How fast arrows are shot out of this tool.\nThe arrow's velocity is taken into account when calculating damage.", "The total elasticity of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.ELASTICITY, "Draw Weight", "How fast arrows are shot out of this tool.\nThe arrow's velocity is taken into account when calculating damage.", "The total draw weight of the tool will be multiplied by this.");
         addToolStat(BowAndArrowToolStats.DRAW_SPEED, "Draw Speed", "How fast arrows are drawn.\nThe exiting velocity of arrows is not linear to how much you draw back the bow.", "The total draw speed of the tool will be multiplied by this.");
         addToolStat(BowAndArrowToolStats.ACCURACY, "Accuracy", "How accurate the shot is.\nThis is affected by both the bow and arrow.", "The total accuracy of the tool will be multiplied by this.");
-        addToolStat(BowAndArrowToolStats.SPEED, "Speed", "How fast the arrow is.\nThe arrow's velocity is taken into account when calculating damage.", "The total speed of the tool will be multiplied by this.");
-        addToolStat(BowAndArrowToolStats.WEIGHT, "Weight", "How heavy the arrow is.\nA heavier arrow follows a more favorable trajectory.", "The total weight of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.COUNT, "Count", "How many arrows you make.", "The total count of arrows will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.WEIGHT, "Weight", "How heavy the arrow is.\nLighter arrows go farther than lighter arrows.", "The total weight of the tool will be multiplied by this.");
+        addToolStat(BowAndArrowToolStats.STABILITY, "Stability", "How stable the trajectory arrows take is.", "The total stability of arrows will be multiplied by this.");
 
     }
 
@@ -236,6 +239,19 @@ public class TinkersArcheryLang extends LanguageProvider {
         add("modifier.tinkersarchery." + id, name);
         add("modifier.tinkersarchery." + id + ".flavor", flavour);
         add("modifier.tinkersarchery." + id + ".description", desc);
+    }
+
+    public void addTooltipModifier(RegistryObject<Modifier> modifier, String name, String flavour, String desc, IToolStat<?> stat, String tooltip) {
+        String id = modifier.getId().getPath();
+        add("modifier.tinkersarchery." + id, name);
+        add("modifier.tinkersarchery." + id + ".flavor", flavour);
+        add("modifier.tinkersarchery." + id + ".description", desc);
+        add("modifier.tinkersarchery." + id + "." + stat.getName().getPath(), tooltip);
+    }
+
+    public void addTooltipModifier(RegistryObject<Modifier> modifier, IToolStat<?> stat, String tooltip) {
+        String id = modifier.getId().getPath();
+        add("modifier.tinkersarchery." + id + "." + stat.getName().getPath(), tooltip);
     }
 
     public void addIncrementalModifier(RegistryObject<Modifier> modifier, String name, String[] names, String flavour, String desc) {

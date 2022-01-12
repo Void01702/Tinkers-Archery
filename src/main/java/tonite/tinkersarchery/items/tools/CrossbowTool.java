@@ -23,6 +23,7 @@ import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CrossbowTool extends ShootableTool {
 
@@ -33,7 +34,7 @@ public class CrossbowTool extends ShootableTool {
     @Override
     public int getItemAmount(ItemStack itemStack, int desiredAmount, boolean isHand) {
         if (itemStack.getItem() == Items.FIREWORK_ROCKET && isHand) {
-            return itemStack.getCount();
+            return Math.min(itemStack.getCount(), desiredAmount);
         } else {
             return super.getItemAmount(itemStack, desiredAmount, isHand);
         }
@@ -80,9 +81,39 @@ public class CrossbowTool extends ShootableTool {
     }
 
     public static void uncharge(ItemStack itemStack) {
-        itemStack.addTagElement("Charged", ByteNBT.ZERO);
-        itemStack.addTagElement("LoadedProjectiles", new ListNBT());
-        itemStack.addTagElement("ArrowCounts", new ListNBT());
+
+        int[] itemCounts = itemStack.getTag().getIntArray("ArrowCounts");
+        ListNBT listNBT = itemStack.getTag().getList("LoadedProjectiles", Constants.NBT.TAG_COMPOUND);
+        List<ItemStack> items = listNBT.stream().map(nbt -> ItemStack.of((CompoundNBT)nbt)).collect(Collectors.toList());
+
+        int totalCount = 1;
+
+        for (int amount : itemCounts) {
+            totalCount += amount;
+        }
+
+        while (totalCount > 0 && !items.isEmpty()) {
+            if (items.get(0).getCount() <= totalCount) {
+                totalCount -= items.get(0).getCount();
+                items.remove(0);
+            } else {
+                items.get(0).shrink(totalCount);
+                totalCount = 0;
+            }
+        }
+
+        if (items.isEmpty()) {
+            itemStack.addTagElement("Charged", ByteNBT.ZERO);
+            itemStack.addTagElement("LoadedProjectiles", new ListNBT());
+            itemStack.addTagElement("ArrowCounts", new ListNBT());
+        } else {
+            ListNBT newList = new ListNBT();
+            for (ItemStack entry : items) {
+                CompoundNBT nbt = entry.serializeNBT();
+                newList.add(nbt);
+            }
+            itemStack.addTagElement("LoadedProjectiles", newList);
+        }
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
@@ -150,7 +181,7 @@ public class CrossbowTool extends ShootableTool {
     public void releaseUsing(ItemStack bow, World world, LivingEntity shooter, int held_ticks) {
         if (shooter instanceof PlayerEntity) {
             int time = getUseDuration(bow) - held_ticks;
-            if (time > 25 / getDrawSpeed(bow)) {
+            if (time >= (int)(20 / getDrawSpeed(bow))) {
 
                 int[] arrowCounts = getArrowCounts(bow, world, shooter, 1.0f);
 

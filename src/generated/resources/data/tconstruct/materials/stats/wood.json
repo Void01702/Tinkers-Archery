@@ -1,13 +1,13 @@
 {
   "stats": {
     "tinkersarchery:arrowhead": {
-      "speed": 1.0,
-      "weight": 0.8,
-      "accuracy": 0.9,
-      "durability": 60,
+      "count": 3,
       "miningSpeed": 2.0,
       "harvestLevel": 0,
-      "attack": 0.0
+      "attack": 0.0,
+      "weight": 0.8,
+      "stability": 0.8,
+      "accuracy": 0.9
     },
     "tinkersarchery:bowstring": {
       "durability": 1.2,
@@ -17,21 +17,18 @@
     },
     "tinkersarchery:bow": {
       "durability": 60,
-      "elasticity": 1.0,
+      "elasticity": 3.0,
       "drawSpeed": 1.0
     },
-    "tinkersarchery:bowguide": {
-      "elasticity": 1.0,
-      "accuracy": 1.0
-    },
+    "tinkersarchery:bowguide": {},
     "tinkersarchery:arrow_shaft": {
-      "speed": 1.0,
-      "weight": 1.0,
-      "accuracy": 1.0,
-      "durability": 1.0,
+      "count": 1.0,
       "miningSpeed": 1.0,
       "attackSpeed": 1.0,
-      "attackDamage": 1.0
+      "attackDamage": 1.0,
+      "weight": 1.0,
+      "stability": 1.0,
+      "accuracy": 1.0
     }
   }
 }

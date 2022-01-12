@@ -119,7 +119,7 @@ public class ContentBowHeadMaterial extends ContentMaterial {
                             materials.add(material);
                             usedMaterial = true;
                         } else {
-                            materials.add(getFirstMaterialWithType(part.getStatType()));
+                            materials.add(getFirstMaterialWithType(part.getStatType(), part.getStatType().equals(BowStringMaterialStats.ID)));
                         }
                     }
 
@@ -153,9 +153,9 @@ public class ContentBowHeadMaterial extends ContentMaterial {
         return MaterialRegistry.getInstance().getMaterialStats(materialId, statsId).isPresent();
     }
 
-    private static IMaterial getFirstMaterialWithType(MaterialStatsId statsId) {
+    private static IMaterial getFirstMaterialWithType(MaterialStatsId statsId, boolean isBowString) {
         for (IMaterial material : MaterialRegistry.getMaterials()) {
-            if (material.getIdentifier().equals(MaterialIds.wood)){
+            if (isBowString && material.getIdentifier().equals(MaterialIds.wood)){
                 continue;
             }
             if (hasStatType(material.getIdentifier(), statsId)) {

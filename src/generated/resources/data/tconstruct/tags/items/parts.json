@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "tinkersarchery:bowshaft",
+    "tinkersarchery:bowstring",
+    "tinkersarchery:bowguide",
+    "tinkersarchery:large_bowshaft",
+    "tinkersarchery:crossbow_arm",
+    "tinkersarchery:arrowhead",
+    "tinkersarchery:arrow_shaft",
+    "tinkersarchery:arrow_fletching"
+  ]
+}

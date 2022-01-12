@@ -19,11 +19,11 @@
     },
     {
       "path": "tinkersarchery:shortbow/bowshaft_pulling_2",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:shortbow/bowshaft_pulling_1",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:shortbow/bowstring_pulling_0",
@@ -35,7 +35,7 @@
     },
     {
       "path": "tinkersarchery:shortbow/bowshaft",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:shortbow/bowstring_pulling_2",
@@ -43,7 +43,7 @@
     },
     {
       "path": "tinkersarchery:shortbow/guide",
-      "statType": "tconstruct:handle"
+      "statType": "tinkersarchery:bowguide"
     },
     {
       "path": "tinkersarchery:crossbow/bowstring",
@@ -59,7 +59,7 @@
     },
     {
       "path": "tinkersarchery:crossbow/crossbow_arm",
-      "statType": "tconstruct:handle"
+      "statType": "tinkersarchery:bowguide"
     },
     {
       "path": "tinkersarchery:crossbow/bowstring_pulling_1",
@@ -67,7 +67,7 @@
     },
     {
       "path": "tinkersarchery:crossbow/bowshaft",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:crossbow/bowstring_pulling_2",
@@ -75,31 +75,31 @@
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_left",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_left_pulling_0",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_left_pulling_2",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_left_pulling_1",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_right",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_right_pulling_1",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_right_pulling_0",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowstring_pulling_0",
@@ -107,7 +107,7 @@
     },
     {
       "path": "tinkersarchery:longbow/bowshaft_right_pulling_2",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/bowstring_pulling_1",
@@ -127,35 +127,35 @@
     },
     {
       "path": "tinkersarchery:longbow/guide",
-      "statType": "tconstruct:handle"
+      "statType": "tinkersarchery:bowguide"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_left",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_left_pulling_0",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_left_pulling_2",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_left_pulling_1",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_right",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_right_pulling_1",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_right_pulling_0",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowstring_pulling_0",
@@ -163,7 +163,7 @@
     },
     {
       "path": "tinkersarchery:longbow/large/bowshaft_right_pulling_2",
-      "statType": "tconstruct:head"
+      "statType": "tinkersarchery:bow"
     },
     {
       "path": "tinkersarchery:longbow/large/bowstring_pulling_1",
@@ -183,7 +183,7 @@
     },
     {
       "path": "tinkersarchery:longbow/large/guide",
-      "statType": "tconstruct:handle"
+      "statType": "tinkersarchery:bowguide"
     },
     {
       "path": "tinkersarchery:arrow/arrow_fletching",

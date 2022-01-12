@@ -2,186 +2,91 @@ package tonite.tinkersarchery.entities;
 
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.block.BlockState;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.network.NetworkHooks;
+import slimeknights.tconstruct.library.materials.MaterialRegistry;
+import slimeknights.tconstruct.library.materials.definition.IMaterial;
+import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
-import slimeknights.tconstruct.library.tools.nbt.*;
+import slimeknights.tconstruct.library.tools.ToolDefinition;
+import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
+import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import tonite.tinkersarchery.TinkersArchery;
-import tonite.tinkersarchery.library.modifier.IProjectileModifier;
+import tonite.tinkersarchery.library.ITinkersConsumableItem;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.library.TinkersArcheryRegistries;
+import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.*;
 import tonite.tinkersarchery.library.util.ProjectileAttackUtil;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
+import tonite.tinkersarchery.tools.BowAndArrowDefinitions;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TinkersArrowEntity extends ProjectileEntity implements IEntityAdditionalSpawnData, ICriticalProjectile, IDamageProjectile, IPiercingProjectile, IWaterInertiaProjectile, IWeightProjectile {
+public class TinkersArrowEntity extends AbstractArrowEntity implements IEntityAdditionalSpawnData, IDamageProjectile, ITrajectoryProjectile, IWeightProjectile, IStoreBowProjectile, IWaterInertiaProjectile {
+
+    private float weightBonus = 0f;
+    private float stabilityBonus = 0f;
+    private float waterInertia = 0.6f;
 
     private ProjectileTrajectory trajectory;
     private Object trajectoryData;
     private Vector3d originalDirection;
     private int numTicks = 0;
-    // As much as I didn't want to, I had to store the item itself. Stupid TConstruct and their stupid lack of IModDataReadOnly.toNBT.
-    private ItemStack arrowStack;
-    private ItemStack bowStack;
 
-    private int pierceLevel = 0;
-    private float bonusDamage = 0;
-    private boolean critical = false;
-    private float waterInertia = 0.6f;
-    private float weightBonus = 0f;
-
-    private ToolStack toolStack;
-    private StatsNBT stats;
-    private List<ModifierEntry> projectileModifierList;
-    private ToolStack bowToolStack;
-
-    protected boolean inGround;
-    protected int inGroundTime;
-    public int shakeTime = 0;
+    private ToolStack toolStack = null;
+    private StatsNBT stats = StatsNBT.EMPTY;
+    private List<ModifierEntry> projectileModifierList = new ArrayList<>();
 
     private IntOpenHashSet piercingIgnoreEntityIds = null;
     private List<Entity> piercedAndKilledEntities = null;
 
-    @Nullable
-    private BlockState lastState;
+    private ItemStack bowStack = ItemStack.EMPTY;
+    private ToolStack bowToolStack = null;
 
     public TinkersArrowEntity(EntityType<? extends TinkersArrowEntity> entityType, World world) {
         super(entityType, world);
 
-        arrowStack = null;
-        toolStack = null;
-        stats = StatsNBT.EMPTY;
-        projectileModifierList = null;
+        setBaseDamage(0);
     }
 
-    public TinkersArrowEntity(double xPos, double yPos, double zPos, World world) {
-        this(TinkersArchery.TINKERS_ARROW.get(), world);
-        this.setPos(xPos, yPos, zPos);
+    public TinkersArrowEntity(World world, IPosition position, Item from, ToolDefinition toolDefinition, MaterialNBT materials) {
+        super(TinkersArchery.TINKERS_ARROW.get(), position.x(), position.y(), position.z(), world);
+
+        setToolStack(ToolStack.createTool(from, toolDefinition, materials.getMaterials()));
+
+        setBaseDamage(0);
     }
 
-    public TinkersArrowEntity(World world, LivingEntity shooter, StatsNBT stats) {
-        this(shooter.getX(), shooter.getEyeY() - 0.1D, shooter.getZ(), world);
-        this.setOwner(shooter);
+    public TinkersArrowEntity(World world, LivingEntity shooter, Item from, ToolDefinition toolDefinition, MaterialNBT materials) {
+        super(TinkersArchery.TINKERS_ARROW.get(), shooter, world);
 
-        this.stats = stats;
-    }
+        setToolStack(ToolStack.createTool(from, toolDefinition, materials.getMaterials()));
 
-    @Override
-    public void shoot(double xDirection, double yDirection, double zDirection, float power, float inaccuracy){
-
-        super.shoot(xDirection, yDirection, zDirection, power * stats.getFloat(BowAndArrowToolStats.SPEED), inaccuracy / stats.getFloat(BowAndArrowToolStats.ACCURACY));
-
-        originalDirection = getDeltaMovement();
-        numTicks = 0;
-    }
-
-    public void changeDirection(Vector3d direction) {
-        super.setDeltaMovement(direction);
-        originalDirection = direction;
-    }
-
-    @Override
-    public boolean isNoGravity() { return true; }
-
-    public void addAdditionalSaveData(CompoundNBT nbt) {
-        super.addAdditionalSaveData(nbt);
-
-        nbt.put("OriginalDirection", this.newDoubleList(originalDirection.x, originalDirection.y, originalDirection.z));
-
-        nbt.put("Tool", arrowStack.serializeNBT());
-        nbt.put("Bow", bowStack.serializeNBT());
-
-        if (trajectory != null && TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsValue(trajectory)) {
-            nbt.putString("Trajectory", TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getKey(trajectory).toString());
-        } else {
-            nbt.putString("Trajectory", TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey().toString());
-        }
-
-        CompoundNBT trajectoryDataNBT = new CompoundNBT();
-        trajectory.save(trajectoryDataNBT, originalDirection, toolStack.getStats().getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData);
-        nbt.put("TrajectoryData", trajectoryDataNBT);
-
-        nbt.putInt("TickCount", numTicks);
-
-        nbt.putInt("PierceLevel", pierceLevel);
-        nbt.putFloat("BonusDamage", bonusDamage);
-        nbt.putBoolean("Critical", critical);
-        nbt.putFloat("WaterInertia", waterInertia);
-
-    }
-
-    public void readAdditionalSaveData(CompoundNBT nbt) {
-        super.readAdditionalSaveData(nbt);
-
-        ListNBT directionList = nbt.getList("OriginalDirection", 6);
-        originalDirection = new Vector3d(directionList.getDouble(0), directionList.getDouble(1), directionList.getDouble(2));
-
-        setTool(ItemStack.of(nbt.getCompound("Tool")));
-        setBow(ItemStack.of(nbt.getCompound("Bow")));
-
-        String trajectoryString = nbt.getString("Trajectory");
-
-        ResourceLocation trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
-
-        if (ResourceLocation.isValidResourceLocation(trajectoryString)) {
-            trajectoryId = ResourceLocation.tryParse(trajectoryString);
-
-            if ( !TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsKey(trajectoryId)) {
-                trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
-            }
-        }
-
-        trajectory = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(trajectoryId);
-
-        trajectory.load(originalDirection, toolStack.getStats().getFloat(BowAndArrowToolStats.WEIGHT), trajectoryData, nbt.getCompound("TrajectoryData"));
-
-        numTicks = nbt.getInt("TickCount");
-
-        pierceLevel = nbt.getInt("PierceLevel");
-        bonusDamage = nbt.getFloat("BonusDamage");
-        critical = nbt.getBoolean("Critical");
-        waterInertia = nbt.getFloat("WaterInertia");
-    }
-
-    @Override
-    protected void defineSynchedData() {}
-
-    @OnlyIn(Dist.CLIENT)
-    public void lerpTo(double p_180426_1_, double p_180426_3_, double p_180426_5_, float p_180426_7_, float p_180426_8_, int p_180426_9_, boolean p_180426_10_) {
-        this.setPos(p_180426_1_, p_180426_3_, p_180426_5_);
-        this.setRot(p_180426_7_, p_180426_8_);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void lerpMotion(double p_70016_1_, double p_70016_3_, double p_70016_5_) {
-        super.lerpMotion(p_70016_1_, p_70016_3_, p_70016_5_);
+        setBaseDamage(0);
     }
 
     @Override
@@ -189,145 +94,75 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         this.waterInertia = waterInertia;
     }
 
-    public float getWaterInertia() {
+    @Override
+    public float getWaterInertiaMultiplier() {
         return waterInertia;
+    }
+
+    @Override
+    protected float getWaterInertia() {
+        return 0.99F;
+    }
+
+    @Override
+    public void shoot(double xDirection, double yDirection, double zDirection, float power, float inaccuracy){
+
+        super.shoot(xDirection, yDirection, zDirection, power, inaccuracy / stats.getFloat(BowAndArrowToolStats.ACCURACY));
+
+        originalDirection = getDeltaMovement();
+        numTicks = 0;
+
+        for(ModifierEntry m: toolStack.getModifierList()) {
+            if (m.getModifier() instanceof IProjectileModifier) {
+                ((IProjectileModifier) m.getModifier()).onArrowShot(toolStack, m.getLevel(), this, originalDirection, this.getOwner());
+            }
+        }
+    }
+
+    @Override
+    protected ItemStack getPickupItem() {
+        if (toolStack != null) {
+            return toolStack.createStack();
+        } else {
+            return new ItemStack(Items.AIR);
+        }
+
     }
 
     private Vector3d getArrowMotion() {
         float weight = calculateWeight();
+        float stability = calculateStability();
+        float resistance =  isInWater() ? getWaterInertiaMultiplier() : 0.99f;
 
         try {
-            return trajectory.getMotionDirection(numTicks, originalDirection, weight, trajectoryData);
+            return trajectory.getMotionDirection(numTicks, originalDirection, weight, stability, resistance, trajectoryData);
         } catch (Exception e) {
-            trajectoryData = trajectory.onCreated(originalDirection, weight);
-            return trajectory.getMotionDirection(numTicks, originalDirection, weight, trajectoryData);
+            trajectoryData = trajectory.onCreated(originalDirection, weight, stability);
+            return trajectory.getMotionDirection(numTicks, originalDirection, weight, stability, resistance, trajectoryData);
         }
     }
 
     @Override
     public void tick() {
-        super.tick();
 
-        if (this.shakeTime > 0) {
-            --this.shakeTime;
-        }
-
-        if (this.isInWaterOrRain()) {
-            this.clearFire();
-        }
-
-        BlockPos blockpos = this.blockPosition();
-        BlockState blockstate = this.level.getBlockState(blockpos);
-        if (!blockstate.isAir(this.level, blockpos) ) {
-            VoxelShape voxelshape = blockstate.getCollisionShape(this.level, blockpos);
-            if (!voxelshape.isEmpty()) {
-                Vector3d vector3d1 = this.position();
-
-                for(AxisAlignedBB axisalignedbb : voxelshape.toAabbs()) {
-                    if (axisalignedbb.move(blockpos).contains(vector3d1)) {
-                        this.inGround = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (inGround) {
-
-            if (this.lastState != blockstate && this.shouldFall()) {
-                this.startFalling();
-            } else if (!this.level.isClientSide) {
-                this.tickDespawn();
-            }
-
-            ++this.inGroundTime;
-
-            for (ModifierEntry m: projectileModifierList) {
-                ((IProjectileModifier)m.getModifier()).onProjectileGroundTick(toolStack, m.getLevel(), this);
-            }
-
-        } else {
-
+        if (!inGround) {
             numTicks++;
 
             if (trajectory != null && originalDirection != null) {
-                Vector3d arrowMotion = getArrowMotion();
-
-                if (this.isInWater()) {
-                    for(int j = 0; j < 4; ++j) {
-                        this.level.addParticle(ParticleTypes.BUBBLE, getX() - arrowMotion.x * 0.25D, getY() - arrowMotion.y * 0.25D, getZ() - arrowMotion.z * 0.25D, arrowMotion.x, arrowMotion.y, arrowMotion.z);
-                    }
-
-                    arrowMotion = arrowMotion.scale(waterInertia);
-                }
-
-                setDeltaMovement(arrowMotion);
+                setDeltaMovement(getArrowMotion());
             }
-
-            Vector3d motion = this.getDeltaMovement();
-
-            this.inGroundTime = 0;
-            Vector3d position = this.position();
-            Vector3d modifiedPosition = position.add(motion);
-            RayTraceResult raytraceresult = this.level.clip(new RayTraceContext(position, modifiedPosition, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, this));
-            if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
-                modifiedPosition = raytraceresult.getLocation();
-            }
-
-            while (this.isAlive()) {
-                EntityRayTraceResult entityraytraceresult = this.findHitEntity(position, modifiedPosition);
-                if (entityraytraceresult != null) {
-                    raytraceresult = entityraytraceresult;
-                }
-
-                if (raytraceresult != null && raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
-                    Entity entity = ((EntityRayTraceResult) raytraceresult).getEntity();
-                    Entity entity1 = this.getOwner();
-                    if (entity instanceof PlayerEntity && entity1 instanceof PlayerEntity && !((PlayerEntity) entity1).canHarmPlayer((PlayerEntity) entity)) {
-                        raytraceresult = null;
-                        entityraytraceresult = null;
-                    }
-                }
-
-                if (raytraceresult != null && raytraceresult.getType() != RayTraceResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
-                    this.onHit(raytraceresult);
-                    this.hasImpulse = true;
-                    if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
-                        motion = getDeltaMovement();
-                    }
-                }
-
-                if (entityraytraceresult == null || this.getPierceLevel() <= 0) {
-                    break;
-                }
-
-                raytraceresult = null;
-            }
-
-            if (critical) {
-                for(int i = 0; i < 4; ++i) {
-                    this.level.addParticle(ParticleTypes.CRIT, this.getX() + motion.x * (double)i / 4.0D, this.getY() + motion.y * (double)i / 4.0D, this.getZ() + motion.z * (double)i / 4.0D, -motion.x, -motion.y + 0.2D, -motion.z);
-                }
-            }
-
-            float f1 = MathHelper.sqrt(getHorizontalDistanceSqr(motion));
-            this.yRot = (float) (MathHelper.atan2(motion.x, motion.z) * (double) (180F / (float) Math.PI));
-            this.xRot = (float) (MathHelper.atan2(motion.y, f1) * (double) (180F / (float) Math.PI));
-            if (this.xRotO == 0f && this.yRotO == 0f) {
-                this.xRotO = xRot;
-                this.yRotO = yRot;
-            } else {
-                this.xRot = lerpRotation(this.xRotO, this.xRot);
-                this.yRot = lerpRotation(this.yRotO, this.yRot);
-            }
-
-            setPos(getX() + motion.x, getY() + motion.y, getZ() + motion.z);
 
             for (ModifierEntry m: projectileModifierList) {
                 ((IProjectileModifier)m.getModifier()).onProjectileFlyTick(toolStack, m.getLevel(), this);
             }
 
+        } else {
+            for (ModifierEntry m: projectileModifierList) {
+                ((IProjectileModifier)m.getModifier()).onProjectileGroundTick(toolStack, m.getLevel(), this);
+            }
         }
+
+        super.tick();
 
         for (ModifierEntry m: projectileModifierList) {
             ((IProjectileModifier)m.getModifier()).onProjectileTick(toolStack, m.getLevel(), this);
@@ -335,26 +170,8 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     }
 
-    private boolean shouldFall() {
-        return this.inGround && this.level.noCollision((new AxisAlignedBB(this.position(), this.position())).inflate(0.06D));
-    }
-
-    private void startFalling() {
-        this.inGround = false;
-        Vector3d vector3d = this.getDeltaMovement();
-        this.setDeltaMovement(vector3d.multiply(this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F, this.random.nextFloat() * 0.2F));
-        this.inGroundTime = 0;
-        this.tickCount = 0;
-    }
-
-    @Nullable
-    protected EntityRayTraceResult findHitEntity(Vector3d p_213866_1_, Vector3d p_213866_2_) {
-        return ProjectileHelper.getEntityHitResult(this.level, this, p_213866_1_, p_213866_2_, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
-    }
-
     @Override
     protected void onHitEntity(EntityRayTraceResult entityHit) {
-        super.onHitEntity(entityHit);
         Entity entity = entityHit.getEntity();
         if (this.getPierceLevel() > 0) {
             if (this.piercingIgnoreEntityIds == null) {
@@ -396,7 +213,7 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
 
         //if (entity.hurt(damagesource, (float)damage)) {
-        if (this.level.isClientSide || ProjectileAttackUtil.attackEntity( arrowStack.getItem(), this, toolStack, livingOwner, entity, false, bowToolStack)) {
+        if (this.level.isClientSide || ProjectileAttackUtil.attackEntity( toolStack.getItem(), this, toolStack, livingOwner, entity, false, bowToolStack)) {
             if (flag) {
                 return;
             }
@@ -462,26 +279,23 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     }
 
+    protected boolean canHitEntity(Entity p_230298_1_) {
+        return super.canHitEntity(p_230298_1_) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(p_230298_1_.getId()));
+    }
+
     @Override
     protected void onHitBlock(BlockRayTraceResult BlockRayTraceResult) {
-        this.lastState = this.level.getBlockState(BlockRayTraceResult.getBlockPos());
-        super.onHitBlock(BlockRayTraceResult);
-        Vector3d direction = getDeltaMovement();
-        Vector3d positionDifference = BlockRayTraceResult.getLocation().subtract(this.getX(), this.getY(), this.getZ());
-        this.setDeltaMovement(positionDifference);
-        Vector3d vector3d1 = positionDifference.normalize().scale(0.05F);
-        this.setPosRaw(this.getX() - vector3d1.x, this.getY() - vector3d1.y, this.getZ() - vector3d1.z);
-        this.playSound(SoundEvents.ARROW_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
-        this.inGround = true;
-        this.shakeTime = 7;
-        this.setCritical(false);
-        this.setPierceLevel(0);
-        setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
-        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight());
-        this.resetPiercedEntities();
+
         for (ModifierEntry m: projectileModifierList) {
-            ((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, this.lastState, direction);
+            if (!((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, lastState, BlockRayTraceResult.getBlockPos(), getDeltaMovement())) return;
         }
+
+        this.lastState = this.level.getBlockState(BlockRayTraceResult.getBlockPos());
+
+        setProjectileTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey()));
+        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight(), calculateStability());
+        this.resetPiercedEntities();
+        super.onHitBlock(BlockRayTraceResult);
     }
 
     private void resetPiercedEntities() {
@@ -495,27 +309,116 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
 
     }
 
-    protected void tickDespawn() {
-        if (this.inGroundTime >= 1200) {
-            this.remove();
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
+
+        nbt.put("Bow", bowStack.serializeNBT());
+
+        nbt.putString("Item", toolStack.getItem().getRegistryName().toString());
+        nbt.put("Materials", toolStack.getMaterials().serializeToNBT());
+
+        nbt.putFloat("Weight", weightBonus);
+        nbt.putFloat("Stability", stabilityBonus);
+
+        nbt.put("OriginalDirection", this.newDoubleList(originalDirection.x, originalDirection.y, originalDirection.z));
+
+        if (trajectory != null && TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsValue(trajectory)) {
+            nbt.putString("Trajectory", TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getKey(trajectory).toString());
+        } else {
+            nbt.putString("Trajectory", TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey().toString());
         }
+
+        CompoundNBT trajectoryDataNBT = new CompoundNBT();
+        trajectory.save(trajectoryDataNBT, originalDirection, calculateWeight(), calculateStability(), trajectoryData);
+        nbt.put("TrajectoryData", trajectoryDataNBT);
+
+        nbt.putInt("TickCount", numTicks);
+
 
     }
 
-    @Override
-    protected boolean canHitEntity(Entity entity) {
-        return super.canHitEntity(entity) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(entity.getId()));
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
+
+        setBow(ItemStack.of(nbt.getCompound("Bow")));
+
+        Item originalItem = TinkersArchery.tinkers_arrow.get();
+
+        try {
+            originalItem = Registry.ITEM.get(new ResourceLocation(nbt.getString("Item")));
+        } catch (RuntimeException runtimeexception) {
+
+        }
+
+        List<IMaterial> materials;
+
+        try {
+            materials = MaterialNBT.readFromNBT(nbt.get("Materials")).getMaterials();
+        } catch (RuntimeException runtimeexception) {
+            materials = new ArrayList<>();
+        }
+
+        ToolDefinition toolDefinition;
+
+        if (originalItem instanceof ITinkersConsumableItem) {
+            toolDefinition = ((ITinkersConsumableItem)originalItem).getToolDefinition();
+        } else {
+            toolDefinition = BowAndArrowDefinitions.ARROW;
+        }
+
+        setToolStack(ToolStack.createTool(originalItem, toolDefinition, materials));
+
+        weightBonus = nbt.getFloat("Weight");
+        stabilityBonus = nbt.getFloat("Stability");
+
+        ListNBT directionList = nbt.getList("OriginalDirection", 6);
+        originalDirection = new Vector3d(directionList.getDouble(0), directionList.getDouble(1), directionList.getDouble(2));
+
+        String trajectoryString = nbt.getString("Trajectory");
+
+        ResourceLocation trajectoryId = ResourceLocation.tryParse(trajectoryString);
+
+        if (trajectoryId != null) {
+            trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
+        }
+
+        if ( !TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsKey(trajectoryId)) {
+            trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
+        }
+
+        setProjectileTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(trajectoryId));
+
+        trajectory.load(originalDirection, calculateWeight(), calculateStability(), trajectoryData, nbt.getCompound("TrajectoryData"));
+
+        numTicks = nbt.getInt("TickCount");
     }
 
     @Override
     public void writeSpawnData(PacketBuffer buffer) {
 
+        buffer.writeItem(bowStack);
+
+        if (toolStack != null) {
+            buffer.writeBoolean(true);
+            buffer.writeVarInt(Item.getId(toolStack.getItem()));
+
+            buffer.writeInt(toolStack.getMaterialsList().size());
+
+            for (IMaterial material : toolStack.getMaterialsList()) {
+                buffer.writeResourceLocation(material.getIdentifier());
+            }
+        } else {
+            buffer.writeBoolean(false);
+
+            buffer.writeInt(0);
+        }
+
+        buffer.writeFloat(weightBonus);
+        buffer.writeFloat(stabilityBonus);
+
         buffer.writeDouble(originalDirection.x);
         buffer.writeDouble(originalDirection.y);
         buffer.writeDouble(originalDirection.z);
-
-        buffer.writeItem(arrowStack);
-        buffer.writeItem(bowStack);
 
         if (trajectory != null && TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsValue(trajectory)) {
             buffer.writeUtf(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getKey(trajectory).toString());
@@ -526,83 +429,63 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
         buffer.writeInt(numTicks);
 
         CompoundNBT trajectoryNBT = new CompoundNBT();
-        trajectory.save(trajectoryNBT, originalDirection, calculateWeight(), trajectoryData);
+        trajectory.save(trajectoryNBT, originalDirection, calculateWeight(), calculateStability(), trajectoryData);
         buffer.writeNbt(trajectoryNBT);
-
-        buffer.writeInt(pierceLevel);
-        buffer.writeFloat(bonusDamage);
-        buffer.writeBoolean(critical);
-        buffer.writeFloat(waterInertia);
-
     }
 
     @Override
     public void readSpawnData(PacketBuffer additionalData) {
 
-        originalDirection = new Vector3d(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
-
-        setTool(additionalData.readItem());
         setBow(additionalData.readItem());
+
+        Item originalItem = TinkersArchery.tinkers_arrow.get();
+
+        if (additionalData.readBoolean()) {
+            originalItem = Item.byId(additionalData.readVarInt());
+        }
+
+        List<IMaterial> materials = new ArrayList<>();
+
+        int size = additionalData.readInt();
+
+        for (int i = 0; i < size; i++) {
+            materials.add(MaterialRegistry.getMaterial(new MaterialId(additionalData.readResourceLocation())));
+        }
+
+        ToolDefinition toolDefinition;
+
+        if (originalItem instanceof ITinkersConsumableItem) {
+            toolDefinition = ((ITinkersConsumableItem)originalItem).getToolDefinition();
+        } else {
+            toolDefinition = BowAndArrowDefinitions.ARROW;
+        }
+
+        setToolStack(ToolStack.createTool(originalItem, toolDefinition, materials));
+
+        weightBonus = additionalData.readFloat();
+        stabilityBonus = additionalData.readFloat();
+
+        originalDirection = new Vector3d(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
 
         String trajectoryString = additionalData.readUtf();
 
-        ResourceLocation trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
-
-        if (ResourceLocation.isValidResourceLocation(trajectoryString)) {
-            trajectoryId = ResourceLocation.tryParse(trajectoryString);
-            if ( !TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsKey(trajectoryId)) {
-                trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
-            }
+        ResourceLocation trajectoryId = ResourceLocation.tryParse(trajectoryString);
+        if ( trajectoryId != null && !TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.containsKey(trajectoryId)) {
+            trajectoryId = TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getDefaultKey();
         }
 
-        setTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(trajectoryId));
+        setProjectileTrajectory(TinkersArcheryRegistries.PROJECTILE_TRAJECTORIES.getValue(trajectoryId));
 
         numTicks = additionalData.readInt();
 
-        trajectory.load(originalDirection, calculateWeight(), trajectoryData, additionalData.readNbt());
-
-        pierceLevel = additionalData.readInt();
-        bonusDamage = additionalData.readFloat();
-        critical = additionalData.readBoolean();
-        waterInertia = additionalData.readFloat();
-
+        trajectory.load(originalDirection, calculateWeight(), calculateStability(), trajectoryData, additionalData.readNbt());
     }
 
-    @Nonnull
-    @Override
-    public IPacket<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @Override
-    public boolean shouldRenderAtSqrDistance(double p_70112_1_) {
-        double d0 = this.getBoundingBox().getSize() * 10.0D;
-        if (Double.isNaN(d0)) {
-            d0 = 1.0D;
-        }
-
-        d0 = d0 * 64.0D * getViewScale();
-        return p_70112_1_ < d0 * d0;
-    }
-
-    public void setTrajectory(ProjectileTrajectory trajectory) {
-        this.trajectory = trajectory;
-        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight());
-    }
-
-    public ProjectileTrajectory getTrajectory() {
-        return this.trajectory;
-    }
-
-    public void setTool(ItemStack tool){
-
+    public void setToolStack(ToolStack toolStack) {
         projectileModifierList = new ArrayList<>();
 
-        if (tool != null) {
-            arrowStack = tool.copy();
-
-            toolStack = ToolStack.from(tool);
+        if (toolStack != null) {
+            this.toolStack = toolStack.copy();
 
             stats = toolStack.getStats();
 
@@ -614,83 +497,68 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
                 }
             }
         } else {
-            arrowStack = null;
-
-            toolStack = null;
+            this.toolStack = null;
 
             stats = StatsNBT.EMPTY;
         }
-
-
     }
 
-    public ToolStack getTool(){
-        return toolStack;
+    public IMaterial getMaterial(int index) {
+        return toolStack.getMaterial(index);
     }
 
-    public void setBow(ItemStack bow){
-
-        if (bow != null) {
-            bowStack = bow.copy();
-
-            bowToolStack = ToolStack.from(bow);
-        } else {
-            bowStack = null;
-
-            bowToolStack = null;
-        }
-
-
+    public int getNumMaterials() {
+        return toolStack.getMaterialsList().size();
     }
 
+    public boolean hasTool() {
+        return toolStack != null;
+    }
+
+    @Nonnull
+    @Override
+    public IPacket<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
+    public ProjectileTrajectory getProjectileTrajectory() {
+        return this.trajectory;
+    }
+
+    @Override
+    public void setProjectileTrajectory(ProjectileTrajectory trajectory) {
+        this.trajectory = trajectory;
+        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight(), calculateStability());
+    }
+
+    @Override
     public Vector3d getOriginalDirection() {
         return originalDirection;
     }
 
     @Override
-    public void setPierceLevel(int pierceLevel) {
-        this.pierceLevel = pierceLevel;
+    public void setOriginalDirection(Vector3d originalDirection) {
+        this.originalDirection = originalDirection;
     }
 
     @Override
-    public int getPierceLevel(){
-        return pierceLevel;
+    public void changeDirection(Vector3d direction) {
+        setDeltaMovement(direction);
+
+        originalDirection = direction;
+
+        trajectoryData = trajectory.onCreated(originalDirection, calculateWeight(), calculateStability());
     }
 
     @Override
-    public void setCritical(boolean critical) {
-        this.critical = critical;
+    public int getTrajectoryTime() {
+        return numTicks;
     }
 
     @Override
-    public boolean getCritical() {
-        return critical;
-    }
-
-    @Override
-    public void setDamage(float damage) {
-        bonusDamage = damage;
-    }
-
-    @Override
-    public float getDamage() {
-        return bonusDamage;
-    }
-
-    @Override
-    public float calculateDamage() {
-
-        float result = stats.getFloat(ToolStats.ATTACK_DAMAGE) + bonusDamage;
-
-        float speed = (float)this.getDeltaMovement().length();
-        result = (float)MathHelper.clamp((double)speed * result, 0.0D, 2.147483647E9D);
-
-        if (critical) {
-            float j = this.random.nextFloat() * (result / 2 + 2);
-            result += j;
-        }
-
-        return result;
+    public void setTrajectoryTime(int ticks) {
+        numTicks = ticks;
     }
 
     @Override
@@ -706,5 +574,51 @@ public class TinkersArrowEntity extends ProjectileEntity implements IEntityAddit
     @Override
     public float calculateWeight() {
         return stats.getFloat(BowAndArrowToolStats.WEIGHT) + weightBonus;
+    }
+
+    @Override
+    public void setStability(float stability) {
+        stabilityBonus = stability;
+    }
+
+    @Override
+    public float getStability() {
+        return stabilityBonus;
+    }
+
+    @Override
+    public float calculateStability() {
+        return stats.getFloat(BowAndArrowToolStats.STABILITY) + stabilityBonus;
+    }
+
+    @Override
+    public void setDamage(float damage) {
+        setBaseDamage(damage);
+    }
+
+    @Override
+    public float getDamage() {
+        return (float)getBaseDamage();
+    }
+
+    @Override
+    public float calculateDamage() {
+
+        float result = stats.getFloat(ToolStats.ATTACK_DAMAGE) + getDamage();
+
+        float speed = (float)this.getDeltaMovement().length();
+        result = (float) MathHelper.clamp((double)speed * result, 0.0D, 2.147483647E9D);
+
+        if (isCritArrow()) {
+            result *= 1.2;
+        }
+
+        return result;
+    }
+
+    @Override
+    public void setBow(ItemStack bow) {
+        bowStack = bow;
+        bowToolStack = ToolStack.from(bow);
     }
 }

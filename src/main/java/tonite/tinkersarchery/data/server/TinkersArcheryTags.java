@@ -13,6 +13,7 @@ import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import slimeknights.mantle.registration.object.FluidObject;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import tonite.tinkersarchery.TinkersArchery;
 
@@ -127,13 +128,17 @@ public class TinkersArcheryTags {
             addCast(TinkersArchery.arrow_shaft_cast, ARROW_SHAFT_CAST, ARROW_SHAFT_CAST_SINGLE);
 
             // Tools
-            tag(MULTIPART_TOOL).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get()).add(TinkersArchery.arrow.get());
-            tag(DURABILITY).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get()).add(TinkersArchery.arrow.get());
-            tag(ONE_HANDED).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.arrow.get());
+            tag(MULTIPART_TOOL).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get());
+            //tag(MODIFIABLE).add(TinkersArchery.tinkers_arrow.get());
+            tag(DURABILITY).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get());//.add(TinkersArchery.arrow.get());
+            tag(ONE_HANDED).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get());//.add(TinkersArchery.arrow.get());
             tag(TWO_HANDED).add(TinkersArchery.longbow.get());
-            tag(MELEE_PRIMARY).add(TinkersArchery.arrow.get());
+            //tag(MELEE_PRIMARY).add(TinkersArchery.tinkers_arrow.get());
             tag(MODIFIABLE_SHOOTABLE).add(TinkersArchery.shortbow.get()).add(TinkersArchery.crossbow.get()).add(TinkersArchery.longbow.get());
-            tag(MODIFIABLE_PROJECTILE).add(TinkersArchery.arrow.get());
+            tag(MODIFIABLE_PROJECTILE).add(TinkersArchery.tinkers_arrow.get());
+            tag(ItemTags.ARROWS).add(TinkersArchery.tinkers_arrow.get());
+
+            tag(TinkerTags.Items.TOOL_PARTS).add(TinkersArchery.bowshaft.get()).add(TinkersArchery.bowstring.get()).add(TinkersArchery.bowguide.get()).add(TinkersArchery.large_bowshaft.get()).add(TinkersArchery.crossbow_arm.get()).add(TinkersArchery.arrowhead.get()).add(TinkersArchery.arrow_shaft.get()).add(TinkersArchery.arrow_fletching.get());
 
             // Tables
             tag(ANVIL_METAL).add(TinkersArchery.cobalt_tantalum_block_item.get()).add(TinkersArchery.galaxy_alloy_block_item.get());

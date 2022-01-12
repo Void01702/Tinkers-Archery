@@ -1,32 +1,23 @@
 package tonite.tinkersarchery.client;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import slimeknights.tconstruct.common.recipe.RecipeCacheInvalidator;
-import slimeknights.tconstruct.library.book.TinkerBook;
-import slimeknights.tconstruct.library.client.data.spritetransformer.*;
 import slimeknights.tconstruct.shared.CommonsClientEvents;
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.client.book.TinkersArcheryBook;
 import tonite.tinkersarchery.client.model.BowModel;
 import tonite.tinkersarchery.client.renderer.TinkersArrowRenderer;
+import tonite.tinkersarchery.client.renderer.TinkersArrowRendererOld;
 import tonite.tinkersarchery.items.tools.BowTool;
 import tonite.tinkersarchery.items.tools.CrossbowTool;
-
-import java.util.function.Consumer;
 
 @Mod.EventBusSubscriber(modid = TinkersArchery.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TinkersArcheryClient {
@@ -44,6 +35,7 @@ public class TinkersArcheryClient {
     static void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
 
+        RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW_OLD.get(), (renderFactory) -> new TinkersArrowRendererOld(renderFactory, new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrowhead.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_shaft.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_fletching.png")));
         RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW.get(), (renderFactory) -> new TinkersArrowRenderer(renderFactory, new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrowhead.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_shaft.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_fletching.png")));
 
         event.enqueueWork(() ->

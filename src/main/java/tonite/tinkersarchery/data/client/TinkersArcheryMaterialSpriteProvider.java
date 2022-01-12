@@ -7,6 +7,8 @@ import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToSprit
 import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
+import tonite.tinkersarchery.stats.BowGuideMaterialStats;
+import tonite.tinkersarchery.stats.BowMaterialStats;
 import tonite.tinkersarchery.stats.BowStringMaterialStats;
 
 public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSpriteProvider {
@@ -20,6 +22,8 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
         // Melee Harvest
         buildMaterial(TinkersArcheryMaterialIds.tantalum)
                 .meleeHarvest()
+                .statType(BowMaterialStats.ID)
+                .statType(BowGuideMaterialStats.ID)
                 .fallbacks("metal")
                 .colorMapper(GreyToColorMapping.builderFromBlack()
                         .addARGB(63, 0xFF323232)
@@ -29,20 +33,25 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                         .addARGB(216, 0xFF95ABAB)
                         .addARGB(255, 0xFFC7E0E0)
                         .build());
+        // Thanks to Generic Username for the colors
         buildMaterial(TinkersArcheryMaterialIds.cobalt_tantalum)
                 .meleeHarvest()
+                .statType(BowMaterialStats.ID)
+                .statType(BowGuideMaterialStats.ID)
                 .fallbacks("metal")
                 .colorMapper(GreyToColorMapping.builderFromBlack()
-                        .addARGB(63, 0xFF575757)
-                        .addARGB(102, 0xFF727272)
-                        .addARGB(140, 0xFF7B808B)
-                        .addARGB(178, 0xFF8491AB)
-                        .addARGB(216, 0xFF8CA0C7)
-                        .addARGB(255, 0xFF90B1F3)
+                        .addARGB(63, 0xFF403C67)
+                        .addARGB(102, 0xFF4F5089)
+                        .addARGB(140, 0xFFA59CCF)
+                        .addARGB(178, 0xFFB2BDFF)
+                        .addARGB(216, 0xFFC6D6FF)
+                        .addARGB(255, 0xFFE5F2FF)
                         .build());
         ResourceLocation galaxyAlloyTexture = TinkersArchery.getResource("item/generator/galaxy_alloy");
         buildMaterial(TinkersArcheryMaterialIds.galaxy_alloy)
                 .meleeHarvest()
+                .statType(BowMaterialStats.ID)
+                .statType(BowGuideMaterialStats.ID)
                 .fallbacks("galaxy", "metal")
                 .transformer(GreyToSpriteTransformer.builderFromBlack()
                         .addARGB(63, 0xFF03001B)

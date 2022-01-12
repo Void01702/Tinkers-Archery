@@ -34,7 +34,7 @@ public class TinkersArcheryToolSlotLayouts extends AbstractStationSlotLayoutProv
                 .addInputItem(TinkersArchery.bowstring, 35, 44)
                 .addInputItem(TinkersArchery.bowguide, 17, 26)
                 .build();
-        defineModifiable(TinkersArchery.arrow)
+        defineModifiable(TinkersArchery.tinkers_arrow)
                 .sortIndex(SORT_PROJECTILE)
                 .addInputItem(TinkersArchery.arrowhead, 48, 26)
                 .addInputItem(TinkersArchery.arrow_shaft, 30, 44)

@@ -2,7 +2,7 @@
   "modifier_id": "tinkersarchery:highlander",
   "text": [
     {
-      "text": "Arrows are launched faster at higher heights, up to a maximum of 100% per level at build height."
+      "text": "Arrows are launched faster at higher heights, up to a maximum of +1 per level at build height."
     }
   ],
   "more_text_space": true,

@@ -4,18 +4,21 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.stat.IToolStat;
 import tonite.tinkersarchery.TinkersArchery;
 
+import java.util.Collections;
 import java.util.List;
 
 public class BowGuideMaterialStats  extends BaseMaterialStats {
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("bowguide"));
-    public static final BowGuideMaterialStats DEFAULT = new BowGuideMaterialStats(1f, 1f);
+    public static final BowGuideMaterialStats DEFAULT = new BowGuideMaterialStats();
 
-    // tooltip prefixes
+    /*// tooltip prefixes
     private static final String ELASTICITY_PREFIX = makeTooltipKey(TinkersArchery.getResource("elasticity"));
     private static final String ACCURACY_PREFIX = makeTooltipKey(TinkersArchery.getResource("accuracy"));
 
@@ -25,15 +28,15 @@ public class BowGuideMaterialStats  extends BaseMaterialStats {
     private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(ELASTICITY_DESCRIPTION, ACCURACY_DESCRIPTION);
 
     private float elasticity;
-    private float accuracy;
+    private float accuracy;*/
 
-    public BowGuideMaterialStats(float elasticity, float accuracy){
-        this.elasticity = elasticity;
-        this.accuracy = accuracy;
-    }
+    private static final ITextComponent NO_STATS = makeTooltip(TConstruct.getResource("extra.no_stats"));
+    private static final List<ITextComponent> LOCALIZED = Collections.singletonList(NO_STATS);
+    private static final List<ITextComponent> DESCRIPTION = Collections.singletonList(StringTextComponent.EMPTY);
 
-    public BowGuideMaterialStats(){
-        this (1f, 1f);
+    public BowGuideMaterialStats(/*float elasticity, float accuracy*/){
+        //this.elasticity = elasticity;
+        //this.accuracy = accuracy;
     }
 
     @Override
@@ -43,12 +46,12 @@ public class BowGuideMaterialStats  extends BaseMaterialStats {
 
     @Override
     public List<ITextComponent> getLocalizedInfo() {
-        List<ITextComponent> info = Lists.newArrayList();
+        //List<ITextComponent> info = Lists.newArrayList();
 
-        info.add(format(ELASTICITY_PREFIX, this.elasticity));
-        info.add(format(ACCURACY_PREFIX, this.accuracy));
+        //info.add(format(ELASTICITY_PREFIX, this.elasticity));
+        //info.add(format(ACCURACY_PREFIX, this.accuracy));
 
-        return info;
+        return LOCALIZED;
     }
 
     public static ITextComponent format(String prefix, float quality) {
@@ -63,23 +66,23 @@ public class BowGuideMaterialStats  extends BaseMaterialStats {
     @Override
     public void encode(PacketBuffer buffer) {
 
-        buffer.writeFloat(this.elasticity);
-        buffer.writeFloat(this.accuracy);
+        //buffer.writeFloat(this.elasticity);
+        //buffer.writeFloat(this.accuracy);
 
     }
 
     @Override
     public void decode(PacketBuffer buffer) {
 
-        this.elasticity = buffer.readFloat();
-        this.accuracy = buffer.readFloat();
+        //this.elasticity = buffer.readFloat();
+        //this.accuracy = buffer.readFloat();
     }
 
-    public float getElasticity() {
+    /*public float getElasticity() {
         return elasticity;
     }
 
     public float getAccuracy() {
         return accuracy;
-    }
+    }*/
 }

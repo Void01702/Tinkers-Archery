@@ -1,11 +1,13 @@
 package tonite.tinkersarchery.modifiers.traits;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.util.math.vector.Vector3d;
 import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
+import tonite.tinkersarchery.library.projectileinterfaces.ITrajectoryProjectile;
 
 import java.util.function.Supplier;
 
@@ -19,9 +21,9 @@ public class TrajectoryApplier extends SingleUseModifier implements IProjectileM
     }
 
     @Override
-    public void onArrowLoaded(IModifierToolStack tool, int level, ProjectileEntity arrow) {
+    public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, Vector3d direction, Entity shooter) {
 
-        ((TinkersArrowEntity)arrow).setTrajectory(trajectory.get());
+        ((ITrajectoryProjectile) arrow).setProjectileTrajectory(trajectory.get());
 
     }
 }

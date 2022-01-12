@@ -1,0 +1,28 @@
+{
+  "type": "tconstruct:material_fluid",
+  "conditions": [
+    {
+      "values": [
+        {
+          "tag": "forge:wires/steel",
+          "type": "forge:tag_empty"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/steel",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:and"
+    }
+  ],
+  "input": "tconstruct:string",
+  "fluid": {
+    "tag": "tconstruct:molten_steel",
+    "amount": 100
+  },
+  "temperature": 950,
+  "output": "tinkersarchery:steel_wire"
+}

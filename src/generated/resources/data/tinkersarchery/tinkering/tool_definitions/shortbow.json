@@ -11,9 +11,11 @@
     }
   ],
   "stats": {
-    "base": {},
+    "base": {
+      "tconstruct:durability": 100.0
+    },
     "multipliers": {
-      "tconstruct:durability": 6.5
+      "tconstruct:durability": 1.1
     }
   },
   "slots": {

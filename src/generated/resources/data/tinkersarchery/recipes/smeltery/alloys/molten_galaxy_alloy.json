@@ -2,16 +2,16 @@
   "type": "tconstruct:alloy",
   "inputs": [
     {
+      "name": "tconstruct:molten_emerald",
+      "amount": 144
+    },
+    {
       "name": "tinkersarchery:molten_tantalum",
       "amount": 288
     },
     {
       "name": "tconstruct:liquid_soul",
       "amount": 1000
-    },
-    {
-      "name": "tconstruct:molten_emerald",
-      "amount": 144
     }
   ],
   "result": {

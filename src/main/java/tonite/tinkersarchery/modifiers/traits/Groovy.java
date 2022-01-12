@@ -1,12 +1,21 @@
 package tonite.tinkersarchery.modifiers.traits;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.TooltipFlag;
+import slimeknights.tconstruct.library.utils.TooltipKey;
 import tonite.tinkersarchery.TinkersArchery;
+import tonite.tinkersarchery.data.server.TinkersArcheryTags;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
+import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class Groovy extends Modifier implements IBowModifier {
@@ -21,7 +30,7 @@ public class Groovy extends Modifier implements IBowModifier {
 
             int effectLevel = TinkersArchery.groovyEffect.get().getLevel(shooter) + 1;
 
-            return drawSpeed * (1 + effectLevel * 0.1f);
+            return drawSpeed + tool.getModifier(BowAndArrowToolStats.DRAW_SPEED) * effectLevel * 0.2f;
 
         } else {
 
@@ -35,5 +44,20 @@ public class Groovy extends Modifier implements IBowModifier {
             int effectLevel = Math.min(5 + (level - 1) * 6, TinkersArchery.groovyEffect.get().getLevel(shooter) + 1);
             TinkersArchery.groovyEffect.get().apply(shooter, 5 * 20, effectLevel, true);
         }
+    }
+
+    @Override
+    public void addInformation(IModifierToolStack tool, int level, @Nullable PlayerEntity player, List<ITextComponent> tooltip, TooltipKey key, TooltipFlag flag) {
+        float bonus = level * 0.2f * 6;
+        if (player != null && key == TooltipKey.SHIFT) {
+            bonus = 0;
+
+            if(player.hasEffect(TinkersArchery.groovyEffect.get())) {
+                int effectLevel = TinkersArchery.groovyEffect.get().getLevel(player) + 1;
+
+                bonus = effectLevel * 0.2f;
+            }
+        }
+        addStatTooltip(tool, BowAndArrowToolStats.DRAW_SPEED, TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE, bonus, tooltip);
     }
 }

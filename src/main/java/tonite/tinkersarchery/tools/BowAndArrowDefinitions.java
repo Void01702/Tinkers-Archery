@@ -21,7 +21,7 @@ public class BowAndArrowDefinitions {
             .build();
 
     public static final ToolDefinition ARROW = ToolDefinition
-            .builder(arrow)
+            .builder(tinkers_arrow)
             .setStatsProvider(BowAndArrowToolStatsProviders.ARROW)
             .build();
 }

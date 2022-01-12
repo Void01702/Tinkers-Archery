@@ -4,6 +4,6 @@ public interface IWaterInertiaProjectile {
 
     void setWaterInertia(float waterInertia);
 
-    float getWaterInertia();
+    float getWaterInertiaMultiplier();
 
 }
