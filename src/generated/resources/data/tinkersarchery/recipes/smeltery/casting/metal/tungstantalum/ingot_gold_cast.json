@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_tungstantalum",
+    "amount": 144
+  },
+  "result": "tinkersarchery:tungstantalum_ingot",
+  "cooling_time": 57
+}

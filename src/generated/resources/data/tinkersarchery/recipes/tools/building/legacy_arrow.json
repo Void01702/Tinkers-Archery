@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:tool_building",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "result": "tinkersarchery:legacy_arrow"
+}

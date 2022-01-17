@@ -26,7 +26,9 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
     @Override
     protected void addMaterials() {
         addMaterial(TinkersArcheryMaterialIds.tantalum, 2, ORDER_BOW, false,  0x9EB9D4);
-        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 3, ORDER_BOW + ORDER_NETHER, false,  0x5079FF);
+        addMaterial(TinkersArcheryMaterialIds.tungstantalum, 3, ORDER_BOW, false,  0x9AA29B, false, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS,  new NotCondition(new TagEmptyCondition("forge","ingots/tungsten"))));
+        addMaterial(TinkersArcheryMaterialIds.luxtum, 3, ORDER_BOW + ORDER_NETHER, false,  0xF9D875);
+        addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 4, ORDER_BOW + ORDER_NETHER, false,  0x5079FF);
         addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, 4, ORDER_BOW + ORDER_NETHER, false,  0x21007F);
 
         addMaterial(TinkersArcheryMaterialIds.slime, 2, ORDER_BOW + ORDER_BINDING, true,  0x5BD141);
@@ -57,6 +59,12 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addDefaultTraits(TinkersArcheryMaterialIds.tantalum, TinkersArchery.FINISHING_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.tantalum, BowMaterialStats.ID, TinkersArchery.ACCURATE_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.tantalum, BowGuideMaterialStats.ID, TinkersArchery.ACCURATE_MODIFIER.get());
+            addDefaultTraits(TinkersArcheryMaterialIds.tungstantalum, TinkersArchery.SWIFTSTRIKE_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.tungstantalum, BowMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.tungstantalum, BowGuideMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
+            addDefaultTraits(TinkersArcheryMaterialIds.luxtum, TinkerModifiers.lightspeed.get());
+            addTraits(TinkersArcheryMaterialIds.luxtum, BowMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.luxtum, BowGuideMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.cobalt_tantalum, TinkersArchery.SWIFTSTRIKE_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.cobalt_tantalum, BowMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.cobalt_tantalum, BowGuideMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
@@ -74,7 +82,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addDefaultTraits(TinkersArcheryMaterialIds.paper, TinkersArchery.LOOPING_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.leaf, TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.slime_leaf, TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER.get());
-            //addTraits(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.ID, TinkersArchery.FLYING_TRAJECTORY_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.ID, TinkersArchery.FLYING_TRAJECTORY_MODIFIER.get());
         }
 
         @Override
@@ -100,8 +108,24 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.4f),
                     new ArrowHeadMaterialStats(12, 4.5f, 2, 2.0f, 1.1f, 1.3f),
                     new ArrowShaftMaterialStats(0.8f, 0.9f, 0.8f, 1.3f, 1.1f, 1.2f));
-            addMaterialStats(TinkersArcheryMaterialIds.cobalt_tantalum,
+            addMaterialStats(TinkersArcheryMaterialIds.tungstantalum,
                     new HeadMaterialStats(900, 5.5f, 3, 2.5f),
+                    new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
+                    ExtraMaterialStats.DEFAULT,
+                    new BowMaterialStats(1200, 3.15f, 1.15f),
+                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
+                    new ArrowHeadMaterialStats(23, 5.5f, 3, 2.5f, 1.0f, 1.3f),
+                    new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.2f, 1.0f, 1.2f));
+            addMaterialStats(TinkersArcheryMaterialIds.luxtum,
+                    new HeadMaterialStats(900, 5.5f, 3, 2.5f),
+                    new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
+                    ExtraMaterialStats.DEFAULT,
+                    new BowMaterialStats(1200, 3.15f, 1.15f),
+                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
+                    new ArrowHeadMaterialStats(23, 5.5f, 3, 2.5f, 1.0f, 1.3f),
+                    new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.2f, 1.0f, 1.2f));
+            addMaterialStats(TinkersArcheryMaterialIds.cobalt_tantalum,
+                    new HeadMaterialStats(900, 5.5f, 4, 2.5f),
                     new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
                     ExtraMaterialStats.DEFAULT,
                     new BowMaterialStats(1200, 3.15f, 1.15f),
@@ -118,7 +142,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new ArrowShaftMaterialStats(1.1f, 0.9f, 1.1f, 1.1f, 1.2f, 1.2f));
 
             // Bowstring
-            addMaterialStats(TinkersArcheryMaterialIds.slime, new BowStringMaterialStats(1.2f, 0.8f, 1.2f, 0.5f));
+            addMaterialStats(TinkersArcheryMaterialIds.slime, new BowStringMaterialStats(1.1f, 0.8f, 0.9f, 0.5f));
             addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.7f, 1.2f, 0.8f, 1.3f));
             addMaterialStats(TinkersArcheryMaterialIds.blazing_string, new BowStringMaterialStats(0.8f, 1.1f, 1.3f, 0.9f));
 
@@ -129,7 +153,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addMaterialStats(TinkersArcheryMaterialIds.paper, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.leaf, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.slime_leaf, ArrowFletchingMaterialStats.DEFAULT);
-            //addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.DEFAULT);
+            addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.DEFAULT);
         }
 
         @Override

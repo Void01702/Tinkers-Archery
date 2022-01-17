@@ -7,6 +7,8 @@ public class TinkersArcheryMaterialIds {
 
     // Melee Harvest
     public static final MaterialId tantalum = id("tantalum");
+    public static final MaterialId tungstantalum = id("tungstantalum");
+    public static final MaterialId luxtum = id("luxtum");
     public static final MaterialId cobalt_tantalum = id("cobalt_tantalum");
     public static final MaterialId galaxy_alloy = id("galaxy_alloy");
 

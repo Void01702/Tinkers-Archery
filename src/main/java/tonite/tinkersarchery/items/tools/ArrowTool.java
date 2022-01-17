@@ -30,9 +30,10 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.library.utils.TooltipFlag;
 import slimeknights.tconstruct.library.utils.TooltipKey;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
+import tonite.tinkersarchery.TinkersArcheryConfig;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.data.server.TinkersArcheryTags;
-import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
+import tonite.tinkersarchery.entities.TinkersArrowEntityLegacy;
 import tonite.tinkersarchery.library.IProjectileItem;
 import tonite.tinkersarchery.library.modifier.IProjectileModifier;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
@@ -82,12 +83,12 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
     public ProjectileEntity createProjectile(ItemStack ammo, World world, LivingEntity player, ItemStack bow) {
         ToolStack tool = ToolStack.from(ammo);
 
-        return new TinkersArrowEntityOld(world, player, tool.getStats());
+        return new TinkersArrowEntityLegacy(world, player, tool.getStats());
     }
 
     @Override
     public void supplyInfoToProjectile(ProjectileEntity projectile, ItemStack ammo, World world, LivingEntity shooter, ItemStack bow) {
-        TinkersArrowEntityOld newProjectile = ((TinkersArrowEntityOld)projectile);
+        TinkersArrowEntityLegacy newProjectile = ((TinkersArrowEntityLegacy)projectile);
         newProjectile.setTool(ammo);
         newProjectile.setBow(bow);
 
@@ -171,6 +172,11 @@ public class ArrowTool extends ModifiableItem implements IProjectileItem {
     }
 
     private static boolean addSubItem(IModifiable item, List<ItemStack> items, IMaterial material, IMaterial[] fixedMaterials) {
+
+        if (!TinkersArcheryConfig.COMMON.legacyArrows.get()) {
+            return false;
+        }
+
         List<PartRequirement> required = item.getToolDefinition().getData().getParts();
         List<IMaterial> materials = new ArrayList<>(required.size());
         for (int i = 0; i < required.size(); i++) {

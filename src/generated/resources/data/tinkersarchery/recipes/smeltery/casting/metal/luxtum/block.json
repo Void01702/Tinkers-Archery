@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "fluid": {
+    "tag": "tinkersarchery:molten_luxtum",
+    "amount": 1296
+  },
+  "result": "tinkersarchery:luxtum_block",
+  "cooling_time": 171
+}

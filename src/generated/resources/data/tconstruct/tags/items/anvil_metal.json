@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "tinkersarchery:tungstantalum_block",
+    "tinkersarchery:luxtum_block",
     "tinkersarchery:cobalt_tantalum_block",
     "tinkersarchery:galaxy_alloy_block"
   ]

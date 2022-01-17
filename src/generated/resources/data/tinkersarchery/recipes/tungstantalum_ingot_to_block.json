@@ -1,0 +1,49 @@
+{
+  "type": "forge:conditional",
+  "conditions": [
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:true"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "XXX",
+          "XYX",
+          "XXX"
+        ],
+        "key": {
+          "X": {
+            "tag": "forge:ingots/tungstantalum"
+          },
+          "Y": {
+            "item": "tinkersarchery:tungstantalum_ingot"
+          }
+        },
+        "result": {
+          "item": "tinkersarchery:tungstantalum_block"
+        }
+      }
+    }
+  ]
+}

@@ -99,7 +99,7 @@ public class ContentArrowMaterial extends ContentMaterial {
         // fill in leftover space
         if (displayTools.size() < 9) {
             toolLoop:
-            for (Item item : TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE.getValues()) {
+            for (Item item : TinkersArcheryTags.TinkersArcheryItemTags.BOOK_ARROW.getValues()) {
                 if (item instanceof IModifiable) {
                     IModifiable tool = ((IModifiable)item);
                     List<PartRequirement> requirements = tool.getToolDefinition().getData().getParts();

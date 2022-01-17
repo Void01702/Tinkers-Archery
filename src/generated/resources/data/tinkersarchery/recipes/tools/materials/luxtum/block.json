@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/luxtum"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkersarchery:luxtum",
+  "leftover": {
+    "tag": "forge:ingots/luxtum"
+  }
+}

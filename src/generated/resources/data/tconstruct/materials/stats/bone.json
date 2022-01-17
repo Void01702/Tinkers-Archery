@@ -10,7 +10,7 @@
       "accuracy": 1.0
     },
     "tinkersarchery:bow": {
-      "durability": 100,
+      "durability": 150,
       "elasticity": 2.8,
       "drawSpeed": 1.1
     },

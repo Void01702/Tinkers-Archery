@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_luxtum",
+    "amount": 144
+  },
+  "result": "tinkersarchery:luxtum_ingot",
+  "cooling_time": 57
+}

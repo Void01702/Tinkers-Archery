@@ -16,6 +16,8 @@ public class TinkersArcheryMaterialRenderInfoProvider extends AbstractMaterialRe
     protected void addMaterialRenderInfo() {
         // Melee Harvest
         buildRenderInfo(TinkersArcheryMaterialIds.tantalum).color(0xFF9EB9D4).fallbacks("metal");
+        buildRenderInfo(TinkersArcheryMaterialIds.tungstantalum).color(0xFF9AA29B).fallbacks("metal");
+        buildRenderInfo(TinkersArcheryMaterialIds.luxtum).color(0xFFF9D875).fallbacks("metal").luminosity(15);
         buildRenderInfo(TinkersArcheryMaterialIds.cobalt_tantalum).color(0xFF5079FF).fallbacks("metal");
         buildRenderInfo(TinkersArcheryMaterialIds.galaxy_alloy).color(0xFF21007F).fallbacks("galaxy", "metal").luminosity(10);
 

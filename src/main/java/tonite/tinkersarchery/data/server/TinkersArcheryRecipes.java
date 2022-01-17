@@ -1,6 +1,7 @@
 package tonite.tinkersarchery.data.server;
 
 import net.minecraft.data.*;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -9,19 +10,19 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
-import net.minecraftforge.common.crafting.conditions.AndCondition;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.minecraftforge.common.crafting.conditions.NotCondition;
-import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
+import net.minecraftforge.common.crafting.conditions.*;
 import net.minecraftforge.fluids.FluidAttributes;
+import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.recipe.ingredient.IngredientWithout;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.ISmelteryRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.ModifierMatch;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.IncrementalModifierRecipeBuilder;
@@ -31,6 +32,7 @@ import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.part.IMaterialItem;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerMaterials;
+import slimeknights.tconstruct.smeltery.data.Byproduct;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.TinkersArchery;
@@ -130,6 +132,38 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 TinkersArchery.tantalum_nugget.get(),
                 "tantalum");
 
+        compressionRecipes(withCondition(finishedRecipeConsumer, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/tungsten")))),
+                TinkersArchery.tungstantalum_block_item.get(),
+                TinkersArchery.tungstantalum_ingot.get(),
+                TinkersArchery.tungstantalum_nugget.get(),
+                "tungstantalum");
+
+        compressionRecipes(finishedRecipeConsumer,
+                TinkersArchery.luxtum_block_item.get(),
+                TinkersArchery.luxtum_ingot.get(),
+                TinkersArchery.luxtum_nugget.get(),
+                "luxtum");
+
+        ConditionalRecipe.builder().addCondition(this.TRUE())
+                .addRecipe( ShapedRecipeBuilder.shaped(TinkersArchery.raw_luxtum_block_item.get(), 1)
+                        .pattern("XX")
+                        .pattern("XY")
+                        .define('X', ItemTags.bind("forge:ingots/luxtum"))
+                        .define('Y', TinkersArchery.luxtum_ingot.get())
+                        .group("")
+                        .unlockedBy("has_ingot", has(TinkersArchery.luxtum_ingot.get()))
+                        ::save )
+                .generateAdvancement()
+                .build(finishedRecipeConsumer, new ResourceLocation(TinkersArchery.MOD_ID, TinkersArchery.luxtum_ingot.get().getRegistryName().getPath() + "_to_raw_block"));
+        ConditionalRecipe.builder().addCondition(this.TRUE())
+                .addRecipe( ShapelessRecipeBuilder.shapeless(TinkersArchery.luxtum_ingot.get(), 4)
+                        .requires(TinkersArchery.raw_luxtum_block_item.get())
+                        .group("")
+                        .unlockedBy("has_block", has(TinkersArchery.raw_luxtum_block_item.get()))
+                        ::save )
+                .generateAdvancement()
+                .build(finishedRecipeConsumer, new ResourceLocation(TinkersArchery.MOD_ID, TinkersArchery.raw_luxtum_block_item.get().getRegistryName().getPath() + "_to_ingot"));
+
         compressionRecipes(finishedRecipeConsumer,
                 TinkersArchery.cobalt_tantalum_block_item.get(),
                 TinkersArchery.cobalt_tantalum_ingot.get(),
@@ -143,6 +177,11 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 "galaxy_alloy");
 
         // Alloy Recipes
+        AlloyRecipeBuilder.alloy(TinkersArchery.molten_tungstantalum.get(), FluidValues.INGOT * 2)
+                .addInput(TinkerFluids.moltenTungsten.get(), FluidValues.INGOT)
+                .addInput(TinkersArchery.molten_tantalum.get(), FluidValues.INGOT)
+                .build(withCondition(finishedRecipeConsumer, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/tungsten")))), prefix(TinkersArchery.molten_tungstantalum, alloyFolder));
+
         AlloyRecipeBuilder.alloy(TinkersArchery.molten_cobalt_tantalum.get(), FluidValues.INGOT * 2)
                 .addInput(TinkersArchery.molten_tantalum.get(), FluidValues.INGOT)
                 .addInput(TinkerFluids.moltenCobalt.get(), FluidValues.INGOT)
@@ -154,11 +193,33 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .addInput(TinkerFluids.liquidSoul.get(), FluidValues.GLASS_BLOCK)
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.molten_galaxy_alloy, alloyFolder));
 
+        // Composite Recipes
+        ItemCastingRecipeBuilder.basinRecipe(TinkersArchery.raw_luxtum_block_item.get())
+                .setFluidAndTime(new FluidStack(TinkersArchery.molten_tantalum.get(), FluidValues.INGOT * 4))
+                .setCast(Items.GLOWSTONE, true)
+                .build(finishedRecipeConsumer, prefix(TinkersArchery.raw_luxtum_block, castFolder));
+        ItemCastingRecipeBuilder.tableRecipe(TinkersArchery.luxtum_ingot.get())
+                .setFluidAndTime(new FluidStack(TinkersArchery.molten_tantalum.get(), FluidValues.INGOT))
+                .setCast(Tags.Items.DUSTS_GLOWSTONE, true)
+                .build(finishedRecipeConsumer, prefix(TinkersArchery.luxtum_ingot, castFolder));
+
         // Material Recipes
         metalCasting(finishedRecipeConsumer, TinkersArchery.molten_tantalum, TinkersArchery.tantalum_block_item.get(), TinkersArchery.tantalum_ingot.get(), TinkersArchery.tantalum_nugget.get(), castingFolder, "tantalum");
-        metalMelting(finishedRecipeConsumer, TinkersArchery.molten_tantalum.get(), "tantalum", true, meltingFolder, false);
+        metalMelting(finishedRecipeConsumer, TinkersArchery.molten_tantalum.get(), "tantalum", true, meltingFolder, false, Byproduct.IRON);
         metalMaterialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.tantalum, materialFolder, "tantalum", false);
         materialMeltingCasting(finishedRecipeConsumer, TinkersArcheryMaterialIds.tantalum, TinkersArchery.molten_tantalum, materialFolder);
+
+        metalCasting(withCondition(finishedRecipeConsumer, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/tungsten")))), TinkersArchery.molten_tungstantalum, TinkersArchery.tungstantalum_block_item.get(), TinkersArchery.tungstantalum_ingot.get(), TinkersArchery.tungstantalum_nugget.get(), castingFolder, "tungstantalum");
+        metalMelting(withCondition(finishedRecipeConsumer, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/tungsten")))), TinkersArchery.molten_tungstantalum.get(), "tungstantalum", false, meltingFolder, false);
+        metalMaterialRecipe(withCondition(finishedRecipeConsumer, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/tungsten")))), TinkersArcheryMaterialIds.tungstantalum, materialFolder, "tungstantalum", false);
+        materialMeltingCasting(withCondition(finishedRecipeConsumer, new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/tungsten")))), TinkersArcheryMaterialIds.tungstantalum, TinkersArchery.molten_tungstantalum, materialFolder);
+
+        metalCasting(finishedRecipeConsumer, TinkersArchery.molten_luxtum, TinkersArchery.luxtum_block_item.get(), TinkersArchery.luxtum_ingot.get(), TinkersArchery.luxtum_nugget.get(), castingFolder, "luxtum");
+        metalMeltingBase(finishedRecipeConsumer, TinkersArchery.molten_luxtum.get(), FluidValues.INGOT * 4, "storage_blocks/raw_luxtum", 4.0f, meltingFolder + "/luxtum/raw_block", false);
+        materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.luxtum, Ingredient.of(getTag("forge", "storage_blocks/raw_luxtum")), 4, 1, materialFolder + "raw_luxtum_block");
+        metalMelting(finishedRecipeConsumer, TinkersArchery.molten_luxtum.get(), "luxtum", false, meltingFolder, false);
+        metalMaterialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.luxtum, materialFolder, "luxtum", false);
+        materialMeltingCasting(finishedRecipeConsumer, TinkersArcheryMaterialIds.luxtum, TinkersArchery.molten_luxtum, materialFolder);
 
         metalCasting(finishedRecipeConsumer, TinkersArchery.molten_cobalt_tantalum, TinkersArchery.cobalt_tantalum_block_item.get(), TinkersArchery.cobalt_tantalum_ingot.get(), TinkersArchery.cobalt_tantalum_nugget.get(), castingFolder, "cobalt_tantalum");
         metalMelting(finishedRecipeConsumer, TinkersArchery.molten_cobalt_tantalum.get(), "cobalt_tantalum", false, meltingFolder, false);
@@ -182,7 +243,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         materialComposite(finishedRecipeConsumer, MaterialIds.string, TinkersArcheryMaterialIds.silky_cloth, TinkerFluids.moltenRoseGold, FluidValues.INGOT, false, materialFolder);
         materialComposite(finishedRecipeConsumer, MaterialIds.string, TinkersArcheryMaterialIds.blazing_string, TinkerFluids.blazingBlood, FluidAttributes.BUCKET_VOLUME / 10, false, materialFolder);
-        materialComposite(withCondition(finishedRecipeConsumer, new AndCondition(new TagEmptyCondition("forge", "wires/steel"), new NotCondition(new TagEmptyCondition("forge:ingots/steel")))), MaterialIds.string, TinkersArcheryMaterialIds.steel_wire, TinkerFluids.moltenSteel, FluidAttributes.BUCKET_VOLUME / 10, false, materialFolder);
+        materialComposite(withCondition(finishedRecipeConsumer, new OrCondition(tonite.tinkersarchery.recipe.ConfigEnabledCondition.ALWAYS_ALLOW_STEEL_ON_STRING_BOWSTRING_FOR_STEEL_WIRE, new AndCondition(new TagEmptyCondition("forge", "wires/steel"), new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new NotCondition(new TagEmptyCondition("forge","ingots/steel")))))), MaterialIds.string, TinkersArcheryMaterialIds.steel_wire, TinkerFluids.moltenSteel, FluidValues.INGOT, false, materialFolder);
 
         // Part Recipes
         partRecipes(finishedRecipeConsumer, TinkersArchery.bowshaft, TinkersArchery.bowshaft_cast, 2, partFolder, castFolder);
@@ -198,7 +259,10 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
         toolBuilding(finishedRecipeConsumer, TinkersArchery.shortbow, toolFolder);
         toolBuilding(finishedRecipeConsumer, TinkersArchery.crossbow, toolFolder);
         toolBuilding(finishedRecipeConsumer, TinkersArchery.longbow, toolFolder);
-        consumableItemBuilding(finishedRecipeConsumer, TinkersArchery.tinkers_arrow, toolFolder);
+        consumableItemBuilding(withCondition(finishedRecipeConsumer, new NotCondition(tonite.tinkersarchery.recipe.ConfigEnabledCondition.LEGACY_ARROWS)), TinkersArchery.tinkers_arrow, toolFolder);
+        toolBuilding(withCondition(finishedRecipeConsumer, tonite.tinkersarchery.recipe.ConfigEnabledCondition.LEGACY_ARROWS), TinkersArchery.legacy_arrow, toolFolder);
+
+        Consumer filteredFinishedRecipeConsumer = withCondition(finishedRecipeConsumer, tonite.tinkersarchery.recipe.ConfigEnabledCondition.LEGACY_ARROWS);
 
         // Modifier Recipes
         ModifierRecipeBuilder.modifier(TinkersArchery.MULTISHOT_MODIFIER.get())
@@ -220,9 +284,9 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .addInput(Items.ENDER_EYE)
                 .addInput(TinkersArcheryTags.TinkersArcheryItemTags.TANTALUM_INGOT)
                 .addInput(Items.ENDER_EYE)
-                .addInput(Items.COMPARATOR)
-                .addInput(Items.COMPARATOR)
-                .addSalvage(Items.COMPARATOR, 0.7f)
+                .addInput(Items.POPPED_CHORUS_FRUIT)
+                .addInput(Items.POPPED_CHORUS_FRUIT)
+                .addSalvage(Items.POPPED_CHORUS_FRUIT, 0.7f)
                 .addSalvage(Items.ENDER_EYE, 0.5f)
                 .addSalvage(TinkersArchery.tantalum_ingot.get(), 0.3f)
                 .setMaxLevel(1)
@@ -230,7 +294,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.AUTOAIM_MODIFIER, salvageFolder))
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.AUTOAIM_MODIFIER, abilityFolder));
 
-        /*ModifierRecipeBuilder.modifier(TinkersArchery.PIERCING_MODIFIER.get())
+        ModifierRecipeBuilder.modifier(TinkersArchery.PIERCING_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .addInput(getTag("forge", "gems/quartz"))
                 .addInput(TinkerMaterials.blazingBone)
@@ -241,8 +305,8 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .addSalvage(Items.QUARTZ, 0.5f)
                 .addSalvage(TinkerMaterials.blazingBone.get(), 0.3f)
                 .setSlots(SlotType.ABILITY, 1)
-                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.PIERCING_MODIFIER, salvageFolder))
-                .build(finishedRecipeConsumer, prefix(TinkersArchery.PIERCING_MODIFIER, abilityFolder));
+                .buildSalvage(filteredFinishedRecipeConsumer, prefix(TinkersArchery.PIERCING_MODIFIER, salvageFolder))
+                .build(filteredFinishedRecipeConsumer, prefix(TinkersArchery.PIERCING_MODIFIER, abilityFolder));
 
         ModifierRecipeBuilder.modifier(TinkersArchery.EXPLOSIVE_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
@@ -254,8 +318,8 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .addSalvage(Items.GUNPOWDER, 0.7f)
                 .addSalvage(Items.TNT, 0.3f)
                 .setSlots(SlotType.ABILITY, 1)
-                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.EXPLOSIVE_MODIFIER, salvageFolder))
-                .build(finishedRecipeConsumer, prefix(TinkersArchery.EXPLOSIVE_MODIFIER, abilityFolder));*/
+                .buildSalvage(filteredFinishedRecipeConsumer, prefix(TinkersArchery.EXPLOSIVE_MODIFIER, salvageFolder))
+                .build(filteredFinishedRecipeConsumer, prefix(TinkersArchery.EXPLOSIVE_MODIFIER, abilityFolder));
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HASTE_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
@@ -273,7 +337,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSlots(SlotType.UPGRADE, 1)
                 .build(finishedRecipeConsumer, wrap(TinkersArchery.HASTE_MODIFIER, upgradeFolder, "_from_block"));
 
-        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.POWER_MODIFIER.get())
+        /*IncrementalModifierRecipeBuilder.modifier(TinkersArchery.POWER_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
                 .setInput(Tags.Items.GEMS_QUARTZ, 1, 36)
                 .setSalvage(Items.QUARTZ, false)
@@ -287,7 +351,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setLeftover(new ItemStack(Items.QUARTZ))
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.POWER_MODIFIER, upgradeFolder, "_from_block"));
+                .build(finishedRecipeConsumer, wrap(TinkersArchery.POWER_MODIFIER, upgradeFolder, "_from_block"));*/
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.LAUNCHING_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
@@ -324,14 +388,14 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.HIGHLANDER_MODIFIER, salvageFolder))
                 .build(finishedRecipeConsumer, prefix(TinkersArchery.HIGHLANDER_MODIFIER, upgradeFolder));
 
-        /*IncrementalModifierRecipeBuilder.modifier(TinkersArchery.VELOCITY_MODIFIER.get())
+        IncrementalModifierRecipeBuilder.modifier(TinkersArchery.VELOCITY_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .setInput(Items.FEATHER, 1, 12)
                 .setSalvage(Items.FEATHER, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.VELOCITY_MODIFIER, salvageFolder))
-                .build(finishedRecipeConsumer, prefix(TinkersArchery.VELOCITY_MODIFIER, upgradeFolder));
+                .buildSalvage(filteredFinishedRecipeConsumer, prefix(TinkersArchery.VELOCITY_MODIFIER, salvageFolder))
+                .build(filteredFinishedRecipeConsumer, prefix(TinkersArchery.VELOCITY_MODIFIER, upgradeFolder));
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HEAVY_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
@@ -339,15 +403,15 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSalvage(Items.CLAY_BALL, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.HEAVY_MODIFIER, salvageFolder))
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.HEAVY_MODIFIER, upgradeFolder, "_from_ball"));
+                .buildSalvage(filteredFinishedRecipeConsumer, prefix(TinkersArchery.HEAVY_MODIFIER, salvageFolder))
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.HEAVY_MODIFIER, upgradeFolder, "_from_ball"));
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HEAVY_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .setInput(Items.CLAY, 4, 36)
                 .setLeftover(new ItemStack(Items.CLAY_BALL))
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.HEAVY_MODIFIER, upgradeFolder, "_from_block"));
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.HEAVY_MODIFIER, upgradeFolder, "_from_block"));
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
@@ -355,22 +419,22 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSalvage(Items.PRISMARINE_SHARD, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.AQUADYNAMIC_MODIFIER, salvageFolder))
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_shard"));
+                .buildSalvage(filteredFinishedRecipeConsumer, prefix(TinkersArchery.AQUADYNAMIC_MODIFIER, salvageFolder))
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_shard"));
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .setInput(Items.PRISMARINE, 4, 36)
                 .setLeftover(new ItemStack(Items.PRISMARINE_SHARD))
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_block"));
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_block"));
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.AQUADYNAMIC_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .setInput(Items.PRISMARINE_BRICKS, 9, 36)
                 .setLeftover(new ItemStack(Items.PRISMARINE_SHARD))
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_bricks"));
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.AQUADYNAMIC_MODIFIER, upgradeFolder, "_from_bricks"));
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.PINPOINTER_ARROW_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
@@ -378,26 +442,26 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
                 .setSalvage(Items.OBSIDIAN, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
-                .buildSalvage(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, salvageFolder, "_arrow"))
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_arrow"));
+                .buildSalvage(filteredFinishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, salvageFolder, "_arrow"))
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.PINPOINTER_MODIFIER, upgradeFolder, "_arrow"));
 
         ModifierRecipeBuilder.modifier(TinkersArchery.FLAME_FLARE_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .addInput(Items.TORCH)
                 .setMaxLevel(1)
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.FLAME_FLARE_MODIFIER, slotlessFolder, "_level_1"));
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.FLAME_FLARE_MODIFIER, slotlessFolder, "_level_1"));
         ModifierRecipeBuilder.modifier(TinkersArchery.FLAME_FLARE_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .addInput(Items.SOUL_TORCH)
                 .setRequirements(ModifierMatch.entry(TinkersArchery.FLAME_FLARE_MODIFIER.get()))
                 .setMaxLevel(2)
-                .build(finishedRecipeConsumer, wrap(TinkersArchery.FLAME_FLARE_MODIFIER, slotlessFolder, "_level_2"));
+                .build(filteredFinishedRecipeConsumer, wrap(TinkersArchery.FLAME_FLARE_MODIFIER, slotlessFolder, "_level_2"));
 
         ModifierRecipeBuilder.modifier(TinkersArchery.SHULKER_FLARE_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
                 .addInput(Items.END_ROD)
                 .setMaxLevel(1)
-                .build(finishedRecipeConsumer, prefix(TinkersArchery.SHULKER_FLARE_MODIFIER, slotlessFolder));*/
+                .build(filteredFinishedRecipeConsumer, prefix(TinkersArchery.SHULKER_FLARE_MODIFIER, slotlessFolder));
     }
 
     private void compressionRecipes(Consumer<IFinishedRecipe> consumer, Item block, Item ingot, Item nugget, String name) {

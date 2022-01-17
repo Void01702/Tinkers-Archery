@@ -79,4 +79,39 @@ public class BowAndArrowToolStatsProviders {
             }
         }
     };
+
+    public static final IToolStatProvider LEGACY_ARROW = new IToolStatProvider() {
+        @Override
+        public StatsNBT buildStats(ToolDefinition definition, List<IMaterial> materials) {
+            return LegacyArrowToolStatsBuilder.from(definition, materials).buildStats();
+        }
+
+        @Override
+        public boolean isMultipart() {
+            return true;
+        }
+
+        @Override
+        public void validate(ToolDefinitionData data) {
+            List<PartRequirement> requirements = data.getParts();
+            if (requirements.isEmpty()) {
+                throw new IllegalStateException("Must have at least one tool part for a arrow tool");
+            }
+            boolean foundHead = false;
+            boolean foundFletching = false;
+            for (PartRequirement req : requirements) {
+                MaterialStatsId statType = req.getStatType();
+                if (statType.equals(ArrowHeadMaterialStats.ID)) {
+                    foundHead = true;
+                } else if (statType.equals(ArrowFletchingMaterialStats.ID)) {
+                    foundFletching = true;
+                } else if (!statType.equals(ArrowShaftMaterialStats.ID)) {
+                    throw new IllegalStateException("Invalid arrow tool part type, only support arrowheads, arrowshafts, and arrow fletching part types");
+                }
+            }
+            if (!foundHead || !foundFletching) {
+                throw new IllegalStateException("Arrow tool must use at least one head and fletching part");
+            }
+        }
+    };
 }

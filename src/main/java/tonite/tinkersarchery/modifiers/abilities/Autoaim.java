@@ -27,11 +27,11 @@ public class Autoaim extends SingleUseModifier implements IBowModifier {
 
 
 
-        if (target != null && target.position().subtract(testPos).length() < 16) {
+        if (target != null && target.position().subtract(testPos).length() < 12) {
 
             Vector3d direction = target.getEyePosition(1.0f).subtract(shooter.getEyePosition(1.0f)).normalize();
 
-            arrow.shoot(direction.x, direction.y, direction.z, power * 3, 1);
+            arrow.shoot(direction.x, direction.y, direction.z, power, 1);
 
         }
     }

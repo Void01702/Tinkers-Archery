@@ -1,4 +1,13 @@
 {
   "type": "tinkersarchery:tinkers_consumable_item",
+  "conditions": [
+    {
+      "value": {
+        "prop": "legacy_arrows",
+        "type": "tinkersarchery:config"
+      },
+      "type": "forge:not"
+    }
+  ],
   "result": "tinkersarchery:tinkers_arrow"
 }

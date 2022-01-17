@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:storage_blocks/raw_luxtum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_luxtum",
+    "amount": 576
+  },
+  "temperature": 700,
+  "time": 228
+}

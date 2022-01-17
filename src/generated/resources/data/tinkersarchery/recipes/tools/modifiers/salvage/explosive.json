@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "modifier": "tinkersarchery:explosive",
+  "min_level": 1,
+  "salvage": [
+    {
+      "item": "minecraft:gunpowder",
+      "chance": 0.7
+    },
+    {
+      "item": "minecraft:tnt",
+      "chance": 0.3
+    }
+  ]
+}

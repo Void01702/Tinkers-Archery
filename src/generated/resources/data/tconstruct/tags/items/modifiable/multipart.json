@@ -3,6 +3,7 @@
   "values": [
     "tinkersarchery:shortbow",
     "tinkersarchery:crossbow",
-    "tinkersarchery:longbow"
+    "tinkersarchery:longbow",
+    "tinkersarchery:legacy_arrow"
   ]
 }

@@ -25,7 +25,7 @@
     "tconstruct:head": {
       "durability": 900,
       "miningSpeed": 5.5,
-      "harvestLevel": 3,
+      "harvestLevel": 4,
       "attack": 2.5
     },
     "tinkersarchery:arrow_shaft": {

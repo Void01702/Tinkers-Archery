@@ -1,0 +1,39 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:rods/tungstantalum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/rod"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_tungstantalum",
+    "amount": 72
+  },
+  "result": {
+    "tag": "forge:rods/tungstantalum"
+  },
+  "cooling_time": 40
+}

@@ -18,7 +18,6 @@ import slimeknights.tconstruct.library.client.materials.MaterialRenderInfo;
 import slimeknights.tconstruct.library.client.materials.MaterialRenderInfoLoader;
 import slimeknights.tconstruct.library.materials.definition.IMaterial;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
-import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
 
 import java.util.Optional;
 

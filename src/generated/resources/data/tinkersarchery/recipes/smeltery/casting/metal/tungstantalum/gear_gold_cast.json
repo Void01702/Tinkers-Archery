@@ -1,0 +1,39 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:gears/tungstantalum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gear"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_tungstantalum",
+    "amount": 576
+  },
+  "result": {
+    "tag": "forge:gears/tungstantalum"
+  },
+  "cooling_time": 114
+}

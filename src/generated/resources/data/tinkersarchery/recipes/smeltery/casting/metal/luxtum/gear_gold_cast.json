@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:gears/luxtum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gear"
+  },
+  "fluid": {
+    "tag": "tinkersarchery:molten_luxtum",
+    "amount": 576
+  },
+  "result": {
+    "tag": "forge:gears/luxtum"
+  },
+  "cooling_time": 114
+}

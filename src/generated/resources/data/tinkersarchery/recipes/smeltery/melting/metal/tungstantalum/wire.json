@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:wires/tungstantalum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    },
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:wires/tungstantalum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_tungstantalum",
+    "amount": 72
+  },
+  "temperature": 700,
+  "time": 11
+}

@@ -1,5 +1,6 @@
 package tonite.tinkersarchery;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -10,10 +11,11 @@ import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.loot.LootConditionType;
+import net.minecraft.loot.LootFunctionType;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.ResourceLocation;
@@ -27,6 +29,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,15 +49,19 @@ import net.minecraftforge.registries.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import slimeknights.mantle.registration.ModelFluidAttributes;
+import slimeknights.mantle.registration.RegistrationHelper;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.TinkerEffect;
+import slimeknights.tconstruct.common.data.FluidTagEmptyCondition;
+import slimeknights.tconstruct.common.recipe.BlockOrEntityCondition;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
 import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialDataProvider;
+import slimeknights.tconstruct.library.loot.SetFluidLootFunction;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
@@ -67,7 +74,7 @@ import tonite.tinkersarchery.client.TinkersArcheryClient;
 import tonite.tinkersarchery.data.client.*;
 import tonite.tinkersarchery.data.server.*;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
-import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
+import tonite.tinkersarchery.entities.TinkersArrowEntityLegacy;
 import tonite.tinkersarchery.items.AwesomeArcheryBook;
 import tonite.tinkersarchery.items.TinkersArrowItem;
 import tonite.tinkersarchery.items.tools.ArrowTool;
@@ -76,8 +83,11 @@ import tonite.tinkersarchery.items.tools.CrossbowTool;
 import tonite.tinkersarchery.library.ITinkersConsumableItem;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.modifiers.abilities.*;
+import tonite.tinkersarchery.modifiers.slotless.flares.FlameFlare;
+import tonite.tinkersarchery.modifiers.slotless.flares.ShulkerFlare;
 import tonite.tinkersarchery.modifiers.traits.*;
 import tonite.tinkersarchery.modifiers.upgrades.*;
+import tonite.tinkersarchery.recipe.ConfigEnabledCondition;
 import tonite.tinkersarchery.recipe.ConsumableItemRecipe;
 import tonite.tinkersarchery.stats.*;
 import tonite.tinkersarchery.tools.BowAndArrowDefinitions;
@@ -138,34 +148,45 @@ public class TinkersArchery
     public static final RegistryObject<BowTool> shortbow = ITEMS.register("shortbow", () -> new BowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.SHORTBOW));
     public static final RegistryObject<BowTool> longbow = ITEMS.register("longbow", () -> new BowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.LONGBOW));
     public static final RegistryObject<CrossbowTool> crossbow = ITEMS.register("crossbow", () -> new CrossbowTool(TOOL.get().addToolType(BowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.CROSSBOW));
-    //public static final RegistryObject<ArrowTool> arrow = ITEMS.register("arrow", () -> new ArrowTool(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.ARROW));
-
+    public static final RegistryObject<ArrowTool> legacy_arrow = ITEMS.register("legacy_arrow", () -> new ArrowTool(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.LEGACY_ARROW));
     public static final RegistryObject<TinkersArrowItem> tinkers_arrow = ITEMS.register("tinkers_arrow", () -> new TinkersArrowItem(TOOL.get().addToolType(ArrowTool.TOOL_TYPE, 0), BowAndArrowDefinitions.ARROW));
 
     public static final RegistryObject<Block> tantalum_ore = BLOCKS.register("tantalum_ore", () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F).harvestLevel(1)));
 
     public static final RegistryObject<Block> tantalum_block = BLOCKS.register("tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(5.0F, 6.0F).harvestLevel(1).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> cobalt_tantalum_block = BLOCKS.register("cobalt_tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(6.0F, 8.0F).harvestLevel(2).sound(SoundType.METAL)));
-    public static final RegistryObject<Block> galaxy_alloy_block = BLOCKS.register("galaxy_alloy_block", () -> new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(8.0F, 10.0F).harvestLevel(3).sound(SoundType.NETHERITE_BLOCK)));
+    public static final RegistryObject<Block> tungstantalum_block = BLOCKS.register("tungstantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(7.0F, 9.0F).harvestLevel(2).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> raw_luxtum_block = BLOCKS.register("raw_luxtum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.GOLD).requiresCorrectToolForDrops().strength(5.5F, 6.0F).harvestLevel(1).sound(SoundType.METAL).lightLevel((state) -> 12)));
+    public static final RegistryObject<Block> luxtum_block = BLOCKS.register("luxtum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.GOLD).requiresCorrectToolForDrops().strength(7.0F, 9.0F).harvestLevel(2).sound(SoundType.METAL).lightLevel((state) -> 15)));
+    public static final RegistryObject<Block> cobalt_tantalum_block = BLOCKS.register("cobalt_tantalum_block", () -> new Block(AbstractBlock.Properties.of(Material.METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(6.0F, 8.0F).harvestLevel(3).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> galaxy_alloy_block = BLOCKS.register("galaxy_alloy_block", () -> new Block(AbstractBlock.Properties.of(Material.HEAVY_METAL, MaterialColor.ICE).requiresCorrectToolForDrops().strength(8.0F, 10.0F).harvestLevel(3).sound(SoundType.NETHERITE_BLOCK).lightLevel((state) -> 5)));
 
     public static final RegistryObject<Item> tantalum_ore_item = ITEMS.register("tantalum_ore", () -> new BlockItem(tantalum_ore.get(), TINKERS_ARCHERY_PROPS));
 
     public static final RegistryObject<Item> tantalum_block_item = ITEMS.register("tantalum_block", () -> new BlockItem(tantalum_block.get(), TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> tungstantalum_block_item = ITEMS.register("tungstantalum_block", () -> new BlockItem(tungstantalum_block.get(), TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> raw_luxtum_block_item = ITEMS.register("raw_luxtum_block", () -> new BlockItem(raw_luxtum_block.get(), TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> luxtum_block_item = ITEMS.register("luxtum_block", () -> new BlockItem(luxtum_block.get(), TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> cobalt_tantalum_block_item = ITEMS.register("cobalt_tantalum_block", () -> new BlockItem(cobalt_tantalum_block.get(), TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> galaxy_alloy_block_item = ITEMS.register("galaxy_alloy_block", () -> new BlockItem(galaxy_alloy_block.get(), TINKERS_ARCHERY_PROPS));
 
     public static final RegistryObject<Item> tantalum_ingot = ITEMS.register("tantalum_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> tungstantalum_ingot = ITEMS.register("tungstantalum_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> luxtum_ingot = ITEMS.register("luxtum_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> cobalt_tantalum_ingot = ITEMS.register("cobalt_tantalum_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> galaxy_alloy_ingot = ITEMS.register("galaxy_alloy_ingot", () -> new Item(TINKERS_ARCHERY_PROPS));
 
     public static final RegistryObject<Item> tantalum_nugget = ITEMS.register("tantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> tungstantalum_nugget = ITEMS.register("tungstantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
+    public static final RegistryObject<Item> luxtum_nugget = ITEMS.register("luxtum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> cobalt_tantalum_nugget = ITEMS.register("cobalt_tantalum_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
     public static final RegistryObject<Item> galaxy_alloy_nugget = ITEMS.register("galaxy_alloy_nugget", () -> new Item(TINKERS_ARCHERY_PROPS));
 
     public static final RegistryObject<Item> awesome_archery = ITEMS.register("awesome_archery", () -> new AwesomeArcheryBook(TINKERS_ARCHERY_PROPS));
 
     public static final FluidObject molten_tantalum = FLUIDS.register("molten_tantalum", hotBuilder().temperature(900), Material.LAVA, 12);
-    public static final FluidObject molten_cobalt_tantalum = FLUIDS.register("molten_cobalt_tantalum", hotBuilder().temperature(1200), Material.LAVA, 12);
+    public static final FluidObject molten_tungstantalum = FLUIDS.register("molten_tungstantalum", hotBuilder().temperature(1000), Material.LAVA, 12);
+    public static final FluidObject molten_luxtum = FLUIDS.register("molten_luxtum", hotBuilder().temperature(1000), Material.LAVA, 15);
+    public static final FluidObject molten_cobalt_tantalum = FLUIDS.register("molten_cobalt_tantalum", hotBuilder().temperature(1500), Material.LAVA, 12);
     public static final FluidObject molten_galaxy_alloy = FLUIDS.register("molten_galaxy_alloy", hotBuilder().temperature(1700), Material.LAVA, 15);
 
     public static final CastItemObject bowshaft_cast = ITEMS_EXTENDED.registerCast("bowshaft", TINKERS_ARCHERY_PROPS);
@@ -190,36 +211,36 @@ public class TinkersArchery
 
     public static final RegistryObject<Modifier> MULTISHOT_MODIFIER = MODIFIERS.register("multishot", Multishot::new);
     public static final RegistryObject<Modifier> AUTOAIM_MODIFIER = MODIFIERS.register("autoaim", Autoaim::new);
-    //public static final RegistryObject<Modifier> PIERCING_MODIFIER = MODIFIERS.register("piercing", Piercing::new);
-    //public static final RegistryObject<Modifier> EXPLOSIVE_MODIFIER = MODIFIERS.register("explosive", Explosive::new);
+    public static final RegistryObject<Modifier> PIERCING_MODIFIER = MODIFIERS.register("piercing", Piercing::new);
+    public static final RegistryObject<Modifier> EXPLOSIVE_MODIFIER = MODIFIERS.register("explosive", Explosive::new);
 
     public static final RegistryObject<Modifier> HASTE_MODIFIER = MODIFIERS.register("haste", Haste::new);
-    public static final RegistryObject<Modifier> POWER_MODIFIER = MODIFIERS.register("power", Power::new);
+    //public static final RegistryObject<Modifier> POWER_MODIFIER = MODIFIERS.register("power", Power::new);
     public static final RegistryObject<Modifier> LAUNCHING_MODIFIER = MODIFIERS.register("launching", Launching::new);
     public static final RegistryObject<Modifier> PINPOINTER_MODIFIER = MODIFIERS.register("pinpointer", Pinpointer::new);
-    //public static final RegistryObject<Modifier> PINPOINTER_ARROW_MODIFIER = MODIFIERS.register("pinpointer_arrow", Pinpointer::new);
+    public static final RegistryObject<Modifier> PINPOINTER_ARROW_MODIFIER = MODIFIERS.register("pinpointer_arrow", Pinpointer::new);
     public static final RegistryObject<Modifier> BURST_MODIFIER = MODIFIERS.register("burst", Burst::new);
     public static final RegistryObject<Modifier> HIGHLANDER_MODIFIER = MODIFIERS.register("highlander", Highlander::new);
     public static final RegistryObject<Modifier> MOBILE_MODIFIER = MODIFIERS.register("mobile", Mobile::new);
-    /*public static final RegistryObject<Modifier> VELOCITY_MODIFIER = MODIFIERS.register("velocity", Velocity::new);
+    public static final RegistryObject<Modifier> VELOCITY_MODIFIER = MODIFIERS.register("velocity", Velocity::new);
     public static final RegistryObject<Modifier> HEAVY_MODIFIER = MODIFIERS.register("heavy", Heavy::new);
     public static final RegistryObject<Modifier> AQUADYNAMIC_MODIFIER = MODIFIERS.register("aquadynamic", Aquadynamic::new);
 
     public static final RegistryObject<Modifier> FLAME_FLARE_MODIFIER = MODIFIERS.register("flame_flare", FlameFlare::new);
-    public static final RegistryObject<Modifier> SHULKER_FLARE_MODIFIER = MODIFIERS.register("shulker_flare", ShulkerFlare::new);*/
+    public static final RegistryObject<Modifier> SHULKER_FLARE_MODIFIER = MODIFIERS.register("shulker_flare", ShulkerFlare::new);
 
     private static final IntFunction<Supplier<TinkerEffect>> MARKER_EFFECT = color -> () -> new NoMilkEffect(EffectType.BENEFICIAL, color, true);
     public static RegistryObject<TinkerEffect> burstEffect = EFFECTS.register("burst", MARKER_EFFECT.apply(0xFFFC921C));
     public static RegistryObject<TinkerEffect> groovyEffect = EFFECTS.register("groovy", MARKER_EFFECT.apply(0xFF21007F));
     public static RegistryObject<TinkerEffect> chainingEffect = EFFECTS.register("chaining", MARKER_EFFECT.apply(0xFF21007F));
 
-    public static final RegistryObject<EntityType<TinkersArrowEntityOld>> TINKERS_ARROW_OLD =
-            ENTITY_TYPES.register("tinkers_arrow_old",
-                    () -> EntityType.Builder.<TinkersArrowEntityOld>of(TinkersArrowEntityOld::new, EntityClassification.MISC)
+    public static final RegistryObject<EntityType<TinkersArrowEntityLegacy>> TINKERS_ARROW_LEGACY =
+            ENTITY_TYPES.register("tinkers_arrow_legacy",
+                    () -> EntityType.Builder.<TinkersArrowEntityLegacy>of(TinkersArrowEntityLegacy::new, EntityClassification.MISC)
                             .sized(0.5F, 0.5F)
                             .clientTrackingRange(4)
                             .updateInterval(20)
-                            .setCustomClientFactory((spawnEntity, world) -> new TinkersArrowEntityOld(TinkersArchery.TINKERS_ARROW_OLD.get(), world))
+                            .setCustomClientFactory((spawnEntity, world) -> new TinkersArrowEntityLegacy(TinkersArchery.TINKERS_ARROW_LEGACY.get(), world))
                             .build(getResource("tinkers_arrow_old").toString()));
 
     public static final RegistryObject<EntityType<TinkersArrowEntity>> TINKERS_ARROW =
@@ -232,14 +253,14 @@ public class TinkersArchery
                             .build(getResource("tinkers_arrow").toString()));
 
     public static final RegistryObject<ProjectileTrajectory> GRAVITY = PROJECTILE_TRAJECTORIES.register("gravity", () -> new GravityTrajectory(-0.05f));
-    //public static final RegistryObject<ProjectileTrajectory> FLYING = PROJECTILE_TRAJECTORIES.register("flying", FlyingTrajectory::new);
+    public static final RegistryObject<ProjectileTrajectory> FLYING = PROJECTILE_TRAJECTORIES.register("flying", FlyingTrajectory::new);
     public static final RegistryObject<ProjectileTrajectory> ANTIGRAVITY = PROJECTILE_TRAJECTORIES.register("antigravity", AntigravityTrajectory::new);
     public static final RegistryObject<ProjectileTrajectory> TWIRLING = PROJECTILE_TRAJECTORIES.register("twirling", TwirlingTrajectory::new);
     public static final RegistryObject<ProjectileTrajectory> BOUNCING = PROJECTILE_TRAJECTORIES.register("bouncing", () -> new GravityTrajectory(-0.2f));
     public static final RegistryObject<ProjectileTrajectory> LOOPING = PROJECTILE_TRAJECTORIES.register("looping", LoopingTrajectory::new);
 
     public static final RegistryObject<Modifier> GRAVITY_TRAJECTORY_MODIFIER = MODIFIERS.register("gravity_trajectory", () -> new TrajectoryApplier(0xFFADADAD, GRAVITY::get));
-    //public static final RegistryObject<Modifier> FLYING_TRAJECTORY_MODIFIER = MODIFIERS.register("flying_trajectory", () -> new TrajectoryApplier(0xFFF7CDBB, FLYING::get));
+    public static final RegistryObject<Modifier> FLYING_TRAJECTORY_MODIFIER = MODIFIERS.register("flying_trajectory", () -> new TrajectoryApplier(0xFFF7CDBB, FLYING::get));
     public static final RegistryObject<Modifier> ANTIGRAVITY_TRAJECTORY_MODIFIER = MODIFIERS.register("antigravity_trajectory", () -> new TrajectoryApplier(0xFFC3B9A1, ANTIGRAVITY::get));
     public static final RegistryObject<Modifier> TWIRLING_TRAJECTORY_MODIFIER = MODIFIERS.register("twirling_trajectory", () -> new TrajectoryApplier(0xFF4AD718, TWIRLING::get));
     public static final RegistryObject<Modifier> BOUNCING_TRAJECTORY_MODIFIER = MODIFIERS.register("bouncing_trajectory", () -> new BouncyTrajectoryApplier(0xFF36FFFC, BOUNCING::get));
@@ -248,8 +269,12 @@ public class TinkersArchery
     public static ConfiguredFeature<?, ?> TANTALUM_ORE_FEATURE;
 
     public static final RegistryObject<ConsumableItemRecipe.TinkersConsumableItemRecipeSerializer> tinkersConsumableItemSerializer = RECIPE_SERIALIZERS.register("tinkers_consumable_item", ConsumableItemRecipe.TinkersConsumableItemRecipeSerializer::new);
+    public static LootConditionType lootConfig;
 
     public TinkersArchery() {
+
+        TinkersArcheryConfig.init();
+
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the setup method for modloading
@@ -283,7 +308,7 @@ public class TinkersArchery
                     Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, TinkersArchery.tantalum_ore.get().defaultBlockState(), 9))
                             .range(48)
                             .squared()
-                            .count(18));
+                            .count(TinkersArcheryConfig.COMMON.veinCountTantalum.get()));
 
             DispenserBlock.registerBehavior(tinkers_arrow.get(), new ProjectileDispenseBehavior() {
                 protected ProjectileEntity getProjectile(World world, IPosition pos, ItemStack stack) {
@@ -329,6 +354,11 @@ public class TinkersArchery
             LOGGER.info("HELLO from Register Block");
         }
 
+        @SubscribeEvent
+        public static void registerRecipeSerializers(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+            CraftingHelper.register(ConfigEnabledCondition.SERIALIZER);
+            lootConfig = Registry.register(Registry.LOOT_CONDITION_TYPE, ConfigEnabledCondition.ID, new LootConditionType(ConfigEnabledCondition.SERIALIZER));
+        }
     }
 
     @SubscribeEvent
@@ -367,6 +397,18 @@ public class TinkersArchery
             generator.addProvider(new MaterialPartTextureGenerator(generator, existingFileHelper, tinkerPartSprites, tinkersArcheryMaterialSprites));
             generator.addProvider(new MaterialPartTextureGenerator(generator, existingFileHelper, tinkersArcheryPartSprites, tinkerMaterialSprites, tinkersArcheryMaterialSprites));
         }
+    }
+
+    @SubscribeEvent
+    void missingItems(final RegistryEvent.MissingMappings<Item> event) {
+        RegistrationHelper.handleMissingMappings(event, MOD_ID, name -> {
+            switch (name) {
+                case "arrow": return TinkersArchery.legacy_arrow.get();
+            }
+            //IItemProvider block = missingBlock(name);
+            //return block == null ? null : block.asItem();
+            return null;
+        });
     }
 
     public static ResourceLocation getResource(String name){

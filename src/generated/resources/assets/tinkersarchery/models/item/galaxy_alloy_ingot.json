@@ -2,5 +2,11 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "tinkersarchery:item/galaxy_alloy_ingot"
-  }
+  },
+  "loader": "mantle:item_layer",
+  "layers": [
+    {
+      "luminosity": 10
+    }
+  ]
 }

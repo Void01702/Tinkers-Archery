@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "tag": "forge:nuggets/luxtum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_luxtum",
+    "amount": 16
+  },
+  "temperature": 700,
+  "time": 19
+}

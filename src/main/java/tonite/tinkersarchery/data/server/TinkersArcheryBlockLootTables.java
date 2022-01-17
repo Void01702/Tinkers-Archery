@@ -23,6 +23,9 @@ public class TinkersArcheryBlockLootTables extends BlockLootTables {
         dropSelf(TinkersArchery.tantalum_ore.get());
 
         dropSelf(TinkersArchery.tantalum_block.get());
+        dropSelf(TinkersArchery.tungstantalum_block.get());
+        dropSelf(TinkersArchery.raw_luxtum_block.get());
+        dropSelf(TinkersArchery.luxtum_block.get());
         dropSelf(TinkersArchery.cobalt_tantalum_block.get());
         dropSelf(TinkersArchery.galaxy_alloy_block.get());
     }

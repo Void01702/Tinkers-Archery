@@ -14,9 +14,7 @@
     }
   ],
   "stats": {
-    "base": {
-      "tconstruct:durability": 200.0
-    },
+    "base": {},
     "multipliers": {
       "tconstruct:durability": 2.0,
       "tinkersarchery:elasticity": 1.35,

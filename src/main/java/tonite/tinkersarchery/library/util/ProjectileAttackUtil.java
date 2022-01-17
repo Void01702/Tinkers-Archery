@@ -125,6 +125,8 @@ public class ProjectileAttackUtil {
                 }
             }
 
+            targetEntity.invulnerableTime = 0;
+
             return true;
 
         } else {

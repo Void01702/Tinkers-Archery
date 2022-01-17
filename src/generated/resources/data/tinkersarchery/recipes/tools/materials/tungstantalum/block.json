@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/tungstantalum"
+  },
+  "value": 9,
+  "needed": 1,
+  "material": "tinkersarchery:tungstantalum",
+  "leftover": {
+    "tag": "forge:ingots/tungstantalum"
+  }
+}

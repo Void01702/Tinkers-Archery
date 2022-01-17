@@ -53,7 +53,7 @@ public class ArrowToolStatsBuilder extends ToolStatsBuilder {
 
     @Override
     protected boolean handles(IToolStat<?> stat) {
-        return stat == ToolStats.DURABILITY || stat == ToolStats.HARVEST_LEVEL
+        return stat == BowAndArrowToolStats.COUNT|| stat == ToolStats.HARVEST_LEVEL
                 || stat == ToolStats.ATTACK_DAMAGE || stat == ToolStats.ATTACK_SPEED || stat == ToolStats.MINING_SPEED
                 || stat == BowAndArrowToolStats.WEIGHT || stat == BowAndArrowToolStats.ELASTICITY;
     }

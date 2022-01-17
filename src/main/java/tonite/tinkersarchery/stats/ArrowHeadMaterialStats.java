@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
+import slimeknights.tconstruct.library.materials.stats.IRepairableMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -12,7 +13,7 @@ import tonite.tinkersarchery.TinkersArchery;
 
 import java.util.List;
 
-public class ArrowHeadMaterialStats extends BaseMaterialStats {
+public class ArrowHeadMaterialStats extends BaseMaterialStats implements IRepairableMaterialStats {
 
     public static final MaterialStatsId ID = new MaterialStatsId(TinkersArchery.getResource("arrowhead"));
     public static final ArrowHeadMaterialStats DEFAULT = new ArrowHeadMaterialStats();
@@ -117,4 +118,8 @@ public class ArrowHeadMaterialStats extends BaseMaterialStats {
         return accuracy;
     }
 
+    @Override
+    public int getDurability() {
+        return count;
+    }
 }

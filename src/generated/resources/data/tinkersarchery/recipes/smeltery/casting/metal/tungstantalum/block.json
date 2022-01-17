@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:casting_basin",
+  "conditions": [
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "fluid": {
+    "tag": "tinkersarchery:molten_tungstantalum",
+    "amount": 1296
+  },
+  "result": "tinkersarchery:tungstantalum_block",
+  "cooling_time": 171
+}

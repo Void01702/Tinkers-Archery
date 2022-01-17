@@ -10,10 +10,6 @@
   },
   {
     "type": "modifier",
-    "data": "modifier_bow/upgrade/power.json"
-  },
-  {
-    "type": "modifier",
     "data": "modifier_bow/upgrade/launching.json"
   },
   {

@@ -1,0 +1,36 @@
+{
+  "type": "tconstruct:alloy",
+  "conditions": [
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "inputs": [
+    {
+      "name": "tconstruct:molten_tungsten",
+      "amount": 144
+    },
+    {
+      "name": "tinkersarchery:molten_tantalum",
+      "amount": 144
+    }
+  ],
+  "result": {
+    "fluid": "tinkersarchery:molten_tungstantalum",
+    "amount": 288
+  },
+  "temperature": 700
+}

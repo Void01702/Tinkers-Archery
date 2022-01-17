@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:incremental_modifier",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "input": {
+    "item": "minecraft:prismarine_shard"
+  },
+  "amount_per_item": 1,
+  "needed_per_level": 36,
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "result": {
+    "name": "tinkersarchery:aquadynamic",
+    "level": 1
+  },
+  "max_level": 5
+}

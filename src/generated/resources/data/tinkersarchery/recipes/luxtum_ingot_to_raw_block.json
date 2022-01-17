@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:true"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "XX",
+          "XY"
+        ],
+        "key": {
+          "X": {
+            "tag": "forge:ingots/luxtum"
+          },
+          "Y": {
+            "item": "tinkersarchery:luxtum_ingot"
+          }
+        },
+        "result": {
+          "item": "tinkersarchery:raw_luxtum_block"
+        }
+      }
+    }
+  ]
+}

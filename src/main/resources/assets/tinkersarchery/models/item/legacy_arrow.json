@@ -1,0 +1,15 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "arrowhead": "tinkersarchery:item/tool/arrow/arrowhead",
+    "arrow_shaft": "tinkersarchery:item/tool/arrow/arrow_shaft",
+    "fletching": "tinkersarchery:item/tool/arrow/arrow_fletching"
+  },
+  "modifier_roots": [ "tinkersarchery:item/tool/arrow/modifiers/" ],
+  "parts": [
+    { "name": "arrow_shaft",    "index": 1},
+    { "name": "arrowhead",  "index": 0 },
+    { "name": "fletching",    "index": 2 }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:incremental_modifier_salvage",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "slots": {
+    "upgrades": 1
+  },
+  "modifier": "tinkersarchery:pinpointer_arrow",
+  "min_level": 1,
+  "salvage": {
+    "item": "minecraft:obsidian",
+    "full": false
+  }
+}

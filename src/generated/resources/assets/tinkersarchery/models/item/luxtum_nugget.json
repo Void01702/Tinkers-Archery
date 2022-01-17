@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "tinkersarchery:item/luxtum_nugget"
+  },
+  "loader": "mantle:item_layer",
+  "layers": [
+    {
+      "luminosity": 15
+    }
+  ]
+}

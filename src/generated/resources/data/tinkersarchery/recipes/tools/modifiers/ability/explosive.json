@@ -1,0 +1,36 @@
+{
+  "type": "tconstruct:modifier",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "slots": {
+    "abilities": 1
+  },
+  "result": {
+    "name": "tinkersarchery:explosive",
+    "level": 1
+  }
+}

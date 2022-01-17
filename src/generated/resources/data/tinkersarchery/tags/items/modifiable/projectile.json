@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tinkersarchery:tinkers_arrow"
+    "tinkersarchery:tinkers_arrow",
+    "tinkersarchery:legacy_arrow"
   ]
 }

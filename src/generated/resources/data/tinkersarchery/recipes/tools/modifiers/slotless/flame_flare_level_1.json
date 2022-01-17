@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "minecraft:torch"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "result": {
+    "name": "tinkersarchery:flame_flare",
+    "level": 1
+  },
+  "max_level": 1
+}

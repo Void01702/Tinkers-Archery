@@ -4,7 +4,7 @@
       "count": 3,
       "miningSpeed": 2.0,
       "harvestLevel": 0,
-      "attack": 0.0,
+      "attack": 1.0,
       "weight": 0.8,
       "stability": 0.8,
       "accuracy": 0.9
@@ -16,7 +16,7 @@
       "accuracy": 1.2
     },
     "tinkersarchery:bow": {
-      "durability": 60,
+      "durability": 170,
       "elasticity": 3.0,
       "drawSpeed": 1.0
     },

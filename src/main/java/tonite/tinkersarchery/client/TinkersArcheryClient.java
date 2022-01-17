@@ -15,7 +15,7 @@ import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.client.book.TinkersArcheryBook;
 import tonite.tinkersarchery.client.model.BowModel;
 import tonite.tinkersarchery.client.renderer.TinkersArrowRenderer;
-import tonite.tinkersarchery.client.renderer.TinkersArrowRendererOld;
+import tonite.tinkersarchery.client.renderer.TinkersArrowRendererLegacy;
 import tonite.tinkersarchery.items.tools.BowTool;
 import tonite.tinkersarchery.items.tools.CrossbowTool;
 
@@ -35,7 +35,7 @@ public class TinkersArcheryClient {
     static void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
 
-        RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW_OLD.get(), (renderFactory) -> new TinkersArrowRendererOld(renderFactory, new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrowhead.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_shaft.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_fletching.png")));
+        RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW_LEGACY.get(), (renderFactory) -> new TinkersArrowRendererLegacy(renderFactory, new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrowhead.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_shaft.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_fletching.png")));
         RenderingRegistry.registerEntityRenderingHandler(TinkersArchery.TINKERS_ARROW.get(), (renderFactory) -> new TinkersArrowRenderer(renderFactory, new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrowhead.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_shaft.png"), new ResourceLocation("tinkersarchery", "textures/entity/tinkersarrow/arrow_fletching.png")));
 
         event.enqueueWork(() ->

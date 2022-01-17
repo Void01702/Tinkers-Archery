@@ -4,24 +4,42 @@
     {
       "values": [
         {
-          "tag": "forge:wires/steel",
-          "type": "forge:tag_empty"
+          "prop": "always_allow_steel_on_string_bowstring_for_steel_wire",
+          "type": "tinkersarchery:config"
         },
         {
-          "value": {
-            "tag": "forge:ingots/steel",
-            "type": "forge:tag_empty"
-          },
-          "type": "forge:not"
+          "values": [
+            {
+              "tag": "forge:wires/steel",
+              "type": "forge:tag_empty"
+            },
+            {
+              "values": [
+                {
+                  "prop": "force_integration_materials",
+                  "type": "tconstruct:config"
+                },
+                {
+                  "value": {
+                    "tag": "forge:ingots/steel",
+                    "type": "forge:tag_empty"
+                  },
+                  "type": "forge:not"
+                }
+              ],
+              "type": "forge:or"
+            }
+          ],
+          "type": "forge:and"
         }
       ],
-      "type": "forge:and"
+      "type": "forge:or"
     }
   ],
   "input": "tconstruct:string",
   "fluid": {
     "tag": "tconstruct:molten_steel",
-    "amount": 100
+    "amount": 144
   },
   "temperature": 950,
   "output": "tinkersarchery:steel_wire"

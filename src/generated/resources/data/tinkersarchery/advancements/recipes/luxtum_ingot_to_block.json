@@ -1,0 +1,43 @@
+{
+  "advancements": [
+    {
+      "conditions": [
+        {
+          "type": "forge:true"
+        }
+      ],
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "rewards": {
+          "recipes": [
+            "tinkersarchery:luxtum_block"
+          ]
+        },
+        "criteria": {
+          "has_ingot": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+              "items": [
+                {
+                  "item": "tinkersarchery:luxtum_ingot"
+                }
+              ]
+            }
+          },
+          "has_the_recipe": {
+            "trigger": "minecraft:recipe_unlocked",
+            "conditions": {
+              "recipe": "tinkersarchery:luxtum_block"
+            }
+          }
+        },
+        "requirements": [
+          [
+            "has_ingot",
+            "has_the_recipe"
+          ]
+        ]
+      }
+    }
+  ]
+}

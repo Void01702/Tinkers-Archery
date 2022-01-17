@@ -10,7 +10,7 @@
   "min_level": 1,
   "salvage": [
     {
-      "item": "minecraft:comparator",
+      "item": "minecraft:popped_chorus_fruit",
       "chance": 0.7
     },
     {

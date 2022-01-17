@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "values": [
+        {
+          "prop": "force_integration_materials",
+          "type": "tconstruct:config"
+        },
+        {
+          "value": {
+            "tag": "forge:ingots/tungsten",
+            "type": "forge:tag_empty"
+          },
+          "type": "forge:not"
+        }
+      ],
+      "type": "forge:or"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/tungstantalum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_tungstantalum",
+    "amount": 16
+  },
+  "temperature": 700,
+  "time": 19
+}

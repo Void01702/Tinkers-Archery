@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "value": {
+        "tag": "forge:dusts/luxtum",
+        "type": "forge:tag_empty"
+      },
+      "type": "forge:not"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/luxtum"
+  },
+  "result": {
+    "fluid": "tinkersarchery:molten_luxtum",
+    "amount": 144
+  },
+  "temperature": 700,
+  "time": 43
+}

@@ -1,5 +1,6 @@
 package tonite.tinkersarchery.data.client;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
@@ -24,13 +25,21 @@ public class TinkersArcheryItemModels extends ItemModelProvider {
         itemWithModel(TinkersArchery.tantalum_ingot, "item/generated");
         itemWithModel(TinkersArchery.tantalum_nugget, "item/generated");
 
+        itemWithModel(TinkersArchery.tungstantalum_ingot, "item/generated");
+        itemWithModel(TinkersArchery.tungstantalum_nugget, "item/generated");
+
+        itemWithModelLuminosity(TinkersArchery.luxtum_ingot, "item/generated", 15);
+        itemWithModelLuminosity(TinkersArchery.luxtum_nugget, "item/generated", 15);
+
         itemWithModel(TinkersArchery.cobalt_tantalum_ingot, "item/generated");
         itemWithModel(TinkersArchery.cobalt_tantalum_nugget, "item/generated");
 
-        itemWithModel(TinkersArchery.galaxy_alloy_ingot, "item/generated");
-        itemWithModel(TinkersArchery.galaxy_alloy_nugget, "item/generated");
+        itemWithModelLuminosity(TinkersArchery.galaxy_alloy_ingot, "item/generated", 10);
+        itemWithModelLuminosity(TinkersArchery.galaxy_alloy_nugget, "item/generated", 10);
 
         bucketModel(TinkersArchery.molten_tantalum);
+        bucketModel(TinkersArchery.molten_tungstantalum);
+        bucketModel(TinkersArchery.molten_luxtum);
         bucketModel(TinkersArchery.molten_cobalt_tantalum);
         bucketModel(TinkersArchery.molten_galaxy_alloy);
 
@@ -48,6 +57,24 @@ public class TinkersArcheryItemModels extends ItemModelProvider {
         ResourceLocation id = registryObject.getId();
         ResourceLocation textureLocation = new ResourceLocation(id.getNamespace(), "item/" + id.getPath());
         singleTexture(id.getPath(), new ResourceLocation(parent), "layer0", textureLocation);
+    }
+
+    public void itemWithModelLuminosity(RegistryObject<? extends Item> registryObject, String parent, int luminosity) {
+        ResourceLocation id = registryObject.getId();
+        ResourceLocation textureLocation = new ResourceLocation(id.getNamespace(), "item/" + id.getPath());
+        singleTexture(id.getPath(), new ResourceLocation(parent), "layer0", textureLocation).customLoader((t, u) ->  new CustomLoaderBuilder(t.getLocation(), t, u) {
+            public JsonObject toJson(JsonObject json) {
+
+                JsonArray array = new JsonArray();
+                JsonObject luminosityObject = new JsonObject();
+                luminosityObject.addProperty("luminosity", luminosity);
+                array.add(luminosityObject);
+
+                json.addProperty("loader", "mantle:item_layer");
+                json.add("layers", array);
+                return json;
+            }
+        });
     }
 
     public void castModels(CastItemObject cast) {

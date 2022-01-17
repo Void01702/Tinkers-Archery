@@ -24,4 +24,9 @@ public class BowAndArrowDefinitions {
             .builder(tinkers_arrow)
             .setStatsProvider(BowAndArrowToolStatsProviders.ARROW)
             .build();
+
+    public static final ToolDefinition LEGACY_ARROW = ToolDefinition
+            .builder(legacy_arrow)
+            .setStatsProvider(BowAndArrowToolStatsProviders.LEGACY_ARROW)
+            .build();
 }

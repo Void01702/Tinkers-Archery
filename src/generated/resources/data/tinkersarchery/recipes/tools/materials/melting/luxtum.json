@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "tinkersarchery:luxtum",
+  "temperature": 700,
+  "result": {
+    "fluid": "tinkersarchery:molten_luxtum",
+    "amount": 144
+  }
+}

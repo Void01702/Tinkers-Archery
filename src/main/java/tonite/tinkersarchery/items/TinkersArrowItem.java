@@ -1,22 +1,17 @@
 package tonite.tinkersarchery.items;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.*;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import slimeknights.tconstruct.TConstruct;
-import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.IMaterial;
@@ -31,18 +26,16 @@ import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.item.ITinkerStationDisplay;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
-import slimeknights.tconstruct.library.tools.nbt.MaterialIdNBT;
 import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.library.utils.TooltipFlag;
 import slimeknights.tconstruct.library.utils.TooltipKey;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
+import tonite.tinkersarchery.TinkersArcheryConfig;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
-import tonite.tinkersarchery.data.server.TinkersArcheryTags;
 import tonite.tinkersarchery.entities.TinkersArrowEntity;
 import tonite.tinkersarchery.library.ITinkersConsumableItem;
-import tonite.tinkersarchery.library.util.TinkersConsumableItemToolTipUtil;
 import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
 import tonite.tinkersarchery.stats.BowAndArrowToolStats;
 
@@ -125,6 +118,11 @@ public class TinkersArrowItem extends ArrowItem implements ITinkersConsumableIte
     }
 
     private static boolean addSubItem(ITinkersConsumableItem item, List<ItemStack> items, IMaterial material, IMaterial[] fixedMaterials) {
+
+        if (TinkersArcheryConfig.COMMON.legacyArrows.get()) {
+            return false;
+        }
+
         List<PartRequirement> required = item.getToolDefinition().getData().getParts();
         List<IMaterial> materials = new ArrayList<>(required.size());
         for (int i = 0; i < required.size(); i++) {
@@ -158,6 +156,7 @@ public class TinkersArrowItem extends ArrowItem implements ITinkersConsumableIte
         return true;
     }
 
+    @Override
     public ITextComponent getName(ItemStack stack) {
         return TooltipUtil.getDisplayName(stack, this.getToolDefinition());
     }

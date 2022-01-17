@@ -34,7 +34,7 @@ import slimeknights.tconstruct.library.utils.TooltipKey;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.data.server.TinkersArcheryTags;
-import tonite.tinkersarchery.entities.TinkersArrowEntityOld;
+import tonite.tinkersarchery.entities.TinkersArrowEntityLegacy;
 import tonite.tinkersarchery.library.modifier.IBowModifier;
 import tonite.tinkersarchery.library.projectileinterfaces.ICriticalProjectile;
 import tonite.tinkersarchery.library.projectileinterfaces.IStoreBowProjectile;
@@ -323,8 +323,8 @@ public abstract class ShootableTool extends ModifiableItem {
             }
         }
 
-        if (projectile instanceof TinkersArrowEntityOld) {
-            ((TinkersArrowEntityOld)projectile).changeDirection(direction);
+        if (projectile instanceof TinkersArrowEntityLegacy) {
+            ((TinkersArrowEntityLegacy)projectile).changeDirection(direction);
         } else {
             projectile.setDeltaMovement(direction);
         }

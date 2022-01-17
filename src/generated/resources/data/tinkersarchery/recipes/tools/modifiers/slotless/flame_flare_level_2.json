@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "conditions": [
+    {
+      "prop": "legacy_arrows",
+      "type": "tinkersarchery:config"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "minecraft:soul_torch"
+    }
+  ],
+  "tools": {
+    "tag": "tinkersarchery:modifiable/projectile"
+  },
+  "requirements": {
+    "name": "tinkersarchery:flame_flare",
+    "level": 1
+  },
+  "result": {
+    "name": "tinkersarchery:flame_flare",
+    "level": 1
+  },
+  "max_level": 2
+}

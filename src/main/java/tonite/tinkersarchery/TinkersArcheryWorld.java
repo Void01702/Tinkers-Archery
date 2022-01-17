@@ -16,7 +16,9 @@ public class TinkersArcheryWorld {
 
         Biome.Category category = event.getCategory();
         if (category != Biome.Category.NETHER && category != Biome.Category.THEEND) {
-            generation.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, TinkersArchery.TANTALUM_ORE_FEATURE);
+            if (TinkersArcheryConfig.COMMON.generateTantalum.get()) {
+                generation.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, TinkersArchery.TANTALUM_ORE_FEATURE);
+            }
         }
     }
 

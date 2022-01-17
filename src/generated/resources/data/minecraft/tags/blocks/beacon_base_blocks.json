@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "#forge:storage_blocks/tantalum",
+    "#forge:storage_blocks/tungstantalum",
+    "#forge:storage_blocks/luxtum",
     "#forge:storage_blocks/cobalt_tantalum",
     "#forge:storage_blocks/galaxy_alloy"
   ]

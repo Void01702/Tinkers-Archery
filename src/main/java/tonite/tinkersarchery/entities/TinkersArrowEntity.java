@@ -610,7 +610,7 @@ public class TinkersArrowEntity extends AbstractArrowEntity implements IEntityAd
         result = (float) MathHelper.clamp((double)speed * result, 0.0D, 2.147483647E9D);
 
         if (isCritArrow()) {
-            result *= 1.2;
+            result *= 1.3;
         }
 
         return result;
