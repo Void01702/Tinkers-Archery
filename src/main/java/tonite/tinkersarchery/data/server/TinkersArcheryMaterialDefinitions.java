@@ -29,6 +29,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
         addMaterial(TinkersArcheryMaterialIds.cobalt_tantalum, 3, ORDER_BOW + ORDER_NETHER, false,  0x5079FF);
         addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, 4, ORDER_BOW + ORDER_NETHER, false,  0x21007F);
 
+        //addMaterial(TinkersArcheryMaterialIds.slime, 2, ORDER_BOW + ORDER_BINDING, true,  0x5BD141);
         addMaterial(TinkersArcheryMaterialIds.silky_cloth, 3, ORDER_BOW + ORDER_BINDING, true,  0xF7CDBB);
         addMaterial(TinkersArcheryMaterialIds.blazing_string, 4, ORDER_BOW + ORDER_BINDING + ORDER_NETHER, false,  0xFFC42E);
 
@@ -63,6 +64,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addTraits(TinkersArcheryMaterialIds.galaxy_alloy, BowMaterialStats.ID, TinkersArchery.GROOVY_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.galaxy_alloy, BowGuideMaterialStats.ID, TinkersArchery.GROOVY_MODIFIER.get());
 
+            //addDefaultTraits(TinkersArcheryMaterialIds.slime, TinkersArchery.SUPERSLIME_MODIFIER.get(), TinkerModifiers.overslime.get());
             addDefaultTraits(TinkersArcheryMaterialIds.silky_cloth, TinkersArchery.UPLIFTING_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.blazing_string, TinkersArchery.BLAZING_MODIFIER.get());
 
@@ -116,6 +118,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new ArrowShaftMaterialStats(1.1f, 0.9f, 1.1f, 1.1f, 1.2f, 1.2f));
 
             // Bowstring
+            //addMaterialStats(TinkersArcheryMaterialIds.slime, new BowStringMaterialStats(1.2f, 0.8f, 1.2f, 0.5f));
             addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.7f, 1.2f, 0.8f, 1.3f));
             addMaterialStats(TinkersArcheryMaterialIds.blazing_string, new BowStringMaterialStats(0.8f, 1.1f, 1.3f, 0.9f));
 

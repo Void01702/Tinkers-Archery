@@ -12,6 +12,7 @@ public class TinkersArcheryMaterialIds {
 
     // Bowstring
     public static final MaterialId silky_cloth = id("silky_cloth");
+    //public static final MaterialId slime = id("slime");
     public static final MaterialId blazing_string = id("blazing_string");
 
     public static final MaterialId steel_wire = id("steel_wire");
