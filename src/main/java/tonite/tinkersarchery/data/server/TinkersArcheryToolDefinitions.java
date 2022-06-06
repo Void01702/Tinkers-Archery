@@ -23,7 +23,6 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.bowstring)
                 .part(TinkersArchery.bowguide)
                 //stats
-                .stat(BowAndArrowToolStats.ELASTICITY, 2f)
                 .multiplier(ToolStats.DURABILITY, 1.5f)
                 .startingSlots(SlotType.UPGRADE, 3)
                 .startingSlots(SlotType.ABILITY, 1);
@@ -34,7 +33,6 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.bowstring)
                 .part(TinkersArchery.crossbow_arm)
                 //stats
-                .stat(BowAndArrowToolStats.ELASTICITY, 2f)
                 .multiplier(ToolStats.DURABILITY, 1.5f)
                 .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.75f)
                 .multiplier(BowAndArrowToolStats.ACCURACY, 1.5f)
@@ -48,7 +46,6 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.bowstring)
                 .part(TinkersArchery.bowguide)
                 //stats
-                .stat(BowAndArrowToolStats.ELASTICITY, 2f)
                 .multiplier(ToolStats.DURABILITY, 4f)
                 .multiplier(BowAndArrowToolStats.ELASTICITY, 1.35f)
                 .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.65f)
