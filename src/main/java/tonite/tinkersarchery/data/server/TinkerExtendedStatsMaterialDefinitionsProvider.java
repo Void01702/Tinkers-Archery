@@ -82,7 +82,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
         protected void addMaterialStats() {
             // Melee Harvest
             addMaterialStats(MaterialIds.wood,
-                    new BowMaterialStats(60, 3f, 1f),
+                    new BowMaterialStats(150, 3f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.0f),
                     new ArrowHeadMaterialStats(3, 2f, WOOD, 0f, 0.8f, 0.9f),
                     new ArrowShaftMaterialStats(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f));
@@ -110,13 +110,13 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(0.65f, 1.0f, 1.15f, 1.0f, 0.9f, 1.0f,0.9f));
 
             addMaterialStats(MaterialIds.iron,
-                    new BowMaterialStats(250, 3.4f, 0.85f),
+                    new BowMaterialStats(250, 3.75f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.0f),
                     new ArrowHeadMaterialStats(13, 6f, IRON, 2f, 1.3f, 1.0f),
                     new ArrowShaftMaterialStats(1.1f, 1.0f, 1.0f, 1.0f, 1.2f, 1.0f));
 
             addMaterialStats(MaterialIds.copper,
-                    new BowMaterialStats(210, 2.6f, 1.1f),
+                    new BowMaterialStats(210, 3.5f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.1f),
                     new ArrowHeadMaterialStats(10, 6.5f, IRON, 1.5f, 1f, 1.3f),
                     new ArrowShaftMaterialStats(0.85f, 1.2f, 1.0f, 1.0f, 1.1f, 1.3f));
@@ -132,7 +132,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(0.8f, 1.0f, 1.05f, 1.1f, 1.1f, 0.9f));
 
             addMaterialStats(MaterialIds.slimewood,
-                    new BowMaterialStats(375, 3.2f, 1.05f),
+                    new BowMaterialStats(375, 3f, 1.1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.2f, 0.7f),
                     new ArrowHeadMaterialStats(6, 4f, IRON, 1f, 0.75f, 0.7f),
                     new ArrowShaftMaterialStats(1.3f, 0.85f, 1.0f, 0.85f, 0.9f, 0.8f));
@@ -144,31 +144,31 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(0.9f, 1.0f, 1.1f, 1.05f, 0.85f, 1.15f, 0.9f));
 
             addMaterialStats(MaterialIds.osmium,
-                    new BowMaterialStats(500, 4f, 0.65f),
+                    new BowMaterialStats(500, 3.75f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.15f, 0.9f),
                     new ArrowHeadMaterialStats(13, 4.5f, IRON, 2.0f, 1.6f, 0.8f),
                     new ArrowShaftMaterialStats(1.2f, 0.9f, 0.9f, 1.0f, 1.7f, 0.8f));
 
             addMaterialStats(MaterialIds.tungsten,
-                    new BowMaterialStats(350, 3.5f, 0.7f),
+                    new BowMaterialStats(350, 4f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.0f),
                     new ArrowHeadMaterialStats(14, 6.5f, IRON, 1.75f,1.55f, 1.0f),
                     new ArrowShaftMaterialStats(0.9f, 1.1f, 0.9f, 1.1f, 1.6f, 1.0f));
 
             addMaterialStats(MaterialIds.platinum,
-                    new BowMaterialStats(400, 3.6f, 0.7f),
+                    new BowMaterialStats(400, 3.75f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.15f, 1.0f),
                     new ArrowHeadMaterialStats(16, 7.0f, IRON, 1.5f, 1.4f, 1.1f),
                     new ArrowShaftMaterialStats(1.05f, 1.05f, 0.95f, 1.0f, 1.5f, 0.9f));
 
             addMaterialStats(MaterialIds.silver,
-                    new BowMaterialStats(300, 3.5f, 0.8f),
+                    new BowMaterialStats(300, 3.75f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.3f),
                     new ArrowHeadMaterialStats(13, 5.5f, IRON, 2.25f, 1.35f, 1.2f),
                     new ArrowShaftMaterialStats(0.9f, 1.05f, 1.1f, 1.0f, 1.15f, 1.1f));
 
             addMaterialStats(MaterialIds.lead,
-                    new BowMaterialStats(200, 3.4f, 0.7f),
+                    new BowMaterialStats(200, 4f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.0f),
                     new ArrowHeadMaterialStats(5, 5f, IRON, 2.5f, 1.5f, 1.1f),
                     new ArrowShaftMaterialStats(1.0f, 1.0f, 0.8f, 1.2f, 1.6f, 1.2f));

@@ -93,10 +93,10 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
         protected void addMaterialStats() {
             // Melee Harvest
             addMaterialStats(TinkersArcheryMaterialIds.tantalum,
-                    new HeadMaterialStats(200, 4.5f, 2, 2f),
+                    new HeadMaterialStats(230, 4.5f, 2, 2f),
                     new HandleMaterialStats(0.8f, 0.9f, 0.8f, 1.3f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(300, 3.45f, 0.9f),
+                    new BowMaterialStats(230, 3.75f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.4f),
                     new ArrowHeadMaterialStats(12, 4.5f, 2, 2.0f, 1.1f, 1.3f),
                     new ArrowShaftMaterialStats(0.8f, 0.9f, 0.8f, 1.3f, 1.1f, 1.2f));
