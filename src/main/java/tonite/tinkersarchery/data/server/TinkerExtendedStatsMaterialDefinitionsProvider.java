@@ -251,7 +251,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(0.8f, 1.15f, 1.15f, 1.0f, 1.2f, 0.9f));
 
             addMaterialStats(MaterialIds.platedSlimewood,
-                    new BowMaterialStats(595, 3.5f, 1.15f),
+                    new BowMaterialStats(595, 3.5f, 1.1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.3f, 0.4f),
                     new ArrowHeadMaterialStats(27, 5.0f, DIAMOND, 2.0f, 0.85f, 0.8f),
                     new ArrowShaftMaterialStats(1.25f, 0.9f, 0.9f, 1.05f, 0.95f, 0.85f));
