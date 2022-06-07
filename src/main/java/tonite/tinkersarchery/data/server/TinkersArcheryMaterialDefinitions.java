@@ -101,18 +101,18 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new ArrowHeadMaterialStats(12, 4.5f, 2, 2.0f, 1.1f, 1.3f),
                     new ArrowShaftMaterialStats(0.8f, 0.9f, 0.8f, 1.3f, 1.1f, 1.2f));
             addMaterialStats(TinkersArcheryMaterialIds.cobalt_tantalum,
-                    new HeadMaterialStats(900, 5.5f, 3, 2.5f),
+                    new HeadMaterialStats(1040, 5.5f, 3, 2.5f),
                     new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(1200, 3.15f, 1.15f),
+                    new BowMaterialStats(1040, 4.25f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(23, 5.5f, 3, 2.5f, 1.0f, 1.3f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.2f, 1.0f, 1.2f));
             addMaterialStats(TinkersArcheryMaterialIds.galaxy_alloy,
-                    new HeadMaterialStats(1000, 6.5f, 4, 2.5f),
+                    new HeadMaterialStats(890, 6.5f, 4, 2.5f),
                     new HandleMaterialStats(1.1f, 0.9f, 1.1f, 1.1f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(1500, 3.0f, 1.15f),
+                    new BowMaterialStats(890, 3.75f, 1.25f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.1f),
                     new ArrowHeadMaterialStats(29, 6.5f, 4, 2.5f, 1.2f, 1.2f),
                     new ArrowShaftMaterialStats(1.1f, 0.9f, 1.1f, 1.1f, 1.2f, 1.2f));
