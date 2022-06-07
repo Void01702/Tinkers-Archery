@@ -98,13 +98,13 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(0.8f, 1.1f, 1.0f, 1.0f, 1.1f, 0.7f));
 
             addMaterialStats(MaterialIds.bone,
-                    //new BowMaterialStats(100, 2.8f, 1.1f),
+                    //new BowMaterialStats(100, 3f, 1f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.1f),
                     new ArrowHeadMaterialStats(7, 2.5f, STONE, 1.25f, 0.9f, 1.1f, 1.0f),
                     new ArrowShaftMaterialStats(0.75f, 1.0f, 1.1f, 1.0f, 0.9f, 1.1f, 0.9f));
 
             addMaterialStats(MaterialIds.necroticBone,
-                    //new BowMaterialStats(125, 2.7f, 1.1f),
+                    //new BowMaterialStats(125, 3f, 1f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.2f),
                     new ArrowHeadMaterialStats(9, 2f, STONE, 1.5f, 0.9f, 1.0f, 1.0f),
                     new ArrowShaftMaterialStats(0.65f, 1.0f, 1.15f, 1.0f, 0.9f, 1.0f,0.9f));
@@ -138,7 +138,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.3f, 0.85f, 1.0f, 0.85f, 0.9f, 0.8f));
 
             addMaterialStats(MaterialIds.bloodbone,
-                    //new BowMaterialStats(175, 3.2f, 1.0f),
+                    //new BowMaterialStats(175, 3.5f, 1.0f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 0.9f),
                     new ArrowHeadMaterialStats(9, 4.5f, IRON, 2.25f, 0.8f, 1.2f, 0.9f),
                     new ArrowShaftMaterialStats(0.9f, 1.0f, 1.1f, 1.05f, 0.85f, 1.15f, 0.9f));
@@ -179,79 +179,79 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.05f, 1.1f, 0.9f, 1.0f, 1.3f, 0.95f));
 
             addMaterialStats(MaterialIds.slimesteel,
-                    new BowMaterialStats(1040, 4.f, 1.05f),
+                    new BowMaterialStats(1040, 4f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.25f, 0.5f),
                     new ArrowHeadMaterialStats(24, 6f, DIAMOND, 2.5f, 0.85f, 0.8f),
                     new ArrowShaftMaterialStats(1.2f, 1.0f, 0.95f, 1.0f, 0.9f, 0.9f));
 
             addMaterialStats(MaterialIds.tinkersBronze,
-                    new BowMaterialStats(720, 3.1f, 1.1f),
+                    new BowMaterialStats(720, 3.75f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.15f, 1.0f),
                     new ArrowHeadMaterialStats(18, 7f, DIAMOND, 2f, 1.0f, 0.9f),
                     new ArrowShaftMaterialStats(1.1f, 1.05f, 1.0f, 1.0f, 1.1f, 1.0f));
 
             addMaterialStats(MaterialIds.nahuatl,
-                    new BowMaterialStats(350, 3.2f, 0.9f),
+                    new BowMaterialStats(350, 4.25f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(17, 4.5f, DIAMOND, 3f, 0.9f, 0.7f, 1.1f),
                     new ArrowShaftMaterialStats(0.9f, 1.0f, 0.9f, 1.3f, 1.1f, 0.8f, 1.1f));
 
             addMaterialStats(MaterialIds.pigIron,
-                    new BowMaterialStats(580, 3.8f, 0.75f),
+                    new BowMaterialStats(580, 4f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.1f),
                     new ArrowHeadMaterialStats(20, 6f, DIAMOND, 2.5f, 1.35f, 1.2f),
                     new ArrowShaftMaterialStats(1.1f, 0.85f, 1.0f, 1.1f, 1.3f, 1.1f));
 
             addMaterialStats(MaterialIds.roseGold,
-                    new BowMaterialStats(175, 2.5f, 1.3f),
+                    new BowMaterialStats(175, 3f, 1.3f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.2f),
                     new ArrowHeadMaterialStats(12, 10f, IRON, 1f, 0.8f, 1.5f),
                     new ArrowShaftMaterialStats(0.6f, 1.25f, 1.25f, 1.0f, 0.7f, 1.6f));
 
             addMaterialStats(MaterialIds.cobalt,
-                    new BowMaterialStats(800, 2.9f, 1.2f),
+                    new BowMaterialStats(800, 3.75f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.1f),
                     new ArrowHeadMaterialStats(19, 7.5f, DIAMOND, 2.25f, 0.9f, 1.0f),
                     new ArrowShaftMaterialStats(1.05f, 1.05f, 1.05f, 1.1f, 0.85f, 1.0f));
 
             addMaterialStats(MaterialIds.steel,
-                    new BowMaterialStats(775, 3.4f, 0.8f),
+                    new BowMaterialStats(775, 4.25f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(21, 6f, DIAMOND, 2.75f, 1.4f, 1.1f),
                     new ArrowShaftMaterialStats(1.05f, 1.05f, 1.05f, 1.0f, 1.3f, 1.1f));
 
             addMaterialStats(MaterialIds.bronze,
-                    new BowMaterialStats(760, 3.1f, 1.0f),
+                    new BowMaterialStats(760, 3.75f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(18, 7f, DIAMOND, 2f, 0.95f, 1.25f),
                     new ArrowShaftMaterialStats(1.1f, 1.05f, 1.0f, 1.0f, 1.05f, 1.25f));
 
             addMaterialStats(MaterialIds.constantan,
-                    new BowMaterialStats(675, 3.3f, 0.8f),
+                    new BowMaterialStats(675, 4f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(20, 7.5f, DIAMOND, 1.75f, 0.9f, 1.15f),
                     new ArrowShaftMaterialStats(0.95f, 1.15f, 1.0f, 1.0f, 1.0f, 1.05f));
 
             addMaterialStats(MaterialIds.invar,
-                    new BowMaterialStats(630, 4.1f, 0.75f),
+                    new BowMaterialStats(630, 4f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1f),
                     new ArrowHeadMaterialStats(21, 5.5f, DIAMOND, 2.5f, 1.4f, 0.9f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 1.0f, 1.2f, 1.3f, 0.8f));
 
             addMaterialStats(MaterialIds.necronium,
-                    //new BowMaterialStats(357, 3.0f, 1.0f),
+                    //new BowMaterialStats(357, 4.0f, 1.0f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(25, 4.0f, DIAMOND, 2.75f, 1.0f, 1.2f, 0.9f),
                     new ArrowShaftMaterialStats(0.8f, 1.0f, 1.15f, 1.1f, 0.9f, 1.2f, 0.8f));
 
             addMaterialStats(MaterialIds.electrum,
-                    new BowMaterialStats(225, 3.8f, 0.7f),
+                    new BowMaterialStats(225, 3.25f, 1.2f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.0f),
                     new ArrowHeadMaterialStats(17, 9f, IRON, 1.5f, 1.15f, 0.9f),
                     new ArrowShaftMaterialStats(0.8f, 1.15f, 1.15f, 1.0f, 1.2f, 0.9f));
 
             addMaterialStats(MaterialIds.platedSlimewood,
-                    new BowMaterialStats(595, 3.3f, 1.2f),
+                    new BowMaterialStats(595, 3.5f, 1.15f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.3f, 0.4f),
                     new ArrowHeadMaterialStats(27, 5.0f, DIAMOND, 2.0f, 0.85f, 0.8f),
                     new ArrowShaftMaterialStats(1.25f, 0.9f, 0.9f, 1.05f, 0.95f, 0.85f));
