@@ -61,7 +61,7 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.arrow_shaft)
                 .part(TinkersArchery.arrow_fletching)
                 //stats
-                .stat(ToolStats.ATTACK_DAMAGE, 2f)
+                .stat(ToolStats.ATTACK_DAMAGE, 3f)
                 .stat(ToolStats.ATTACK_SPEED, 1.5f)
                 .multiplier(ToolStats.ATTACK_DAMAGE, 0.5f)
                 .multiplier(ToolStats.MINING_SPEED, 0.75f)
