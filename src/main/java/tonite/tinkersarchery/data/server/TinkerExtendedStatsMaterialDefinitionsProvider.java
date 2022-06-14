@@ -175,7 +175,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
 
             addMaterialStats(MaterialIds.whitestone,
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.2f),
-                    new ArrowHeadMaterialStats(15, 6.0f, IRON, 1.5f, 1.0f, 1.05f, 0.9f),
+                    new ArrowHeadMaterialStats(15, 6.0f, IRON, 1.25f, 1.0f, 1.1f, 0.9f),
                     new ArrowShaftMaterialStats(1.05f, 1.1f, 0.9f, 1.0f, 1.3f, 0.95f));
 
             addMaterialStats(MaterialIds.slimesteel,
