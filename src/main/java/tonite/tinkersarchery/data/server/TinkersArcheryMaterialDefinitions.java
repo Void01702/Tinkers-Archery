@@ -106,7 +106,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     ExtraMaterialStats.DEFAULT,
                     new BowMaterialStats(1040, 4.25f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
-                    new ArrowHeadMaterialStats(23, 5.5f, DIAMOND, 2.5f, 1.0f, 1.0f, 1.3f),
+                    new ArrowHeadMaterialStats(32, 5.5f, DIAMOND, 2.75f, 1.0f, 0.85f, 1.05f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.2f, 1.0f, 1.2f));
             addMaterialStats(TinkersArcheryMaterialIds.galaxy_alloy,
                     new HeadMaterialStats(890, 6.5f, 4, 2.5f),
@@ -114,7 +114,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     ExtraMaterialStats.DEFAULT,
                     new BowMaterialStats(890, 3.75f, 1.25f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.1f),
-                    new ArrowHeadMaterialStats(29, 6.5f, NETHERITE, 2.5f, 1.2f, 1.2f, 1.2f),
+                    new ArrowHeadMaterialStats(24, 6.5f, NETHERITE, 2.25f, 0.8f, 0.95f, 1.0f),
                     new ArrowShaftMaterialStats(1.1f, 0.9f, 1.1f, 1.1f, 1.2f, 1.2f));
 
             // Bowstring
