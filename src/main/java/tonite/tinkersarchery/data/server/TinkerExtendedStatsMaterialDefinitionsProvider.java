@@ -90,24 +90,24 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
             addMaterialStats(MaterialIds.stone,
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.0f),
                     new ArrowHeadMaterialStats(10, 4f, STONE, 0.75f, 1.05f, 1.1f, 1.0f),
-                    new ArrowShaftMaterialStats(1.0f, 1.0f, 1.0f, 1.1f, 1.2f, 1.2f, 0.9f));
+                    new ArrowShaftMaterialStats(1.0f, 1.0f, 1.0f, 0.95f, 1.1f, 1.1f, 1.0f));
 
             addMaterialStats(MaterialIds.flint,
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.8f, 1.3f),
                     new ArrowHeadMaterialStats(8, 3.5f, STONE, 1f, 1.0f, 1.0f, 1.0f),
-                    new ArrowShaftMaterialStats(1.0f, 1.1f, 1.0f, 1.0f, 1.1f, 1.1f, 0.7f));
+                    new ArrowShaftMaterialStats(1.0f, 1.1f, 1.0f, 1.05f, 1.1f, 1.0f, 1.05f));
 
             addMaterialStats(MaterialIds.bone,
                     //new BowMaterialStats(100, 3f, 1f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.1f),
                     new ArrowHeadMaterialStats(6, 2.5f, STONE, 1.25f, 0.95f, 1.0f, 0.9f),
-                    new ArrowShaftMaterialStats(1.0f, 1.0f, 1.1f, 1.0f, 0.9f, 1.1f, 0.9f));
+                    new ArrowShaftMaterialStats(1.0f, 1.0f, 1.1f, 1.05f, 0.95f, 1.0f, 0.85f));
 
             addMaterialStats(MaterialIds.necroticBone,
                     //new BowMaterialStats(125, 3f, 1f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.2f),
-                    new ArrowHeadMaterialStats(4, 2f, STONE, 1.25f, 0.85f, 1.0f, 0.95f),
-                    new ArrowShaftMaterialStats(1.0f, 1.0f, 1.15f, 1.0f, 0.9f, 1.0f, 0.9f));
+                    new ArrowHeadMaterialStats(4, 2f, STONE, 1.25f, 0.85f, 1.0f, 0.85f),
+                    new ArrowShaftMaterialStats(1.0f, 1.0f, 1.15f, 1.15f, 0.95f, 1.0f, 0.75f));
 
             addMaterialStats(MaterialIds.iron,
                     new BowMaterialStats(250, 3.5f, 1f),
