@@ -260,25 +260,25 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new BowMaterialStats(1650, 4f, 1.1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.35f, 0.3f),
                     new ArrowHeadMaterialStats(40, 6f, NETHERITE, 2.5f, 1.1f, 0.95f, 1.0f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 0.95f, 1.0f, 1.0f, 0.8f));
+                    new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.0f, 1.05f, 1.0f, 1.15f));
 
             addMaterialStats(MaterialIds.hepatizon,
                     new BowMaterialStats(975, 5f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.95f, 1.1f),
                     new ArrowHeadMaterialStats(40, 8f, NETHERITE, 2.25f, 1.0f, 1.1f, 0.95f),
-                    new ArrowShaftMaterialStats(1.0f, 1.2f, 1.0f, 0.9f, 0.95f, 0.95f, 0.9f));
+                    new ArrowShaftMaterialStats(1.0f, 1.2f, 1.0f, 0.95f, 1.0f, 1.2f, 0.95f));
 
             addMaterialStats(MaterialIds.manyullyn,
                     new BowMaterialStats(1250, 4.5f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.2f, 0.9f),
                     new ArrowHeadMaterialStats(32, 6.5f, NETHERITE, 2.75f, 1.2f, 1.1f, 1.0f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.25f, 1.2f, 1.2f, 0.8f));
+                    new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.2f, 1.2f, 1.1f, 1.0f));
 
             addMaterialStats(MaterialIds.blazingBone,
                     //new BowMaterialStats(530, 4.5f, 1f),
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.2f),
                     new ArrowHeadMaterialStats(18, 6f, IRON, 2.75f, 0.8f, 1.05f, 0.75f),
-                    new ArrowShaftMaterialStats(1.0f, 1.05f, 1.2f, 1.0f, 0.65f, 1.35f, 1.0f));
+                    new ArrowShaftMaterialStats(1.0f, 1.05f, 1.2f, 1.25f, 0.8f, 0.9f, 0.75f));
 
             // Bowstrings
 
