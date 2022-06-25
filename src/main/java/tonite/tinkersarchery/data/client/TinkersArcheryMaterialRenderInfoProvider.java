@@ -22,7 +22,7 @@ public class TinkersArcheryMaterialRenderInfoProvider extends AbstractMaterialRe
         buildRenderInfo(TinkersArcheryMaterialIds.galaxy_alloy).color(0xFF21007F).fallbacks("galaxy", "metal").luminosity(10);
 
         // Bowstring
-        buildRenderInfo(TinkersArcheryMaterialIds.slime).color(0xFF5BD141);
+        //buildRenderInfo(TinkersArcheryMaterialIds.slime).color(0xFF5BD141);
         buildRenderInfo(TinkersArcheryMaterialIds.silky_cloth).color(0xFFF7CDBB).luminosity(1);
         buildRenderInfo(TinkersArcheryMaterialIds.blazing_string).color(0xFFFFC42E).luminosity(15);
 

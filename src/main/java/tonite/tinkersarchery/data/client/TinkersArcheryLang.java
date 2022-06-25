@@ -107,7 +107,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addMaterial(TinkersArcheryMaterialIds.galaxy_alloy, "Niillite", "Reach for the stars", "Killing an enemy causes your next attack with this weapon to deal 3 per level more damage", "Each shot from a bow increases the draw speed of the next shot by 0.2 up to a maximum of 6 times per level.");
 
         addMaterial(TinkersArcheryMaterialIds.silky_cloth, "Silky Cloth", "Very soft on the skin", "", "Arrows are shot slightly upwards to help with aiming.");
-        addMaterial(TinkersArcheryMaterialIds.slime, "Slime", "Bouncy", "", "At full Overslime, the bow has 0.5 more Draw Speed and Draw Weight.");
+        //addMaterial(TinkersArcheryMaterialIds.slime, "Slime", "Bouncy", "", "At full Overslime, the bow has 0.5 more Draw Speed and Draw Weight.");
         addMaterial(TinkersArcheryMaterialIds.blazing_string, "Blazing String", "Hot Hot Ouch Ouch Ooh Ouch Hot Ouch", "", "Arrows are on fire.");
         addMaterial(TinkersArcheryMaterialIds.steel_wire, "Steel Wire", "Clay is no match for power of steel wire!", "", "Arrows are always critical.");
 

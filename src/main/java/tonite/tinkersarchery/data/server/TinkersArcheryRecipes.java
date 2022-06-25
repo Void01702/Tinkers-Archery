@@ -232,7 +232,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
         materialMeltingCasting(finishedRecipeConsumer, TinkersArcheryMaterialIds.galaxy_alloy, TinkersArchery.molten_galaxy_alloy, materialFolder);
 
         materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.silky_cloth, Ingredient.of(TinkerModifiers.silkyCloth), 1, 1, materialFolder + "silky_cloth");
-        materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.slime, Ingredient.of(Tags.Items.SLIMEBALLS), 1, 1, materialFolder + "slime");
+        //materialRecipe(finishedRecipeConsumer, TinkersArcheryMaterialIds.slime, Ingredient.of(Tags.Items.SLIMEBALLS), 1, 1, materialFolder + "slime");
 
         materialRecipe(withCondition(finishedRecipeConsumer, new NotCondition(new TagEmptyCondition("forge", "wires/steel"))), TinkersArcheryMaterialIds.steel_wire, Ingredient.of(getTag("forge", "wires/steel")), 1, 1, materialFolder + "steel_wire");
 

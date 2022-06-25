@@ -13,10 +13,9 @@
   "stats": {
     "base": {},
     "multipliers": {
-      "tconstruct:durability": 1.3,
-      "tinkersarchery:elasticity": 1.1,
-      "tinkersarchery:draw_speed": 0.8,
-      "tinkersarchery:accuracy": 0.8
+      "tconstruct:durability": 1.5,
+      "tinkersarchery:draw_speed": 0.75,
+      "tinkersarchery:accuracy": 1.5
     }
   },
   "slots": {

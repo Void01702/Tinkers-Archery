@@ -100,11 +100,11 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                         .addARGB(216, 0xFFF7CDBB)
                         .addARGB(255, 0xFFFFE7DB)
                         .build());
-        buildMaterial(TinkersArcheryMaterialIds.slime)
+        /*buildMaterial(TinkersArcheryMaterialIds.slime)
                 .statType(BowStringMaterialStats.ID)
                 .colorMapper(GreyToColorMapping.builderFromBlack()
                         .addARGB(255, 0xFF5BD141)
-                        .build());
+                        .build());*/
         buildMaterial(TinkersArcheryMaterialIds.blazing_string)
                 .statType(BowStringMaterialStats.ID)
                 .colorMapper(GreyToColorMapping.builderFromBlack()

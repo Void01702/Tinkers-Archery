@@ -433,8 +433,8 @@ public abstract class ShootableTool extends ModifiableItem {
             } else if (required.get(i).canUseMaterial(material)) {
                 materials.add(material);
             } else if (required.get(i).getStatType() == BowStringMaterialStats.ID) {
-                if (material.getIdentifier().getPath().contains("slime") && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.slime))) {
-                    materials.add(MaterialRegistry.getMaterial(TinkersArcheryMaterialIds.slime));
+                if (material.getIdentifier().getPath().contains("slime") && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.enderslimeVine))) {
+                    materials.add(MaterialRegistry.getMaterial(MaterialIds.enderslimeVine));
                 } else if (material.getTier() <= 1 && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.wood))) {
                     materials.add(MaterialRegistry.getMaterial(MaterialIds.wood));
                 } else if (material.getTier() <= 2 && required.get(i).canUseMaterial(MaterialRegistry.getMaterial(MaterialIds.skyslimeVine))) {

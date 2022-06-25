@@ -8,34 +8,34 @@
       "attackDamage": 1.1
     },
     "tinkersarchery:arrowhead": {
-      "count": 29,
+      "count": 24,
       "miningSpeed": 6.5,
       "harvestLevel": 4,
-      "attack": 2.5,
-      "weight": 1.2,
-      "stability": 1.2,
-      "accuracy": 1.2
+      "attack": 2.25,
+      "weight": 0.8,
+      "stability": 0.95,
+      "accuracy": 1.0
     },
     "tinkersarchery:bow": {
-      "durability": 1500,
-      "elasticity": 3.0,
-      "drawSpeed": 1.15
+      "durability": 890,
+      "elasticity": 3.75,
+      "drawSpeed": 1.25
     },
     "tinkersarchery:bowguide": {},
     "tconstruct:head": {
-      "durability": 1000,
+      "durability": 890,
       "miningSpeed": 6.5,
       "harvestLevel": 4,
       "attack": 2.5
     },
     "tinkersarchery:arrow_shaft": {
-      "count": 1.1,
+      "count": 1.0,
       "miningSpeed": 0.9,
       "attackSpeed": 1.1,
-      "attackDamage": 1.1,
-      "weight": 1.2,
-      "stability": 1.2,
-      "accuracy": 1.2
+      "attackDamage": 0.9,
+      "weight": 0.8,
+      "stability": 1.0,
+      "accuracy": 1.0
     }
   }
 }

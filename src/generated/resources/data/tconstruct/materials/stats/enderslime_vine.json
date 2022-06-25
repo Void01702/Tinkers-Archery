@@ -1,10 +1,10 @@
 {
   "stats": {
     "tinkersarchery:bowstring": {
-      "durability": 0.7,
-      "elasticity": 1.2,
-      "drawSpeed": 1.1,
-      "accuracy": 1.2
+      "durability": 1.1,
+      "elasticity": 0.9,
+      "drawSpeed": 0.9,
+      "accuracy": 1.3
     }
   }
 }

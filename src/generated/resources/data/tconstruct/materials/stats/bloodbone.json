@@ -4,25 +4,19 @@
       "count": 9,
       "miningSpeed": 4.5,
       "harvestLevel": 2,
-      "attack": 2.25,
-      "weight": 0.8,
-      "stability": 1.2,
-      "accuracy": 0.9
+      "attack": 1.75,
+      "weight": 0.95,
+      "stability": 1.05,
+      "accuracy": 0.85
     },
-    "tinkersarchery:bow": {
-      "durability": 175,
-      "elasticity": 3.2,
-      "drawSpeed": 1.0
-    },
-    "tinkersarchery:bowguide": {},
     "tinkersarchery:arrow_shaft": {
-      "count": 0.9,
+      "count": 1.0,
       "miningSpeed": 1.0,
       "attackSpeed": 1.1,
       "attackDamage": 1.05,
-      "weight": 0.85,
-      "stability": 1.15,
-      "accuracy": 0.9
+      "weight": 0.9,
+      "stability": 1.0,
+      "accuracy": 0.85
     }
   }
 }

@@ -13,7 +13,7 @@
   "stats": {
     "base": {},
     "multipliers": {
-      "tconstruct:durability": 1.1
+      "tconstruct:durability": 1.5
     }
   },
   "slots": {
