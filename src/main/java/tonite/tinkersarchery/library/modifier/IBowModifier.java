@@ -3,6 +3,8 @@ package tonite.tinkersarchery.library.modifier;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.vector.Quaternion;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
 
@@ -71,7 +73,7 @@ public interface IBowModifier {
      * @param world          World containing tool
      * @param shooter        Entity who shot tool
      */
-    default void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int numArrows, World world, LivingEntity shooter) {}
+    default Vector3f onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int numArrows, World world, Vector3f currentDirection, LivingEntity shooter) {return currentDirection;}
 
     /**
      * Called for every arrow shot out of the bow. This is different from onBowReleased in that onBowReleased is only called once, but this can be called more than once.

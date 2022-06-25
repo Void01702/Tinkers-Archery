@@ -8,13 +8,13 @@
   "perStat": {
     "tinkersarchery:bow": [
       {
-        "name": "tinkersarchery:weighty",
+        "name": "tinkersarchery:enlightening",
         "level": 1
       }
     ],
     "tinkersarchery:bowguide": [
       {
-        "name": "tinkersarchery:weighty",
+        "name": "tinkersarchery:enlightening",
         "level": 1
       }
     ]

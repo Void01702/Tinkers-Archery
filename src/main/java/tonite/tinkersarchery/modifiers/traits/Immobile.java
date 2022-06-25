@@ -1,11 +1,10 @@
-package tonite.tinkersarchery.modifiers.upgrades;
+package tonite.tinkersarchery.modifiers.traits;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.world.World;
-import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
@@ -14,12 +13,12 @@ import tonite.tinkersarchery.library.modifier.IBowModifier;
 
 import java.util.UUID;
 
-public class Mobile extends Modifier implements IBowModifier {
+public class Immobile extends Modifier implements IBowModifier {
 
-    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("68ee3026-1d50-4eb4-914e-a8b05fbfdb72");
-    private static final String SPEED_MODIFIER_NAME = TinkersArchery.prefix("mobile_speedup");
+    private static final UUID SPEED_MODIFIER_UUID = UUID.fromString("68ee3026-1d50-4eb4-914e-a8b05fbfdb73");
+    private static final String SPEED_MODIFIER_NAME = TinkersArchery.prefix("immobile_speeddown");
 
-    public Mobile() {
+    public Immobile() {
         super(0x9EF7DE);
     }
 
@@ -28,7 +27,7 @@ public class Mobile extends Modifier implements IBowModifier {
         try {
             ModifiableAttributeInstance instance = shooter.getAttributes().getInstance(Attributes.MOVEMENT_SPEED);
             if (instance != null) {
-                instance.addTransientModifier(new AttributeModifier(SPEED_MODIFIER_UUID, SPEED_MODIFIER_NAME, 0.333 * level, AttributeModifier.Operation.MULTIPLY_BASE));
+                instance.addTransientModifier(new AttributeModifier(SPEED_MODIFIER_UUID, SPEED_MODIFIER_NAME, -0.5 * level, AttributeModifier.Operation.MULTIPLY_BASE));
             }
         } catch (IllegalArgumentException e) {
 

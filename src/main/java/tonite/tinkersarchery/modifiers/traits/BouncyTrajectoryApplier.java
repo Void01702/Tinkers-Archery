@@ -30,7 +30,7 @@ public class BouncyTrajectoryApplier extends TrajectoryApplier {
         arrow.setPosRaw(arrow.getX(), pos.getY() + 1, arrow.getZ());
 
         if (arrow instanceof ITrajectoryProjectile) {
-            ((ITrajectoryProjectile)arrow).changeDirection(arrow.getDeltaMovement().add(0, 0.1f, 0).multiply(1, -0.75, 1));
+            ((ITrajectoryProjectile)arrow).changeDirection(arrow.getDeltaMovement().add(0, 0.1f, 0).multiply(1, -0.8, 1));
             ((ITrajectoryProjectile)arrow).setTrajectoryTime(0);
         }
 

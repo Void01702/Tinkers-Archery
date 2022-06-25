@@ -36,9 +36,9 @@ public class TinkersArcheryConfig {
 
             this.alwaysAllowSteelOnStringBowstringForSteelWire = builder
                     .comment("This will always allow you to pour Molten Steel on a String Bowstring to make the Steel Wire Bowstring.\nSome mods make acquiring Steel Wire very difficult, so this option is here for that case.\nThis option won't be taken into account if it has no reason to (there is no steel wire item)")
-                    .translation("tinkerarchery.configgui.alwaysAllowSteelOnStringBowstringForSteelWire")
+                    .translation("tinkerarchery.configgui.alwaysAllowSteelOnString")
                     .worldRestart()
-                    .define("alwaysAllowSteelOnStringBowstringForSteelWire", false);
+                    .define("alwaysAllowSteelOnString", false);
 
             this.legacyArrows = builder
                     .comment("Use the older more legacy arrows\nNote: this is not the intended way to use the mod. This option exists for those who prefer the older version of arrows.")

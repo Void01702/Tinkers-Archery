@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.SingleUseModifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
@@ -18,22 +19,20 @@ public class Autoaim extends SingleUseModifier implements IBowModifier {
     }
 
     @Override
-    public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, float drawPortion, float power, World world, LivingEntity shooter){
+    public Vector3f onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int numArrows, World world, Vector3f currentDirection, LivingEntity shooter){
         List<LivingEntity> targets = world.getNearbyEntities(LivingEntity.class, new EntityPredicate(), shooter, shooter.getBoundingBox().inflate(34, 34, 34));
 
         Vector3d testPos = shooter.getEyePosition(1.0f).add(shooter.getLookAngle().scale(17));
 
         LivingEntity target = world.getNearestEntity(targets, new EntityPredicate(), shooter, testPos.x, testPos.y, testPos.z);
 
-
-
         if (target != null && target.position().subtract(testPos).length() < 12) {
 
-            Vector3d direction = target.getEyePosition(1.0f).subtract(shooter.getEyePosition(1.0f)).normalize();
-
-            arrow.shoot(direction.x, direction.y, direction.z, power, 1);
+            return new Vector3f(target.getEyePosition(1.0f).subtract(shooter.getEyePosition(1.0f)).normalize());
 
         }
+
+        return currentDirection;
     }
 
 }

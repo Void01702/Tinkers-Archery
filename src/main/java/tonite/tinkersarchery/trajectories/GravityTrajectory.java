@@ -18,7 +18,7 @@ public class GravityTrajectory extends ProjectileTrajectory {
     @Override
     public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, float stability, float resistance, Object data) {
 
-        ((GravityData)data).motion = ((GravityData)data).motion.add(0, ((GravityData)data).gravity, 0).scale((float)Math.pow(resistance, 1 / stability));
+        ((GravityData)data).motion = ((GravityData)data).motion.add(0, ((GravityData)data).gravity, 0).scale(1/(1+Math.pow(Math.E, -4.6 * stability)));
 
         return ((GravityData)data).motion;
 

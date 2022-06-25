@@ -25,7 +25,9 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 //stats
                 .multiplier(ToolStats.DURABILITY, 1.1f)
                 .startingSlots(SlotType.UPGRADE, 3)
-                .startingSlots(SlotType.ABILITY, 1);
+                .startingSlots(SlotType.ABILITY, 1)
+                // traits
+                .trait(TinkersArchery.BOW_GLOBAL_MODIFIER_BONUS_MODIFIER);
 
         define(BowAndArrowDefinitions.CROSSBOW)
                 //parts
@@ -38,7 +40,9 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.8f)
                 .multiplier(BowAndArrowToolStats.ACCURACY, 0.8f)
                 .startingSlots(SlotType.UPGRADE, 3)
-                .startingSlots(SlotType.ABILITY, 1);
+                .startingSlots(SlotType.ABILITY, 1)
+                // traits
+                .trait(TinkersArchery.BOW_GLOBAL_MODIFIER_BONUS_MODIFIER);
 
         define(BowAndArrowDefinitions.LONGBOW)
                 //parts
@@ -54,6 +58,8 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .startingSlots(SlotType.UPGRADE, 2)
                 .startingSlots(SlotType.ABILITY, 1)
                 // traits
+                .trait(TinkersArchery.BOW_GLOBAL_MODIFIER_BONUS_MODIFIER)
+                .trait(TinkersArchery.IMMOBILE_MODIFIER)
                 .trait(TinkerModifiers.twoHanded);
 
         define(BowAndArrowDefinitions.ARROW)
@@ -62,6 +68,8 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.arrow_shaft)
                 .part(TinkersArchery.arrow_fletching)
                 //stats
+                .multiplier(ToolStats.ATTACK_DAMAGE, 0.5f)
+                .stat(ToolStats.ATTACK_DAMAGE, 1)
                 .stat(ToolStats.ATTACK_SPEED, 2f)
                 .multiplier(ToolStats.MINING_SPEED, 0.75f);
 

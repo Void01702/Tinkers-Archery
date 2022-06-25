@@ -3,6 +3,7 @@ package tonite.tinkersarchery.items.tools;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.nbt.ByteNBT;
 import net.minecraft.nbt.FloatNBT;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
@@ -58,6 +59,8 @@ public class BowTool extends ShootableTool {
             }
         }
 
+        bow.addTagElement("IsDrawing", ByteNBT.ZERO);
+
         super.releaseUsing(bow, world, shooter, held_ticks);
     }
 
@@ -85,7 +88,11 @@ public class BowTool extends ShootableTool {
 
     public int getUseDuration(ItemStack bow) {
 
-        return (int)(72000 / getDrawSpeed(bow));
+        if (bow.getTag().contains("IsDrawing") && bow.getTag().getBoolean("IsDrawing")) {
+            return (int) (72000 / getDrawSpeed(bow));
+        } else {
+            return super.getUseDuration(bow);
+        }
     }
 
     public static float getDrawSpeed(ItemStack bow) {
@@ -100,8 +107,12 @@ public class BowTool extends ShootableTool {
         return drawspeedModifier;
     }
 
-    public UseAction getUseAnimation(ItemStack p_77661_1_) {
-        return UseAction.BOW;
+    public UseAction getUseAnimation(ItemStack bow) {
+        if (bow.getTag().contains("IsDrawing") && bow.getTag().getBoolean("IsDrawing")) {
+            return UseAction.BOW;
+        } else {
+            return super.getUseAnimation(bow);
+        }
     }
 
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
@@ -134,13 +145,20 @@ public class BowTool extends ShootableTool {
             if (ret != null) return ret;
 
             if (player.abilities.instabuild || flag) {
+                itemstack.addTagElement("IsDrawing", ByteNBT.ONE);
                 player.startUsingItem(hand);
                 return ActionResult.consume(itemstack);
             } else {
-                return ActionResult.fail(itemstack);
+
+                itemstack.addTagElement("IsDrawing", ByteNBT.ZERO);
+
+                return super.use(world, player, hand);
             }
         }
-        return ActionResult.fail(itemstack);
+
+        itemstack.addTagElement("IsDrawing", ByteNBT.ZERO);
+
+        return super.use(world, player, hand);
     }
 
 }

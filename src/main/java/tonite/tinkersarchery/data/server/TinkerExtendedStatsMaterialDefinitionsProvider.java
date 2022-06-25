@@ -23,6 +23,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
         add(MaterialIds.flint);
         add(MaterialIds.bone);
         add(MaterialIds.necroticBone);
+        add(MaterialIds.leather);
         add(MaterialIds.iron);
         add(MaterialIds.copper);
         add(MaterialIds.searedStone);
@@ -52,11 +53,13 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
         add(MaterialIds.hepatizon);
         add(MaterialIds.manyullyn);
         add(MaterialIds.blazingBone);
+        add(MaterialIds.ancientHide);
 
         // Bowstrings
         add(MaterialIds.string);
         add(MaterialIds.vine);
         add(MaterialIds.skyslimeVine);
+        add(MaterialIds.darkthread);
         add(MaterialIds.enderslimeVine);
 
         // Fletchings
@@ -84,23 +87,23 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
             addMaterialStats(MaterialIds.wood,
                     new BowMaterialStats(170, 3f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.0f),
-                    new ArrowHeadMaterialStats(3, 2f, WOOD, 1f, 0.8f, 0.9f),
+                    new ArrowHeadMaterialStats(3, 2f, WOOD, 0f, 0.8f, 0.9f),
                     new ArrowShaftMaterialStats(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f));
 
             addMaterialStats(MaterialIds.stone,
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.0f),
-                    new ArrowHeadMaterialStats(4, 4f, STONE, 1f, 1.3f, 0.8f),
+                    new ArrowHeadMaterialStats(4, 4f, STONE, 0.75f, 1.3f, 0.8f),
                     new ArrowShaftMaterialStats(0.8f, 1.0f, 1.0f, 1.1f, 1.2f, 0.9f));
 
             addMaterialStats(MaterialIds.flint,
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.8f, 1.3f),
-                    new ArrowHeadMaterialStats(8, 3.5f, STONE, 2f, 1.0f, 1.0f),
+                    new ArrowHeadMaterialStats(8, 3.5f, STONE, 1f, 1.0f, 1.0f),
                     new ArrowShaftMaterialStats(0.8f, 1.1f, 1.0f, 1.0f, 1.1f, 0.7f));
 
             addMaterialStats(MaterialIds.bone,
                     new BowMaterialStats(150, 2.8f, 1.1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.1f),
-                    new ArrowHeadMaterialStats(7, 2.5f, STONE, 1.25f, 0.9f, 1.1f, 1.0f),
+                    new ArrowHeadMaterialStats(7, 2.5f, STONE, 1.0f, 0.9f, 1.1f, 1.0f),
                     new ArrowShaftMaterialStats(0.75f, 1.0f, 1.1f, 1.0f, 0.9f, 1.1f, 0.9f));
 
             addMaterialStats(MaterialIds.necroticBone,
@@ -108,6 +111,9 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.2f),
                     new ArrowHeadMaterialStats(9, 2f, STONE, 1.5f, 0.9f, 1.0f, 1.0f),
                     new ArrowShaftMaterialStats(0.65f, 1.0f, 1.15f, 1.0f, 0.9f, 1.0f,0.9f));
+
+            addMaterialStats(MaterialIds.leather,
+                    new BowGuideMaterialStats());
 
             addMaterialStats(MaterialIds.iron,
                     new BowMaterialStats(250, 3.4f, 0.85f),
@@ -280,6 +286,9 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowHeadMaterialStats(31, 6f, IRON, 3f, 0.65f, 1.35f, 1.1f),
                     new ArrowShaftMaterialStats(0.85f, 1.05f, 1.2f, 1.0f, 0.65f, 1.35f, 1.0f));
 
+            addMaterialStats(MaterialIds.ancientHide,
+                    new BowGuideMaterialStats());
+
             // Bowstrings
 
             addMaterialStats(MaterialIds.wood, new BowStringMaterialStats(1.2f, 0.8f, 0.8f, 1.2f));
@@ -287,6 +296,8 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
             addMaterialStats(MaterialIds.vine, new BowStringMaterialStats(1.3f, 0.8f, 1.2f, 0.8f));
             addMaterialStats(MaterialIds.slimewood, new BowStringMaterialStats(1.3f, 1.1f, 0.9f, 0.8f));
             addMaterialStats(MaterialIds.skyslimeVine, new BowStringMaterialStats(1.1f, 1.0f, 0.9f, 1.2f));
+            addMaterialStats(MaterialIds.nahuatl, new BowStringMaterialStats(1.2f, 0.8f, 0.8f, 1.2f));
+            addMaterialStats(MaterialIds.darkthread, new BowStringMaterialStats(0.4f, 1.25f, 1.3f, 1.25f));
             addMaterialStats(MaterialIds.enderslimeVine, new BowStringMaterialStats(0.7f, 1.2f, 1.1f, 1.2f));
 
             // Fletchings

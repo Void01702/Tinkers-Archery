@@ -32,7 +32,7 @@ public class ArrowShaftMaterialStats extends BaseMaterialStats {
     private static final ITextComponent ACCURACY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("accuracy.multiplier_description"));
     private static final ITextComponent WEIGHT_DESCRIPTION = makeTooltip(TinkersArchery.getResource("weight.multiplier_description"));
     private static final ITextComponent STABILITY_DESCRIPTION = makeTooltip(TinkersArchery.getResource("stability.multiplier_description"));
-    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(DURABILITY_DESCRIPTION, ATTACK_DAMAGE_DESCRIPTION, /*ATTACK_SPEED_DESCRIPTION, MINING_SPEED_DESCRIPTION,*/ ACCURACY_DESCRIPTION, WEIGHT_DESCRIPTION, STABILITY_DESCRIPTION);
+    private static final List<ITextComponent> DESCRIPTION = ImmutableList.of(/*DURABILITY_DESCRIPTION,*/ ATTACK_DAMAGE_DESCRIPTION, /*ATTACK_SPEED_DESCRIPTION, MINING_SPEED_DESCRIPTION,*/ ACCURACY_DESCRIPTION, WEIGHT_DESCRIPTION, STABILITY_DESCRIPTION);
 
     private float count;
     private float miningSpeed;
@@ -69,10 +69,10 @@ public class ArrowShaftMaterialStats extends BaseMaterialStats {
     public List<ITextComponent> getLocalizedInfo() {
         List<ITextComponent> info = new ArrayList<>();
 
-        info.add(format(COUNT_PREFIX, this.count));
+        //info.add(format(COUNT_PREFIX, this.count));
         info.add(HandleMaterialStats.formatAttackDamage(this.attackDamage));
         info.add(format(ACCURACY_PREFIX, this.accuracy));
-        info.add(format(WEIGHT_PREFIX, this.weight));
+        info.add(ArrowHeadMaterialStats.formatInvertedColoredMultiplier(WEIGHT_PREFIX, this.weight));
         info.add(format(STABILITY_PREFIX, this.stability));
 
         return info;

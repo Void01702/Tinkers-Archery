@@ -24,6 +24,7 @@ public class TinkersArcheryMaterialIds {
     public static final MaterialId paper = id("paper");
     public static final MaterialId leaf = id("leaf");
     public static final MaterialId slime_leaf = id("slime_leaf");
+    public static final MaterialId bamboo = id("bamboo");
 
     private static MaterialId id(String name) {
         return new MaterialId(TinkersArchery.MOD_ID, name);

@@ -6,8 +6,7 @@ import slimeknights.tconstruct.library.data.material.AbstractMaterialTraitDataPr
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import tonite.tinkersarchery.TinkersArchery;
-import tonite.tinkersarchery.stats.ArrowFletchingMaterialStats;
-import tonite.tinkersarchery.stats.BowStringMaterialStats;
+import tonite.tinkersarchery.stats.*;
 
 public class TinkerExtendedTraitsMaterialDefinitionsProvider extends AbstractMaterialDataProvider {
 
@@ -18,9 +17,16 @@ public class TinkerExtendedTraitsMaterialDefinitionsProvider extends AbstractMat
     @Override
     protected void addMaterials() {
 
+        // Bow Materials
+        add(MaterialIds.steel);
+        add(MaterialIds.cobalt);
+
         // Bowstrings
         add(MaterialIds.string);
         add(MaterialIds.skyslimeVine);
+
+        // Arrow Materials
+        add(MaterialIds.pigIron);
 
         // Fletchings
         add(MaterialIds.phantom);
@@ -44,9 +50,20 @@ public class TinkerExtendedTraitsMaterialDefinitionsProvider extends AbstractMat
 
         @Override
         protected void addMaterialTraits() {
+
+            // Materials
+            addTraits(MaterialIds.steel, BowMaterialStats.ID, TinkersArchery.DUCTILE_REPLACEMENT_MODIFIER.get());
+            addTraits(MaterialIds.steel, BowGuideMaterialStats.ID, TinkersArchery.DUCTILE_REPLACEMENT_MODIFIER.get());
+            addTraits(MaterialIds.cobalt, BowMaterialStats.ID, TinkersArchery.LIGHTWEIGHT_REPLACEMENT_MODIFIER.get());
+            addTraits(MaterialIds.cobalt, BowGuideMaterialStats.ID, TinkersArchery.LIGHTWEIGHT_REPLACEMENT_MODIFIER.get());
+
             // Bowstrings
             addTraits(MaterialIds.string, BowStringMaterialStats.ID, TinkersArchery.CLEAN_MODIFIER.get());
             addTraits(MaterialIds.skyslimeVine, BowStringMaterialStats.ID, TinkersArchery.AIRBORNE_MODIFIER.get());
+
+            // Arrow Materials
+            addTraits(MaterialIds.pigIron, ArrowHeadMaterialStats.ID, TinkersArchery.TASTY_REPLACEMENT_MODIFIER.get());
+            addTraits(MaterialIds.pigIron, ArrowShaftMaterialStats.ID, TinkersArchery.TASTY_REPLACEMENT_MODIFIER.get());
 
             // Fletchings
             addTraits(MaterialIds.phantom, ArrowFletchingMaterialStats.ID, TinkersArchery.ANTIGRAVITY_TRAJECTORY_MODIFIER.get());

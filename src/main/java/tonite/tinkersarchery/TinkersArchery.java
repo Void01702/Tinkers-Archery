@@ -83,9 +83,13 @@ import tonite.tinkersarchery.items.tools.CrossbowTool;
 import tonite.tinkersarchery.library.ITinkersConsumableItem;
 import tonite.tinkersarchery.library.ProjectileTrajectory;
 import tonite.tinkersarchery.modifiers.abilities.*;
+import tonite.tinkersarchery.modifiers.internal.BowGlobalModifierBonusModifier;
 import tonite.tinkersarchery.modifiers.slotless.flares.FlameFlare;
 import tonite.tinkersarchery.modifiers.slotless.flares.ShulkerFlare;
 import tonite.tinkersarchery.modifiers.traits.*;
+import tonite.tinkersarchery.modifiers.traits.replacements.arrow.TastyModifier;
+import tonite.tinkersarchery.modifiers.traits.replacements.bow.DuctileModifier;
+import tonite.tinkersarchery.modifiers.traits.replacements.bow.LightweightModifier;
 import tonite.tinkersarchery.modifiers.upgrades.*;
 import tonite.tinkersarchery.recipe.ConfigEnabledCondition;
 import tonite.tinkersarchery.recipe.ConsumableItemRecipe;
@@ -196,12 +200,18 @@ public class TinkersArchery
     public static final CastItemObject arrowhead_cast = ITEMS_EXTENDED.registerCast("arrowhead", TINKERS_ARCHERY_PROPS);
     public static final CastItemObject arrow_shaft_cast = ITEMS_EXTENDED.registerCast("arrow_shaft", TINKERS_ARCHERY_PROPS);
 
+    public static final RegistryObject<Modifier> TASTY_REPLACEMENT_MODIFIER = MODIFIERS.register("tasty", TastyModifier::new);
+
+    public static final RegistryObject<Modifier> DUCTILE_REPLACEMENT_MODIFIER = MODIFIERS.register("ductile", DuctileModifier::new);
+    public static final RegistryObject<Modifier> LIGHTWEIGHT_REPLACEMENT_MODIFIER = MODIFIERS.register("lightweight", LightweightModifier::new);
+
     public static final RegistryObject<Modifier> ACCURATE_MODIFIER = MODIFIERS.register("accurate", Accurate::new);
     public static final RegistryObject<Modifier> FINISHING_MODIFIER = MODIFIERS.register("finishing", Finishing::new);
     public static final RegistryObject<Modifier> STABLE_MODIFIER = MODIFIERS.register("weighty", Stable::new);
     public static final RegistryObject<Modifier> SWIFTSTRIKE_MODIFIER = MODIFIERS.register("swiftstrike", Swiftstrike::new);
     public static final RegistryObject<Modifier> GROOVY_MODIFIER = MODIFIERS.register("groovy", Groovy::new);
     public static final RegistryObject<Modifier> CHAINING_MODIFIER = MODIFIERS.register("chaining", Chaining::new);
+    public static final RegistryObject<Modifier> ENLIGHTENING_MODIFIER = MODIFIERS.register("enlightening", Enlightening::new);
     public static final RegistryObject<Modifier> CLEAN_MODIFIER = MODIFIERS.register("clean", Clean::new);
     public static final RegistryObject<Modifier> SUPERSLIME_MODIFIER = MODIFIERS.register("superslime", Superslime::new);
     public static final RegistryObject<Modifier> UPLIFTING_MODIFIER = MODIFIERS.register("uplifting", Uplifting::new);
@@ -211,6 +221,7 @@ public class TinkersArchery
 
     public static final RegistryObject<Modifier> MULTISHOT_MODIFIER = MODIFIERS.register("multishot", Multishot::new);
     public static final RegistryObject<Modifier> AUTOAIM_MODIFIER = MODIFIERS.register("autoaim", Autoaim::new);
+    public static final RegistryObject<Modifier> INFINITY_MODIFIER = MODIFIERS.register("infinity", Infinity::new);
     public static final RegistryObject<Modifier> PIERCING_MODIFIER = MODIFIERS.register("piercing", Piercing::new);
     public static final RegistryObject<Modifier> EXPLOSIVE_MODIFIER = MODIFIERS.register("explosive", Explosive::new);
 
@@ -225,6 +236,9 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> VELOCITY_MODIFIER = MODIFIERS.register("velocity", Velocity::new);
     public static final RegistryObject<Modifier> HEAVY_MODIFIER = MODIFIERS.register("heavy", Heavy::new);
     public static final RegistryObject<Modifier> AQUADYNAMIC_MODIFIER = MODIFIERS.register("aquadynamic", Aquadynamic::new);
+
+    public static final RegistryObject<Modifier> IMMOBILE_MODIFIER = MODIFIERS.register("immobile", Immobile::new);
+    public static final RegistryObject<Modifier> BOW_GLOBAL_MODIFIER_BONUS_MODIFIER = MODIFIERS.register("bow_global_modifier_bonus", BowGlobalModifierBonusModifier::new);
 
     public static final RegistryObject<Modifier> FLAME_FLARE_MODIFIER = MODIFIERS.register("flame_flare", FlameFlare::new);
     public static final RegistryObject<Modifier> SHULKER_FLARE_MODIFIER = MODIFIERS.register("shulker_flare", ShulkerFlare::new);
@@ -258,6 +272,7 @@ public class TinkersArchery
     public static final RegistryObject<ProjectileTrajectory> TWIRLING = PROJECTILE_TRAJECTORIES.register("twirling", TwirlingTrajectory::new);
     public static final RegistryObject<ProjectileTrajectory> BOUNCING = PROJECTILE_TRAJECTORIES.register("bouncing", () -> new GravityTrajectory(-0.2f));
     public static final RegistryObject<ProjectileTrajectory> LOOPING = PROJECTILE_TRAJECTORIES.register("looping", LoopingTrajectory::new);
+    public static final RegistryObject<ProjectileTrajectory> BOOMERANGING = PROJECTILE_TRAJECTORIES.register("boomeranging", BoomerangingTrajectory::new);
 
     public static final RegistryObject<Modifier> GRAVITY_TRAJECTORY_MODIFIER = MODIFIERS.register("gravity_trajectory", () -> new TrajectoryApplier(0xFFADADAD, GRAVITY::get));
     public static final RegistryObject<Modifier> FLYING_TRAJECTORY_MODIFIER = MODIFIERS.register("flying_trajectory", () -> new TrajectoryApplier(0xFFF7CDBB, FLYING::get));
@@ -265,6 +280,7 @@ public class TinkersArchery
     public static final RegistryObject<Modifier> TWIRLING_TRAJECTORY_MODIFIER = MODIFIERS.register("twirling_trajectory", () -> new TrajectoryApplier(0xFF4AD718, TWIRLING::get));
     public static final RegistryObject<Modifier> BOUNCING_TRAJECTORY_MODIFIER = MODIFIERS.register("bouncing_trajectory", () -> new BouncyTrajectoryApplier(0xFF36FFFC, BOUNCING::get));
     public static final RegistryObject<Modifier> LOOPING_TRAJECTORY_MODIFIER = MODIFIERS.register("looping_trajectory", () -> new TrajectoryApplier(0xFFFFFFFF, LOOPING::get));
+    public static final RegistryObject<Modifier> BOOMERANGING_TRAJECTORY_MODIFIER = MODIFIERS.register("boomeranging_trajectory", () -> new TrajectoryApplier(0xFF568112, BOOMERANGING::get));
 
     public static ConfiguredFeature<?, ?> TANTALUM_ORE_FEATURE;
 

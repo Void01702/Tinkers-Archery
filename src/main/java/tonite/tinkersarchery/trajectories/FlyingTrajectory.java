@@ -15,7 +15,11 @@ public class    FlyingTrajectory extends ProjectileTrajectory {
     @Override
     public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, float stability, float resistance, Object data) {
 
-        ((FlyingData)data).motion = ((FlyingData)data).motion.add(0, ((FlyingData)data).gravity, 0).scale(resistance + ((FlyingData)data).resistance_addition);
+        if (time < 7) {
+            ((FlyingData)data).motion = ((FlyingData)data).motion.add(0, -((FlyingData)data).gravity, 0).scale(resistance + ((FlyingData)data).resistance_addition);
+        } else {
+            ((FlyingData)data).motion = ((FlyingData)data).motion.add(0, ((FlyingData)data).gravity, 0).scale(resistance + ((FlyingData)data).resistance_addition);
+        }
 
         return ((FlyingData)data).motion;
 

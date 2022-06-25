@@ -4,7 +4,7 @@
       "count": 3,
       "miningSpeed": 2.0,
       "harvestLevel": 0,
-      "attack": 1.0,
+      "attack": 0.0,
       "weight": 0.8,
       "stability": 0.8,
       "accuracy": 0.9

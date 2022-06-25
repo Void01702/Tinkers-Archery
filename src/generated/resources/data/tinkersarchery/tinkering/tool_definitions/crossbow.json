@@ -22,5 +22,11 @@
   "slots": {
     "upgrades": 3,
     "abilities": 1
-  }
+  },
+  "traits": [
+    {
+      "name": "tinkersarchery:bow_global_modifier_bonus",
+      "level": 1
+    }
+  ]
 }

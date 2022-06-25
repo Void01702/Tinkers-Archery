@@ -3,11 +3,16 @@ package tonite.tinkersarchery.stats;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.Color;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import slimeknights.tconstruct.library.materials.stats.BaseMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.IRepairableMaterialStats;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.Util;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import tonite.tinkersarchery.TinkersArchery;
 
@@ -121,5 +126,11 @@ public class ArrowHeadMaterialStats extends BaseMaterialStats implements IRepair
     @Override
     public int getDurability() {
         return count;
+    }
+
+    static ITextComponent formatInvertedColoredMultiplier(String loc, float number) {
+        // 0.5 is red, 1.0 should be roughly green, 1.5 is blue
+        float hue = MathHelper.positiveModulo(1 / number - 0.5f, 2f);
+        return new TranslationTextComponent(loc).append((ITextComponent)new StringTextComponent(Util.MULTIPLIER_FORMAT.format(number)).withStyle(style -> style.withColor(Color.fromRgb(MathHelper.hsvToRgb(hue / 1.5f, 1.0f, 0.75f)))));
     }
 }

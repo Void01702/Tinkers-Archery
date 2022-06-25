@@ -32,6 +32,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.utils.TooltipFlag;
 import slimeknights.tconstruct.library.utils.TooltipKey;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
+import tonite.tinkersarchery.TinkersArchery;
 import tonite.tinkersarchery.data.TinkersArcheryMaterialIds;
 import tonite.tinkersarchery.data.server.TinkersArcheryTags;
 import tonite.tinkersarchery.entities.TinkersArrowEntityLegacy;
@@ -110,7 +111,7 @@ public abstract class ShootableTool extends ModifiableItem {
                 }
             }
 
-            if (player.abilities.instabuild) {
+            if (player.abilities.instabuild || (ToolStack.from(bowItemStack).getModifierLevel(TinkersArchery.INFINITY_MODIFIER.get()) > 0)) {
                 return new ItemStack(Items.ARROW);
             }
 
@@ -143,7 +144,7 @@ public abstract class ShootableTool extends ModifiableItem {
                 }
             }
 
-            if (currentlyDesired > 0 && player.abilities.instabuild) {
+            if (currentlyDesired > 0 && (player.abilities.instabuild || (ToolStack.from(bowItemStack).getModifierLevel(TinkersArchery.INFINITY_MODIFIER.get()) > 0))) {
                 result.add(new AmmoListEntry(new ItemStack(Items.ARROW), currentlyDesired));
             }
 
@@ -219,15 +220,15 @@ public abstract class ShootableTool extends ModifiableItem {
 
         arrows.add(new IBowModifier.ArrowData(Quaternion.ONE, power, accuracy));
 
+        Vector3f lookingDirection = new Vector3f( shooter.getViewVector(1.0F) );
+
         for(int i = 0; i < Math.min(modifierList.size(), arrowCounts.length); i++) {
             ModifierEntry entry = modifierList.get(i);
-            ((IBowModifier) entry.getModifier()).onReleaseBow(tool, entry.getLevel(), drawPortion, power, accuracy, arrows, arrowCounts[i], world, shooter);
+            lookingDirection = ((IBowModifier) entry.getModifier()).onReleaseBow(tool, entry.getLevel(), drawPortion, power, accuracy, arrows, arrowCounts[i], world, lookingDirection, shooter);
         }
 
         Vector3d motion = shooter.getDeltaMovement();
         motion = new Vector3d(motion.x(), shooter.isOnGround() ? 0.0f : motion.y(), motion.z());
-
-        Vector3f lookingDirection = new Vector3f( shooter.getViewVector(1.0F) );
 
         int ammoListIndex = 0;
 

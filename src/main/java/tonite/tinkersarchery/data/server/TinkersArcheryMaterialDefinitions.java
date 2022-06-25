@@ -41,6 +41,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
         addMaterial(TinkersArcheryMaterialIds.paper, 1, ORDER_BOW, true,  0xFFFFFF);
         addMaterial(TinkersArcheryMaterialIds.leaf, 1, ORDER_BOW, true,  0x4AD718);
         addMaterial(TinkersArcheryMaterialIds.slime_leaf, 1, ORDER_BOW, true,  0x36FFFC);
+        addMaterial(TinkersArcheryMaterialIds.bamboo, 1, ORDER_BOW + 1, true,  0xFF568112);
     }
 
     @Override
@@ -63,8 +64,8 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addTraits(TinkersArcheryMaterialIds.tungstantalum, BowMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.tungstantalum, BowGuideMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.luxtum, TinkerModifiers.lightspeed.get());
-            addTraits(TinkersArcheryMaterialIds.luxtum, BowMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
-            addTraits(TinkersArcheryMaterialIds.luxtum, BowGuideMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.luxtum, BowMaterialStats.ID, TinkersArchery.ENLIGHTENING_MODIFIER.get());
+            addTraits(TinkersArcheryMaterialIds.luxtum, BowGuideMaterialStats.ID, TinkersArchery.ENLIGHTENING_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.cobalt_tantalum, TinkersArchery.SWIFTSTRIKE_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.cobalt_tantalum, BowMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.cobalt_tantalum, BowGuideMaterialStats.ID, TinkersArchery.STABLE_MODIFIER.get());
@@ -83,6 +84,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addDefaultTraits(TinkersArcheryMaterialIds.leaf, TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER.get());
             addDefaultTraits(TinkersArcheryMaterialIds.slime_leaf, TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER.get());
             addTraits(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.ID, TinkersArchery.FLYING_TRAJECTORY_MODIFIER.get());
+            addDefaultTraits(TinkersArcheryMaterialIds.bamboo, TinkersArchery.BOOMERANGING_TRAJECTORY_MODIFIER.get());
         }
 
         @Override
@@ -154,6 +156,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
             addMaterialStats(TinkersArcheryMaterialIds.leaf, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.slime_leaf, ArrowFletchingMaterialStats.DEFAULT);
             addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, ArrowFletchingMaterialStats.DEFAULT);
+            addMaterialStats(TinkersArcheryMaterialIds.bamboo, ArrowFletchingMaterialStats.DEFAULT);
         }
 
         @Override

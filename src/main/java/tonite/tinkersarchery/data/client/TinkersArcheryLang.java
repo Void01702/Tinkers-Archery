@@ -115,6 +115,7 @@ public class TinkersArcheryLang extends LanguageProvider {
         addMaterial(TinkersArcheryMaterialIds.leaf, "Leaf", "It's organic!", "", "");
         addMaterial(TinkersArcheryMaterialIds.slime_leaf, "Slime Leaf", "It's definitely the wood of a slime.", "", "");
         addMaterial(TinkersArcheryMaterialIds.paper, "Paper", "Aeroplanes Ahead!", "", "");
+        addMaterial(TinkersArcheryMaterialIds.bamboo, "Bamboo", "I'm always right back at ya, like my... Boomerang", "", "");
 
         addBowString(MaterialIds.string, "The bow is 100% more accurate when fully drawn.");
         addBowString(MaterialIds.skyslimeVine, "Cancels out your velocity added to the arrow.");
@@ -125,14 +126,15 @@ public class TinkersArcheryLang extends LanguageProvider {
         addFletching(TinkersArcheryMaterialIds.leaf, "Arrows twirl around in the air for some time, and then fall.", "Lighter arrows slow down slower and stabler arrows twirl tighter.");
         addFletching(TinkersArcheryMaterialIds.paper, "Arrows fly a bit, then loop, then fly parallel to the ground, then loop again, the fly downwards.", "Lighter arrows fly farther and stabler arrows loop tighter.");
         addFletching(TinkersArcheryMaterialIds.slime_leaf, "Arrows bounce 5 times in the air.", "Lighter arrows fall slower, and stabler arrows slow down slower.");
-        addFletching(TinkersArcheryMaterialIds.silky_cloth, "Arrows fly upwards a bit then fall to the ground.", "Weight affects how quickly the arrow flies upwards and falls.");
+        addFletching(TinkersArcheryMaterialIds.silky_cloth, "Arrows fly upwards a bit then fall to the ground, also flying faster the longer the fly.", "Weight affects how quickly the arrow flies upwards and falls.");
         addFletching(MaterialIds.phantom, "Arrows fly in a straight line, slowing down before starting to fall.", "Lighter arrows fly farther and stabler arrows fall slower after beginning to fall.");
+        addFletching(TinkersArcheryMaterialIds.bamboo, "Arrows forwards a bit, loop, and then fly back to you (probably missing).", "Lighter Arrows fly further before returning, and stabler arrows turn tighter.");
 
         // Modifiers
         addModifier(TinkersArchery.ACCURATE_MODIFIER, "Accurate", "What good is a bow that doesn't shoot where you point?", "The bow is more accurate");
         addTooltipModifier(TinkersArchery.FINISHING_MODIFIER, "Finishing", "Leaves falling from trees / Snow drifting onto the ground / Life leaving your corpse", "Deal more damage to enemies with low health", ToolStats.ATTACK_DAMAGE, "Damage under Half Health");
         addModifier(TinkersArchery.STABLE_MODIFIER, "Stable", "Steady Now", "Makes arrows stabler, making them follow more favorable trajectories");
-        addTooltipModifier(TinkersArchery.SWIFTSTRIKE_MODIFIER, "Swiftstrike", "Let's have a chat, shall we?", "Moving faster causes you to deal more damage", ToolStats.ATTACK_DAMAGE, "Moving Damage");
+        addTooltipModifier(TinkersArchery.SWIFTSTRIKE_MODIFIER, "Swiftstrike", "And they say being a loader is a boring job", "Moving faster causes you to deal more damage", ToolStats.ATTACK_DAMAGE, "Moving Damage");
         addTooltipModifier(TinkersArchery.GROOVY_MODIFIER, "Groovy", "In the Groove", "The more you shoot, the faster you draw", BowAndArrowToolStats.DRAW_SPEED, "Groovy Draw Speed");
         addTooltipModifier(TinkersArchery.CHAINING_MODIFIER, "Chaining", "Killstreak", "Your next attack after killing an enemy deals extra damage", ToolStats.ATTACK_DAMAGE, "Chaining Damage");
 
@@ -147,11 +149,12 @@ public class TinkersArcheryLang extends LanguageProvider {
         addModifier(TinkersArchery.SLICING_MODIFIER, "Slicing", "Cuts clay easily", "Arrows are always critical");
 
         addModifier(TinkersArchery.GRAVITY_TRAJECTORY_MODIFIER, "Gravity Trajectory", "Like Newton and the Apple", "Arrows act like they should and fall to the ground in a parabolic trajectory");
-        addModifier(TinkersArchery.FLYING_TRAJECTORY_MODIFIER, "Flying Trajectory", "From Down Town", "Arrows fly faster the longer they fly");
+        addModifier(TinkersArchery.FLYING_TRAJECTORY_MODIFIER, "Flying Trajectory", "From Down Town", "Arrows fly upwards a bit and also fly faster the longer they fly");
         addModifier(TinkersArchery.TWIRLING_TRAJECTORY_MODIFIER, "Twirling Trajectory", "Do a barrel roll", "Arrows twirl around in the air");
         addModifier(TinkersArchery.BOUNCING_TRAJECTORY_MODIFIER, "Bouncing Trajectory", "Hippity Hoppity", "Arrows bounce on the ground");
         addModifier(TinkersArchery.ANTIGRAVITY_TRAJECTORY_MODIFIER, "Antigravity Trajectory", "Zero G", "Arrows don't obey gravity");
         addModifier(TinkersArchery.LOOPING_TRAJECTORY_MODIFIER, "Looping Trajectory", "Whooh... Whooh", "Arrows loop once in the air before flying straight then loop again");
+        addModifier(TinkersArchery.BOOMERANGING_TRAJECTORY_MODIFIER, "Boomeranging Trajectory", "There and back again", "Arrows fly forward and to the left, then loop, then fly back to you (though it will likely miss you)");
 
         addModifier(TinkersArchery.MULTISHOT_MODIFIER, "Multishot", "Now with 3 times the projectiles", "Bow shoots additional arrows");
         addModifier(TinkersArchery.AUTOAIM_MODIFIER, "Autoaim", "I never miss", "Arrows shoot in the direction of the nearest entity in front of you");

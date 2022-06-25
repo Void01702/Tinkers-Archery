@@ -2,6 +2,8 @@ package tonite.tinkersarchery.modifiers.traits;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -39,11 +41,12 @@ public class Groovy extends Modifier implements IBowModifier {
     }
 
     @Override
-    public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, LivingEntity shooter) {
+    public Vector3f onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, Vector3f currentDirection, LivingEntity shooter) {
         if(drawPortion > 0.75) {
             int effectLevel = Math.min(5 + (level - 1) * 6, TinkersArchery.groovyEffect.get().getLevel(shooter) + 1);
             TinkersArchery.groovyEffect.get().apply(shooter, 5 * 20, effectLevel, true);
         }
+        return currentDirection;
     }
 
     @Override

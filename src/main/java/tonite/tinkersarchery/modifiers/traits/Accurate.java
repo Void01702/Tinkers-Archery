@@ -13,6 +13,6 @@ public class Accurate extends Modifier {
 
     @Override
     public void addToolStats(ToolRebuildContext context, int level, ModifierStatsBuilder builder) {
-        BowAndArrowToolStats.ACCURACY.multiply(builder, 1 + level * 0.4f);
+        BowAndArrowToolStats.ACCURACY.multiply(builder, 1 + level * 0.1f);
     }
 }

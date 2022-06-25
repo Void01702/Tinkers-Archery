@@ -4,7 +4,7 @@
     {
       "values": [
         {
-          "prop": "always_allow_steel_on_string_bowstring_for_steel_wire",
+          "prop": "always_allow_steel_on_string",
           "type": "tinkersarchery:config"
         },
         {

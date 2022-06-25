@@ -8,7 +8,7 @@ public class LoopingTrajectory extends ProjectileTrajectory {
 
     public static final float ANGLE = (float)(Math.PI / 8);
     public static final int INITIAL_STRAIGHT_TIME = 10;
-    public static final int MIDDLE_STRAIGHT_TIME = 30;
+    public static final int MIDDLE_STRAIGHT_TIME = 25;
 
     @Override
     public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, float stability, float resistance, Object internalData) {

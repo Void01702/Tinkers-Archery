@@ -144,5 +144,11 @@ public class TinkersArcheryMaterialSpriteProvider extends AbstractMaterialSprite
                         .addARGB(178, 0xFFA8FFFD)
                         .addARGB(255, 0xFF36FFFC)
                         .build());
+        buildMaterial(TinkersArcheryMaterialIds.bamboo)
+                .statType(ArrowFletchingMaterialStats.ID)
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                        .addARGB(178, 0xFF8AAE60)
+                        .addARGB(255, 0xFF568112)
+                        .build());
     }
 }

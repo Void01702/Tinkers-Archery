@@ -488,7 +488,7 @@ public class TinkersArrowEntityLegacy extends ProjectileEntity implements IEntit
         trajectoryData = trajectory.onCreated(originalDirection, calculateWeight(), calculateStability());
         this.resetPiercedEntities();
         for (ModifierEntry m: projectileModifierList) {
-            ((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, this.lastState, null, direction);
+            ((IProjectileModifier)m.getModifier()).onProjectileHitBlock(toolStack, m.getLevel(), this, this.lastState, BlockRayTraceResult.getBlockPos(), direction);
         }
     }
 

@@ -67,7 +67,7 @@ public class ConfigEnabledCondition implements ICondition, ILootCondition {
     }
 
     static {
-        ALWAYS_ALLOW_STEEL_ON_STRING_BOWSTRING_FOR_STEEL_WIRE = add("always_allow_steel_on_string_bowstring_for_steel_wire", TinkersArcheryConfig.COMMON.alwaysAllowSteelOnStringBowstringForSteelWire);
+        ALWAYS_ALLOW_STEEL_ON_STRING_BOWSTRING_FOR_STEEL_WIRE = add("always_allow_steel_on_string", TinkersArcheryConfig.COMMON.alwaysAllowSteelOnStringBowstringForSteelWire);
         LEGACY_ARROWS = add("legacy_arrows", TinkersArcheryConfig.COMMON.legacyArrows);
     }
 

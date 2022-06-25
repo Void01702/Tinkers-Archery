@@ -7,7 +7,7 @@ import tonite.tinkersarchery.library.ProjectileTrajectory;
 
 public class AntigravityTrajectory extends ProjectileTrajectory {
 
-    public static final int CUTOFF = 20;
+    public static final int CUTOFF = 17;
 
     public AntigravityTrajectory() {
         super();

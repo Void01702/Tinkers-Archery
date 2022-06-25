@@ -28,6 +28,14 @@
   },
   "traits": [
     {
+      "name": "tinkersarchery:bow_global_modifier_bonus",
+      "level": 1
+    },
+    {
+      "name": "tinkersarchery:immobile",
+      "level": 1
+    },
+    {
       "name": "tconstruct:two_handed",
       "level": 1
     }

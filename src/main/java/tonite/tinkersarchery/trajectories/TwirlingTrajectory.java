@@ -11,12 +11,13 @@ public class TwirlingTrajectory extends ProjectileTrajectory {
     public static final float SPREAD = 1f;
     public static final float SPREAD_RATE = 0.3f;
     public static final float ANTIGRAVITY_THRESHOLD = 0.3f;
+    public static final int CUTOFF = 20;
 
     @Override
     public Vector3d getMotionDirection(int time, Vector3d originalDirection, float weight, float stability, float resistance, Object internalData) {
         TwirlingData data = (TwirlingData)internalData;
 
-        if (data.motion.length() < data.antigravityThreshold) {
+        if (data.motion.length() < data.antigravityThreshold || time >= data.cutoffTicks) {
             data.falling = true;
         }
 
@@ -97,6 +98,8 @@ public class TwirlingTrajectory extends ProjectileTrajectory {
 
         public Vector3d motion;
 
+        public int cutoffTicks;
+
         public TwirlingData(Vector3d originalDirection, float weight, float stability) {
             spread = SPREAD / stability;
             spreadRate = SPREAD_RATE * stability;
@@ -113,6 +116,8 @@ public class TwirlingTrajectory extends ProjectileTrajectory {
             antigravityThreshold = (float)Math.pow(ANTIGRAVITY_THRESHOLD, 1 / weight);
 
             motion = originalDirection;
+
+            cutoffTicks = (int)(CUTOFF/ weight);
         }
     }
 }

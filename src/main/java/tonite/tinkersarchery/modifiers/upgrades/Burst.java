@@ -1,6 +1,8 @@
 package tonite.tinkersarchery.modifiers.upgrades;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.tools.nbt.IModifierToolStack;
@@ -23,7 +25,7 @@ public class Burst extends Modifier implements IBowModifier {
 
             tool.getPersistentData().putInt(TinkersArchery.getResource("burst_count"), tool.getPersistentData().getInt(TinkersArchery.getResource("burst_count")) - 1);
 
-            return drawSpeed * 3;
+            return drawSpeed + 1;
         } else {
             tool.getPersistentData().putInt(TinkersArchery.getResource("burst_count"), level);
 
@@ -32,10 +34,12 @@ public class Burst extends Modifier implements IBowModifier {
     }
 
     @Override
-    public void onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, LivingEntity shooter) {
+    public Vector3f onReleaseBow(IModifierToolStack tool, int level, float drawPortion, float power, float accuracy, List<ArrowData> arrows, int arrowCount, World world, Vector3f currentDirection, LivingEntity shooter) {
         if(tool.getPersistentData().getInt(TinkersArchery.getResource("burst_count")) > 0 && drawPortion > 0.75) {
             int duration = 20;
             TinkersArchery.burstEffect.get().apply(shooter, duration, 0, true);
         }
+
+        return currentDirection;
     }
 }

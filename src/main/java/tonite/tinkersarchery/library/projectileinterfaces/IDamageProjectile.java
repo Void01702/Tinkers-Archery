@@ -8,4 +8,6 @@ public interface IDamageProjectile {
 
     float calculateDamage();
 
+    //float getDamageMultiplier();
+
 }
