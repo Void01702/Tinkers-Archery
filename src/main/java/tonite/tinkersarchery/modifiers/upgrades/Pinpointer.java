@@ -27,6 +27,6 @@ public class Pinpointer extends IncrementalModifier {
         // currently gives +5 speed per level
         // for comparison, vanilla gives +2, 5, 10, 17, 26 for efficiency I to V
         // 5 per level gives us          +5, 10, 15, 20, 25 for 5 levels
-        BowAndArrowToolStats.ACCURACY.multiply(builder, 1 + scaledLevel * 0.4f);
+        BowAndArrowToolStats.ACCURACY.multiply(builder, 1 + scaledLevel * 0.1f);
     }
 }
