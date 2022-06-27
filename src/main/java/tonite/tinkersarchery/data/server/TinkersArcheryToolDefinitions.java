@@ -36,8 +36,9 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.crossbow_arm)
                 //stats
                 .multiplier(ToolStats.DURABILITY, 1.5f)
-                .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.75f)
-                .multiplier(BowAndArrowToolStats.ACCURACY, 1.5f)
+                .multiplier(BowAndArrowToolStats.ELASTICITY, 1.05f)
+                .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.8f)
+                .multiplier(BowAndArrowToolStats.ACCURACY, 1.2f)
                 .startingSlots(SlotType.UPGRADE, 3)
                 .startingSlots(SlotType.ABILITY, 1)
                 // traits
