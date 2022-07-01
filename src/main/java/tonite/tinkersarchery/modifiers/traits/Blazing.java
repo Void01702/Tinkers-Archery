@@ -14,6 +14,6 @@ public class Blazing extends SingleUseModifier implements IBowModifier {
 
     @Override
     public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, float drawPortion, float power, World world, LivingEntity shooter) {
-        arrow.setSecondsOnFire(10);
+        arrow.setSecondsOnFire(100);
     }
 }
