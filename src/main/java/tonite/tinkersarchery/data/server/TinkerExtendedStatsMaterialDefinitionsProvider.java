@@ -138,7 +138,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 1.0f, 1.05f, 1.1f, 0.95f, 0.85f, 1.0f));
 
             addMaterialStats(MaterialIds.slimewood,
-                    new BowMaterialStats(375, 3f, 1.1f),
+                    new BowMaterialStats(375, 3f, 1.15f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.2f, 0.7f),
                     new ArrowHeadMaterialStats(15, 4f, IRON, 1.25f, 0.9f, 0.95f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.85f, 1.0f, 0.85f, 0.85f, 0.9f, 1.1f));
@@ -150,31 +150,31 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 1.0f, 1.1f, 1.05f, 0.9f, 1.0f, 0.85f));
 
             addMaterialStats(MaterialIds.osmium,
-                    new BowMaterialStats(500, 3.5f, 0.9f),
+                    new BowMaterialStats(500, 4f, 0.85f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.15f, 0.9f),
                     new ArrowHeadMaterialStats(15, 4.5f, IRON, 1.5f, 1.25f, 1.2f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 0.9f, 1.0f, 1.25f, 1.15f, 1.1f));
 
             addMaterialStats(MaterialIds.tungsten,
-                    new BowMaterialStats(350, 3.75f, 0.95f),
+                    new BowMaterialStats(350, 4.0f, 0.85f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.0f),
                     new ArrowHeadMaterialStats(12, 6.5f, IRON, 1.25f, 1.2f, 1.2f, 1.1f),
                     new ArrowShaftMaterialStats(1.0f, 1.1f, 0.9f, 0.9f, 1.2f, 1.25f, 1.05f));
 
             addMaterialStats(MaterialIds.platinum,
-                    new BowMaterialStats(400, 3.5f, 0.95f),
+                    new BowMaterialStats(400, 3.25f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.15f, 1.0f),
                     new ArrowHeadMaterialStats(15, 7.0f, IRON, 1.25f, 1.2f, 1.1f, 1.15f),
                     new ArrowShaftMaterialStats(1.0f, 1.05f, 0.95f, 0.95f, 1.2f, 1.1f, 1.15f));
 
             addMaterialStats(MaterialIds.silver,
-                    new BowMaterialStats(300, 3.25f, 1.05f),
+                    new BowMaterialStats(300, 3.25f, 1.1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.3f),
                     new ArrowHeadMaterialStats(12, 5.5f, IRON, 1.5f, 1.1f, 1.1f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 1.05f, 1.1f, 1.05f, 1.1f, 1.05f, 1.0f));
 
             addMaterialStats(MaterialIds.lead,
-                    new BowMaterialStats(200, 4f, 0.85f),
+                    new BowMaterialStats(200, 4f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.0f),
                     new ArrowHeadMaterialStats(12, 5f, IRON, 1.75f, 1.15f, 1.0f, 1.05f),
                     new ArrowShaftMaterialStats(1.0f, 1.0f, 0.8f, 1.15f, 1.15f, 0.95f, 1.05f));
