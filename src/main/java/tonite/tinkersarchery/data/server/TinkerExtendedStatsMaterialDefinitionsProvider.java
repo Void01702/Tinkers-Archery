@@ -269,13 +269,13 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.0f, 1.05f, 1.0f, 1.15f));
 
             addMaterialStats(MaterialIds.hepatizon,
-                    new BowMaterialStats(975, 5f, 0.9f),
+                    new BowMaterialStats(975, 4.5f, 1.0f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.95f, 1.1f),
                     new ArrowHeadMaterialStats(40, 8f, NETHERITE, 2.25f, 1.0f, 1.1f, 0.95f),
                     new ArrowShaftMaterialStats(1.0f, 1.2f, 1.0f, 0.95f, 1.0f, 1.2f, 0.95f));
 
             addMaterialStats(MaterialIds.manyullyn,
-                    new BowMaterialStats(1250, 4.5f, 0.95f),
+                    new BowMaterialStats(1250, 5f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.2f, 0.9f),
                     new ArrowHeadMaterialStats(32, 6.5f, NETHERITE, 2.75f, 1.2f, 1.1f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.2f, 1.2f, 1.1f, 1.0f));

@@ -130,7 +130,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new HeadMaterialStats(1040, 5.5f, 3, 2.5f),
                     new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(1040, 4.25f, 1.05f),
+                    new BowMaterialStats(1040, 4.75f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(32, 5.5f, 3, 2.75f, 1.0f, 0.85f, 1.05f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.15f, 1.0f, 0.9f, 1.05f));
@@ -138,7 +138,7 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
                     new HeadMaterialStats(890, 6.5f, 4, 2.5f),
                     new HandleMaterialStats(1.1f, 0.9f, 1.1f, 1.1f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(890, 3.75f, 1.25f),
+                    new BowMaterialStats(890, 4f, 1.15f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.1f),
                     new ArrowHeadMaterialStats(24, 6.5f, 4, 2.25f, 0.8f, 0.95f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 0.9f, 0.8f, 1.0f, 1.0f));
