@@ -233,13 +233,13 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 1.05f, 1.0f, 0.95f, 1.1f, 1.15f, 1.1f));
 
             addMaterialStats(MaterialIds.constantan,
-                    new BowMaterialStats(675, 3.75f, 0.95f),
+                    new BowMaterialStats(675, 4.25f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
                     new ArrowHeadMaterialStats(20, 7.5f, DIAMOND, 1.75f, 1.1f, 1.2f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 1.15f, 1.0f, 1.0f, 1.1f, 1.2f, 1.0f));
 
             addMaterialStats(MaterialIds.invar,
-                    new BowMaterialStats(630, 3.75f, 0.95f),
+                    new BowMaterialStats(630, 4.25f, 0.95f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1f),
                     new ArrowHeadMaterialStats(25, 5.5f, DIAMOND, 2.0f, 1.1f, 1.05f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f));
