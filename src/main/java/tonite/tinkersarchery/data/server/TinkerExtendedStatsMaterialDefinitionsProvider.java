@@ -291,14 +291,14 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
 
             // Bowstrings
 
-            addMaterialStats(MaterialIds.wood, new BowStringMaterialStats(1.1f, 0.8f, 0.9f, 1.0f));
+            addMaterialStats(MaterialIds.wood, new BowStringMaterialStats(1.1f, 0.85f, 0.9f, 1.0f));
             addMaterialStats(MaterialIds.string, new BowStringMaterialStats(1.0f, 1.0f, 1.0f, 1.0f));
             addMaterialStats(MaterialIds.vine, new BowStringMaterialStats(0.95f, 0.9f, 1.15f, 1.0f));
-            addMaterialStats(MaterialIds.slimewood, new BowStringMaterialStats(1.3f, 0.9f, 1f, 0.85f));
+            addMaterialStats(MaterialIds.slimewood, new BowStringMaterialStats(1.3f, 0.85f, 1f, 0.85f));
             addMaterialStats(MaterialIds.skyslimeVine, new BowStringMaterialStats(0.95f, 1.2f, 0.9f, 1.0f));
             //addMaterialStats(MaterialIds.nahuatl, new BowStringMaterialStats(1.2f, 0.8f, 0.8f, 1.2f));
-            addMaterialStats(MaterialIds.darkthread, new BowStringMaterialStats(0.4f, 1.25f, 1.3f, 1.25f));
-            addMaterialStats(MaterialIds.enderslimeVine, new BowStringMaterialStats(1.1f, 0.9f, 0.9f, 1.3f));
+            addMaterialStats(MaterialIds.darkthread, new BowStringMaterialStats(0.9f, 1.3f, 0.9f, 1.0f));
+            addMaterialStats(MaterialIds.enderslimeVine, new BowStringMaterialStats(0.95f, 0.9f, 1.05f, 1.3f));
 
             // Fletchings
 
