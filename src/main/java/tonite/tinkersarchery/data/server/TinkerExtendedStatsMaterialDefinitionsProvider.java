@@ -215,7 +215,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 1.25f, 1.25f, 0.85f, 1.15f, 1.2f, 1.2f));
 
             addMaterialStats(MaterialIds.cobalt,
-                    new BowMaterialStats(800, 3.75f, 1.1f),
+                    new BowMaterialStats(800, 4.75f, 0.85f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.1f),
                     new ArrowHeadMaterialStats(20, 7.5f, DIAMOND, 3.0f, 1.0f, 0.9f, 1.1f),
                     new ArrowShaftMaterialStats(1.0f, 1.05f, 1.05f, 1.0f, 1.0f, 1.0f, 1.1f));
@@ -263,7 +263,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 0.9f, 0.95f, 0.85f, 0.9f, 1.1f));
 
             addMaterialStats(MaterialIds.queensSlime,
-                    new BowMaterialStats(1650, 4.75f, 0.9f),
+                    new BowMaterialStats(1650, 4.25f, 1.05f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.35f, 0.3f),
                     new ArrowHeadMaterialStats(40, 6f, NETHERITE, 3.5f, 1.1f, 0.95f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.0f, 1.05f, 1.0f, 1.15f));
@@ -275,7 +275,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new ArrowShaftMaterialStats(1.0f, 1.2f, 1.0f, 0.95f, 1.0f, 1.2f, 0.95f));
 
             addMaterialStats(MaterialIds.manyullyn,
-                    new BowMaterialStats(1250, 5.25f, 0.85f),
+                    new BowMaterialStats(1250, 5f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.2f, 0.9f),
                     new ArrowHeadMaterialStats(32, 6.5f, NETHERITE, 3.75f, 1.2f, 1.1f, 1.0f),
                     new ArrowShaftMaterialStats(1.0f, 0.9f, 0.95f, 1.2f, 1.2f, 1.1f, 1.0f));
