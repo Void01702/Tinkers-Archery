@@ -145,9 +145,8 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
 
             // Bowstring
             //addMaterialStats(TinkersArcheryMaterialIds.slime, new BowStringMaterialStats(1.2f, 0.8f, 1.2f, 0.5f));
-            addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.7f, 0.95f, 1.25f, 1.25f));
+            addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.6f, 1.0f, 1.25f, 1.25f));
             addMaterialStats(TinkersArcheryMaterialIds.blazing_string, new BowStringMaterialStats(0.85f, 1.05f, 1.2f, 1.0f));
-
             addMaterialStats(TinkersArcheryMaterialIds.steel_wire, new BowStringMaterialStats(1.15f, 1.3f, 0.7f, 1.0f));
 
             // fletching
