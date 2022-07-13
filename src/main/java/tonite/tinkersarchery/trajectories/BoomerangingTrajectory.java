@@ -54,7 +54,7 @@ public class BoomerangingTrajectory extends ProjectileTrajectory {
 
     @Override
     public Object onCreated(Vector3d originalDirection, float weight, float stability) {
-        return new BoomerangingData(originalDirection, weight, stability);
+        return new BoomerangingData(originalDirection, 1, stability);
     }
 
     @Override

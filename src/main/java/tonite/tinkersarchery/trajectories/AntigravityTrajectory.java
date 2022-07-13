@@ -34,7 +34,7 @@ public class AntigravityTrajectory extends ProjectileTrajectory {
 
     @Override
     public Object onCreated(Vector3d originalDirection, float weight, float stability) {
-        return new AntigravityData(weight, originalDirection);
+        return new AntigravityData(1, originalDirection);
     }
 
     @Override

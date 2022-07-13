@@ -244,7 +244,8 @@ public abstract class ShootableTool extends ModifiableItem {
 
             ProjectileEntity projectile = createArrow(bow, world, arrowDirection, drawPortion, shooter, arrowItem);
 
-            projectile.shoot(arrowDirection.x(), arrowDirection.y(), arrowDirection.z(), power, 1.0F / accuracy);
+            float adjustedWeight = 2f - calculateWeight();
+            projectile.shoot(arrowDirection.x(), arrowDirection.y(), arrowDirection.z(), power * adjustedWeight, 1.0F / accuracy);
 
             supplyInfoToArrow(projectile, bow, world, projectile.getDeltaMovement().add(motion), drawPortion, shooter, arrowItem);
 

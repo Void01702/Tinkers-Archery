@@ -609,6 +609,9 @@ public class TinkersArrowEntity extends AbstractArrowEntity implements IEntityAd
         float speed = (float)this.getDeltaMovement().length();
         result = (float) MathHelper.clamp((double)speed * result, 0.0D, 2.147483647E9D);
 
+        float adjustedWeight = 2f - calculateWeight();
+        result = result / adjustedWeight;
+
         if (isCritArrow()) {
             result *= 1.3;
         }
