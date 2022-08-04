@@ -2,15 +2,15 @@
   "type": "tconstruct:alloy",
   "inputs": [
     {
-      "name": "tconstruct:molten_emerald",
-      "amount": 144
-    },
-    {
-      "name": "tinkersarchery:molten_tantalum",
-      "amount": 288
+      "name": "tinkersarchery:molten_luxtum",
+      "amount": 432
     },
     {
       "name": "tconstruct:liquid_soul",
+      "amount": 1000
+    },
+    {
+      "name": "tconstruct:molten_obsidian",
       "amount": 1000
     }
   ],
@@ -18,5 +18,5 @@
     "fluid": "tinkersarchery:molten_galaxy_alloy",
     "amount": 432
   },
-  "temperature": 1400
+  "temperature": 1320
 }
