@@ -28,13 +28,13 @@ public class BowGlobalModifierBonusModifier extends Modifier {
 
             int emerald = context.getModifierLevel(TinkerModifiers.emerald.get());
             if (emerald > 0) {
-                BowAndArrowToolStats.ACCURACY.add(builder, emerald * 0.25f);
-                BowAndArrowToolStats.ELASTICITY.add(builder, emerald * 0.25f);
+                BowAndArrowToolStats.ACCURACY.add(builder, emerald * 0.1f);
+                //BowAndArrowToolStats.ELASTICITY.add(builder, emerald * 0.25f);
             }
 
             int netherite = context.getModifierLevel(TinkerModifiers.netherite.get());
             if (netherite > 0) {
-                BowAndArrowToolStats.ELASTICITY.add(builder, netherite * 0.25f);
+                BowAndArrowToolStats.ELASTICITY.multiply(builder, 1 + netherite * 0.1f);
             }
         }
     }

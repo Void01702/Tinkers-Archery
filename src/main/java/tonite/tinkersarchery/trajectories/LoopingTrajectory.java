@@ -65,7 +65,7 @@ public class LoopingTrajectory extends ProjectileTrajectory {
 
     @Override
     public Object onCreated(Vector3d originalDirection, float weight, float stability) {
-        return new LoopingData(originalDirection, weight, stability);
+        return new LoopingData(originalDirection, 1, stability);
     }
 
     @Override

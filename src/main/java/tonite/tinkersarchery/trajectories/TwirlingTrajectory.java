@@ -64,7 +64,7 @@ public class TwirlingTrajectory extends ProjectileTrajectory {
 
     @Override
     public Object onCreated(Vector3d originalDirection, float weight, float stability) {
-        return new TwirlingData(originalDirection, weight, stability);
+        return new TwirlingData(originalDirection, 1, stability);
     }
 
     @Override

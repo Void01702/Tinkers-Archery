@@ -356,8 +356,8 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.LAUNCHING_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
-                .setInput(Items.BAMBOO, 1, 64)
-                .setSalvage(Items.BAMBOO, false)
+                .setInput(Items.ICHOR_SLIME_BALL, 1, 12)
+                .setSalvage(Items.ICHOR_SLIME_BALL, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
                 .buildSalvage(finishedRecipeConsumer, prefix(TinkersArchery.LAUNCHING_MODIFIER, salvageFolder))
@@ -382,7 +382,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HIGHLANDER_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
-                .setInput(Items.FEATHER, 1, 12)
+                .setInput(Items.FEATHER, 1, 25)
                 .setSalvage(Items.FEATHER, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
@@ -391,7 +391,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.VELOCITY_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
-                .setInput(Items.FEATHER, 1, 12)
+                .setInput(Items.FEATHER, 1, 25)
                 .setSalvage(Items.FEATHER, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)

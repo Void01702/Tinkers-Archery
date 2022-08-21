@@ -36,8 +36,9 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.crossbow_arm)
                 //stats
                 .multiplier(ToolStats.DURABILITY, 1.5f)
-                .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.75f)
-                .multiplier(BowAndArrowToolStats.ACCURACY, 1.5f)
+                .multiplier(BowAndArrowToolStats.ELASTICITY, 1.05f)
+                .multiplier(BowAndArrowToolStats.DRAW_SPEED, 0.8f)
+                .multiplier(BowAndArrowToolStats.ACCURACY, 1.2f)
                 .startingSlots(SlotType.UPGRADE, 3)
                 .startingSlots(SlotType.ABILITY, 1)
                 // traits
@@ -67,7 +68,7 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.arrow_shaft)
                 .part(TinkersArchery.arrow_fletching)
                 //stats
-                .stat(ToolStats.ATTACK_DAMAGE, 3f)
+                .stat(ToolStats.ATTACK_DAMAGE, 2f)
                 .stat(ToolStats.ATTACK_SPEED, 1.5f)
                 .multiplier(ToolStats.ATTACK_DAMAGE, 0.5f)
                 .multiplier(ToolStats.MINING_SPEED, 0.75f);
@@ -78,7 +79,11 @@ public class TinkersArcheryToolDefinitions extends AbstractToolDefinitionDataPro
                 .part(TinkersArchery.arrow_shaft)
                 .part(TinkersArchery.arrow_fletching)
                 //stats
-                .stat(ToolStats.ATTACK_SPEED, 2f)
+                .stat(ToolStats.DURABILITY, -0.8f)
+                .stat(ToolStats.ATTACK_DAMAGE, 4f)
+                .stat(ToolStats.ATTACK_SPEED, 1.5f)
+                .multiplier(ToolStats.DURABILITY, 5f)
+                .multiplier(ToolStats.ATTACK_DAMAGE, 0.25f)
                 .multiplier(ToolStats.MINING_SPEED, 0.75f)
                 .startingSlots(SlotType.UPGRADE, 3)
                 .startingSlots(SlotType.ABILITY, 1);

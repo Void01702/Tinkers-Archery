@@ -33,7 +33,7 @@ public class    FlyingTrajectory extends ProjectileTrajectory {
 
     @Override
     public Object onCreated(Vector3d originalDirection, float weight, float stability) {
-        return new FlyingData(GRAVITY * weight, stability, originalDirection);
+        return new FlyingData(GRAVITY, stability, originalDirection);
     }
 
     @Override

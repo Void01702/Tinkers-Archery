@@ -17,7 +17,7 @@ public class Stable extends Modifier implements IBowModifier {
     public void onArrowShot(IModifierToolStack tool, int level, ProjectileEntity arrow, float drawPortion, float power, World world, LivingEntity shooter) {
         if (arrow instanceof IWeightProjectile) {
             IWeightProjectile projectile = ((IWeightProjectile)arrow);
-            projectile.setStability(projectile.getStability() + level * 0.2f);
+            projectile.setStability(projectile.getStability() + level * 0.1f);
         }
     }
 }

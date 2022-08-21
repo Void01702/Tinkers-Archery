@@ -32,7 +32,7 @@ public class Groovy extends Modifier implements IBowModifier {
 
             int effectLevel = TinkersArchery.groovyEffect.get().getLevel(shooter) + 1;
 
-            return drawSpeed + tool.getModifier(BowAndArrowToolStats.DRAW_SPEED) * effectLevel * 0.2f;
+            return drawSpeed + tool.getModifier(BowAndArrowToolStats.DRAW_SPEED) * effectLevel * 0.033f;
 
         } else {
 

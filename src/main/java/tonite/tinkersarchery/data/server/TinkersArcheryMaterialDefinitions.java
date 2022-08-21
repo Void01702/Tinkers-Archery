@@ -103,52 +103,51 @@ public class TinkersArcheryMaterialDefinitions extends AbstractMaterialDataProvi
         protected void addMaterialStats() {
             // Melee Harvest
             addMaterialStats(TinkersArcheryMaterialIds.tantalum,
-                    new HeadMaterialStats(230, 4.5f, 2, 2f),
-                    new HandleMaterialStats(0.8f, 0.9f, 0.8f, 1.3f),
+                    new HeadMaterialStats(230, 4f, IRON, 2.5f),
+                    new HandleMaterialStats(1.1f, 0.9f, 0.9f, 1.15f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(230, 3.75f, 1f),
+                    new BowMaterialStats(230, 4f, 0.9f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.4f),
-                    new ArrowHeadMaterialStats(9, 4.5f, 2, 1.75f, 1.15f, 1.05f, 1.05f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 0.8f, 1.15f, 1.15f, 1.05f, 1.05f));
+                    new ArrowHeadMaterialStats(10, 4.5f, IRON, 3f, 1.2f, 1f, 1.1f),
+                    new ArrowShaftMaterialStats(1f, 0.9f, 0.8f, 1.15f, 1.2f, 1f, 1.15f));
             addMaterialStats(TinkersArcheryMaterialIds.tungstantalum,
-                    new HeadMaterialStats(900, 5.5f, 3, 2.5f),
-                    new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
+                    new HeadMaterialStats(680, 6f, DIAMOND, 2.5f),
+                    new HandleMaterialStats(1f, 1.1f, 0.85f, 1.2f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(1200, 3.15f, 1.15f),
-                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
-                    new ArrowHeadMaterialStats(23, 5.5f, 3, 2.5f, 1.0f, 1.3f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.2f, 1.0f, 1.2f));
+                    new BowMaterialStats(680, 4.75f, 0.85f),
+                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1f, 1.2f),
+                    new ArrowHeadMaterialStats(28, 5.5f, DIAMOND, 3.5f, 1.25f, 1f, 1.2f),
+                    new ArrowShaftMaterialStats(1f, 0.9f, 1.1f, 1.2f, 1.25f, 1f, 1.2f));
             addMaterialStats(TinkersArcheryMaterialIds.luxtum,
-                    new HeadMaterialStats(900, 5.5f, 3, 2.5f),
-                    new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
+                    new HeadMaterialStats(480, 4f, DIAMOND, 3f),
+                    new HandleMaterialStats(0.85f, 1.05f, 1f, 1.2f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(1200, 3.15f, 1.15f),
-                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
-                    new ArrowHeadMaterialStats(23, 5.5f, 3, 2.5f, 1.0f, 1.3f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.2f, 1.0f, 1.2f));
+                    new BowMaterialStats(480, 3.5f, 1.15f),
+                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1f, 1.2f),
+                    new ArrowHeadMaterialStats(20, 5.5f, DIAMOND, 2.75f, 0.85f, 0.8f, 1.15f),
+                    new ArrowShaftMaterialStats(1f, 0.9f, 1.1f, 1f, 0.85f, 0.8f, 1.2f));
             addMaterialStats(TinkersArcheryMaterialIds.cobalt_tantalum,
-                    new HeadMaterialStats(1040, 5.5f, 3, 2.5f),
-                    new HandleMaterialStats(1.0f, 0.9f, 1.1f, 1.2f),
-                    ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(1040, 4.25f, 1.05f),
-                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.2f),
-                    new ArrowHeadMaterialStats(32, 5.5f, 3, 2.75f, 1.0f, 0.85f, 1.05f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 1.15f, 1.0f, 0.9f, 1.05f));
+                    //new HeadMaterialStats(1040, 5.5f, NETHERITE, 2.5f),
+                    //new HandleMaterialStats(1f, 0.9f, 1.1f, 1.2f),
+                    //ExtraMaterialStats.DEFAULT,
+                    //new BowMaterialStats(1040, 5.25f, 0.85f),
+                    //new BowGuideMaterialStats(),//new BowGuideMaterialStats(1f, 1.2f),
+                    //new ArrowHeadMaterialStats(32, 5.5f, NETHERITE, 3.5f, 1.1f, 1f, 1.1f),
+                    //new ArrowShaftMaterialStats(1f, 0.9f, 1.1f, 1.15f, 1.1f, 1f, 1.15f));
             addMaterialStats(TinkersArcheryMaterialIds.galaxy_alloy,
-                    new HeadMaterialStats(890, 6.5f, 4, 2.5f),
-                    new HandleMaterialStats(1.1f, 0.9f, 1.1f, 1.1f),
+                    new HeadMaterialStats(830, 6.5f, NETHERITE, 3.5f),
+                    new HandleMaterialStats(0.75f, 1.2f, 0.9f, 1.3f),
                     ExtraMaterialStats.DEFAULT,
-                    new BowMaterialStats(890, 3.75f, 1.25f),
-                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.0f, 1.1f),
-                    new ArrowHeadMaterialStats(24, 6.5f, 4, 2.25f, 0.8f, 0.95f, 1.0f),
-                    new ArrowShaftMaterialStats(1.0f, 0.9f, 1.1f, 0.9f, 0.8f, 1.0f, 1.0f));
+                    new BowMaterialStats(830, 4f, 1.15f),
+                    new BowGuideMaterialStats(),//new BowGuideMaterialStats(1f, 1.1f),
+                    new ArrowHeadMaterialStats(24, 6.5f, NETHERITE, 3.25f, 0.85f, 0.75f, 1.1f),
+                    new ArrowShaftMaterialStats(1f, 0.9f, 1.1f, 1f, 0.8f, 0.9f, 1.1f));
 
             // Bowstring
             //addMaterialStats(TinkersArcheryMaterialIds.slime, new BowStringMaterialStats(1.2f, 0.8f, 1.2f, 0.5f));
-            addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.7f, 0.95f, 1.3f, 1.2f));
-            addMaterialStats(TinkersArcheryMaterialIds.blazing_string, new BowStringMaterialStats(0.9f, 1.1f, 1.2f, 1.0f));
-
-            addMaterialStats(TinkersArcheryMaterialIds.steel_wire, new BowStringMaterialStats(1.15f, 1.3f, 0.7f, 1.0f));
+            addMaterialStats(TinkersArcheryMaterialIds.silky_cloth, new BowStringMaterialStats(0.6f, 1f, 1.25f, 1.25f));
+            addMaterialStats(TinkersArcheryMaterialIds.steel_wire, new BowStringMaterialStats(1.05f, 1.4f, 0.7f, 1f));
+            addMaterialStats(TinkersArcheryMaterialIds.blazing_string, new BowStringMaterialStats(0.85f, 1.05f, 1.2f, 1f));
 
             // fletching
             addMaterialStats(TinkersArcheryMaterialIds.feather, ArrowFletchingMaterialStats.DEFAULT);

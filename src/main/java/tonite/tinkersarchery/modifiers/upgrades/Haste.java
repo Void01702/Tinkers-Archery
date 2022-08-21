@@ -24,6 +24,6 @@ public class Haste extends IncrementalModifier {
     @Override
     public void addToolStats(ToolRebuildContext context, int level, ModifierStatsBuilder builder) {
         float scaledLevel = getScaledLevel(context.getPersistentData(), level);
-        BowAndArrowToolStats.DRAW_SPEED.add(builder, scaledLevel * 0.25f);
+        BowAndArrowToolStats.DRAW_SPEED.multiply(builder, 1 + scaledLevel * 0.1f);
     }
 }
