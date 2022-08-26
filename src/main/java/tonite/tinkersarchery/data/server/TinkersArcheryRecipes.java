@@ -382,7 +382,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.HIGHLANDER_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_SHOOTABLE)
-                .setInput(Items.FEATHER, 1, 25)
+                .setInput(Items.FEATHER, 1, 32)
                 .setSalvage(Items.FEATHER, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)
@@ -391,7 +391,7 @@ public class TinkersArcheryRecipes extends RecipeProvider implements IConditionB
 
         IncrementalModifierRecipeBuilder.modifier(TinkersArchery.VELOCITY_MODIFIER.get())
                 .setTools(TinkersArcheryTags.TinkersArcheryItemTags.MODIFIABLE_PROJECTILE)
-                .setInput(Items.FEATHER, 1, 25)
+                .setInput(Items.FEATHER, 1, 32)
                 .setSalvage(Items.FEATHER, false)
                 .setMaxLevel(5)
                 .setSlots(SlotType.UPGRADE, 1)

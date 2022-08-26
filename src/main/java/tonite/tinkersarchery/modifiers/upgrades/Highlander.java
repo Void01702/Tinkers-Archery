@@ -36,16 +36,16 @@ public class Highlander extends IncrementalModifier implements IBowModifier {
 
     public float getPower(IModifierToolStack tool, int level, float drawPortion, float power, World world, LivingEntity shooter) {
 
-        int powerIncreaseHeight = world.getMaxBuildHeight() / 2;
-        int powerIncreasePortion = world.getMaxBuildHeight() - powerIncreaseHeight;
+        int powerIncreaseHeight = world.getMaxBuildHeight() / 4;
+        int powerIncreaseMaxHeight = world.getMaxBuildHeight();
 
         float multiplier;
 
         if (shooter.getY() <= powerIncreaseHeight) {
             multiplier = 0;
         } else {
-            if (shooter.getY() < powerIncreaseHeight + powerIncreasePortion) {
-                multiplier = ((float)shooter.getY() - powerIncreaseHeight) / powerIncreasePortion;
+            if (shooter.getY() < powerIncreaseMaxHeight) {
+                multiplier = ((float)shooter.getY() - powerIncreaseHeight) / ( powerIncreaseMaxHeight - powerIncreaseHeight );
             } else {
                 multiplier = 1;
             }
@@ -58,16 +58,16 @@ public class Highlander extends IncrementalModifier implements IBowModifier {
     public void addInformation(IModifierToolStack tool, int level, @Nullable PlayerEntity player, List<ITextComponent> tooltip, TooltipKey key, TooltipFlag flag) {
         float bonus = level * BONUS;
         if (player != null && key == TooltipKey.SHIFT) {
-            int powerIncreaseHeight = player.level.getMaxBuildHeight() / 2;
-            int powerIncreasePortion = player.level.getMaxBuildHeight() - powerIncreaseHeight;
+            int powerIncreaseHeight = player.level.getMaxBuildHeight() / 4;
+            int powerIncreaseMaxHeight = player.level.getMaxBuildHeight();
 
             float multiplier;
 
             if (player.getY() <= powerIncreaseHeight) {
                 multiplier = 0;
             } else {
-                if (player.getY() < powerIncreaseHeight + powerIncreasePortion) {
-                    multiplier = ((float)player.getY() - powerIncreaseHeight) / powerIncreasePortion;
+                if (player.getY() < powerIncreaseMaxHeight) {
+                    multiplier = ((float)player.getY() - powerIncreaseHeight) / ( powerIncreaseMaxHeight - powerIncreaseHeight );
                 } else {
                     multiplier = 1;
                 }
