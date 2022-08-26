@@ -29,7 +29,7 @@ public class Clean extends SingleUseModifier implements IBowModifier {
     @Override
     public float getAccuracy(IModifierToolStack tool, int level, float drawPortion, float baseAccuracy, float accuracy, World world, LivingEntity shooter) {
         if (drawPortion == 1.0f) {
-            return accuracy * (1 + 0.3f * level);
+            return accuracy * (1 + 0.2f * level);
         } else {
             return accuracy;
         }
