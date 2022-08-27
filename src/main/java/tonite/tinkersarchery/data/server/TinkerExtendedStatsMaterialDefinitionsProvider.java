@@ -98,7 +98,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
             addMaterialStats(MaterialIds.flint,
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.8f, 1.3f),
                     new ArrowHeadMaterialStats(4, 3.5f, STONE, 2f, 1f, 1f, 1f),
-                    new ArrowShaftMaterialStats(1f, 1.1f, 1f, 1f, 1.2f, 1.1f, 1f));
+                    new ArrowShaftMaterialStats(1f, 1.1f, 1f, 1f, 1.2f, 1f, 1.1f));
 
             addMaterialStats(MaterialIds.bone,
                     new BowMaterialStats(100, 2.75f, 1.05f),
@@ -109,7 +109,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
             addMaterialStats(MaterialIds.necroticBone,
                     new BowMaterialStats(125, 2.5f, 1.15f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.2f),
-                    new ArrowHeadMaterialStats(6, 2f, STONE, 2.25f, 0.9f, 0.95f, 0.85f),
+                    new ArrowHeadMaterialStats(6, 2f, STONE, 2.5f, 0.9f, 0.95f, 0.85f),
                     new ArrowShaftMaterialStats(1f, 1f, 1.15f, 1.1f, 0.9f, 0.9f, 0.75f));
 
             addMaterialStats(MaterialIds.leather,
@@ -125,7 +125,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new BowMaterialStats(210, 3.5f, 1f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.1f),
                     new ArrowHeadMaterialStats(9, 6.5f, IRON, 2.25f, 1.05f, 1f, 1.1f),
-                      new ArrowShaftMaterialStats(1f, 1.2f, 1f, 1f, 1.1f, 1.15f, 1f));
+                      new ArrowShaftMaterialStats(1f, 1.2f, 1f, 1f, 1.05f, 1.1f, 1f));
 
             addMaterialStats(MaterialIds.searedStone,
                     //new BowGuideMaterialStats(),//new BowGuideMaterialStats(0.9f, 1.1f),
@@ -284,7 +284,7 @@ public class TinkerExtendedStatsMaterialDefinitionsProvider extends AbstractMate
                     new BowMaterialStats(530, 3.75f, 1.2f),
                     new BowGuideMaterialStats(),//new BowGuideMaterialStats(1.1f, 1.2f),
                     new ArrowHeadMaterialStats(22, 6f, IRON, 3.75f, 0.8f, 0.9f, 0.8f),
-                    new ArrowShaftMaterialStats(1f, 1.05f, 1.2f, 1.25f, 0.75f, 0.9f, 0.75f));
+                    new ArrowShaftMaterialStats(1f, 1.05f, 1.2f, 1.25f, 0.75f, 0.85f, 0.8f));
 
             addMaterialStats(MaterialIds.ancientHide,
                     //new BowGuideMaterialStats());
